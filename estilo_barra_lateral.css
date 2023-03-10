@@ -1,0 +1,397 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    /*transition*/
+    --tran-02:all 0.2s ease;
+    --tran-03:all 0.3s ease;
+    --tran-04:all 0.4s ease;
+    --tran-05:all 0.5s ease;
+}
+
+body{
+    height: 100vh;
+    background: white;
+}
+
+/* REUSABLE CSS */
+.sidebar .text{
+    font-size: 20px;
+    font-weight: 500;
+    transition: var(--tran-03);
+    white-space: nowrap;
+    opacity: 1;
+}
+
+.sidebar .image{
+    /* min-width: 60px; */
+    display: flex ;
+    align-items: center; 
+}
+
+.sidebar.close .text{
+    opacity: 0;
+}
+
+
+/* =====SIDEBAR==== */
+.sidebar{
+    border-top-right-radius:10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 210px;
+    padding: 10px 14px;
+    background-color:#454546 ;
+    transition: var(--tran-05);
+    z-index: 1;
+}
+
+.sidebar.close{
+    width: 88px;
+}
+
+.sidebar li{
+    height: 50px;
+    margin-top: 10px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar li .icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 60px;
+    font-size: 20px;
+}
+
+.sidebar header{
+    position:relative;
+}
+
+.sidebar li .icons,
+.sidebar li .text{
+    color: white;
+}
+
+
+
+.sidebar .image-text img{
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+}
+
+.sidebar header .image-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2.0em;
+    margin-bottom: 4.0em;
+}
+
+header .image-text .header-text{ 
+    display: flex;
+    flex-direction: column;
+}
+
+.header-text .name{
+    font-weight: 600;
+}
+
+
+
+.toggle{
+    position: absolute;
+    top: 50%;
+    right: -13px;
+    transform: translateY(-50%) rotate(180deg);
+    height: 25px;
+    width: 25px;
+    background: #F2A530;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--tran-03);
+    z-index: 99;
+}
+
+.sidebar.close .toggle{
+    transform: translateY(-50%);
+}
+
+.toggle:hover{
+    color: black;
+}
+
+.sidebar li a{ 
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 6px;
+}
+
+
+.sidebar li a:hover .icons,
+.sidebar li a:hover .text{
+    color: gray;
+}
+
+
+
+
+
+.sidebar .menu-bar{
+    /* background: red; */
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.perfil{
+    position: relative;
+    left: 210px;
+    height: 100vh;
+    width: calc(100% - 210px);
+    background: white;
+    transition: var(--tran-05);
+}
+
+.sidebar.close ~ .perfil{
+    left:88px;
+    width: calc(100% - 88px);
+}
+
+
+/* USUARIO  */
+/* ================================================== */
+
+.contenido_perfil{
+    display: flex;
+    flex-direction: column;
+    gap: 3%;
+    padding: 8px 60px;
+    flex-wrap: wrap;
+    align-content: stretch;
+}
+
+.perfil .text{
+    font-size: 30px;
+    font-weight: 00;
+    color: black;
+}
+
+.barra_usuario{
+    display: flex;
+    justify-content: flex-end;
+    background-color: white;
+    padding: 10px 30px;
+}
+
+.barra_usuario ul{
+    display: flex;
+}
+
+.barra_usuario li{
+    height: 50px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.barra_encuesta{
+    margin-right: 4.0em;
+    background: #F2A530;
+    padding: 5px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.imagen_perfil{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+}
+
+.imagen_perfil img{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    
+}
+
+.input_perfil{
+    display: flex;
+    gap: 5%;
+    margin-top: 15px;
+}
+
+/* .diseño_input1{
+    height: 30px;
+    border-radius: 10px;
+    background-color: #D9D9D9;
+    border: none;
+    padding: 10px;
+    
+} */
+
+/* .diseño_input2{
+    height: 30px;
+    border-radius: 10px;
+    background-color: #D9D9D9;
+    border: none;
+    padding: 10px;
+} */
+
+
+.seleccionar_imagen{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.seleccionar_imagen p{
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #ABABAB;
+    width: 150%;
+}
+
+.inputfile {
+    /* width: 0.1px;
+    height: 0.1px; */
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    max-width: 100%;
+    font-size: 15px;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.inputfile + label svg {
+    width: 2.5em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    margin-right: 0.25em;
+
+    
+}
+
+.inputfile-1 + label {
+    color: black;
+    background-color: #D9D9D9;
+}
+
+.inputfile-1:focus + label,
+.inputfile-1.has-focus + label,
+.inputfile-1 + label:hover {
+    background-color: #a1a1a1;
+}
+
+/* DATOS BASICOS */
+
+.datos-basicos{
+    margin-top: 35px;
+}
+
+
+
+/* DATOS PROFESIONALES */
+
+.datos-profesionales{
+    margin-top: 5rem;
+}
+
+/* REUSABLE EN DATOS BASICOS Y PROFESIONALES */
+
+.bi-pencil{
+    border: 0.5px solid   #9D9D9D;
+    padding: 6px 8px;
+    border-radius: 12px;
+}
+
+.input-datos{
+    flex-wrap: wrap;
+    display: flex;
+    gap: 5%;
+    margin-top: 5px;
+    width: 70%;
+}
+
+.datos-input{
+    color: black;
+    padding: 10px;
+    width: 300px;
+    height: 35px;
+    margin-top: 15px;
+    border-radius: 12px;
+}
+
+.li-grupo{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.botontes-datos{
+    margin-top: 30px;
+    display: flex;
+    gap: 3%;
+}
+
+.botontes-datos a {
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+}
+
+.btn_guardar{
+    background-color: #F2A530;
+    color: #2D453E;
+    border-radius: 8px;
+    padding: 5px 30px;
+}
+
+.btn_cancelar{
+    background-color: white;
+    border: 2px solid black;
+    color: black;
+    border-radius: 8px;
+    padding: 4.8px 20px;
+}
