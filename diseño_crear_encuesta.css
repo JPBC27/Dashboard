@@ -70,14 +70,14 @@
 }
 
 .sidebar-2.cerrar{
+    top: 56%;
     width: 25px;
-    height: 25px;
+    height: 40px;
     border-top-right-radius:8px;
     border-bottom-right-radius:8px;
 }
 
 .sidebar-2.cerrar .bi-caret-right{
-    position: absolute;
     right: 0px;
     transform: translateY(-50%);
     border-top-left-radius:0;
