@@ -1,0 +1,108 @@
+.contenido-diseño-encuesta{
+    display: flex;
+    flex-direction: column;
+    gap: 3%;
+    padding: 8px 60px;
+    flex-wrap: wrap;
+    align-content: stretch;
+}
+
+.titulo-contenedor{
+    width: 35%;
+    font-size: 30px;
+    font-weight: 600;
+    color: black;
+}
+
+.sidebar-2{
+    border-top-right-radius:50px;
+    border-bottom-right-radius:50px;
+    position: fixed;
+    top: 40%;
+    left: 0;
+    height: 250px;
+    width: 50px;
+    padding: 10px 14px;
+    background-color:#666666 ;
+    transition: var(--tran-05);
+    z-index: 1;
+}
+
+.menu2{
+    margin-top: 30px;
+}
+
+
+.sidebar-2 li{
+    height: 50px;
+    margin-top: 10px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-2 li .icons,
+.sidebar-2 li .text{
+    color: white;
+}
+
+.bi-caret-right{
+    position: absolute;
+    top: 50%;
+    right: -13px;
+    transform: translateY(-50%) rotate(180deg);
+    height: 25px;
+    width: 25px;
+    background: #666666;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius:8px;
+    border-bottom-left-radius:8px;
+    transition: var(--tran-03);
+    z-index: 99;
+
+}
+
+.sidebar-2.cerrar .icons{
+    opacity: 0;
+}
+
+.sidebar-2.cerrar{
+    width: 25px;
+    height: 25px;
+    border-top-right-radius:8px;
+    border-bottom-right-radius:8px;
+}
+
+.sidebar-2.cerrar .bi-caret-right{
+    position: absolute;
+    right: 0px;
+    transform: translateY(-50%);
+    border-top-left-radius:0;
+    border-bottom-left-radius:0;
+    border-top-right-radius:8px;
+    border-bottom-right-radius:8px;
+}
+
+.barra-menu{
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.diseñar-encuesta{
+    position: relative;
+    left: 50px;
+    height: 100vh;
+    width: calc(100% - 50px);
+    background: white;
+    transition: var(--tran-05);
+}
+
+.sidebar-2.cerrar ~ .diseñar-encuesta{
+    left:25px;
+    width: calc(100% -25px);
+}
