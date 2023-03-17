@@ -1,6 +1,6 @@
 const body= document.querySelector("body"),
       sidebar=body.querySelector(".sidebar-2"),
-      toggle=body.querySelector(".bi-caret-right"),
+      toggle=body.querySelector(".bi-chevron-right"),
       submenu=document.querySelector(".sub-menu"),
       submenu1=document.querySelector(".sub-menu-1");
 
