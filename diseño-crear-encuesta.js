@@ -11,24 +11,6 @@ const body= document.querySelector("body"),
 const links=document.querySelectorAll('.nav-link2');
 
 
-// const links=document.querySelectorAll('.nav-link2');
-// const menu=body.querySelectorAll(".menu2");
-
-
-// menu.forEach(element => {
-//   element.addEventListener("mouseover",function(e) {
- 
-//       toggle.classList.toggle("hidden-arrow");
-      
-    
-//   })
-
-  
-//   element.addEventListener("mouseout",function(e) {
-//       toggle.classList.remove("hidden-arrow")
-      
-//   })
-// });
 
 // ===============================================
 // funciones para la barra lateral
@@ -106,10 +88,34 @@ primero1.addEventListener("click",function (e){
   submenu1.classList.toggle("activate-sub-menu-1")
 })
 
+// ==================================
+// FUNCIONES DEL DROPDOWN
+// ============================
 
+const optionMenu=document.querySelector(".dropdown"),
+      selectBtn= optionMenu.querySelector(".select-btn"),
+      options= optionMenu.querySelectorAll(".option"),
+      sBtn_text= optionMenu.querySelector(".sBtn-text");
 
+selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"));
 
+      options.forEach(option =>{
+        option.addEventListener("click", ()=>{
+          let selectedOption=option.querySelector(".option-text").innerText;
+          sBtn_text.innerText= selectedOption;
+          
+          
+          optionMenu.classList.remove("active");
+        })
+      })
 
+// ==================================
+// FUNCIONES DE LA BARRA FLOTANTE DE PREGUNTA
+// ============================
+const tuerca=document.querySelector(".tuerca");
+const barraTuerca=document.querySelector(".contenedor-barra-tuerca");
 
-
-
+tuerca.addEventListener("click", () =>{
+  tuerca.classList.toggle("tuerca-active")
+  barraTuerca.classList.toggle("activar-barra-tuerca")
+})

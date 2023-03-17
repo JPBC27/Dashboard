@@ -98,6 +98,71 @@
 
 }
 
+.barra-pregunta{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 3.5rem;
+    /* background: #F0ECEC;
+    padding: 12px 20px; */
+
+}
+
+.contenedor-barra-tuerca{
+    padding: 12px 20px;
+    background: #F0ECEC;
+    /* position: absolute; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 40px;
+    opacity: 0;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    transition-delay: 1s;
+    transition: .8s .6s;
+}
+
+.activar-barra-tuerca{
+    opacity: 1;
+}
+
+.barra-tuerca{
+    display: flex;
+}
+
+.barra-tuerca li{
+    list-style: none;
+    margin: 0px 10px;
+}
+
+.barra-tuerca li i{ 
+    color: black;
+}
+
+
+.tuerca{
+    padding: 12px 20px;
+    background: #F0ECEC;
+    /* position: absolute; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 40px;
+    opacity: .4;
+    border-radius: 8px;
+    transition:  .4s .5s;
+}
+
+.tuerca-active{
+    opacity: 1;
+    transform: rotate(-360deg);
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+
 .input-pregunta{
     display: flex;
     padding: 20px 50px;    
@@ -105,19 +170,19 @@
 }
 
 .texto-pregunta{
-    width: 75%;
+    width: 70%;
     height: 60px;
     border: 2px solid #ABABAB;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     padding: 15px 30px;
-    color:#B8B8B8;
+    color:gray;
     font-size: 18px;
     font-weight: 800;
 }
 
 .dropdown{
-    width: 25%;
+    width: 30%;
     /* margin: 150px auto; */
     /* height: 60px;
     border: 2px solid #ABABAB;
@@ -140,7 +205,7 @@
     border-bottom-right-radius: 10px;
     align-items: center;
     cursor: pointer;
-    justify-content: flex-end;
+    justify-content: center;
     
 }
 
@@ -160,6 +225,7 @@
     border-radius: 10px;
     background: #fff;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    display: none;
 }
 
 .options .option{
@@ -186,6 +252,17 @@
     font-size: 18px ;
     color: #333;
 }
+
+.dropdown.active .options{
+    display: block;
+}
+
+.dropdown.active .select-btn i{
+    transform: rotate(-180deg);
+    margin-top: 0;
+    margin-bottom: 3px;
+}
+
 
 /*BARRA LATERAL*/
 
