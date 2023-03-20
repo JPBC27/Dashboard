@@ -173,6 +173,10 @@ header .image-text .header-text{
     width: calc(100% - 88px);
 }
 
+/*=========================================================*/
+/*BREAKPOINT*/
+/*=========================================================*/
+
 
 /* USUARIO  */
 /* ================================================== */
@@ -395,3 +399,79 @@ header .image-text .header-text{
     border-radius: 8px;
     padding: 4.8px 20px;
 }
+
+
+/*=========================================================*/
+/*BREAKPOINT*/
+/*=========================================================*/
+@media screen and (min-width: 320px) and (max-width: 480px){
+    /*CELULARES*/
+    .sidebar{
+        border-top-right-radius:10px;
+        border-top-left-radius:10px;
+        position: fixed;
+        top: 95vh;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        padding: 15px 15px;
+    }
+
+    header{
+        display: none;
+    }
+
+    .menu-links{
+        display: flex;
+    }
+
+    .sidebar.close{
+        height: 250px;
+        width: 100%;
+        top: 100vh;
+        
+    }
+
+    .sidebar.close .text{
+        opacity: 0;
+    }
+
+    .sidebar .text{
+        font-size:13px ;
+    }
+    
+    .toggle{
+        display: none;
+    }
+
+    .sidebar .menu-bar{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .sidebar li{
+        margin-right: 15px;
+        margin-top: 10;
+    }
+
+    .sidebar li a{
+        flex-direction: column;
+        gap: 10%;
+    }
+
+    .perfil{
+        position: relative;
+        left: 0;
+        height: 100vh;
+        width: 100%;
+        background: white;
+        transition: var(--tran-05);
+    }
+    
+    .sidebar.close ~ .perfil{
+        left:0;
+        width: 100%;
+    }
+} 
