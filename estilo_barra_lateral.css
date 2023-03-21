@@ -15,7 +15,10 @@
 body{
     height: 100vh;
     background: white;
+    position: relative;
 }
+
+
 
 /* REUSABLE CSS */
 .sidebar .text{
@@ -41,7 +44,7 @@ body{
 .sidebar{
     border-top-right-radius:10px;
     position: fixed;
-    top: 0;
+    /* top: 0; */
     left: 0;
     height: 100%;
     width: 210px;
@@ -61,6 +64,10 @@ body{
     list-style: none;
     display: flex;
     align-items: center;
+}
+
+.botton-content{
+    margin-top: 7.0rem;
 }
 
 .sidebar li .icons{
@@ -148,7 +155,10 @@ header .image-text .header-text{
 }
 
 
-
+.menu{
+    position: relative;
+    top: 10%;
+}
 
 
 .sidebar .menu-bar{
@@ -162,7 +172,7 @@ header .image-text .header-text{
 .perfil{
     position: relative;
     left: 210px;
-    height: 100vh;
+    /* height: 100%; */
     width: calc(100% - 210px);
     background: white;
     transition: var(--tran-05);
@@ -404,17 +414,35 @@ header .image-text .header-text{
 /*=========================================================*/
 /*BREAKPOINT*/
 /*=========================================================*/
-@media screen and (min-width: 320px) and (max-width: 480px){
+@media screen and (max-width: 480px){
     /*CELULARES*/
-    .sidebar{
+    .menu{
+        top: 0;
+    }
+
+    .imagen_perfil{
+        width: 100%;
+    }
+
+    .botton-content{
+        margin-top: 0;
+    }
+
+     .sidebar{
         border-top-right-radius:10px;
         border-top-left-radius:10px;
         position: fixed;
-        top: 95vh;
-        left: 0;
-        width: 100%;
-        height: 100px;
+        bottom: 0;
+        width: 100% !important;
+        height: 80px;
         padding: 15px 15px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .mostrar-texto{
+        opacity: 1 !important;
+        color: white !important;
     }
 
     header{
@@ -425,16 +453,47 @@ header .image-text .header-text{
         display: flex;
     }
 
-    .sidebar.close{
-        height: 250px;
-        width: 100%;
-        top: 100vh;
-        
+    
+    /* .sidebar.close ~ .perfil{
+        left: unset;
+        width: auto;
+    } */
+
+    .perfil{
+        width: 100% !important;
+        /* background-color: #9D9D9D; */
+        left: 0;
     }
 
-    .sidebar.close .text{
-        opacity: 0;
+    .datos-input{
+        width: 190px;
     }
+
+    .datos-basicos{
+       /* background-color: yellow; */
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+    }
+
+    .datos-profesionales{
+        /* background-color: red; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+     }
+
+    .input-datos{
+        justify-content: center;
+    }
+
+    .sidebar.close ~ .perfil{
+        left: unset;
+        padding-bottom: 100px;
+    }
+
 
     .sidebar .text{
         font-size:13px ;
@@ -460,18 +519,6 @@ header .image-text .header-text{
         flex-direction: column;
         gap: 10%;
     }
-
-    .perfil{
-        position: relative;
-        left: 0;
-        height: 100vh;
-        width: 100%;
-        background: white;
-        transition: var(--tran-05);
-    }
     
-    .sidebar.close ~ .perfil{
-        left:0;
-        width: 100%;
-    }
+    
 } 
