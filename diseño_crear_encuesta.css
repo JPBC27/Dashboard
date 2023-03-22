@@ -490,6 +490,14 @@
         font-size: 20px;
     }
 
+    .icon-volver a{
+        font-size: 15px;
+    }
+
+    .icon-volver a i{
+        font-size: 15px;
+    }
+
     .barra-pregunta{
         margin-right: 1.0rem;
     }
@@ -505,6 +513,10 @@
         width: 70%;
     }
 
+    .diseñar a{
+        font-size: 15px;
+    }
+
     .dropdown{
         width: 30%;
     }
@@ -512,7 +524,8 @@
     .dropdown .select-btn {
         height: 45px;
         font-size: 10px;
-        padding: 20px 5px;
+        padding: 20px 2px;
+        gap:0;
     }
 
     .contenedor-barra-tuerca{
@@ -522,5 +535,28 @@
     .tuerca{
         height: 25px;
         width: 50px;
+        font-size: 15px;
+    }
+
+    .dropdown .options{
+        right: 0px;
+        padding: 10px;
+    }
+
+    .dropdown.active .options {
+        width: 113px;
+    }
+
+    .options .option{
+        height: auto;
+        padding: 2px 5px;
+    }
+
+    .option i{
+        font-size: 13px;
+    }
+
+    .option .option-text{
+        font-size: 10px;
     }
 }
