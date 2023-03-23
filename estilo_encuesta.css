@@ -501,6 +501,37 @@
 /*=========================================================*/
 /*BREAKPOINT*/
 /*=========================================================*/
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  /*TABLET*/
+  .contenido-encuesta{
+    padding: 8px 20px;
+  }
+
+  .crear-gestionar a{
+    font-size: 15px;
+  }
+
+  .cg-encuesta{
+    width: 90%;
+  }
+
+  .linea-separacion hr{
+    width: 100%;
+  }
+
+  .texto{
+    width: 55%;
+  }
+  .cartas{
+    margin-bottom: 20px;
+  }
+
+  .card{
+    margin-top: 15px;
+  }
+}
+
+
 @media screen and (max-width: 480px){
   /*CELULARES*/
   .encuesta{

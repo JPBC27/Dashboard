@@ -470,7 +470,35 @@
 /*=========================================================*/
 /*BREAKPOINT*/
 /*=========================================================*/
+@media screen and (min-width: 481px) and (max-width: 768px) {}
+
 @media screen and (max-width: 480px){
+
+    .sidebar-2.cerrar{
+        width: 20px;
+        height: 40px;
+    }
+
+    .sidebar-2{
+        width: 40px;
+        height: 250px;
+        display: flex;
+        /* align-items: center; */
+        justify-content: center;
+    }
+
+    .diseñar-encuesta{
+        left: 40px;
+        width: calc(100% - 40px);
+    }
+    
+    .sidebar-2.cerrar ~ .diseñar-encuesta{
+        left:20px;
+        width: calc(100% - 20px);
+    }
+
+    
+
     .contenido-diseño-encuesta{
         padding: 8px 15px;
     }

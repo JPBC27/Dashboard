@@ -414,6 +414,49 @@ header .image-text .header-text{
 /*=========================================================*/
 /*BREAKPOINT*/
 /*=========================================================*/
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    /*TABLET*/
+    .menu{
+        right: 18px;
+    }
+
+    .botton-content{
+        position: relative;
+        right: 18px;
+    }
+
+    .sidebar.close{
+        width: 58px;
+    }
+
+    .sidebar li .icons{
+        font-size: 15px;
+    }
+
+    .sidebar .text{
+        font-size: 15px;
+    }
+
+    .datos-input{
+        width: 220px;
+    }
+
+    .perfil{
+        position: relative;
+        left: 210px;
+        /* height: 100%; */
+        width: calc(100% - 210px);
+        background: white;
+        transition: var(--tran-05);
+    }
+    
+    .sidebar.close ~ .perfil{
+        left:58px;
+        width: calc(100% - 58px);
+    }
+    
+}
+
 @media screen and (max-width: 480px){
     /*CELULARES*/
     .menu{
