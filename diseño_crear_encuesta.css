@@ -470,7 +470,96 @@
 /*=========================================================*/
 /*BREAKPOINT*/
 /*=========================================================*/
-@media screen and (min-width: 481px) and (max-width: 768px) {}
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .contenido-diseño-encuesta{
+        padding: 8px 15px;
+    }
+
+    .titulo-contenedor{
+        width: 80%;
+        font-size: 25px;
+    }
+
+    .titulo-encuesta{
+        margin: 0;
+
+    }
+    
+    .titulo-encuesta p{
+        width: 85%;
+        font-size: 22px;
+    }
+
+    .icon-volver a{
+        font-size: 17px;
+    }
+
+    .icon-volver a i{
+        font-size: 17px;
+    }
+
+    .barra-pregunta{
+        margin-right: 1.0rem;
+    }
+
+    .input-pregunta{
+        padding: 20px 8px;
+    }
+
+    .texto-pregunta{
+        height: 45px;
+        font-size: 13px;
+        padding: 15px;
+        width: 70%;
+    }
+
+    .diseñar a{
+        font-size: 17px;
+    }
+
+    .dropdown{
+        width: 30%;
+    }
+
+    .dropdown .select-btn {
+        height: 45px;
+        font-size: 10px;
+        padding: 20px 5px;
+        gap:0;
+    }
+
+    .contenedor-barra-tuerca{
+        height: 30px;
+    }
+
+    .tuerca{
+        height: 30px;
+        width: 50px;
+        font-size: 15px;
+    }
+
+    .dropdown .options{
+        right: 0px;
+        padding: 10px;
+    }
+
+    .dropdown.active .options {
+        width: 140px;
+    }
+
+    .options .option{
+        height: auto;
+        padding: 2px 5px;
+    }
+
+    .option i{
+        font-size: 13px;
+    }
+
+    .option .option-text{
+        font-size: 11px;
+    }
+}
 
 @media screen and (max-width: 480px){
 

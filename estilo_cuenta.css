@@ -336,7 +336,7 @@ text-align: center;
 /* DATOS PROFESIONALES */
 
 .datos-profesionales{
-    margin-top: 5rem;
+    margin-top: 1rem;
 }
 
 /* REUSABLE EN DATOS BASICOS Y PROFESIONALES */
@@ -458,6 +458,13 @@ text-align: center;
     flex-direction: row ;
 }
 
+.columna1{
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
 .contraseña-nueva{
     margin-left: 40px;
     display: flex;
@@ -479,12 +486,12 @@ text-align: center;
 
     .menu{
         position: relative;
-        right: 18px;
+        right: 12px;
     }
 
     .botton-content{
         position: relative;
-        right: 18px;
+        right: 12px;
     }
 
     .sidebar.close{
@@ -515,6 +522,10 @@ text-align: center;
         width: 340px;
     }
 
+    .datos-profesionales{
+        margin-top: 3rem;
+    }
+
     .cuenta{
         position: relative;
         left: 210px;
@@ -527,6 +538,10 @@ text-align: center;
     .sidebar.close ~ .cuenta{
         left:70px;
         width: calc(100% - 70px);
+    }
+
+    .sidebar li{
+        list-style: none;
     }
     
 }
