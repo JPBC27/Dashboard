@@ -19,7 +19,6 @@ body{
 }
 
 
-
 /* REUSABLE CSS */
 .sidebar .text{
     font-size: 20px;
@@ -29,22 +28,21 @@ body{
     opacity: 1;
 }
 
-.sidebar .image{
-    /* min-width: 60px; */
-    display: flex ;
-    align-items: center; 
-}
-
 .sidebar.close .text{
     opacity: 0;
 }
 
+.image-text{
+text-align: center;
+}
 
 /* =====SIDEBAR==== */
 .sidebar{
     border-top-right-radius:10px;
     position: fixed;
-    /* top: 0; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     left: 0;
     height: 100%;
     width: 210px;
@@ -53,22 +51,23 @@ body{
     transition: var(--tran-05);
     z-index: 1;
 }
+/* ===menu=== */
+.menu{
+    overflow: hidden;
+    z-index: 1;
+}
 
 .sidebar.close{
     width: 88px;
 }
 
-.sidebar li{
+
+.menu ul li{
     height: 50px;
-    margin-top: 10px;
     list-style: none;
-    display: flex;
-    align-items: center;
+ 
 }
 
-.botton-content{
-    margin-top: 7.0rem;
-}
 
 .sidebar li .icons{
     display: flex;
@@ -78,9 +77,6 @@ body{
     font-size: 20px;
 }
 
-.sidebar header{
-    position:relative;
-}
 
 .sidebar li .icons,
 .sidebar li .text{
@@ -95,30 +91,22 @@ body{
     border-radius: 6px;
 }
 
-.sidebar header .image-text{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2.0em;
-    margin-bottom: 4.0em;
-}
-
-header .image-text .header-text{ 
-    display: flex;
-    flex-direction: column;
-}
 
 .header-text .name{
     font-weight: 600;
 }
 
+/* ===caja del boton expandir==== */
+.box-toggle{
+    position:absolute;
+    right: -15px;
+    z-index: 2;
+    width: 50px;
+   
+}
 
-
-.toggle{
-    position: absolute;
-    top: 50%;
-    right: -13px;
-    transform: translateY(-50%) rotate(180deg);
+.toggle{  
+    transform:  rotate(180deg);
     height: 25px;
     width: 25px;
     background: #F2A530;
@@ -128,16 +116,21 @@ header .image-text .header-text{
     justify-content: center;
     border-radius: 50%;
     transition: var(--tran-03);
-    z-index: 99;
+    margin-left: 20px;
+    cursor: pointer;
+
+
 }
 
 .sidebar.close .toggle{
-    transform: translateY(-50%);
+    transform: rotate(0);
 }
 
 .toggle:hover{
     color: black;
 }
+
+
 
 .sidebar li a{ 
     text-decoration: none;
@@ -146,6 +139,9 @@ header .image-text .header-text{
     align-items: center;
     width: 100%;
     border-radius: 6px;
+  
+
+    
 }
 
 
@@ -155,10 +151,7 @@ header .image-text .header-text{
 }
 
 
-.menu{
-    position: relative;
-    top: 10%;
-}
+
 
 
 .sidebar .menu-bar{
@@ -215,6 +208,7 @@ header .image-text .header-text{
 
 .barra_usuario ul{
     display: flex;
+
 }
 
 .barra_usuario li{
