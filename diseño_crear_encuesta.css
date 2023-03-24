@@ -387,12 +387,36 @@
     flex-direction: column;
     /* align-items: center; */
     width: 120px;
-    height: 110px;
+    height: auto;
     opacity: 0;
     top: 38%;
     border-top-right-radius:8px;
     border-bottom-right-radius:8px;
     border-bottom-left-radius:8px;
+}
+
+.sub-menu-1 ul{
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10%;
+    justify-content: center;
+}
+
+.sub-menu-1 li{
+    display: flex;
+    height: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.tema{
+    border: 2px solid #FFFFFF;
+}
+
+.tema img{
+    width: 35px;
+    height: 35px;
 }
 
 .activate-sub-menu-1{
