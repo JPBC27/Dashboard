@@ -26,22 +26,21 @@ body{
     opacity: 1;
 }
 
-.sidebar .image{
-    /* min-width: 60px; */
-    display: flex ;
-    align-items: center; 
-}
-
 .sidebar.close .text{
     opacity: 0;
 }
 
+.image-text{
+text-align: center;
+}
 
 /* =====SIDEBAR==== */
 .sidebar{
     border-top-right-radius:10px;
     position: fixed;
-    /* top: 0; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     left: 0;
     height: 100%;
     width: 210px;
@@ -50,18 +49,23 @@ body{
     transition: var(--tran-05);
     z-index: 1;
 }
+/* ===menu=== */
+.menu{
+    overflow: hidden;
+    z-index: 1;
+}
 
 .sidebar.close{
     width: 88px;
 }
 
-.sidebar li{
+
+.menu ul li{
     height: 50px;
-    margin-top: 10px;
     list-style: none;
-    display: flex;
-    align-items: center;
+ 
 }
+
 
 .sidebar li .icons{
     display: flex;
@@ -71,9 +75,6 @@ body{
     font-size: 20px;
 }
 
-.sidebar header{
-    position:relative;
-}
 
 .sidebar li .icons,
 .sidebar li .text{
@@ -88,30 +89,22 @@ body{
     border-radius: 6px;
 }
 
-.sidebar header .image-text{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2.0em;
-    margin-bottom: 4.0em;
-}
-
-header .image-text .header-text{ 
-    display: flex;
-    flex-direction: column;
-}
 
 .header-text .name{
     font-weight: 600;
 }
 
+/* ===caja del boton expandir==== */
+.box-toggle{
+    position:absolute;
+    right: -15px;
+    z-index: 2;
+    width: 50px;
+   
+}
 
-
-.toggle{
-    position: absolute;
-    top: 50%;
-    right: -13px;
-    transform: translateY(-50%) rotate(180deg);
+.toggle{  
+    transform:  rotate(180deg);
     height: 25px;
     width: 25px;
     background: #F2A530;
@@ -121,17 +114,21 @@ header .image-text .header-text{
     justify-content: center;
     border-radius: 50%;
     transition: var(--tran-03);
-    z-index: 99;
+    margin-left: 20px;
+    cursor: pointer;
+
 
 }
 
 .sidebar.close .toggle{
-    transform: translateY(-50%);
+    transform: rotate(0);
 }
 
 .toggle:hover{
     color: black;
 }
+
+
 
 .sidebar li a{ 
     text-decoration: none;
@@ -140,6 +137,9 @@ header .image-text .header-text{
     align-items: center;
     width: 100%;
     border-radius: 6px;
+  
+
+    
 }
 
 
@@ -353,6 +353,8 @@ header .image-text .header-text{
     gap: 5%;
     margin-top: 5px;
     width: 70%;
+    flex-direction: column;
+
 }
 
 .datos-input{
@@ -466,9 +468,73 @@ header .image-text .header-text{
 /*=========================================================*/
 /*BREAKPOINT*/
 /*=========================================================*/
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .contenido_perfil{
+        padding: 8px 30px;
+    }
+
+    .input-datos{
+        width: 100%;
+    }
+
+    .menu{
+        position: relative;
+        right: 18px;
+    }
+
+    .botton-content{
+        position: relative;
+        right: 18px;
+    }
+
+    .sidebar.close{
+        width: 70px;
+    }
+
+    .sidebar li .icons{
+        font-size: 15px;
+    }
+
+    .sidebar .text{
+        font-size: 15px;
+    }
+
+    .datos-input{
+        width: 220px;
+    }   
+
+    .contraseña-nueva{
+        margin-left: 0;
+    }
+
+    .suscripcion{
+        margin-bottom: 3rem;
+    }
+
+    .container-plan{
+        width: 340px;
+    }
+
+    .cuenta{
+        position: relative;
+        left: 210px;
+        /* height: 100%; */
+        width: calc(100% - 210px);
+        background: white;
+        transition: var(--tran-05);
+    }
+    
+    .sidebar.close ~ .cuenta{
+        left:70px;
+        width: calc(100% - 70px);
+    }
+    
+}
+
 @media screen and (max-width: 480px){
     /*CELULARES*/
     .menu{
+        position: relative;
         top: 0;
     }
 
@@ -490,6 +556,7 @@ header .image-text .header-text{
         padding: 15px 15px;
         display: flex;
         justify-content: center;
+        flex-direction: row;
     }
 
     .mostrar-texto{
@@ -570,7 +637,8 @@ header .image-text .header-text{
 
     .sidebar li{
         margin-right: 15px;
-        margin-top: 10;
+        margin-top: 10px;
+        list-style: none;
     }
 
     .sidebar li a{

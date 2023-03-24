@@ -411,16 +411,17 @@ text-align: center;
 @media screen and (min-width: 481px) and (max-width: 768px) {
     /*TABLET*/
     .menu{
-        right: 18px;
+        position: relative;
+        right: 12px;
     }
 
     .botton-content{
         position: relative;
-        right: 18px;
+        right: 12px;
     }
 
     .sidebar.close{
-        width: 58px;
+        width: 70px;
     }
 
     .sidebar li .icons{
@@ -445,8 +446,8 @@ text-align: center;
     }
     
     .sidebar.close ~ .perfil{
-        left:58px;
-        width: calc(100% - 58px);
+        left:70px;
+        width: calc(100% - 70px);
     }
     
 }
@@ -475,6 +476,7 @@ text-align: center;
         padding: 15px 15px;
         display: flex;
         justify-content: center;
+        flex-direction: row;
     }
 
     .mostrar-texto{
@@ -548,8 +550,9 @@ text-align: center;
     }
 
     .sidebar li{
+        list-style: none;
         margin-right: 15px;
-        margin-top: 10;
+        margin-top: 10px;
     }
 
     .sidebar li a{
