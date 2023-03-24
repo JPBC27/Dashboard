@@ -119,3 +119,28 @@ tuerca.addEventListener("click", () =>{
   tuerca.classList.toggle("tuerca-active")
   barraTuerca.classList.toggle("activar-barra-tuerca")
 })
+
+
+// ==================================
+// FUNCIONES PARA REMPLAZAR EL FONDO 
+// ============================
+
+  const fondo=document.querySelectorAll(".nav-link4");
+  const contenedorEncuesta=document.getElementById("contenedor-encuesta")
+  const dato3=window.localStorage.prueba
+  
+  
+  fondo.forEach(e => {
+    contenedorEncuesta.style.background=`url(${dato3}) no-repeat center center`;
+    contenedorEncuesta.style.backgroundSize=`100% 100%`;
+  
+    e.onclick=()=>{
+      const filename=new URL(e.lastChild.lastChild.src).pathname
+      localStorage.setItem("prueba",JSON.stringify(filename))
+      contenedorEncuesta.style.background=`url(${filename }) no-repeat center center`;
+      contenedorEncuesta.style.backgroundSize=`100% 100%`;
+
+    }
+  
+  });
+

@@ -1,3 +1,11 @@
+:root{
+    /*transition*/
+    --tran-02:all 0.2s ease;
+    --tran-03:all 0.3s ease;
+    --tran-04:all 0.4s ease;
+    --tran-05:all 0.5s ease;
+}
+
 .contenido-diseño-encuesta{
     display: flex;
     flex-direction: column;
@@ -69,9 +77,10 @@
     margin-bottom: 25px;
     min-height: 100vh;
     width: 100%;
-    background-color: #00B3AA;
+    background: #00B3AA;
     display: flex;
     flex-direction: column;
+    transition: var(--tran-04);
 }
 
 .titulo-encuesta{
