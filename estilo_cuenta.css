@@ -187,7 +187,7 @@ header .image-text .header-text{
     align-content: stretch;
 }
 
-.perfil .text{
+.cuenta .text{
     font-size: 30px;
     font-weight: 500;
     color: black;
@@ -456,6 +456,13 @@ header .image-text .header-text{
     flex-direction: row ;
 }
 
+.columna1{
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
 .contraseña-nueva{
     margin-left: 40px;
     display: flex;
@@ -466,6 +473,70 @@ header .image-text .header-text{
 /*=========================================================*/
 /*BREAKPOINT*/
 /*=========================================================*/
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .contenido_perfil{
+        padding: 8px 30px;
+    }
+
+    .input-datos{
+        width: 100%;
+    }
+
+    .menu{
+        position: relative;
+        right: 18px;
+    }
+
+    .botton-content{
+        position: relative;
+        right: 18px;
+    }
+
+    .sidebar.close{
+        width: 58px;
+    }
+
+    .sidebar li .icons{
+        font-size: 15px;
+    }
+
+    .sidebar .text{
+        font-size: 15px;
+    }
+
+    .datos-input{
+        width: 220px;
+    }   
+
+    .contraseña-nueva{
+        margin-left: 0;
+    }
+
+    .suscripcion{
+        margin-bottom: 3rem;
+    }
+
+    .container-plan{
+        width: 340px;
+    }
+
+    .cuenta{
+        position: relative;
+        left: 210px;
+        /* height: 100%; */
+        width: calc(100% - 210px);
+        background: white;
+        transition: var(--tran-05);
+    }
+    
+    .sidebar.close ~ .cuenta{
+        left:58px;
+        width: calc(100% - 58px);
+    }
+    
+}
+
 @media screen and (max-width: 480px){
     /*CELULARES*/
     .menu{
@@ -579,6 +650,12 @@ header .image-text .header-text{
     }
 
     .columna{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .columna1{
         flex-direction: column;
         align-items: center;
         justify-content: center;
