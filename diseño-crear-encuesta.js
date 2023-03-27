@@ -120,6 +120,7 @@ selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"))
             casilla_verificacion.style.display ="none";
             texto_simple.style.display="none";
             control_deslizante.style.display="none";
+            opcion_checkbox.innerHTML=''
           }
 
           else if(selectedOption=="Casillas de verificación"){
@@ -127,19 +128,23 @@ selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"))
             casilla_verificacion.style.display ="block";
             texto_simple.style.display="none";
             control_deslizante.style.display="none";
+            opcion_multiple.innerHTML=''
           }
           else if(selectedOption=="Texto simple"){
             menu_multiple.style.display ="none";
             casilla_verificacion.style.display ="none";
             texto_simple.style.display="block";
             control_deslizante.style.display="none";
+            opcion_checkbox.innerHTML=''
+            opcion_multiple.innerHTML=''
           }
           else {
             menu_multiple.style.display ="none";
             casilla_verificacion.style.display ="none";
             texto_simple.style.display="none";
             control_deslizante.style.display="block";
-
+            opcion_checkbox.innerHTML=''
+            opcion_multiple.innerHTML=''
           }
 
         })
@@ -182,5 +187,69 @@ tuerca.addEventListener("click", () =>{
     }
   
   });
+
+// ==================================
+// FUNCIONES PARA  BOTON MAS
+// ============================
+
+const opcion_multiple=document.getElementById("opcion-multiple")
+const mas_opcion_multiple=document.getElementById("mas-opcion-multiple")
+
+mas_opcion_multiple.addEventListener("click",()=>{
+  // console.log("hola")
+  const temp=`
+  <div class="pregunta-opciones" >
+  <label class="radio1">
+      <input type="radio" name="r" value="clasica" disabled>
+      <span></span>
+  </label>
+  <input class="input-opciones1" type="text">
+  <i class="bi bi-dash-circle"></i>
+</div>
+`
+  // opcion_multiple.insertAdjacentHTML("beforeend",temp) =temp
+  opcion_multiple.innerHTML+=temp;
+})
+
+
+const opcion_checkbox=document.getElementById("opcion-checkbox")
+const mas_opcion_checkbox=document.getElementById("mas-opcion-checkbox")
+
+mas_opcion_checkbox.addEventListener("click",()=>{
+  // console.log("hola")
+  const temp1=`
+  <div class="pregunta-opciones">
+    <div class="checkbox">
+      <input class="checkbox-spin" type="checkbox" id="check4" disabled/>
+      <label for="check4"><span></span></label>
+    </div>
+      <input class="input-opciones1" type="text">
+      <i class="bi bi-dash-circle"></i>
+    </div>
+`
+  // opcion_multiple.insertAdjacentHTML("beforeend",temp) =temp
+  opcion_checkbox.innerHTML+=temp1;
+})
+
+// ==================================
+// FUNCIONES BOTON CANCELAR
+// ============================
+const cancelar=document.querySelectorAll(".opcion-cancelar")
+const contenedor_opciones=document.querySelectorAll(".contenedor-opciones")
+cancelar.forEach(element => {
+  element.addEventListener("click",()=>{
+    contenedor_opciones.forEach(element1 => {
+      // console.log(element1)
+      element1.style.display="none"
+      sBtn_text.innerText= "Diseño de opciones";
+      opcion_checkbox.innerHTML=''
+      opcion_multiple.innerHTML=''
+    });
+  })
+});
+
+
+
+
 
 
