@@ -104,6 +104,7 @@
 .contenedor-preguntas{
     display: flex;
     flex-direction: column;
+    padding: 0px 15px;
 
 }
 
@@ -176,6 +177,7 @@
     display: flex;
     padding: 20px 50px;    
     width: 100%;
+    background-color: #d1d7e3;
 }
 
 .texto-pregunta{
@@ -264,6 +266,7 @@
 
 .dropdown.active .options{
     display: block;
+    position: absolute;
     
 }
 
@@ -280,7 +283,7 @@
     /* gap: 10px; */
     padding: 20px 50px;
     width: 100%;
-    /* background-color: blue; */
+    background-color: #d1d7e3;
 }
 
 .mas-pregunta{
@@ -318,7 +321,7 @@
 .pregunta-opciones{
     display: flex;
     align-items: center;
-    background-color: #F0ECEC;
+    /* background-color: #F0ECEC; */
     padding: 10px;
     gap: 3%;
 }
@@ -351,8 +354,8 @@
   }
   .radio1 input + span:before, .radio1 input + span:after {
     content: "";
-    width: 22px;
-    height: 22px;
+    width: 30px;
+    height: 30px;
     display: block;
     border-radius: 50%;
     left: 0;
@@ -385,6 +388,134 @@
   .radio1:hover input:checked + span:after {
     transform: scale(0.4);
   }
+
+
+  .botones-opciones{
+    display: flex;
+    /* flex-direction: column; */
+    /* gap: 10px; */
+    padding: 20px 50px;
+    width: 100%;
+    background-color: #d1d7e3;
+}
+
+    .botones{
+        display: flex;
+        gap: 2%;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    .opcion-cancelar{
+        background-color: white;
+        text-align: center;
+        display: flex;
+        width: 120px;
+        height: 30px;
+        border: 2px solid gray;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: black;
+        font-weight: 800;
+    }
+
+    .opcion-guardar{
+        background-color: green;
+        text-align: center;
+        display: flex;
+        width: 120px;
+        height: 30px;
+        border: 2px solid gray;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: white;
+        font-weight: 800;
+    }
+
+
+    /*CHECKBOX*/
+    
+      
+      .checkbox-spin {
+        display: none;
+      }
+      
+      .checkbox-spin + label span {
+        display: inline-block;
+        width: 25px;
+        height: 19px;
+        margin: 0 5px -4px 0;
+        /*layout relationship between check and label*/
+      }
+
+      .checkbox-spin + label span:before,
+      .checkbox-spin + label span:after {
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        content: "";
+        position: absolute;
+        z-index: 1;
+        width: 1.5rem;
+        height: 1.5rem;
+        background: transparent;
+        border: 2px solid black;
+      }
+
+      .checkbox-spin + label span:after {
+        z-index: 0;
+        border: none;
+      }
+      
+      .checkbox-spin:checked + label span:before {
+        -webkit-transform: rotateZ(180deg);
+        -moz-transform: rotateZ(180deg);
+        -ms-transform: rotateZ(180deg);
+        -o-transform: rotateZ(180deg);
+        transform: rotateZ(180deg);
+        background: gray;
+      }
+
+
+      /*control deslizante*/
+      .control-deslizante{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        gap: 2%;
+      }
+
+      .control-deslizante label{
+        display: flex;
+        width: 10%;
+        align-items: center;
+        gap: 2%;
+
+      }
+
+      .pregunta-opciones1{
+        display: flex;
+        align-items: center;
+        /* background-color: #F0ECEC; */
+        padding: 10px;
+        gap: 15px;
+        flex-direction: column;
+      }
+      
+
+      .input-opciones2{
+        width: 50%;
+        height: 50px;
+        padding: 15px 30px;
+        color: gray;
+        font-size: 18px;
+        font-weight: 800;
+        border: 10px;
+        border: 2px solid gray;
+        border-radius: 10px;
+    }
 
 
 /*BARRA LATERAL*/

@@ -95,7 +95,11 @@ primero1.addEventListener("click",function (e){
 const optionMenu=document.querySelector(".dropdown"),
       selectBtn= optionMenu.querySelector(".select-btn"),
       options= optionMenu.querySelectorAll(".option"),
-      sBtn_text= optionMenu.querySelector(".sBtn-text");
+      sBtn_text= optionMenu.querySelector(".sBtn-text"),
+      menu_multiple= document.querySelector(".contendor-opciones-multiple"),
+      casilla_verificacion=document.querySelector(".contendor-casilla-verificacion"),
+      texto_simple=document.querySelector(".contendor-texto-simple"),
+      control_deslizante=document.querySelector(".contendor-control-deslizante");
 
 selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"));
 
@@ -104,10 +108,45 @@ selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"))
           let selectedOption=option.querySelector(".option-text").innerText;
           sBtn_text.innerText= selectedOption;
           
-          
           optionMenu.classList.remove("active");
+          // console.log(selectedOption)
+
+          // ==================================
+          // FUNCIONES PARA OPCIONES DE PREGUNTA
+          // =====================================
+
+          if(selectedOption=="Opción múltiples"){
+            menu_multiple.style.display ="block";
+            casilla_verificacion.style.display ="none";
+            texto_simple.style.display="none";
+            control_deslizante.style.display="none";
+          }
+
+          else if(selectedOption=="Casillas de verificación"){
+            menu_multiple.style.display ="none";
+            casilla_verificacion.style.display ="block";
+            texto_simple.style.display="none";
+            control_deslizante.style.display="none";
+          }
+          else if(selectedOption=="Texto simple"){
+            menu_multiple.style.display ="none";
+            casilla_verificacion.style.display ="none";
+            texto_simple.style.display="block";
+            control_deslizante.style.display="none";
+          }
+          else {
+            menu_multiple.style.display ="none";
+            casilla_verificacion.style.display ="none";
+            texto_simple.style.display="none";
+            control_deslizante.style.display="block";
+
+          }
+
         })
       })
+
+
+
 
 // ==================================
 // FUNCIONES DE LA BARRA FLOTANTE DE PREGUNTA
@@ -143,4 +182,5 @@ tuerca.addEventListener("click", () =>{
     }
   
   });
+
 
