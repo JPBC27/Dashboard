@@ -95,12 +95,15 @@ primero1.addEventListener("click",function (e){
 const optionMenu=document.querySelector(".dropdown"),
       selectBtn= optionMenu.querySelector(".select-btn"),
       options= optionMenu.querySelectorAll(".option"),
-      sBtn_text= optionMenu.querySelector(".sBtn-text"),
-      menu_multiple= document.querySelector(".contendor-opciones-multiple"),
-      casilla_verificacion=document.querySelector(".contendor-casilla-verificacion"),
-      texto_simple=document.querySelector(".contendor-texto-simple"),
-      control_deslizante=document.querySelector(".contendor-control-deslizante");
+      sBtn_text= optionMenu.querySelector(".sBtn-text");
 
+const menu_multiple= document.getElementById("opcion-multiple"),
+      casilla_verificacion=document.getElementById("opcion-checkbox"),
+      texto_simple=document.querySelector(".contendor-texto-simple"),
+      control_deslizante=document.querySelector(".contendor-control-deslizante"),
+      contenedor_opcion_multiple=document.getElementById("boton-opcion-multiple"),
+      contenedor_opcion_checkbox=document.getElementById("boton-opcion-checkbox");
+const contenedor_general=document.getElementById("contenedor-opciones")
 selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"));
 
       options.forEach(option =>{
@@ -116,35 +119,46 @@ selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"))
           // =====================================
 
           if(selectedOption=="Opción múltiples"){
+            contenedor_general.style.display="block"
             menu_multiple.style.display ="block";
             casilla_verificacion.style.display ="none";
-            texto_simple.style.display="none";
-            control_deslizante.style.display="none";
+            // texto_simple.style.display="none";
+            // control_deslizante.style.display="none";
             opcion_checkbox.innerHTML=''
+            contenedor_opcion_multiple.style.display="flex"
+            contenedor_opcion_checkbox.style.display="none"
           }
 
           else if(selectedOption=="Casillas de verificación"){
+            contenedor_general.style.display="block"
+
             menu_multiple.style.display ="none";
             casilla_verificacion.style.display ="block";
-            texto_simple.style.display="none";
-            control_deslizante.style.display="none";
+            // texto_simple.style.display="none";
+            // control_deslizante.style.display="none";
             opcion_multiple.innerHTML=''
+            contenedor_opcion_multiple.style.display="none"
+            contenedor_opcion_checkbox.style.display="flex"
           }
           else if(selectedOption=="Texto simple"){
             menu_multiple.style.display ="none";
             casilla_verificacion.style.display ="none";
-            texto_simple.style.display="block";
-            control_deslizante.style.display="none";
+            // texto_simple.style.display="block";
+            // control_deslizante.style.display="none";
             opcion_checkbox.innerHTML=''
             opcion_multiple.innerHTML=''
+            contenedor_opcion_multiple.style.display="none"
+            contenedor_opcion_checkbox.style.display="none"
           }
           else {
             menu_multiple.style.display ="none";
             casilla_verificacion.style.display ="none";
-            texto_simple.style.display="none";
-            control_deslizante.style.display="block";
+            // texto_simple.style.display="none";
+            // control_deslizante.style.display="block";
             opcion_checkbox.innerHTML=''
             opcion_multiple.innerHTML=''
+            contenedor_opcion_multiple.style.display="none"
+            contenedor_opcion_checkbox.style.display="none"
           }
 
         })
@@ -248,6 +262,32 @@ cancelar.forEach(element => {
   })
 });
 
+// ==================================
+// OBTENER DATOS DE PREGUNTA
+// ============================
+
+const pregunta= document.querySelector(".texto-pregunta")
+const respuestas=document.querySelectorAll(".input-opciones1")
+const guardar=document.querySelector(".opcion-guardar")
+
+// guardar.forEach(elemento => {
+//   elemento.addEventListener("click",()=>{
+//     var question=pregunta.value;
+//     respuestas.forEach(elemento1 => {
+//       var questions=elemento1;
+//       console.log(question)
+//       console.log(elemento1)
+//     });
+//   }) 
+// });
+
+
+guardar.onclick= (e) => {
+  // console.log("hola")
+  e.preventDefault();
+  var question=pregunta.value;
+  console.log(question)
+}
 
 
 
