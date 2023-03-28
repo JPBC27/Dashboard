@@ -347,8 +347,8 @@
     position: relative;
   }
   .radio1 input + span:not(:empty) {
-    padding-left: 30px;
-    font-size: 15px;
+    padding-left: 35px;
+    font-size: 25px;
     color: #656565;
     font-weight: 800;
   }
@@ -545,6 +545,42 @@
 
     .add{
         height: auto;
+    }
+
+    /*DISEÑO DE PREGUNTAS REALIZADAS*/
+    .contenedor-preguntas-realizadas{
+        padding: 20px 50px;
+        width: 100%;
+        display: flex;
+        background-color: transparent;
+        flex-direction: column;
+    }
+
+    .diseño-pregunta{
+        margin-top: 5px;
+        display: flex;
+        padding: 0px 25px;
+        margin-bottom: 5px;
+    }
+
+    .diseño-pregunta span{
+        font-size: 35px;
+        font-weight: 700;
+        color: black;
+    }
+
+    .diseño-opciones{
+        display: flex;
+        align-items: center;
+        height: auto;
+        padding: 0px 35px;
+        flex-direction: row;
+        gap: 2%;
+    }
+
+    .diseño-opciones span{
+        font-size: 30px;
+        font-weight: 500;
     }
 
 

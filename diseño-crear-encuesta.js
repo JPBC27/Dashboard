@@ -167,16 +167,7 @@ selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"))
 
 
 
-// ==================================
-// FUNCIONES DE LA BARRA FLOTANTE DE PREGUNTA
-// ============================
-const tuerca=document.querySelector(".tuerca");
-const barraTuerca=document.querySelector(".contenedor-barra-tuerca");
 
-tuerca.addEventListener("click", () =>{
-  tuerca.classList.toggle("tuerca-active")
-  barraTuerca.classList.toggle("activar-barra-tuerca")
-})
 
 
 // ==================================
@@ -269,12 +260,14 @@ cancelar.forEach(element => {
 const pregunta= document.querySelector(".texto-pregunta")
 const multiples=document.querySelector(".opciones-multiples")
 const guardar=document.getElementById("guardar")
+const contenedor_diseño_pregunta=document.getElementById("pregunta")
 // const objeto=[];
 var objeto = JSON.parse(localStorage.getItem("prueba1")) || [];
 
 guardar.addEventListener("click",()=>{
   const respuestas= document.querySelectorAll(".input-opciones1");
   const values = [];
+   
     var question=pregunta.value;
     // console.log(question)
 
@@ -285,17 +278,70 @@ guardar.addEventListener("click",()=>{
 
     });
 
-    const questions={pregunta:pregunta.value,respuestas: values, tipo:sBtn_text.innerText}
-     objeto.push(questions)
+    // const questions={pregunta:pregunta.value,respuestas: values, tipo:sBtn_text.innerText}
+     objeto.push({pregunta:pregunta.value,respuestas: values, tipo:sBtn_text.innerText})
     localStorage.setItem("prueba1",JSON.stringify(objeto))
     
-
-
-    
+    contenedor_diseño_pregunta.style.display="none"
+    renderQuestions();
 
 }) 
 
-  
+// ==================================
+// RENDERIZAR PREGUNTAS
+// ============================
+window.onload =function () {
+renderQuestions();
+}
+
+const renderQuestions =()=>{
+  const htmlres=document.getElementById("contenedor-preguntas-realizadas")
+  JSON.parse(localStorage.getItem("prueba1")).map((a)=>{
+    let {pregunta,respuestas,tipo}=a
+    let search = objeto.find(x => x.pregunta === pregunta) || [];
+
+    if(a.tipo=="Opción múltiples" ){
+      if(a.pregunta!= search.pregunta){
+        const html=`
+      <div class="barra-pregunta">
+                            <div class="contenedor-barra-tuerca">
+                                <ul class="barra-tuerca">
+                                    <li><a href=""><i class="bi bi-pencil-square"></i></a></li>
+                                    <li><a href=""><i class="bi bi-trash3"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="tuerca">
+                                <i class="bi bi-gear-fill"></i>
+                            </div>
+                            
+                        </div> 
+                        
+                        <div class="diseño-pregunta">
+                        <span>${pregunta}</span>
+                    </div>
+                    <div class="diseño-opciones">
+                        <label class="radio1">
+                            <input type="radio" name="r" value="${respuestas}" >
+                            <span></span>
+                        </label>
+                        <span>${respuestas}</span>
+                    </div>
+      `;
+      htmlres.innerHTML += html;
+      }
+      
+    }
+  })
+}
 
 
+// ==================================
+// FUNCIONES DE LA BARRA FLOTANTE DE PREGUNTA
+// ============================
+const tuerca=document.querySelector(".tuerca");
+const barraTuerca=document.querySelector(".contenedor-barra-tuerca");
 
+// tuerca.addEventListener("click", () =>{
+//   tuerca.classList.toggle("tuerca-active")
+//   barraTuerca.classList.toggle("activar-barra-tuerca")
+// })
