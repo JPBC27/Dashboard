@@ -267,29 +267,35 @@ cancelar.forEach(element => {
 // ============================
 
 const pregunta= document.querySelector(".texto-pregunta")
-const respuestas=document.querySelectorAll(".input-opciones1")
-const guardar=document.querySelector(".opcion-guardar")
+const multiples=document.querySelector(".opciones-multiples")
+const guardar=document.getElementById("guardar")
+// const objeto=[];
+var objeto = JSON.parse(localStorage.getItem("prueba1")) || [];
 
-// guardar.forEach(elemento => {
-//   elemento.addEventListener("click",()=>{
-//     var question=pregunta.value;
-//     respuestas.forEach(elemento1 => {
-//       var questions=elemento1;
-//       console.log(question)
-//       console.log(elemento1)
-//     });
-//   }) 
-// });
+guardar.addEventListener("click",()=>{
+  const respuestas= document.querySelectorAll(".input-opciones1");
+  const values = [];
+    var question=pregunta.value;
+    // console.log(question)
+
+    
+
+    respuestas.forEach(input => {
+      values.push(input.value);
+
+    });
+
+    const questions={pregunta:pregunta.value,respuestas: values, tipo:sBtn_text.innerText}
+     objeto.push(questions)
+    localStorage.setItem("prueba1",JSON.stringify(objeto))
+    
 
 
-guardar.onclick= (e) => {
-  // console.log("hola")
-  e.preventDefault();
-  var question=pregunta.value;
-  console.log(question)
-}
+    
 
+}) 
 
+  
 
 
 
