@@ -273,29 +273,19 @@ guardar.addEventListener("click",()=>{
 
     
 
-    // respuestas.forEach(input => {
-    //   values.push(input.value);
+    respuestas.forEach(input => {
+      values.push(input.value);
 
-    // });
+    });
 
     // const questions={pregunta:pregunta.value,respuestas: values, tipo:sBtn_text.innerText}
  
-    // if (!objeto.includes(a.pregunta)) {
-    //   )
-    // }
-
-  //   if (buscar ==undefined) {
-  // 
-  //   }
-  //  else {
-  //   return
-  //  }
 
   // verifica si la pregunta ya existe en el array
   if (objeto.some((item) => item.pregunta === question)) {
     return; // si existe, no la agregues de nuevo
   }
-  objeto.push({pregunta:pregunta.value})
+  objeto.push({pregunta:pregunta.value,respuestas: values, tipo:sBtn_text.innerText})
  
   renderQuestions();
     localStorage.setItem("prueba1",JSON.stringify(objeto))
@@ -315,8 +305,18 @@ guardar.addEventListener("click",()=>{
 const renderQuestions =()=>{
   const htmlres=document.getElementById("contenedor-preguntas-realizadas")
   htmlres.innerHTML="";
+  if (objeto.length == 0) {
+    contenedor_diseño_pregunta.style.display="block"
+    contenedor_agregar_pregunta.style.display="none"
+  }else{
+    contenedor_diseño_pregunta.style.display="none"
+    contenedor_agregar_pregunta.style.display="flex"
+  }
+  
  objeto.forEach((a)=>{
-    let {pregunta}=a
+    let {pregunta,respuestas,tipo}=a
+    const htmlrespuesta=document.getElementById("diseño-opciones")
+     
       const html=` 
       <div class="barra-pregunta">
                             <div class="contenedor-barra-tuerca">
@@ -333,13 +333,20 @@ const renderQuestions =()=>{
                         
                         <div class="diseño-pregunta">
                         <span>${pregunta}</span>
-                    </div>
-                    <div class="diseño-opciones">
-                        <label class="radio1">
-                            <input type="radio" name="r" value="" >
-                            <span></span>
-                        </label>
-                        <span></span>
+                    <div id="diseño-opciones">     
+                      ${respuestas.map(b=>{
+                        return `
+                        <div class="diseño-opciones" >
+                          <label class="radio1">
+                          <input type="radio" name="${pregunta}" value="${b}" >
+                          <span>${b.toString()}</span>
+                          </label>
+                          
+                  
+                        </div>
+                        `
+                       }).join("")}
+                    </div>  
                     </div>
       `;
       htmlres.innerHTML += html;
@@ -350,6 +357,8 @@ const renderQuestions =()=>{
 
 
 }
+
+
 
 
 // ==================================
