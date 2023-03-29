@@ -261,9 +261,9 @@ const pregunta= document.querySelector(".texto-pregunta")
 const multiples=document.querySelector(".opciones-multiples")
 const guardar=document.getElementById("guardar")
 const contenedor_diseño_pregunta=document.getElementById("pregunta")
+const contenedor_agregar_pregunta=document.getElementById("contenedor-agregar-pregunta");
 // const objeto=[];
 var objeto = JSON.parse(localStorage.getItem("prueba1")) || [];
-
 guardar.addEventListener("click",()=>{
   const respuestas= document.querySelectorAll(".input-opciones1");
   const values = [];
@@ -273,36 +273,51 @@ guardar.addEventListener("click",()=>{
 
     
 
-    respuestas.forEach(input => {
-      values.push(input.value);
+    // respuestas.forEach(input => {
+    //   values.push(input.value);
 
-    });
+    // });
 
     // const questions={pregunta:pregunta.value,respuestas: values, tipo:sBtn_text.innerText}
-     objeto.push({pregunta:pregunta.value,respuestas: values, tipo:sBtn_text.innerText})
+ 
+    // if (!objeto.includes(a.pregunta)) {
+    //   )
+    // }
+
+  //   if (buscar ==undefined) {
+  // 
+  //   }
+  //  else {
+  //   return
+  //  }
+
+  // verifica si la pregunta ya existe en el array
+  if (objeto.some((item) => item.pregunta === question)) {
+    return; // si existe, no la agregues de nuevo
+  }
+  objeto.push({pregunta:pregunta.value})
+ 
+  renderQuestions();
     localStorage.setItem("prueba1",JSON.stringify(objeto))
-    
+    console.log(objeto)
     contenedor_diseño_pregunta.style.display="none"
-    renderQuestions();
+    contenedor_agregar_pregunta.style.display="flex"
+    
 
 }) 
 
 // ==================================
 // RENDERIZAR PREGUNTAS
 // ============================
-window.onload =function () {
-renderQuestions();
-}
+
+
 
 const renderQuestions =()=>{
   const htmlres=document.getElementById("contenedor-preguntas-realizadas")
-  JSON.parse(localStorage.getItem("prueba1")).map((a)=>{
-    let {pregunta,respuestas,tipo}=a
-    let search = objeto.find(x => x.pregunta === pregunta) || [];
-
-    if(a.tipo=="Opción múltiples" ){
-      if(a.pregunta!= search.pregunta){
-        const html=`
+  htmlres.innerHTML="";
+ objeto.forEach((a)=>{
+    let {pregunta}=a
+      const html=` 
       <div class="barra-pregunta">
                             <div class="contenedor-barra-tuerca">
                                 <ul class="barra-tuerca">
@@ -321,17 +336,19 @@ const renderQuestions =()=>{
                     </div>
                     <div class="diseño-opciones">
                         <label class="radio1">
-                            <input type="radio" name="r" value="${respuestas}" >
+                            <input type="radio" name="r" value="" >
                             <span></span>
                         </label>
-                        <span>${respuestas}</span>
+                        <span></span>
                     </div>
       `;
       htmlres.innerHTML += html;
-      }
-      
+    
     }
-  })
+  
+  )
+
+
 }
 
 
@@ -345,3 +362,18 @@ const barraTuerca=document.querySelector(".contenedor-barra-tuerca");
 //   tuerca.classList.toggle("tuerca-active")
 //   barraTuerca.classList.toggle("activar-barra-tuerca")
 // })
+
+// ==================================
+// FUNCIONES DE BOTON AGREGAR PREGUNTA
+// ============================
+const boton_agregar_pregunta = document.getElementById("agregar-pregunta")
+
+boton_agregar_pregunta.addEventListener("click",()=>{
+  contenedor_diseño_pregunta.style.display="block"
+  contenedor_agregar_pregunta.style.display="none"
+
+})
+
+
+
+renderQuestions();
