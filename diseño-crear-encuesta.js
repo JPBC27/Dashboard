@@ -296,13 +296,11 @@ renderQuestions();
 
 const renderQuestions =()=>{
   const htmlres=document.getElementById("contenedor-preguntas-realizadas")
-  JSON.parse(localStorage.getItem("prueba1")).map((a)=>{
+ objeto.map((a)=>{
     let {pregunta,respuestas,tipo}=a
-    let search = objeto.find(x => x.pregunta === pregunta) || [];
 
-    if(a.tipo=="Opción múltiples" ){
-      if(a.pregunta!= search.pregunta){
-        const html=`
+    if(tipo=="Opción múltiples" ){
+        const html=` 
       <div class="barra-pregunta">
                             <div class="contenedor-barra-tuerca">
                                 <ul class="barra-tuerca">
@@ -328,7 +326,7 @@ const renderQuestions =()=>{
                     </div>
       `;
       htmlres.innerHTML += html;
-      }
+  
       
     }
   })
