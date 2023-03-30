@@ -322,7 +322,7 @@ const renderQuestions =()=>{
       <div class="barra-pregunta " >
                             <div class="contenedor-barra-tuerca f${id}">
                                 <ul class="barra-tuerca ">
-                                    <li><a href=""><i class="bi bi-pencil-square"></i></a></li>
+                                    <li><a onclick="editar(${id})"><i class="bi bi-pencil-square"></i></a></li>
                                     <li><a onclick="eliminar(${id})"><i class="bi bi-trash3"></i></a></li>
                                 </ul>
                             </div>
@@ -397,30 +397,47 @@ const mostrar=(id)=>{
 }
 
 // ==================================
+// FUNCION PARA EDITAR PREGUNTA
+// ==================================
+const editar=(id)=>{
+  
+
+  // Recuperar los datos almacenados en localStorage
+  let data = JSON.parse(localStorage.getItem('prueba1'));
+
+  // Encontrar el objeto con el ID que deseas editar
+  let objectId = id.id;
+  let object = id;
+
+  let objectToUpdate = data.find((obj) => obj.id === objectId);
+
+  object.style.display="none"
+
+  console.log(object)
+
+  // Actualizar el objeto encontrado
+  // objectToUpdate.propiedad = 'nuevo valor';
+
+  // // Almacenar la nueva versión de los datos en localStorage
+  // localStorage.setItem('data', JSON.stringify(data));
+}
+
+
+
+// ==================================
 // FUNCION PARA ELIMINAR PREGUNTA
 // ==================================
 const eliminar=(id)=>{
   let idinput1=id
-  console.log(idinput1)
+  // console.log(idinput1)
   idinput1.remove();
   // localStorage.removeItem("prueba1");
   borrarDatoPorId(idinput1.id);
-  console.log(objeto.length)
+  // console.log(objeto.length)
 
-  if (objeto.length <= 1) {
-    contenedor_diseño_pregunta.style.display="block"
-    contenedor_agregar_pregunta.style.display="none"
-    console.log(1)
-    console.log(objeto.length)
-  }
-  // else{
-  //   contenedor_diseño_pregunta.style.display="none"
-  //   contenedor_agregar_pregunta.style.display="flex"
-  //   console.log(2)
-  //   console.log(objeto.length)
-
-  // }
+  
 }
+
 
 function borrarDatoPorId(id) {
   // Obtener los datos del localStorage
@@ -433,6 +450,20 @@ function borrarDatoPorId(id) {
 
   // Guardar los datos actualizados en el localStorage
   localStorage.setItem("prueba1", JSON.stringify(datos));
+
+  const newItemCount = datos.length;
+  if (newItemCount < 1) {
+    contenedor_diseño_pregunta.style.display="block"
+    contenedor_agregar_pregunta.style.display="none"
+
+  }
+  // else{
+  //   contenedor_diseño_pregunta.style.display="none"
+  //   contenedor_agregar_pregunta.style.display="flex"
+  //   console.log(2)
+  //   console.log(objeto.length)
+
+  // }
 }
 
 
