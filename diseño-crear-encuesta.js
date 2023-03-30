@@ -124,7 +124,7 @@ selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"))
             contenedor_general.style.display="block"
             menu_multiple.style.display ="block";
             casilla_verificacion.style.display ="none";
-            // texto_simple.style.display="none";
+            // texto_simple.sty le.display="none";
             // control_deslizante.style.display="none";
             opcion_checkbox.innerHTML=''
             contenedor_opcion_multiple.style.display="flex"
@@ -399,28 +399,216 @@ const mostrar=(id)=>{
 // ==================================
 // FUNCION PARA EDITAR PREGUNTA
 // ==================================
-const editar=(id)=>{
+
+// const editar=(id)=>{
   
 
-  // Recuperar los datos almacenados en localStorage
-  let data = JSON.parse(localStorage.getItem('prueba1'));
+//   // Recuperar los datos almacenados en localStorage
+//   let data = JSON.parse(localStorage.getItem('prueba1'));
 
-  // Encontrar el objeto con el ID que deseas editar
-  let objectId = id.id;
-  let object = id;
+//   // Encontrar el objeto con el ID que deseas editar
+//   let objectId = id.id;
+//   let object = id;
 
-  let objectToUpdate = data.find((obj) => obj.id === objectId);
+//   let objectToUpdate = data.find((obj) => obj.id === objectId);
 
-  object.style.display="none"
+//   const cp=document.getElementById(objectId);
+//   cp.innerHTML="";
+//   const cphtml=`
+//   <div class="pregunta" >
 
-  console.log(object)
+//                         <div class="input-pregunta">
+//                             <input class="texto-pregunta" type="text" placeholder="Primera pregunta?">
+                            
+//                             <div class="dropdown1">
+//                                 <div class="select-btn1" >
+//                                     <span class="sBtn-text1">Diseño de opciones</span>
+//                                     <i class="bi bi-caret-down-fill"></i>   
+//                             </div>
 
-  // Actualizar el objeto encontrado
-  // objectToUpdate.propiedad = 'nuevo valor';
+//                                 <ul class="options">
+//                                     <li class="option1">
+//                                         <i class="bi bi-list-ul"></i>
+//                                         <span class="option-text">Opción múltiples</span>
+//                                     </li>
+//                                     <li class="option1">
+//                                         <i class="bi bi-card-checklist"></i>
+//                                         <span class="option1-text">Casillas de verificación</span>
+//                                     </li>
+//                                     <li class="option1">
+//                                         <i class="bi bi-card-text"></i>
+//                                         <span class="option-text">Texto simple</span>
+//                                     </li>
+//                                     <li class="option1">
+//                                         <i class="bi bi-sliders"></i>
+//                                         <span class="option-text">Control deslizante</span>
+//                                     </li>
+//                                 </ul>
 
-  // // Almacenar la nueva versión de los datos en localStorage
-  // localStorage.setItem('data', JSON.stringify(data));
-}
+//                             </div>
+//                         </div>
+
+//                         <div class="contendor-opciones-multiple contenedor-opciones" id="contenedor-opciones" style="display: none;">
+//                         <hr>
+//                             <div class="opciones-preguntas">
+//                                 <div class="mas-pregunta" id="boton-opcion-multiple" style="display: none;">
+//                                     <a type="button" id="mas-opcion-multiple"><i class="bi bi-plus-circle"></i></a>
+//                                 </div>
+
+//                                 <div class="mas-pregunta" id="boton-opcion-checkbox" style="display: none;">
+//                                     <a type="button" id="mas-opcion-checkbox"><i class="bi bi-plus-circle"></i></a>
+//                                 </div>
+
+//                                 <div>
+                                    
+//                                 </div>
+//                                 <div id="opcion-multiple1" class="add opciones-multiples" style="display: none;">
+                                    
+//                                 </div>
+
+//                                 <div class="add" id="opcion-checkbox1" style="display: none;">
+                                        
+//                                 </div>
+
+//                                 <div class="pregunta-opciones" style="display: none;">   
+//                                     <input class="input-opciones3" type="text" disabled>
+//                                 </div>
+
+//                                 <div class="pregunta-opciones1" style="display: none;">
+//                                     <div class="control-deslizante">
+//                                         <label for="">Lado Izquierdo</label>
+//                                         <input class="input-opciones2" type="text">
+//                                     </div>
+//                                     <div class="control-deslizante">
+//                                         <label for="">Centro</label>
+//                                         <input class="input-opciones2" type="text">
+//                                     </div>
+//                                     <div class="control-deslizante">
+//                                         <label for="">Lado Derecho</label>
+//                                         <input class="input-opciones2" type="text">
+//                                     </div>
+                                    
+//                                 </div>
+                                
+
+//                             </div>
+                            
+//                             <hr>
+    
+//                             <div class="botones-opciones">
+//                                 <div class="botones">
+//                                     <a class="opcion-cancelar" type="button">Cancelar</a>
+//                                     <a class="opcion-guardar" id="guardar" type="button">Guardar</a>
+//                                 </div>
+//                             </div>
+//                         </div>
+         
+//                     </div>
+//                     `;
+//                     cp.innerHTML += cphtml;
+ 
+//   // object.style.display="none"
+//   // contenedor_diseño_pregunta.style.display="block"
+
+
+//   // Actualizar el objeto encontrado
+//   // objectToUpdate.propiedad = 'nuevo valor';
+
+//   // // Almacenar la nueva versión de los datos en localStorage
+//   // localStorage.setItem('data', JSON.stringify(data));
+
+//   const optionMenu1=document.querySelector(".dropdown1"),
+//   selectBtn1= optionMenu.querySelector(".select-btn1"),
+//   options1= optionMenu.querySelectorAll(".option1"),
+//   sBtn_text1= optionMenu.querySelector(".sBtn-text1");
+  
+//   const menu_multiple1= document.getElementById("opcion-multiple1"),
+//   casilla_verificacion1=document.getElementById("opcion-checkbox"),
+//   texto_simple1=document.querySelector(".contendor-texto-simple"),
+//   control_deslizante1=document.querySelector(".contendor-control-deslizante"),
+//   contenedor_opcion_multiple1=document.getElementById("boton-opcion-multiple"),
+//   contenedor_opcion_checkbox1=document.getElementById("boton-opcion-checkbox");
+//   const contenedor_general1=document.getElementById("contenedor-opciones")
+  
+
+//   // if(selectBtn1!== null){
+//   //   selectBtn1.addEventListener("click", () => optionMenu.classList.toggle("active"));
+
+//   // }
+  
+
+//   // selectBtn1.onclick=(e)=>{
+//   //   console.log(e)
+//   // }
+
+  
+
+
+//   options1.forEach(option1 =>{
+//     option1.addEventListener("click", ()=>{
+//       let selectedOption=option1.querySelector(".option-text").innerText;
+//       sBtn_text1.innerText= selectedOption;
+      
+//       optionMenu1.classList.remove("active");
+//       // console.log(selectedOption)
+  
+//       // ==================================
+//       // FUNCIONES PARA OPCIONES DE PREGUNTA
+//       // =====================================
+  
+//       if(selectedOption=="Opción múltiples"){
+//         contenedor_general1.style.display="block"
+//         menu_multiple1.style.display ="block";
+//         casilla_verificacion1.style.display ="none";
+//         // texto_simple.sty le.display="none";
+//         // control_deslizante.style.display="none";
+//         opcion_checkbox.innerHTML=''
+//         contenedor_opcion_multiple1.style.display="flex"
+//         contenedor_opcion_checkbox1.style.display="none"
+//       }
+  
+//       else if(selectedOption=="Casillas de verificación"){
+//         contenedor_general1.style.display="block"
+  
+//         menu_multiple.style.display ="none";
+//         casilla_verificacion.style.display ="block";
+//         // texto_simple.style.display="none";
+//         // control_deslizante.style.display="none";
+//         opcion_multiple.innerHTML=''
+//         contenedor_opcion_multiple.style.display="none"
+//         contenedor_opcion_checkbox.style.display="flex"
+//       }
+//       else if(selectedOption=="Texto simple"){
+//         menu_multiple1.style.display ="none";
+//         casilla_verificacion1.style.display ="none";
+//         // texto_simple.style.display="block";
+//         // control_deslizante.style.display="none";
+//         opcion_checkbox.innerHTML=''
+//         opcion_multiple.innerHTML=''
+//         contenedor_opcion_multiple1.style.display="none"
+//         contenedor_opcion_checkbox1.style.display="none"
+//       }
+//       else {
+//         menu_multiple1.style.display ="none";
+//         casilla_verificacion1.style.display ="none";
+//         // texto_simple.style.display="none";
+//         // control_deslizante.style.display="block";
+//         opcion_checkbox.innerHTML=''
+//         opcion_multiple.innerHTML=''
+//         contenedor_opcion_multiple1.style.display="none"
+//         contenedor_opcion_checkbox1.style.display="none"
+//       }
+  
+//     })
+//   })
+  
+
+
+
+// }
+
+
+
 
 
 
