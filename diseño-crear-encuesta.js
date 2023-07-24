@@ -243,16 +243,30 @@ mas_opcion_checkbox.addEventListener("click",()=>{
 // ============================
 const cancelar=document.querySelectorAll(".opcion-cancelar")
 const contenedor_opciones=document.querySelectorAll(".contenedor-opciones")
+const contenedor_agregar_pregunta=document.getElementById("contenedor-agregar-pregunta");
+
 cancelar.forEach(element => {
-  element.addEventListener("click",()=>{
-    contenedor_opciones.forEach(element1 => {
-      // console.log(element1)
-      element1.style.display="none"
-      sBtn_text.innerText= "Diseño de opciones";
-      opcion_checkbox.innerHTML=''
-      opcion_multiple.innerHTML=''
-    });
-  })
+  element.addEventListener("click", () => {
+    const valorLocalStorage = localStorage.getItem("prueba1");
+    console.log(valorLocalStorage)
+    if (valorLocalStorage) {
+      // Si existe el valor en el localStorage, ocultamos los contenedores de opciones
+      contenedor_opciones.forEach(element1 => {
+        element1.style.display = "none";
+      });
+      contenedor_agregar_pregunta.style.display = "none";
+      
+      
+    } else {
+      // Si NO existe el valor en el localStorage, ocultamos el contenedor actual y mostramos el de agregar pregunta
+      contenedor_opciones.forEach(element1 => {
+        element1.style.display = "none";
+        sBtn_text.innerText = "Diseño de opciones";
+        opcion_checkbox.innerHTML = '';
+        opcion_multiple.innerHTML = '';
+      });
+    }
+  });
 });
 
 // ==================================
@@ -263,7 +277,7 @@ const pregunta= document.querySelector(".texto-pregunta")
 const multiples=document.querySelector(".opciones-multiples")
 const guardar=document.getElementById("guardar")
 const contenedor_diseño_pregunta=document.getElementById("pregunta")
-const contenedor_agregar_pregunta=document.getElementById("contenedor-agregar-pregunta");
+// const contenedor_agregar_pregunta=document.getElementById("contenedor-agregar-pregunta");
 // const objeto=[];
 
 var objeto = JSON.parse(localStorage.getItem("prueba1")) || [];
@@ -288,16 +302,21 @@ guardar.addEventListener("click",()=>{
   if (objeto.some((item) => item.pregunta === question)) {
     return; // si existe, no la agregues de nuevo
   }
-
+    
   const id=CryptoJS.SHA3(`${values+pregunta.value+sBtn_text.innerText}`,{outputLength:32}).toString();
 
   objeto.push({id:"f"+id,pregunta:pregunta.value,respuestas: values, tipo:sBtn_text.innerText})
  
-  renderQuestions();
+  
     localStorage.setItem("prueba1",JSON.stringify(objeto))
     console.log(objeto)
+    renderQuestions();
     contenedor_diseño_pregunta.style.display="none"
     contenedor_agregar_pregunta.style.display="flex"
+    respuestas.forEach(input => {
+      input.value = "";
+      pregunta.value = "";
+    });
     
 
 }) 
@@ -611,7 +630,7 @@ const mostrar=(id)=>{
 
 
 
-
+1
 // ==================================
 // FUNCION PARA ELIMINAR PREGUNTA
 // ==================================
@@ -619,17 +638,25 @@ const eliminar=(id)=>{
   let idinput1=id
   // console.log(idinput1)
   idinput1.remove();
+
+  // Actualizar el 'objeto' para reflejar los datos actualizados en el 'localStorage'
+  objeto = objeto.filter(item => item.id !== id.id);
+  console.log(objeto)
   // localStorage.removeItem("prueba1");
   borrarDatoPorId(idinput1.id);
   // console.log(objeto.length)
 
-  
 }
+
+
 
 
 function borrarDatoPorId(id) {
   // Obtener los datos del localStorage
   let datos = JSON.parse(localStorage.getItem("prueba1"));
+
+  // Imprimir el contenido actual del localStorage
+  console.log("Contenido actual del localStorage:", datos);
 
   // Buscar y eliminar el objeto con el ID específico
   datos = datos.filter(function (dato) {
@@ -639,19 +666,14 @@ function borrarDatoPorId(id) {
   // Guardar los datos actualizados en el localStorage
   localStorage.setItem("prueba1", JSON.stringify(datos));
 
+  console.log(datos)
+
   const newItemCount = datos.length;
   if (newItemCount < 1) {
     contenedor_diseño_pregunta.style.display="block"
     contenedor_agregar_pregunta.style.display="none"
 
   }
-  // else{
-  //   contenedor_diseño_pregunta.style.display="none"
-  //   contenedor_agregar_pregunta.style.display="flex"
-  //   console.log(2)
-  //   console.log(objeto.length)
-
-  // }
 }
 
 
