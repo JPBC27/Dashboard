@@ -102,31 +102,31 @@
                         </div> -->
                     </div>
 
-                    <div class="pregunta" id="pregunta">
+                    <div class="pregunta" id="pregunta-agregar">
 
                         <div class="input-pregunta">
-                            <input class="texto-pregunta" type="text" placeholder="Primera pregunta?">
+                            <input class="texto-pregunta texto-pregunta-agregar" type="text" placeholder="Primera pregunta?">
                             
-                            <div class="dropdown">
-                                <div class="select-btn">
-                                    <span class="sBtn-text">Diseño de opciones</span>
+                            <div class="dropdown dropdown-agregar">
+                                <div class="select-btn select-btn-agregar">
+                                    <span class="sBtn-text sBtn-text-agregar">Diseño de opciones</span>
                                     <i class="bi bi-caret-down-fill"></i>
                                 </div>
 
                                 <ul class="options">
-                                    <li class="option">
+                                    <li class="option option-agregar">
                                         <i class="bi bi-list-ul"></i>
                                         <span class="option-text">Opción múltiples</span>
                                     </li>
-                                    <li class="option">
+                                    <li class="option option-agregar">
                                         <i class="bi bi-card-checklist"></i>
                                         <span class="option-text">Casillas de verificación</span>
                                     </li>
-                                    <li class="option">
+                                    <li class="option option-agregar">
                                         <i class="bi bi-card-text"></i>
                                         <span class="option-text">Texto simple</span>
                                     </li>
-                                    <li class="option">
+                                    <li class="option option-agregar">
                                         <i class="bi bi-sliders"></i>
                                         <span class="option-text">Control deslizante</span>
                                     </li>
@@ -135,25 +135,25 @@
                             </div>
                         </div>
 
-                        <div class="contendor-opciones-multiple contenedor-opciones" id="contenedor-opciones" style="display: none;">
+                        <div class="contendor-opciones-multiple contenedor-opciones contenedor-opciones-agregar" id="contenedor-opciones-agregar" style="display: none;">
                         <hr>
                             <div class="opciones-preguntas">
-                                <div class="mas-pregunta" id="boton-opcion-multiple" style="display: none;">
-                                    <a type="button" id="mas-opcion-multiple"><i class="bi bi-plus-circle"></i></a>
+                                <div class="mas-pregunta" id="boton-opcion-multiple-agregar" style="display: none;">
+                                    <a type="button" id="mas-opcion-multiple-agregar"><i class="bi bi-plus-circle"></i></a>
                                 </div>
 
-                                <div class="mas-pregunta" id="boton-opcion-checkbox" style="display: none;">
-                                    <a type="button" id="mas-opcion-checkbox"><i class="bi bi-plus-circle"></i></a>
+                                <div class="mas-pregunta" id="boton-opcion-checkbox-agregar" style="display: none;">
+                                    <a type="button" id="mas-opcion-checkbox-agregar"><i class="bi bi-plus-circle"></i></a>
                                 </div>
 
                                 <div>
                                     
                                 </div>
-                                <div id="opcion-multiple" class="add opciones-multiples" style="display: none;">
+                                <div id="opcion-multiple-agregar" class="add opciones-multiples opciones-multiples-agregar" style="display: none;">
                                     
                                 </div>
 
-                                <div class="add" id="opcion-checkbox" style="display: none;">
+                                <div class="add" id="opcion-checkbox-agregar" style="display: none;">
                                         
                                 </div>
 
@@ -184,7 +184,7 @@
     
                             <div class="botones-opciones">
                                 <div class="botones">
-                                    <a class="opcion-cancelar" type="button">Cancelar</a>
+                                    <a class="opcion-cancelar opcion-cancelar-agregar" type="button">Cancelar</a>
                                     <a class="opcion-guardar" id="guardar" type="button">Guardar</a>
                                 </div>
                             </div>
@@ -200,6 +200,107 @@
                 </div>
             </div>
 
+        </div>
+
+        <!-- Modal Editar -->
+        <div id="modalEditar" class="modalEditar">
+            <div class="modalEditar-content">
+                <div class="modalEditar-titulo">
+                    <p>EDITAR PREGUNTA</p>
+                    <span class="closeEditar" id="closeModalEditarButton">&times;</span>
+                </div>
+                </br>
+                <div class="pregunta" id="pregunta-editar">
+
+                    <div class="input-pregunta">
+                        <input class="texto-pregunta" type="text" placeholder="Primera pregunta?">
+                        
+                        <div class="dropdown dropdown-editar">
+                            <div class="select-btn select-btn-editar">
+                                <span class="sBtn-text sBtn-text-editar">Diseño de opciones</span>
+                                <i class="bi bi-caret-down-fill"></i>
+                            </div>
+
+                            <ul class="options options-editar">
+                                <li class="option option-editar">
+                                    <i class="bi bi-list-ul"></i>
+                                    <span class="option-text option-text-editar">Opción múltiples</span>
+                                </li>
+                                <li class="option option-editar">
+                                    <i class="bi bi-card-checklist"></i>
+                                    <span class="option-text option-text-editar">Casillas de verificación</span>
+                                </li>
+                                <li class="option option-editar">
+                                    <i class="bi bi-card-text"></i>
+                                    <span class="option-text option-text-editar">Texto simple</span>
+                                </li>
+                                <li class="option option-editar">
+                                    <i class="bi bi-sliders"></i>
+                                    <span class="option-text option-text-editar">Control deslizante</span>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <div class="contendor-opciones-multiple contenedor-opciones contenedor-opciones-editar" id="contenedor-opciones-editar" style="display: none;">
+                    <hr>
+                        <div class="opciones-preguntas">
+                            <div class="mas-pregunta" id="boton-opcion-multiple-editar" style="display: none;">
+                                <a type="button" id="mas-opcion-multiple"><i class="bi bi-plus-circle"></i></a>
+                            </div>
+
+                            <div class="mas-pregunta" id="boton-opcion-checkbox-editar" style="display: none;">
+                                <a type="button" id="mas-opcion-checkbox"><i class="bi bi-plus-circle"></i></a>
+                            </div>
+
+                            <div>
+                                
+                            </div>
+                            <div id="opcion-multiple-editar" class="add opciones-multiples opciones-multiples-editar" style="display: none;">
+                                
+                            </div>
+
+                            <div class="add" id="opcion-checkbox-editar" style="display: none;">
+                                    
+                            </div>
+
+                            <div class="pregunta-opciones" style="display: none;">   
+                                <input class="input-opciones3" type="text" disabled>
+                            </div>
+
+                            <div class="pregunta-opciones1" style="display: none;">
+                                <div class="control-deslizante">
+                                    <label for="">Lado Izquierdo</label>
+                                    <input class="input-opciones2" type="text">
+                                </div>
+                                <div class="control-deslizante">
+                                    <label for="">Centro</label>
+                                    <input class="input-opciones2" type="text">
+                                </div>
+                                <div class="control-deslizante">
+                                    <label for="">Lado Derecho</label>
+                                    <input class="input-opciones2" type="text">
+                                </div>
+                                
+                            </div>
+                            
+
+                        </div>
+                        
+                        <hr>
+
+                        <div class="botones-opciones">
+                            <div class="botones">
+                                <a class="opcion-cancelar" type="button">Cancelar</a>
+                                <a class="opcion-guardar" id="guardar" type="button">Guardar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
 
     </section>
