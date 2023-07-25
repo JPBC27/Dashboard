@@ -202,21 +202,56 @@ selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"))
 const opcion_multiple=document.getElementById("opcion-multiple")
 const mas_opcion_multiple=document.getElementById("mas-opcion-multiple")
 
-mas_opcion_multiple.addEventListener("click",()=>{
-  // console.log("hola")
-  const temp=`
-  <div class="pregunta-opciones" >
-  <label class="radio1">
-      <input type="radio" name="r" value="clasica" disabled>
-      <span></span>
-  </label>
-  <input class="input-opciones1" type="text">
-  <i class="bi bi-dash-circle"></i>
-</div>
-`
-  // opcion_multiple.insertAdjacentHTML("beforeend",temp) =temp
-  opcion_multiple.innerHTML+=temp;
-})
+// Declara un array para almacenar los objetos con el índice y el valor ingresado en los inputs
+let valoresIngresados = [];
+
+mas_opcion_multiple.addEventListener("click", () => {
+  const temp = `
+    <div class="pregunta-opciones">
+      <label class="radio1">
+        <input type="radio" name="r" value="clasica" disabled>
+        <span></span>
+      </label>
+      <input class="input-opciones1" type="text">
+      <i class="bi bi-dash-circle"></i>
+    </div>
+  `;
+
+  opcion_multiple.innerHTML += temp;
+
+  // Obtiene todos los inputs recién agregados
+  const nuevosInputs = opcion_multiple.querySelectorAll(".input-opciones1");
+
+  // Almacena los valores ingresados en el array de objetos
+  nuevosInputs.forEach((input, index) => {
+    input.addEventListener("input", (event) => {
+      const valor = event.target.value;
+      valoresIngresados[index] = { index, valor };
+    });
+  });
+
+  // Muestra los valores almacenados en los inputs cuando se hace clic en "Agregar más input"
+  nuevosInputs.forEach((input, index) => {
+    input.value = valoresIngresados[index] ? valoresIngresados[index].valor : "";
+  });
+});
+
+
+// mas_opcion_multiple.addEventListener("click",()=>{
+//   // console.log("hola")
+//   const temp=`
+//   <div class="pregunta-opciones" >
+//   <label class="radio1">
+//       <input type="radio" name="r" value="clasica" disabled>
+//       <span></span>
+//   </label>
+//   <input class="input-opciones1" type="text">
+//   <i class="bi bi-dash-circle"></i>
+// </div>
+// `
+//   // opcion_multiple.insertAdjacentHTML("beforeend",temp) =temp
+//   opcion_multiple.innerHTML+=temp;
+// })
 
 
 const opcion_checkbox=document.getElementById("opcion-checkbox")
@@ -244,27 +279,37 @@ mas_opcion_checkbox.addEventListener("click",()=>{
 const cancelar=document.querySelectorAll(".opcion-cancelar")
 const contenedor_opciones=document.querySelectorAll(".contenedor-opciones")
 const contenedor_agregar_pregunta=document.getElementById("contenedor-agregar-pregunta");
+const contenedor_diseño_pregunta=document.getElementById("pregunta")
+const pregunta= document.querySelector(".texto-pregunta")
 
 cancelar.forEach(element => {
   element.addEventListener("click", () => {
     const valorLocalStorage = localStorage.getItem("prueba1");
-    console.log(valorLocalStorage)
     if (valorLocalStorage) {
       // Si existe el valor en el localStorage, ocultamos los contenedores de opciones
-      contenedor_opciones.forEach(element1 => {
-        element1.style.display = "none";
-      });
-      contenedor_agregar_pregunta.style.display = "none";
-      
-      
-    } else {
-      // Si NO existe el valor en el localStorage, ocultamos el contenedor actual y mostramos el de agregar pregunta
       contenedor_opciones.forEach(element1 => {
         element1.style.display = "none";
         sBtn_text.innerText = "Diseño de opciones";
         opcion_checkbox.innerHTML = '';
         opcion_multiple.innerHTML = '';
       });
+    pregunta.value = "";
+     valoresIngresados = [];
+      contenedor_agregar_pregunta.style.display = "flex";
+      contenedor_diseño_pregunta.style.display = "none";
+      
+    } else {
+      // Si NO existe el valor en el localStorage, ocultamos el contenedor actual y mostramos el de agregar pregunta
+      valoresIngresados = [];
+      pregunta.value = "";
+      contenedor_opciones.forEach(element1 => {
+        element1.style.display = "none";
+        sBtn_text.innerText = "Diseño de opciones";
+        opcion_checkbox.innerHTML = '';
+        opcion_multiple.innerHTML = '';
+      });
+      
+      
     }
   });
 });
@@ -273,10 +318,8 @@ cancelar.forEach(element => {
 // OBTENER DATOS DE PREGUNTA
 // ============================
 
-const pregunta= document.querySelector(".texto-pregunta")
 const multiples=document.querySelector(".opciones-multiples")
 const guardar=document.getElementById("guardar")
-const contenedor_diseño_pregunta=document.getElementById("pregunta")
 // const contenedor_agregar_pregunta=document.getElementById("contenedor-agregar-pregunta");
 // const objeto=[];
 
@@ -313,9 +356,17 @@ guardar.addEventListener("click",()=>{
     renderQuestions();
     contenedor_diseño_pregunta.style.display="none"
     contenedor_agregar_pregunta.style.display="flex"
+     // Restablece valoresIngresados a un array vacío
+     valoresIngresados = [];
     respuestas.forEach(input => {
       input.value = "";
       pregunta.value = "";
+    });
+    contenedor_opciones.forEach(element1 => {
+      element1.style.display = "none";
+      sBtn_text.innerText = "Diseño de opciones";
+      opcion_checkbox.innerHTML = '';
+      opcion_multiple.innerHTML = '';
     });
     
 
@@ -331,7 +382,7 @@ const renderQuestions =()=>{
   const htmlres=document.getElementById("contenedor-preguntas-realizadas")
   htmlres.innerHTML="";
   
-  
+  console.log(objeto)
  objeto.forEach((a)=>{
     let {id,pregunta,respuestas,tipo}=a
     const htmlrespuesta=document.getElementById("diseño-opciones")
@@ -377,8 +428,10 @@ const renderQuestions =()=>{
   )
 
   if (objeto.length == 0) {
+    
     contenedor_diseño_pregunta.style.display="block"
     contenedor_agregar_pregunta.style.display="none"
+    
   }else{
     contenedor_diseño_pregunta.style.display="none"
     contenedor_agregar_pregunta.style.display="flex"
@@ -419,218 +472,82 @@ const mostrar=(id)=>{
 // FUNCION PARA EDITAR PREGUNTA
 // ==================================
 
-// const editar=(id)=>{
-  
+const ocultarContenidoDelDiv = (elemento) => {
 
-//   // Recuperar los datos almacenados en localStorage
-//   let data = JSON.parse(localStorage.getItem('prueba1'));
+  // Recorre todos los hijos del elemento y oculta su contenido (si los tiene)
+  const hijos = elemento.children;
+  for (let i = 0; i < hijos.length; i++) {
+    // ocultarContenidoDelDiv(hijos[i]);
+    hijos[i].style.display = "none";
 
-//   // Encontrar el objeto con el ID que deseas editar
-//   let objectId = id.id;
-//   let object = id;
+  }
+};
 
-//   let objectToUpdate = data.find((obj) => obj.id === objectId);
+const editar = (id) => {
+  let contPregunta = document.getElementById(id.id);
+  contPregunta.style.display = "none";
+  contenedor_diseño_pregunta.style.display = "block";
+  const preguntaId = id.id; // El id de la pregunta que se está editando
+  const objetoGuardado = JSON.parse(localStorage.getItem("prueba1"));
 
-//   const cp=document.getElementById(objectId);
-//   cp.innerHTML="";
-//   const cphtml=`
-//   <div class="pregunta" >
+  // Busca el objeto correspondiente al id de la pregunta en el array objetoGuardado
+  const preguntaEditada = objetoGuardado.find((objeto) => objeto.id === preguntaId);
 
-//                         <div class="input-pregunta">
-//                             <input class="texto-pregunta" type="text" placeholder="Primera pregunta?">
-                            
-//                             <div class="dropdown1">
-//                                 <div class="select-btn1" >
-//                                     <span class="sBtn-text1">Diseño de opciones</span>
-//                                     <i class="bi bi-caret-down-fill"></i>   
-//                             </div>
-
-//                                 <ul class="options">
-//                                     <li class="option1">
-//                                         <i class="bi bi-list-ul"></i>
-//                                         <span class="option-text">Opción múltiples</span>
-//                                     </li>
-//                                     <li class="option1">
-//                                         <i class="bi bi-card-checklist"></i>
-//                                         <span class="option1-text">Casillas de verificación</span>
-//                                     </li>
-//                                     <li class="option1">
-//                                         <i class="bi bi-card-text"></i>
-//                                         <span class="option-text">Texto simple</span>
-//                                     </li>
-//                                     <li class="option1">
-//                                         <i class="bi bi-sliders"></i>
-//                                         <span class="option-text">Control deslizante</span>
-//                                     </li>
-//                                 </ul>
-
-//                             </div>
-//                         </div>
-
-//                         <div class="contendor-opciones-multiple contenedor-opciones" id="contenedor-opciones" style="display: none;">
-//                         <hr>
-//                             <div class="opciones-preguntas">
-//                                 <div class="mas-pregunta" id="boton-opcion-multiple" style="display: none;">
-//                                     <a type="button" id="mas-opcion-multiple"><i class="bi bi-plus-circle"></i></a>
-//                                 </div>
-
-//                                 <div class="mas-pregunta" id="boton-opcion-checkbox" style="display: none;">
-//                                     <a type="button" id="mas-opcion-checkbox"><i class="bi bi-plus-circle"></i></a>
-//                                 </div>
-
-//                                 <div>
-                                    
-//                                 </div>
-//                                 <div id="opcion-multiple1" class="add opciones-multiples" style="display: none;">
-                                    
-//                                 </div>
-
-//                                 <div class="add" id="opcion-checkbox1" style="display: none;">
-                                        
-//                                 </div>
-
-//                                 <div class="pregunta-opciones" style="display: none;">   
-//                                     <input class="input-opciones3" type="text" disabled>
-//                                 </div>
-
-//                                 <div class="pregunta-opciones1" style="display: none;">
-//                                     <div class="control-deslizante">
-//                                         <label for="">Lado Izquierdo</label>
-//                                         <input class="input-opciones2" type="text">
-//                                     </div>
-//                                     <div class="control-deslizante">
-//                                         <label for="">Centro</label>
-//                                         <input class="input-opciones2" type="text">
-//                                     </div>
-//                                     <div class="control-deslizante">
-//                                         <label for="">Lado Derecho</label>
-//                                         <input class="input-opciones2" type="text">
-//                                     </div>
-                                    
-//                                 </div>
-                                
-
-//                             </div>
-                            
-//                             <hr>
+  if (preguntaEditada) {
+    // Si se encontró el objeto, asigna los valores almacenados a los campos del formulario
+    let preguntaInput = document.querySelector(".texto-pregunta");
+    let botonTipo = document.querySelector(".sBtn-text");
+    let opcionesMultiplesContainer = document.querySelector(".opciones-multiples");
     
-//                             <div class="botones-opciones">
-//                                 <div class="botones">
-//                                     <a class="opcion-cancelar" type="button">Cancelar</a>
-//                                     <a class="opcion-guardar" id="guardar" type="button">Guardar</a>
-//                                 </div>
-//                             </div>
-//                         </div>
-         
-//                     </div>
-//                     `;
-//                     cp.innerHTML += cphtml;
- 
-//   // object.style.display="none"
-//   // contenedor_diseño_pregunta.style.display="block"
+    // Verifica que los elementos se han encontrado correctamente antes de asignar valores
+    if (preguntaInput && preguntaEditada.pregunta) {
+      preguntaInput.value = preguntaEditada.pregunta;
+    }
+
+    if (botonTipo && preguntaEditada.tipo) {
+      botonTipo.innerText = preguntaEditada.tipo;
+    }
+
+    if (preguntaEditada.tipo === "Opción múltiples") {
+      // Mostrar campos adicionales y cargar las opciones múltiples desde el objetoGuardado
+
+      // Borra los campos previamente creados (si los hay) para evitar duplicados
+      opcionesMultiplesContainer.innerHTML = "";
+
+      // Recorre las respuestas del objetoGuardado y crea los campos de opciones múltiples
+      preguntaEditada.respuestas.forEach((respuesta) => {
+        const nuevaOpcion = document.createElement("div");
+        nuevaOpcion.classList.add("pregunta-opciones");
+        nuevaOpcion.innerHTML = `
+          <label class="radio1">
+            <input type="radio" name="r" value="clasica" disabled>
+            <span></span>
+          </label>
+          <input class="input-opciones1" type="text" value="${respuesta}">
+          <i class="bi bi-dash-circle"></i>
+        `;
+        opcionesMultiplesContainer.appendChild(nuevaOpcion);
+      });
+
+      // Mostrar el contenedor de opciones múltiples
+      opcionesMultiplesContainer.style.display = "block";
+
+    } else if (preguntaEditada.tipo === "Casillas de verificación") {
+      // Mostrar campos adicionales y cargar las casillas de verificación desde el objetoGuardado
+      // ...
+
+    } else if (preguntaEditada.tipo === "Texto simple") {
+      // Mostrar campos adicionales y cargar el texto simple desde el objetoGuardado
+      // ...
+
+    } else if (preguntaEditada.tipo === "Control deslizante") {
+      // Mostrar campos adicionales y cargar los valores del control deslizante desde el objetoGuardado
+      // ...
+    }
+  }
+};
 
 
-//   // Actualizar el objeto encontrado
-//   // objectToUpdate.propiedad = 'nuevo valor';
-
-//   // // Almacenar la nueva versión de los datos en localStorage
-//   // localStorage.setItem('data', JSON.stringify(data));
-
-//   const optionMenu1=document.querySelector(".dropdown1"),
-//   selectBtn1= optionMenu.querySelector(".select-btn1"),
-//   options1= optionMenu.querySelectorAll(".option1"),
-//   sBtn_text1= optionMenu.querySelector(".sBtn-text1");
-  
-//   const menu_multiple1= document.getElementById("opcion-multiple1"),
-//   casilla_verificacion1=document.getElementById("opcion-checkbox"),
-//   texto_simple1=document.querySelector(".contendor-texto-simple"),
-//   control_deslizante1=document.querySelector(".contendor-control-deslizante"),
-//   contenedor_opcion_multiple1=document.getElementById("boton-opcion-multiple"),
-//   contenedor_opcion_checkbox1=document.getElementById("boton-opcion-checkbox");
-//   const contenedor_general1=document.getElementById("contenedor-opciones")
-  
-
-//   // if(selectBtn1!== null){
-//   //   selectBtn1.addEventListener("click", () => optionMenu.classList.toggle("active"));
-
-//   // }
-  
-
-//   // selectBtn1.onclick=(e)=>{
-//   //   console.log(e)
-//   // }
-
-  
-
-
-//   options1.forEach(option1 =>{
-//     option1.addEventListener("click", ()=>{
-//       let selectedOption=option1.querySelector(".option-text").innerText;
-//       sBtn_text1.innerText= selectedOption;
-      
-//       optionMenu1.classList.remove("active");
-//       // console.log(selectedOption)
-  
-//       // ==================================
-//       // FUNCIONES PARA OPCIONES DE PREGUNTA
-//       // =====================================
-  
-//       if(selectedOption=="Opción múltiples"){
-//         contenedor_general1.style.display="block"
-//         menu_multiple1.style.display ="block";
-//         casilla_verificacion1.style.display ="none";
-//         // texto_simple.sty le.display="none";
-//         // control_deslizante.style.display="none";
-//         opcion_checkbox.innerHTML=''
-//         contenedor_opcion_multiple1.style.display="flex"
-//         contenedor_opcion_checkbox1.style.display="none"
-//       }
-  
-//       else if(selectedOption=="Casillas de verificación"){
-//         contenedor_general1.style.display="block"
-  
-//         menu_multiple.style.display ="none";
-//         casilla_verificacion.style.display ="block";
-//         // texto_simple.style.display="none";
-//         // control_deslizante.style.display="none";
-//         opcion_multiple.innerHTML=''
-//         contenedor_opcion_multiple.style.display="none"
-//         contenedor_opcion_checkbox.style.display="flex"
-//       }
-//       else if(selectedOption=="Texto simple"){
-//         menu_multiple1.style.display ="none";
-//         casilla_verificacion1.style.display ="none";
-//         // texto_simple.style.display="block";
-//         // control_deslizante.style.display="none";
-//         opcion_checkbox.innerHTML=''
-//         opcion_multiple.innerHTML=''
-//         contenedor_opcion_multiple1.style.display="none"
-//         contenedor_opcion_checkbox1.style.display="none"
-//       }
-//       else {
-//         menu_multiple1.style.display ="none";
-//         casilla_verificacion1.style.display ="none";
-//         // texto_simple.style.display="none";
-//         // control_deslizante.style.display="block";
-//         opcion_checkbox.innerHTML=''
-//         opcion_multiple.innerHTML=''
-//         contenedor_opcion_multiple1.style.display="none"
-//         contenedor_opcion_checkbox1.style.display="none"
-//       }
-  
-//     })
-//   })
-  
-
-
-
-// }
-
-
-
-
-
-1
 // ==================================
 // FUNCION PARA ELIMINAR PREGUNTA
 // ==================================
@@ -645,7 +562,14 @@ const eliminar=(id)=>{
   // localStorage.removeItem("prueba1");
   borrarDatoPorId(idinput1.id);
   // console.log(objeto.length)
-
+  if (objeto.length == 0) {
+  contenedor_opciones.forEach(element1 => {
+    element1.style.display = "none";
+    sBtn_text.innerText = "Diseño de opciones";
+    opcion_checkbox.innerHTML = '';
+    opcion_multiple.innerHTML = '';
+  });
+  }
 }
 
 
@@ -655,9 +579,6 @@ function borrarDatoPorId(id) {
   // Obtener los datos del localStorage
   let datos = JSON.parse(localStorage.getItem("prueba1"));
 
-  // Imprimir el contenido actual del localStorage
-  console.log("Contenido actual del localStorage:", datos);
-
   // Buscar y eliminar el objeto con el ID específico
   datos = datos.filter(function (dato) {
     return dato.id !== id;
@@ -665,8 +586,6 @@ function borrarDatoPorId(id) {
 
   // Guardar los datos actualizados en el localStorage
   localStorage.setItem("prueba1", JSON.stringify(datos));
-
-  console.log(datos)
 
   const newItemCount = datos.length;
   if (newItemCount < 1) {
