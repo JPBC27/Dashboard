@@ -195,7 +195,7 @@ selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"))
 
 
 // ==================================
-// FUNCIONES PARA  BOTON MAS
+// FUNCIONES PARA  BOTON MAS MULTIPLES
 // ============================
 
 const opcion_multiple=document.getElementById("opcion-multiple-agregar")
@@ -256,6 +256,22 @@ mas_opcion_checkbox.addEventListener("click",()=>{
 `
   // opcion_multiple.insertAdjacentHTML("beforeend",temp) =temp
   opcion_checkbox.innerHTML+=temp1;
+
+  // Obtiene todos los inputs recién agregados
+  const nuevosInputsC = opcion_checkbox.querySelectorAll(".input-opciones1-agregar");
+
+  // Almacena los valores ingresados en el array de objetos
+  nuevosInputsC.forEach((input, index) => {
+    input.addEventListener("input", (event) => {
+      const valor = event.target.value;
+      valoresIngresados[index] = { index, valor };
+    });
+  });
+
+  // Muestra los valores almacenados en los inputs cuando se hace clic en "Agregar más input"
+  nuevosInputsC.forEach((input, index) => {
+    input.value = valoresIngresados[index] ? valoresIngresados[index].valor : "";
+  });
 })
 
 // ==================================
@@ -453,6 +469,7 @@ const mostrar=(id)=>{
   }
 }
 
+
 // ================================================================================================
 // FUNCION PARA EDITAR PREGUNTA
 // ================================================================================================
@@ -570,6 +587,7 @@ const editar=(id)=>{
     let preguntaInput = document.querySelector(".texto-pregunta-editar");
     let botonTipo = document.querySelector(".sBtn-text-editar");
     let opcionesMultiplesContainer = document.querySelector(".opciones-multiples-editar");
+    let opcionesVerificacionContainer = document.querySelector(".opciones-checkbox-editar");
     
     // Verifica que los elementos se han encontrado correctamente antes de asignar valores
     if (preguntaInput && preguntaEditada.pregunta) {
@@ -585,6 +603,8 @@ const editar=(id)=>{
       contenedor_general_editar.style.display="block"
       contenedor_opcion_multiple_editar.style.display="flex"
       contenedor_opcion_checkbox_editar.style.display="none"
+      opcion_checkbox_editar.innerHTML=''
+
       // Borra los campos previamente creados (si los hay) para evitar duplicados
       opcionesMultiplesContainer.innerHTML = "";
 
@@ -608,7 +628,29 @@ const editar=(id)=>{
 
     } else if (preguntaEditada.tipo === "Casillas de verificación") {
       // Mostrar campos adicionales y cargar las casillas de verificación desde el objetoGuardado
-      // ...
+      contenedor_general_editar.style.display="block"
+      opcion_multiple_editar.innerHTML=''
+      contenedor_opcion_multiple_editar.style.display="none"
+      contenedor_opcion_checkbox_editar.style.display="flex"
+      // Borra
+      opcionesVerificacionContainer.innerHTML=""
+
+      preguntaEditada.respuestas.forEach((respuesta) => {
+        const nuevaOpcion = document.createElement("div");
+        nuevaOpcion.classList.add("pregunta-opciones");
+        nuevaOpcion.innerHTML = `
+          <div class="checkbox">
+            <input class="checkbox-spin" type="checkbox" id="check4" disabled/>
+            <label for="check4"><span></span></label>
+          </div>
+            <input class="input-opciones1 " type="text" value="${respuesta}">
+            <i class="bi bi-dash-circle"></i>
+      `;
+        opcionesVerificacionContainer.appendChild(nuevaOpcion);
+      });
+
+      // Mostrar el contenedor de opciones múltiples
+      opcionesVerificacionContainer.style.display = "block";
 
     } else if (preguntaEditada.tipo === "Texto simple") {
       // Mostrar campos adicionales y cargar el texto simple desde el objetoGuardado
