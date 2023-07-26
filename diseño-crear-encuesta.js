@@ -134,7 +134,7 @@ selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"))
 
       options.forEach(option =>{
         option.addEventListener("click", ()=>{
-          let selectedOption=option.querySelector(".option-text").innerText;
+          let selectedOption=option.querySelector(".option-text-agregar").innerText;
           sBtn_text.innerText= selectedOption;
           
           optionMenu.classList.remove("active");
@@ -457,31 +457,15 @@ const mostrar=(id)=>{
 // FUNCION PARA EDITAR PREGUNTA
 // ================================================================================================
 
-// Cerrar el modalEditar al hacer clic en la "X" o en el fondo oscuro difuminado
-document.getElementById("closeModalEditarButton").addEventListener("click", function() {
-  document.getElementById("modalEditar").style.display = "none";
-});
-
-document.getElementById("modalEditar").addEventListener("click", function(event) {
-  if (event.target === document.getElementById("modalEditar")) {
-    document.getElementById("modalEditar").style.display = "none";
-  }
-});
-
-const editar=(id)=>{
-  document.getElementById("modalEditar").style.display = "block";
-}
-
-
 // ==================================
 // FUNCIONES DEL DROPDOWN EDITAR
 // ==================================
 
-const opcion_multiple_editar=document.getElementById("opcion-multiple")
-const mas_opcion_multiple_editar=document.getElementById("mas-opcion-multiple")
+const opcion_multiple_editar=document.getElementById("opcion-multiple-editar")
+const mas_opcion_multiple_editar=document.getElementById("mas-opcion-multiple-editar")
 
-const opcion_checkbox_editar=document.getElementById("opcion-checkbox")
-const mas_opcion_checkbox_editar=document.getElementById("mas-opcion-checkbox")
+const opcion_checkbox_editar=document.getElementById("opcion-checkbox-editar")
+const mas_opcion_checkbox_editar=document.getElementById("mas-opcion-checkbox-editar")
 
 const optionMenuEditar=document.querySelector(".dropdown-editar"),
       selectBtnEditar= optionMenuEditar.querySelector(".select-btn-editar"),
@@ -497,10 +481,10 @@ const menu_multiple_editar= document.getElementById("opcion-multiple-editar"),
 const contenedor_general_editar=document.getElementById("contenedor-opciones-editar")
 selectBtnEditar.addEventListener("click", () => optionMenuEditar.classList.toggle("active"));
 
-      options.forEach(option =>{
+optionsEditor.forEach(option =>{
         option.addEventListener("click", ()=>{
-          let selectedOption=option.querySelector(".option-text-editar").innerText;
-          sBtn_text_editar.innerText= selectedOption;
+          let selectedOptionEditar=option.querySelector(".option-text-editar").innerText;
+          sBtn_text_editar.innerText= selectedOptionEditar;
           
           optionMenuEditar.classList.remove("active");
           // console.log(selectedOption)
@@ -509,7 +493,7 @@ selectBtnEditar.addEventListener("click", () => optionMenuEditar.classList.toggl
           // FUNCIONES PARA OPCIONES DE PREGUNTA
           // =====================================
 
-          if(selectedOption=="Opción múltiples"){
+          if(selectedOptionEditar=="Opción múltiples"){
             contenedor_general_editar.style.display="block"
             menu_multiple_editar.style.display ="block";
             casilla_verificacion_editar.style.display ="none";
@@ -520,10 +504,10 @@ selectBtnEditar.addEventListener("click", () => optionMenuEditar.classList.toggl
             contenedor_opcion_checkbox_editar.style.display="none"
           }
 
-          else if(selectedOption=="Casillas de verificación"){
+          else if(selectedOptionEditar=="Casillas de verificación"){
             contenedor_general_editar.style.display="block"
 
-            menu_multiple.style_editar.display ="none";
+            menu_multiple_editar.style.display ="none";
             casilla_verificacion_editar.style.display ="block";
             // texto_simple.style.display="none";
             // control_deslizante.style.display="none";
@@ -531,7 +515,7 @@ selectBtnEditar.addEventListener("click", () => optionMenuEditar.classList.toggl
             contenedor_opcion_multiple_editar.style.display="none"
             contenedor_opcion_checkbox_editar.style.display="flex"
           }
-          else if(selectedOption=="Texto simple"){
+          else if(selectedOptionEditar=="Texto simple"){
             menu_multiple_editar.style.display ="none";
             casilla_verificacion_editar.style.display ="none";
             // texto_simple.style.display="block";
@@ -554,6 +538,131 @@ selectBtnEditar.addEventListener("click", () => optionMenuEditar.classList.toggl
 
         })
       })
+
+// ================================================================================================
+// FUNCIONES PARA EL MODAL Y LOCAL STORAGE
+// ================================================================================================
+      
+
+// Cerrar el modalEditar al hacer clic en la "X" o en el fondo oscuro difuminado
+document.getElementById("closeModalEditarButton").addEventListener("click", function() {
+  document.getElementById("modalEditar").style.display = "none";
+});
+
+document.getElementById("modalEditar").addEventListener("click", function(event) {
+  if (event.target === document.getElementById("modalEditar")) {
+    document.getElementById("modalEditar").style.display = "none";
+  }
+});
+
+const editar=(id)=>{
+  document.getElementById("modalEditar").style.display = "block";
+  const preguntaId = id.id; // El id de la pregunta que se está editando
+  const objetoGuardado = JSON.parse(localStorage.getItem("prueba1"));
+
+  // Busca el objeto correspondiente al id de la pregunta en el array objetoGuardado
+  const preguntaEditada = objetoGuardado.find((objeto) => objeto.id === preguntaId);
+
+  console.log(preguntaEditada)
+
+  if (preguntaEditada) {
+    // Si se encontró el objeto, asigna los valores almacenados a los campos del formulario
+    let preguntaInput = document.querySelector(".texto-pregunta-editar");
+    let botonTipo = document.querySelector(".sBtn-text-editar");
+    let opcionesMultiplesContainer = document.querySelector(".opciones-multiples-editar");
+    
+    // Verifica que los elementos se han encontrado correctamente antes de asignar valores
+    if (preguntaInput && preguntaEditada.pregunta) {
+      preguntaInput.value = preguntaEditada.pregunta;
+    }
+
+    if (botonTipo && preguntaEditada.tipo) {
+      botonTipo.innerText = preguntaEditada.tipo;
+    }
+
+    if (preguntaEditada.tipo === "Opción múltiples") {
+      // Mostrar campos adicionales y cargar las opciones múltiples desde el objetoGuardado
+      contenedor_general_editar.style.display="block"
+      contenedor_opcion_multiple_editar.style.display="flex"
+      contenedor_opcion_checkbox_editar.style.display="none"
+      // Borra los campos previamente creados (si los hay) para evitar duplicados
+      opcionesMultiplesContainer.innerHTML = "";
+
+      // Recorre las respuestas del objetoGuardado y crea los campos de opciones múltiples
+      preguntaEditada.respuestas.forEach((respuesta) => {
+        const nuevaOpcion = document.createElement("div");
+        nuevaOpcion.classList.add("pregunta-opciones");
+        nuevaOpcion.innerHTML = `
+          <label class="radio1">
+            <input type="radio" name="r" value="clasica" disabled>
+            <span></span>
+          </label>
+          <input class="input-opciones1" type="text" value="${respuesta}">
+          <i class="bi bi-dash-circle"></i>
+        `;
+        opcionesMultiplesContainer.appendChild(nuevaOpcion);
+      });
+
+      // Mostrar el contenedor de opciones múltiples
+      opcionesMultiplesContainer.style.display = "block";
+
+    } else if (preguntaEditada.tipo === "Casillas de verificación") {
+      // Mostrar campos adicionales y cargar las casillas de verificación desde el objetoGuardado
+      // ...
+
+    } else if (preguntaEditada.tipo === "Texto simple") {
+      // Mostrar campos adicionales y cargar el texto simple desde el objetoGuardado
+      // ...
+
+    } else if (preguntaEditada.tipo === "Control deslizante") {
+      // Mostrar campos adicionales y cargar los valores del control deslizante desde el objetoGuardado
+      // ...
+    }
+  }
+}
+
+
+// ====================================================================
+// FUNCIONES BOTON CANCELAR EDITAR
+// ====================================================================
+const cancelar_editar=document.querySelectorAll(".opcion-cancelar-editar")
+const contenedor_opciones_editar=document.querySelectorAll(".contenedor-opciones-editar")
+// const contenedor_agregar_pregunta_editar=document.getElementById("contenedor-agregar-pregunta");
+const contenedor_diseño_pregunta_editar=document.getElementById("pregunta-agregar")
+const pregunta_editar= document.querySelector(".texto-pregunta-editar")
+
+cancelar_editar.forEach(element => {
+  element.addEventListener("click", () => {
+    document.getElementById("modalEditar").style.display = "none";
+    const valorLocalStorage = localStorage.getItem("prueba1");
+    if (valorLocalStorage) {
+      // Si existe el valor en el localStorage, ocultamos los contenedores de opciones
+      contenedor_opciones_editar.forEach(element1 => {
+        element1.style.display = "none";
+        sBtn_text_editar.innerText = "Diseño de opciones";
+        opcion_checkbox_editar.innerHTML = '';
+        opcion_multiple_editar.innerHTML = '';
+      });
+    pregunta_editar.value = "";
+     valoresIngresados = [];
+    //  contenedor_agregar_pregunta_editar.style.display = "flex";
+      contenedor_diseño_pregunta_editar.style.display = "none";
+      
+    } else {
+      // Si NO existe el valor en el localStorage, ocultamos el contenedor actual y mostramos el de agregar pregunta
+      valoresIngresados = [];
+      pregunta.value = "";
+      contenedor_opciones_editar.forEach(element1 => {
+        element1.style.display = "none";
+        sBtn_text_editar.innerText = "Diseño de opciones";
+        opcion_checkbox_editar.innerHTML = '';
+        opcion_multiple_editar.innerHTML = '';
+      });
+      
+      
+    }
+  });
+});
 
 
 // ================================================================================================
