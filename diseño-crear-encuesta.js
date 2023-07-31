@@ -212,7 +212,7 @@ mas_opcion_multiple.addEventListener("click", () => {
         <span></span>
       </label>
       <input class="input-opciones1 input-opciones1-agregar" type="text">
-      <i class="bi bi-dash-circle"></i>
+      <i class="bi bi-dash-circle circle-quitar-agregar"></i>
     </div>
   `;
 
@@ -233,6 +233,18 @@ mas_opcion_multiple.addEventListener("click", () => {
   nuevosInputs.forEach((input, index) => {
     input.value = valoresIngresados[index] ? valoresIngresados[index].valor : "";
   });
+
+  // Obtiene todos los divs recién agregados
+  const nuevosDivs = opcion_multiple.querySelectorAll(".pregunta-opciones");
+
+  // Agrega el evento de clic para eliminar el div cuando se hace clic en el icono
+  nuevosDivs.forEach((div) => {
+    const iconoEliminar = div.querySelector(".circle-quitar-agregar");
+    iconoEliminar.addEventListener("click", () => {
+      div.remove();
+    });
+  });
+  
 });
 
 // ==================================
