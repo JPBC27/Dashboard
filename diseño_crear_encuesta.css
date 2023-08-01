@@ -589,6 +589,61 @@
         font-weight: 500;
     }
 
+    /*CHECKBOX CREADO*/
+    /* Estilo para el contenedor del checkbox */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  /* Estilo para el checkbox oculto */
+  .checkbox-container input[type="radio"] {
+    display: none;
+  }
+  
+  /* Estilo para el diseño del checkbox personalizado */
+  .checkbox-container label {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    background-color: white;
+    border-radius: 3px;
+    margin-right: 10px;
+  }
+  
+  /* Estilo para el ícono de verificación (checkmark) */
+.checkbox-container label span {
+    position: absolute;
+    top: 1px;
+    left: 5px;
+    font-size: 14px;
+    opacity: 0; /* Mostrar el ícono por defecto */
+    color: white; /* Cambiar el color del ícono a blanco */
+    background-color: #000; /* Cambiar el color de fondo del ícono a negro */
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* Hacer que el ícono sea redondeado */
+}
+
+  
+  /* Estilo para el checkbox marcado */
+  .checkbox-container input[type="radio"]:checked + label {
+    background-color: #000;
+    border-color: #000;
+  }
+  
+  /* Estilo para mostrar el ícono cuando el checkbox está seleccionado */
+  .checkbox-container input[type="radio"]:checked + label span {
+    opacity: 1; /* Mostrar el ícono cuando el checkbox está seleccionado */
+  }
+  
+    /*====================================*/
+
     /*CONTENEDOR AGREGAR PREGUNTA*/
     .contenedor-agregar-pregunta{
         width: 100%;
