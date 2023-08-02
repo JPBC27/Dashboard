@@ -417,6 +417,9 @@ const mostrar=(id)=>{
 // FUNCIONES DEL DROPDOWN EDITAR
 // ==================================
 
+const btnEditar=document.getElementById("editar")
+const pregunta_editar= document.querySelector(".texto-pregunta-editar")
+
 const opcion_multiple_editar=document.getElementById("opcion-multiple-editar")
 const mas_opcion_multiple_editar=document.getElementById("mas-opcion-multiple-editar")
 
@@ -519,6 +522,26 @@ const editar=(id)=>{
   // Busca el objeto correspondiente al id de la pregunta en el array objetoGuardado
   const preguntaEditada = objetoGuardado.find((objeto) => objeto.id === preguntaId);
 
+  const contenedorInputs = document.getElementById("contenedor-opciones-editar");
+  const inputTemporal = document.querySelector(".id-temporal-editar");
+  
+  if (inputTemporal) {
+    // Si el input ya existe, actualiza su valor
+    inputTemporal.value = preguntaId;
+  } else {
+    // Si el input no existe, créalo y configúralo
+    const nuevoInput = document.createElement("input");
+    nuevoInput.type = "text";
+    nuevoInput.className = "id-temporal-editar"; // Puedes agregar una clase para aplicar estilos CSS
+    nuevoInput.id = "id-temporal";
+    nuevoInput.value = preguntaId;
+    // Agregar el input al contenedor
+    contenedorInputs.appendChild(nuevoInput);
+  }
+  
+
+     
+
   console.log(preguntaEditada)
 
   if (preguntaEditada) {
@@ -600,6 +623,16 @@ const editar=(id)=>{
       // ...
     }
   }
+  const nuevosDivsEO = opcion_multiple_editar.querySelectorAll(".pregunta-opciones");
+
+   // Agrega el evento de clic para eliminar el div cuando se hace clic en el icono
+   nuevosDivsEO.forEach((div) => {
+    const iconoEliminar = div.querySelector(".multiple-quitar-editar");
+    iconoEliminar.addEventListener("click", () => {
+      div.remove();
+    });
+  });
+
 }
 
 
@@ -653,6 +686,122 @@ mas_opcion_multiple_editar.addEventListener("click", () => {
   });
   
 });
+
+
+// ========================================================
+// FUNCIONES PARA  BOTON MAS CHECKBOX EDITAR
+// ========================================================
+
+mas_opcion_checkbox_editar.addEventListener("click",()=>{
+  // console.log("hola")
+  const temp1=`
+  <div class="pregunta-opciones">
+    <div class="checkbox">
+      <input class="checkbox-spin" type="checkbox" id="check4" disabled/>
+      <label for="check4"><span></span></label>
+    </div>
+      <input class="input-opciones1 input-opciones1-editar" type="text">
+      <i class="bi bi-dash-circle verificacion-quitar-editar"></i>
+    </div>
+`
+  // opcion_multiple.insertAdjacentHTML("beforeend",temp) =temp
+  opcion_checkbox.innerHTML+=temp1;
+
+  // Obtiene todos los inputs recién agregados
+  const nuevosInputsC = opcion_checkbox.querySelectorAll(".input-opciones1-editar");
+
+  // Almacena los valores ingresados en el array de objetos
+  nuevosInputsC.forEach((input, index) => {
+    input.addEventListener("input", (event) => {
+      const valor = event.target.value;
+      valoresIngresados[index] = { index, valor };
+    });
+  });
+
+  // Muestra los valores almacenados en los inputs cuando se hace clic en "Agregar más input"
+  nuevosInputsC.forEach((input, index) => {
+    input.value = valoresIngresados[index] ? valoresIngresados[index].valor : "";
+  });
+
+   // Obtiene todos los divs recién agregados
+  const nuevosDivsC = opcion_checkbox.querySelectorAll(".pregunta-opciones");
+
+  // Agrega el evento de clic para eliminar el div cuando se hace clic en el icono
+  nuevosDivsC.forEach((div) => {
+    const iconoEliminar = div.querySelector(".verificacion-quitar-editar");
+    iconoEliminar.addEventListener("click", () => {
+      div.remove();
+    });
+  });
+  
+})
+
+// ====================================================================
+// FUNCIONES BOTON  EDITAR
+// ====================================================================
+
+btnEditar.addEventListener("click", () => {
+  const respuestas = document.querySelectorAll(".input-opciones1");
+  const values = [];
+
+  // Obtiene el id existente de la pregunta a editar
+  const idTemporal = document.getElementById("id-temporal").value;
+
+  var question = pregunta_editar.value;
+
+  respuestas.forEach(input => {
+    values.push(input.value);
+  });
+
+
+  // Verifica si la pregunta ya existe en el array
+  if (objeto.some((item) => item.pregunta_editar === question)) {
+    return; // Si existe, no la agregues de nuevo
+  }
+
+  const id = CryptoJS.SHA3(`${values + pregunta_editar.value + sBtn_text_editar.innerText}`, { outputLength: 32 }).toString();
+
+  // Obtén el índice del elemento que se quiere editar en el array "objeto"
+  const index = objeto.findIndex(item => item.id === idTemporal);
+
+  console.log(objeto.findIndex)
+  console.log(idTemporal)
+  console.log(index)
+  console.log(id)
+
+  if (index !== -1) {
+    // Actualiza el elemento existente con los nuevos valores
+    objeto[index].id = "f" + id;
+    objeto[index].pregunta = pregunta_editar.value;
+    objeto[index].respuestas = values;
+    objeto[index].tipo = sBtn_text_editar.innerText;
+
+    // Guarda el objeto actualizado en el localStorage
+    localStorage.setItem("prueba1", JSON.stringify(objeto));
+
+    console.log(objeto);
+    renderQuestions();
+    contenedor_diseño_pregunta_editar.style.display = "none";
+    document.getElementById("modalEditar").style.display = "none";
+    // contenedor_agregar_pregunta_ed.style.display = "flex";
+
+    // Restablece valoresIngresados a un array vacío
+    valoresIngresados = [];
+    respuestas.forEach(input => {
+      input.value = "";
+      pregunta_editar.value = "";
+    });
+    contenedor_opciones_editar.forEach(element1 => {
+      element1.style.display = "none";
+      sBtn_text_editar.innerText = "Diseño de opciones";
+      opcion_checkbox_editar.innerHTML = '';
+      opcion_multiple_editar.innerHTML = '';
+    });
+  }
+});
+
+
+
 // ================================================================================================================================
 // ================================================================================================================================
 
@@ -664,7 +813,6 @@ const cancelar_editar=document.querySelectorAll(".opcion-cancelar-editar")
 const contenedor_opciones_editar=document.querySelectorAll(".contenedor-opciones-editar")
 // const contenedor_agregar_pregunta_editar=document.getElementById("contenedor-agregar-pregunta");
 const contenedor_diseño_pregunta_editar=document.getElementById("pregunta-agregar")
-const pregunta_editar= document.querySelector(".texto-pregunta-editar")
 
 cancelar_editar.forEach(element => {
   element.addEventListener("click", () => {
