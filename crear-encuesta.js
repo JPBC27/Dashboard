@@ -603,10 +603,10 @@ const editar=(id)=>{
         nuevaOpcion.innerHTML = `
           <div class="checkbox">
             <input class="checkbox-spin" type="checkbox" id="check4" disabled/>
-            <label for="check4"><span></span></label>
+            <label class="check4" for="check4"><span></span></label>
           </div>
             <input class="input-opciones1 " type="text" value="${respuesta}">
-            <i class="bi bi-dash-circle verificacion-quitar-agregar"></i>
+            <i class="bi bi-dash-circle verificacion-quitar-editar"></i>
       `;
         opcionesVerificacionContainer.appendChild(nuevaOpcion);
       });
@@ -623,6 +623,8 @@ const editar=(id)=>{
       // ...
     }
   }
+
+  // OPCIONES MULTIPLES
   const nuevosDivsEO = opcion_multiple_editar.querySelectorAll(".pregunta-opciones");
 
    // Agrega el evento de clic para eliminar el div cuando se hace clic en el icono
@@ -633,6 +635,16 @@ const editar=(id)=>{
     });
   });
 
+  // OPCION CHECKBOX
+  const nuevosDivsEC = opcion_checkbox_editar.querySelectorAll(".pregunta-opciones");
+
+   // Agrega el evento de clic para eliminar el div cuando se hace clic en el icono
+   nuevosDivsEC.forEach((div) => {
+    const iconoEliminar = div.querySelector(".verificacion-quitar-editar");
+    iconoEliminar.addEventListener("click", () => {
+      div.remove();
+    });
+  });
 }
 
 
@@ -698,17 +710,17 @@ mas_opcion_checkbox_editar.addEventListener("click",()=>{
   <div class="pregunta-opciones">
     <div class="checkbox">
       <input class="checkbox-spin" type="checkbox" id="check4" disabled/>
-      <label for="check4"><span></span></label>
+      <label class="check4" for="check4"><span></span></label>
     </div>
       <input class="input-opciones1 input-opciones1-editar" type="text">
       <i class="bi bi-dash-circle verificacion-quitar-editar"></i>
     </div>
 `
   // opcion_multiple.insertAdjacentHTML("beforeend",temp) =temp
-  opcion_checkbox.innerHTML+=temp1;
+  opcion_checkbox_editar.innerHTML+=temp1;
 
   // Obtiene todos los inputs recién agregados
-  const nuevosInputsC = opcion_checkbox.querySelectorAll(".input-opciones1-editar");
+  const nuevosInputsC = opcion_checkbox_editar.querySelectorAll(".input-opciones1-editar");
 
   // Almacena los valores ingresados en el array de objetos
   nuevosInputsC.forEach((input, index) => {
@@ -724,7 +736,7 @@ mas_opcion_checkbox_editar.addEventListener("click",()=>{
   });
 
    // Obtiene todos los divs recién agregados
-  const nuevosDivsC = opcion_checkbox.querySelectorAll(".pregunta-opciones");
+  const nuevosDivsC = opcion_checkbox_editar.querySelectorAll(".pregunta-opciones");
 
   // Agrega el evento de clic para eliminar el div cuando se hace clic en el icono
   nuevosDivsC.forEach((div) => {
@@ -763,11 +775,6 @@ btnEditar.addEventListener("click", () => {
 
   // Obtén el índice del elemento que se quiere editar en el array "objeto"
   const index = objeto.findIndex(item => item.id === idTemporal);
-
-  console.log(objeto.findIndex)
-  console.log(idTemporal)
-  console.log(index)
-  console.log(id)
 
   if (index !== -1) {
     // Actualiza el elemento existente con los nuevos valores
