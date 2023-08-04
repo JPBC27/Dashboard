@@ -1,14 +1,16 @@
 // VARIABLES GLOBALES DEL PRIMER SUB MENU
 const primero1=document.getElementById("primero_1");
 const primero2=document.getElementById("primero_2")
+const primero3=document.getElementById("primero_3")
 
 
 const body= document.querySelector("body"),
       sidebar=body.querySelector(".sidebar-2"),
       toggle=body.querySelector(".bi-chevron-right"),
       submenu=document.querySelector(".sub-menu"),
-      submenu1=document.querySelector(".sub-menu-1");
-      submenu2=document.querySelector(".sub-menu-2");
+      submenu1=document.querySelector(".sub-menu-1"),
+      submenu2=document.querySelector(".sub-menu-2"),
+      submenu3=document.querySelector(".sub-menu-3");
 
       toggle.addEventListener("click",()=>{
         sidebar.classList.toggle("cerrar"); 
@@ -41,6 +43,8 @@ links.forEach(element => {
       submenu1.classList.remove("activate-sub-menu-1")
       primero2.classList.remove("activate-li-sub-menu")
       submenu2.classList.remove("activate-sub-menu-2")
+      primero3.classList.remove("activate-li-sub-menu")
+      submenu3.classList.remove("activate-sub-menu-3")
 
       // console.log(document.getElementById("pencil"))
       // console.log(document.getElementById("primero"))
@@ -98,7 +102,8 @@ primero1.addEventListener("click",function (e){
   submenu1.classList.toggle("activate-sub-menu-1")
   primero2.classList.remove("activate-li-sub-menu")
   submenu2.classList.remove("activate-sub-menu-2")
-
+  primero3.classList.remove("activate-li-sub-menu")
+  submenu3.classList.remove("activate-sub-menu-3")
 
 })
 
@@ -108,6 +113,18 @@ primero2.addEventListener("click",function (e){
   submenu2.classList.toggle("activate-sub-menu-2")
   primero1.classList.remove("activate-li-sub-menu")
   submenu1.classList.remove("activate-sub-menu-1")
+  primero3.classList.remove("activate-li-sub-menu")
+  submenu3.classList.remove("activate-sub-menu-3")
+})
+
+// COLOR 
+primero3.addEventListener("click",function (e){
+  primero3.classList.toggle("activate-li-sub-menu")
+  submenu3.classList.toggle("activate-sub-menu-3")
+  primero1.classList.remove("activate-li-sub-menu")
+  submenu1.classList.remove("activate-sub-menu-1")
+  primero2.classList.remove("activate-li-sub-menu")
+  submenu2.classList.remove("activate-sub-menu-2")
 })
 
 
@@ -134,14 +151,18 @@ fondo.forEach(e => {
 
 });
 
-// ==================================
+// ========================================================
 // FUNCIONES PARA REMPLAZAR FUENTE
-// ============================
+// ========================================================
 
 const fuente = document.querySelectorAll(".nav-link5");
 const tituloEncuesta = document.getElementById("titulo-encuesta");
+const dato4=window.localStorage.fuente
+
+// console.log(dato4)
 
 fuente.forEach(f => {
+  tituloEncuesta.style.fontFamily = dato4;
   f.onclick = () => {
     const fuenteSeleccionada = f.querySelector(".descripcion-fuente").textContent;
     localStorage.setItem("fuente", fuenteSeleccionada);
@@ -151,3 +172,43 @@ fuente.forEach(f => {
 });
 
 
+// ========================================================
+// FUNCIONES PARA REMPLAZAR COLOR
+// ========================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  const color = document.querySelectorAll(".nav-link6");
+  const colorTituloEncuesta = document.getElementById("titulo-encuesta");
+  const colorPregunta = document.querySelectorAll(".diseño-pregunta-span");
+  const colorRespuestas = document.querySelectorAll(".diseño-opciones span");
+  const dato5 = window.localStorage.color;
+
+  colorTituloEncuesta.style.color = dato5;
+  colorPregunta.forEach(pregunta => {
+    pregunta.style.color = dato5;
+  });
+  colorRespuestas.forEach(respuestas => {
+    respuestas.style.color = dato5;
+  });
+
+
+  color.forEach(f => {
+    f.onclick = () => {
+      const imgElement = f.querySelector("img");
+      if (imgElement) {
+        const filenameColor = imgElement.getAttribute('alt');
+        console.log(filenameColor);
+        localStorage.setItem("color", filenameColor);
+        tituloEncuesta.style.color = filenameColor;
+
+        colorPregunta.forEach(pregunta => {
+          pregunta.style.color = filenameColor;
+        });
+
+        colorRespuestas.forEach(respuestas => {
+          respuestas.style.color = filenameColor;
+        });
+      }
+    };
+  });
+});

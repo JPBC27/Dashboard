@@ -98,7 +98,7 @@
     width: 35%;
     font-size: 40px;
     font-weight: 800;
-    color:#2E6B24;
+    color:gray;
 }
 
 .contenedor-preguntas{
@@ -1034,7 +1034,8 @@
     /* align-items: center; */
     text-align: center;
     width: 120px;
-    height: 130px;
+    /* height: 130px; */
+    min-height: auto;
     opacity: 0;
     top: 13.8%;
     border-top-right-radius:8px;
@@ -1053,7 +1054,7 @@
     width: 120px;
     height: auto;
     opacity: 0;
-    top: 38%;
+    top: 32.5%;
     border-top-right-radius:8px;
     border-bottom-right-radius:8px;
     border-bottom-left-radius:8px;
@@ -1177,7 +1178,7 @@
     width: 150px;
     height: auto;
     opacity: 0;
-    top: 67%;
+    top: 56%;
     border-top-right-radius:8px;
     border-bottom-right-radius:8px;
     border-bottom-left-radius:8px;
@@ -1224,6 +1225,61 @@
 
 
 .activate-sub-menu-2{
+    opacity: 1;
+    z-index: 120;
+}
+
+/* sub-menu-3 */
+.sub-menu-3{
+    position: absolute;
+    left: 100%;
+    background-color: #666666;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    width: 150px;
+    height: auto;
+    opacity: 0;
+    top: 80%;
+    border-top-right-radius:8px;
+    border-bottom-right-radius:8px;
+    border-bottom-left-radius:8px;
+}
+
+.sub-menu-3 ul{
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10%;
+    justify-content: center;
+    width: 150px;
+    height: auto;
+}
+
+.sub-menu-3 li{
+    display: flex;
+    height: 50px;
+    width: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.color{
+    /* border: 2px solid #FFFFFF; */
+    text-align: center;
+
+}
+
+.color img{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background: white;
+    width: 35px;
+    height: 35px;
+}
+
+.activate-sub-menu-3{
     opacity: 1;
     z-index: 120;
 }

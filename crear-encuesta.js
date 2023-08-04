@@ -315,7 +315,7 @@ const renderQuestions =()=>{
                         </div> 
                         
                         <div class="diseño-pregunta">
-                        <span>${pregunta}</span>
+                        <span class="diseño-pregunta-span">${pregunta}</span>
                     <div id="diseño-opciones">     
                       ${respuestas.map(b=>{
                         return `
@@ -351,7 +351,7 @@ const renderQuestions =()=>{
                           </div> 
                           
                           <div class="diseño-pregunta">
-                          <span>${pregunta}</span>
+                          <span class="diseño-pregunta-span">${pregunta}</span>
                       <div id="diseño-opciones">     
                         ${respuestas.map(b=>{
                           return `
