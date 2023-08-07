@@ -107,7 +107,7 @@
                             <th class="estilo_celda">Id</th>
                             <th class="estilo_celda">Nombre</th>
                             <th class="estilo_celda">Estado</th>
-                            <th class="estilo_celda">Respuestas</th>
+                            <th class="estilo_celda">Preguntas</th>
                             <th class="estilo_celda">Fecha</th>
                             <th class="estilo_celda">Editar</th>
                             <th class="estilo_celda">Eliminar</th>
@@ -116,10 +116,10 @@
                         <tbody id="tabla-comidas" class="table-body">
                             <tr id="tab_p">
                                 <td scope="row" class="estilo_celda_body">123456</td>
-                                <td class="estilo_celda_body">HOla</td>
-                                <td class="estilo_celda_body">Borrador</td>
-                                <td class="estilo_celda_body">0</td>
-                                <td class="estilo_celda_body">9/03/2023</td>
+                                <td class="estilo_celda_body">Prueba</td>
+                                <td class="estilo_celda_body">Activo</td>
+                                <td class="estilo_celda_body">1</td>
+                                <td class="estilo_celda_body">09/08/2023</td>
                                 <td class="estilo_celda_body"><i class="editItem editar bi bi-pencil-square"></i></td>
                                 <td class="estilo_celda_body"><i class="deleteItem basura bi bi-trash3"></i></td>
                             </tr>
@@ -150,7 +150,7 @@
             <div class="contenido-modal">
                 <div class="nombre-encuesta">
                     <p class="modal-paragraph">Cómo se llamará tu encuesta?</p>
-                    <input type="text" placeholder="Pulso de clima laboral">
+                    <input type="text" id="tituloEncuesta" placeholder="Ingrese titulo de encuesta">
                 </div>
                 <hr>
                 <div class="formato-encuesta">
@@ -169,7 +169,8 @@
                         </div>
 
                         <div class="boton-crear">
-                            <a href="crear_encuesta.html" type="button">Crear</a>
+                            <a href="crear_encuesta.html" id="crearEncuesta" type="button">Crear</a>
+                            <!-- <a id="crearEncuesta" type="button">Crear</a> -->
                         </div>
 
                     </form>

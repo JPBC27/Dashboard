@@ -1,3 +1,19 @@
+//OBTENER EL TITULO DE ENCUESTA
+
+const tituloEncuestaElement = document.getElementById('titulo-encuesta');
+
+    // Intenta recuperar el título almacenado en el localStorage
+    const storedTituloEncuesta = localStorage.getItem('datosEncuesta');
+
+    // Si existe un título almacenado en el localStorage, reemplaza el contenido del <p> con él
+    if (storedTituloEncuesta) {
+        const tituloEncuestaObj = JSON.parse(storedTituloEncuesta);
+        if (tituloEncuestaObj.Titulo) {
+            tituloEncuestaElement.textContent = tituloEncuestaObj.Titulo;
+        }
+    }
+
+
 // VARIABLES GLOBALES DEL PRIMER SUB MENU
 const primero1=document.getElementById("primero_1");
 const primero2=document.getElementById("primero_2")
@@ -203,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         colorPregunta.forEach(pregunta => {
           pregunta.style.color = filenameColor;
+          console.log("cambio")
         });
 
         colorRespuestas.forEach(respuestas => {

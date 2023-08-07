@@ -578,7 +578,7 @@
     .diseño-pregunta span{
         font-size: 35px;
         font-weight: 700;
-        color: gray;
+        /* color: gray; */
     }
 
     .diseño-opciones{
@@ -1282,6 +1282,32 @@
 .activate-sub-menu-3{
     opacity: 1;
     z-index: 120;
+}
+
+/*=========================================================*/
+/*BOTON LISTO */
+/*=========================================================*/
+.contenedor-listo{
+    width: 100%;
+    min-height: auto;
+    /* background-color: red; */
+}
+
+.sector-boton{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 10px; */
+}
+
+.btn-listo{
+    background-color: #000;
+    color: white;
+    font-size: 20px;
+    font-weight: 800;
+    padding:10px 25px;
+    border-radius: 15px;
+    border:2px solid white;
 }
 
 /*=========================================================*/

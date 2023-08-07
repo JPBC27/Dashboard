@@ -13,6 +13,7 @@ const menu_multiple= document.getElementById("opcion-multiple-agregar"),
       control_deslizante=document.querySelector(".contendor-control-deslizante"),
       contenedor_opcion_multiple=document.getElementById("boton-opcion-multiple-agregar"),
       contenedor_opcion_checkbox=document.getElementById("boton-opcion-checkbox-agregar");
+      contenedor_opcion_textArea=document.getElementById("opcion-textArea-agregar");
 const contenedor_general=document.getElementById("contenedor-opciones-agregar")
 selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"));
 
@@ -37,6 +38,7 @@ selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"))
             opcion_checkbox.innerHTML=''
             contenedor_opcion_multiple.style.display="flex"
             contenedor_opcion_checkbox.style.display="none"
+            contenedor_opcion_textArea.style.display="none"
           }
 
           else if(selectedOption=="Casillas de verificación"){
@@ -49,8 +51,11 @@ selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"))
             opcion_multiple.innerHTML=''
             contenedor_opcion_multiple.style.display="none"
             contenedor_opcion_checkbox.style.display="flex"
+            contenedor_opcion_textArea.style.display="none"
           }
           else if(selectedOption=="Texto simple"){
+            contenedor_general.style.display="block"
+
             menu_multiple.style.display ="none";
             casilla_verificacion.style.display ="none";
             // texto_simple.style.display="block";
@@ -59,6 +64,7 @@ selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"))
             opcion_multiple.innerHTML=''
             contenedor_opcion_multiple.style.display="none"
             contenedor_opcion_checkbox.style.display="none"
+            contenedor_opcion_textArea.style.display="block"
           }
           else {
             menu_multiple.style.display ="none";
@@ -188,13 +194,16 @@ mas_opcion_checkbox.addEventListener("click",()=>{
 const cancelar=document.querySelectorAll(".opcion-cancelar-agregar")
 const contenedor_opciones=document.querySelectorAll(".contenedor-opciones-agregar")
 const contenedor_agregar_pregunta=document.getElementById("contenedor-agregar-pregunta");
+const contenedor_listo=document.querySelector(".contenedor-listo");
 const contenedor_diseño_pregunta=document.getElementById("pregunta-agregar")
 const pregunta= document.querySelector(".texto-pregunta-agregar")
 
 cancelar.forEach(element => {
   element.addEventListener("click", () => {
     const valorLocalStorage = localStorage.getItem("prueba1");
-    if (valorLocalStorage) {
+    console.log(valorLocalStorage)
+
+    if (valorLocalStorage && JSON.parse(valorLocalStorage).length > 0) {
       // Si existe el valor en el localStorage, ocultamos los contenedores de opciones
       contenedor_opciones.forEach(element1 => {
         element1.style.display = "none";
@@ -209,6 +218,8 @@ cancelar.forEach(element => {
       
     } else {
       // Si NO existe el valor en el localStorage, ocultamos el contenedor actual y mostramos el de agregar pregunta
+      contenedor_diseño_pregunta.style.display = "block";
+      contenedor_agregar_pregunta.style.display = "none";
       valoresIngresados = [];
       pregunta.value = "";
       contenedor_opciones.forEach(element1 => {
@@ -261,7 +272,7 @@ guardar.addEventListener("click",()=>{
  
   
     localStorage.setItem("prueba1",JSON.stringify(objeto))
-    console.log(objeto)
+    // console.log(objeto)
     renderQuestions();
     contenedor_diseño_pregunta.style.display="none"
     contenedor_agregar_pregunta.style.display="flex"
@@ -334,7 +345,7 @@ const renderQuestions =()=>{
        </div>             
       `;
       htmlres.innerHTML += html;
-    }else {
+    }else if(tipo === "Casillas de verificación"){
         const html = `
         <div id="${id}"> 
         <div class="barra-pregunta " >
@@ -372,6 +383,33 @@ const renderQuestions =()=>{
          </div>             
         `;
         htmlres.innerHTML += html;
+      }else if(tipo === "Texto simple"){
+        const html = `
+        <div id="${id}"> 
+        <div class="barra-pregunta " >
+                              <div class="contenedor-barra-tuerca f${id}">
+                                  <ul class="barra-tuerca ">
+                                      <li><a onclick="editar(${id})"><i class="bi bi-pencil-square"></i></a></li>
+                                      <li><a onclick="eliminar(${id})"><i class="bi bi-trash3"></i></a></li>
+                                  </ul>
+                              </div>
+                              <div class="tuerca ${id}">
+                                 <a onclick="mostrar(${id})"><i class="bi bi-gear-fill"></i></a>
+                              </div>
+                              
+                          </div> 
+                          
+                          <div class="diseño-pregunta">
+                          <span class="diseño-pregunta-span">${pregunta}</span>
+                      <div id="diseño-opciones">     
+                        <div class="diseño-opciones">
+                         <textarea name="${id}" id="" cols="30" rows="10" style="width: 100%;"></textarea>     
+                        </div>  
+                      </div>  
+                      </div>
+         </div>             
+        `;
+        htmlres.innerHTML += html;
       }
     
     }
@@ -382,12 +420,27 @@ const renderQuestions =()=>{
     
     contenedor_diseño_pregunta.style.display="block"
     contenedor_agregar_pregunta.style.display="none"
+    contenedor_listo.style.display="none"
     
   }else{
     contenedor_diseño_pregunta.style.display="none"
     contenedor_agregar_pregunta.style.display="flex"
+    contenedor_listo.style.display="block"
   }
-    
+
+   // Asignar estilos a los elementos DOM
+   const colorTituloEncuesta = document.getElementById("titulo-encuesta");
+   const colorPregunta = document.querySelectorAll(".diseño-pregunta-span");
+   const colorRespuestas = document.querySelectorAll(".diseño-opciones span");
+   const dato5 = window.localStorage.color;
+
+   colorTituloEncuesta.style.color = dato5;
+   colorPregunta.forEach((pregunta) => {
+     pregunta.style.color = dato5;
+   });
+   colorRespuestas.forEach((respuestas) => {
+     respuestas.style.color = dato5;
+   });  
 
 }
 
@@ -873,6 +926,7 @@ const eliminar=(id)=>{
   borrarDatoPorId(idinput1.id);
   // console.log(objeto.length)
   if (objeto.length == 0) {
+    contenedor_listo.style.display="none"
   contenedor_opciones.forEach(element1 => {
     element1.style.display = "none";
     sBtn_text.innerText = "Diseño de opciones";

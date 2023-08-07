@@ -40,3 +40,24 @@ closeModal.addEventListener('click',(e)=>{
     e.preventDefault();
     modal.classList.remove('modal--show');
 })
+
+// ALMACENAR DATOS DE LA ENCUESTA 
+const inputTituloEncuesta= document.getElementById("tituloEncuesta")
+const radioButtons = document.querySelectorAll('input[name="r"]');
+    
+    document.getElementById('crearEncuesta').addEventListener('click', () => {
+        let seleccionado = null;
+
+        radioButtons.forEach(input => {
+            if (input.checked) {
+                seleccionado = input.value;
+            }
+        });
+       
+       if(inputTituloEncuesta.value){
+            localStorage.setItem('datosEncuesta', JSON.stringify({Titulo:inputTituloEncuesta.value, Formato: seleccionado }));
+       }
+       else{
+        console.log("Falta titulo")
+       }
+    });

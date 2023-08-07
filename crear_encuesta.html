@@ -106,7 +106,7 @@
 
             <div class="contenedor-encuesta" id="contenedor-encuesta">
                 <div class="titulo-encuesta">
-                    <p id="titulo-encuesta">Pulso de clima laboral</p>
+                    <p id="titulo-encuesta"></p>
                 </div>
 
                 <div class="contenedor-preguntas">
@@ -167,9 +167,6 @@
                                     <a type="button" id="mas-opcion-checkbox-agregar"><i class="bi bi-plus-circle"></i></a>
                                 </div>
 
-                                <div>
-                                    
-                                </div>
                                 <div id="opcion-multiple-agregar" class="add opciones-multiples opciones-multiples-agregar" style="display: none;">
                                     
                                 </div>
@@ -178,11 +175,13 @@
                                         
                                 </div>
 
-                                <div class="pregunta-opciones" style="display: none;">   
-                                    <input class="input-opciones3" type="text" disabled>
+                                <div class="add opciones-textArea-agregar" id="opcion-textArea-agregar" style="display: none;">
+                                   <textarea name="" id="" cols="30" rows="10" style="width: 100%;"></textarea>     
                                 </div>
 
-                                <div class="pregunta-opciones1" style="display: none;">
+
+
+                                <!-- <div class="pregunta-opciones1" style="display: none;">
                                     <div class="control-deslizante">
                                         <label for="">Lado Izquierdo</label>
                                         <input class="input-opciones2" type="text">
@@ -196,7 +195,7 @@
                                         <input class="input-opciones2" type="text">
                                     </div>
                                     
-                                </div>
+                                </div> -->
                                 
 
                             </div>
@@ -219,10 +218,20 @@
                         <a id="agregar-pregunta" type="button"><i class="bi bi-plus-circle-fill"></i></a>
                     </div>
                 </div>
+
+                 <!-- BOTON LISTO -->
+                <div class="contenedor-listo" style="display: none;">
+                    <div class="sector-boton">
+                        <button class="btn-listo" type="button">Listo</button>
+                    </div>
+                        
+                </div>
+
             </div>
 
         </div>
 
+       
         <!-- Modal Editar -->
         <div id="modalEditar" class="modalEditar">
             <div class="modalEditar-content">
