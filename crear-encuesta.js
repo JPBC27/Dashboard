@@ -489,7 +489,8 @@ const menu_multiple_editar= document.getElementById("opcion-multiple-editar"),
       texto_simple_editar=document.querySelector(".contendor-texto-simple"),
       control_deslizante_editar=document.querySelector(".contendor-control-deslizante"),
       contenedor_opcion_multiple_editar=document.getElementById("boton-opcion-multiple-editar"),
-      contenedor_opcion_checkbox_editar=document.getElementById("boton-opcion-checkbox-editar");
+      contenedor_opcion_checkbox_editar=document.getElementById("boton-opcion-checkbox-editar"),
+      contenedor_opcion_textArea_editar=document.getElementById("opcion-textArea-editar");
 const contenedor_general_editar=document.getElementById("contenedor-opciones-editar")
 selectBtnEditar.addEventListener("click", () => optionMenuEditar.classList.toggle("active"));
 
@@ -514,6 +515,8 @@ optionsEditor.forEach(option =>{
             opcion_checkbox_editar.innerHTML=''
             contenedor_opcion_multiple_editar.style.display="flex"
             contenedor_opcion_checkbox_editar.style.display="none"
+            contenedor_opcion_textArea_editar.style.display="none"
+
           }
 
           else if(selectedOptionEditar=="Casillas de verificación"){
@@ -526,8 +529,11 @@ optionsEditor.forEach(option =>{
             opcion_multiple_editar.innerHTML=''
             contenedor_opcion_multiple_editar.style.display="none"
             contenedor_opcion_checkbox_editar.style.display="flex"
+            contenedor_opcion_textArea_editar.style.display="none"
+
           }
           else if(selectedOptionEditar=="Texto simple"){
+            contenedor_general_editar.style.display="block"
             menu_multiple_editar.style.display ="none";
             casilla_verificacion_editar.style.display ="none";
             // texto_simple.style.display="block";
@@ -536,6 +542,7 @@ optionsEditor.forEach(option =>{
             opcion_multiple_editar.innerHTML=''
             contenedor_opcion_multiple_editar.style.display="none"
             contenedor_opcion_checkbox_editar.style.display="none"
+            contenedor_opcion_textArea_editar.style.display="block"
           }
           else {
             menu_multiple_editar.style.display ="none";
@@ -618,6 +625,8 @@ const editar=(id)=>{
       contenedor_general_editar.style.display="block"
       contenedor_opcion_multiple_editar.style.display="flex"
       contenedor_opcion_checkbox_editar.style.display="none"
+      contenedor_opcion_textArea_editar.style.display="none"
+
       opcion_checkbox_editar.innerHTML=''
 
       // Borra los campos previamente creados (si los hay) para evitar duplicados
@@ -647,6 +656,8 @@ const editar=(id)=>{
       opcion_multiple_editar.innerHTML=''
       contenedor_opcion_multiple_editar.style.display="none"
       contenedor_opcion_checkbox_editar.style.display="flex"
+      contenedor_opcion_textArea_editar.style.display="none"
+
       // Borra
       opcionesVerificacionContainer.innerHTML=""
 
@@ -669,7 +680,12 @@ const editar=(id)=>{
 
     } else if (preguntaEditada.tipo === "Texto simple") {
       // Mostrar campos adicionales y cargar el texto simple desde el objetoGuardado
-      // ...
+      contenedor_general_editar.style.display="block"
+      opcion_multiple_editar.innerHTML=''
+      contenedor_opcion_multiple_editar.style.display="none"
+      contenedor_opcion_checkbox_editar.style.display="none"
+      contenedor_opcion_textArea_editar.style.display="block"
+
 
     } else if (preguntaEditada.tipo === "Control deslizante") {
       // Mostrar campos adicionales y cargar los valores del control deslizante desde el objetoGuardado
@@ -960,9 +976,9 @@ function borrarDatoPorId(id) {
 }
 
 
-// ==================================
+// ====================================================================
 // FUNCIONES DE BOTON AGREGAR PREGUNTA
-// ============================
+// ==============================================================
 const boton_agregar_pregunta = document.getElementById("agregar-pregunta")
 
 boton_agregar_pregunta.addEventListener("click",()=>{
@@ -974,4 +990,35 @@ boton_agregar_pregunta.addEventListener("click",()=>{
 
 
 renderQuestions();
+
+// ====================================================================
+// FUNCIONES DE EDITAR BOTON DE FINALIZACIÓN
+// ====================================================================
+const btnEditarListo= document.querySelector(".btn-editar-listo");
+const editarContenedorBoton=document.querySelector(".editar-contenedor-boton");
+const botonListo = document.getElementById('btn-listo');
+const inputValor = document.getElementById('valor-boton');
+const cancelarEditarBoton=document.querySelector(".cancelar-editar-boton")
+const guardarEditarBoton= document.getElementById("guardar-editar-boton")
+
+btnEditarListo.addEventListener("click",()=>{
+  editarContenedorBoton.style.display="block"
+  inputValor.value = botonListo.textContent;
+
+})
+
+cancelarEditarBoton.addEventListener("click",()=>{
+  editarContenedorBoton.style.display="none"
+})
+
+guardarEditarBoton.addEventListener("click",()=>{
+  botonListo.textContent=inputValor.value;
+  editarContenedorBoton.style.display="none"
+})
+
+
+
+
+
+
 

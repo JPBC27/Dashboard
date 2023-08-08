@@ -221,10 +221,28 @@
 
                  <!-- BOTON LISTO -->
                 <div class="contenedor-listo" style="display: none;">
+                    <div class="sector-editar-boton" >
+                        <button class="btn-editar-listo" type="button">Editar</button>
+                    </div>
                     <div class="sector-boton">
-                        <button class="btn-listo" type="button">Listo</button>
+                        <button class="btn-listo" id="btn-listo" type="button">Listo</button>
                     </div>
                         
+                </div>
+
+                <div class="editar-contenedor-boton" style="display:none;">
+                    <div class="titulo-contenedor-editar-boton">
+                        <p>Editar texto del boton</p>
+                    </div>
+                    <hr>
+                    <div class="cuerpo-contenedor-editar-boton">
+                        <input type="text" id="valor-boton">
+                    </div>
+                    <br>
+                    <div class="footer-contenedor-editar-boton">
+                        <a class="cancelar-editar-boton" type="button">Cancelar</a>
+                        <a class="guardar-editar-boton" id="guardar-editar-boton" type="button">Guardar</a>
+                    </div>
                 </div>
 
             </div>
@@ -295,8 +313,8 @@
                                     
                             </div>
 
-                            <div class="pregunta-opciones" style="display: none;">   
-                                <input class="input-opciones3" type="text" disabled>
+                            <div class="add opciones-textArea-editar" id="opcion-textArea-editar" style="display: none;">
+                                   <textarea name="" id="" cols="30" rows="10" style="width: 100%;"></textarea>     
                             </div>
 
                             <div class="pregunta-opciones1" style="display: none;">
