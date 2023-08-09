@@ -1016,9 +1016,53 @@ guardarEditarBoton.addEventListener("click",()=>{
   editarContenedorBoton.style.display="none"
 })
 
+// ====================================================================
+// FUNCIONES DE GUARDAR ENCUESTA
+// ====================================================================
+const botonGuardarEncuesta = document.getElementById("guardar-encuesta");
 
+botonGuardarEncuesta.addEventListener('click', () => {
+  var objetoEstiloEncuesta = [];
+  var preguntasEncuesta = JSON.parse(localStorage.getItem("prueba1"));
+  var cantidadPreguntas = JSON.parse(localStorage.getItem("prueba1")).length;
+  var datosEncuesta = JSON.parse(localStorage.getItem("datosEncuesta"));
+  var idEncuesta = CryptoJS.SHA3(`${datosEncuesta.Titulo + cantidadPreguntas}`, { outputLength: 32 }).toString();
+  var fecha = new Date();
+  var opcionesFecha = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'America/Lima' };
+  var fechaFormateada = fecha.toLocaleString('es-PE', opcionesFecha);
 
+  var colorEncuesta = localStorage.getItem("color");
+  var fuenteEncuesta = localStorage.getItem("fuente");
+  var fondoEncuesta = localStorage.getItem("fondo");
 
+  objetoEstiloEncuesta.push({
+    color: colorEncuesta,
+    fuente: fuenteEncuesta,
+    fondo: fondoEncuesta
+  });
 
+  var objetoEncuesta = {
+    id: "e" + idEncuesta,
+    Titulo: datosEncuesta.Titulo,
+    Formato: datosEncuesta.Formato,
+    cantidadPreguntas: cantidadPreguntas,
+    Fecha: fechaFormateada,
+    preguntasEncuesta: preguntasEncuesta,
+    estiloEncuesta: objetoEstiloEncuesta
+  };
+
+  var encuestas = JSON.parse(localStorage.getItem("Encuesta")) || [];
+  encuestas.push(objetoEncuesta);
+
+  // Almacenar objetoEncuesta en el localStorage y borrar otros valores
+  localStorage.setItem("Encuesta", JSON.stringify(encuestas));
+  localStorage.removeItem("prueba1");
+  localStorage.removeItem("datosEncuesta");
+  localStorage.removeItem("color");
+  localStorage.removeItem("fuente");
+  localStorage.removeItem("fondo");
+
+  window.location.href = 'encuesta.html';
+});
 
 

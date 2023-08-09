@@ -21,7 +21,7 @@ btnGestionar.onclick = function () {
 // FUNCIONES PARA EL MODAL
 
 const openModal =document.querySelector('.llamar-modal');
-const openModal1=document.querySelector('.segunda-carta')
+// const openModal1=document.querySelector('.segunda-carta')
 const modal = document.querySelector('.modal');
 const closeModal = document.querySelector('.modal_close')
 
@@ -30,10 +30,10 @@ openModal.addEventListener('click',(e)=>{
     modal.classList.add('modal--show');
 })
 
-openModal1.addEventListener('click',(e)=>{
-    e.preventDefault();
-    modal.classList.add('modal--show');
-})
+// openModal1.addEventListener('click',(e)=>{
+//     e.preventDefault();
+//     modal.classList.add('modal--show');
+// })
 
 
 closeModal.addEventListener('click',(e)=>{
@@ -61,3 +61,68 @@ const radioButtons = document.querySelectorAll('input[name="r"]');
         console.log("Falta titulo")
        }
     });
+
+//FUNCIONES PARA GESTIONAR LAS ENCUESTAS    
+
+const tbody = document.getElementById('tabla-encuestas');
+const objetoEncuesta = JSON.parse(localStorage.getItem('Encuesta'));
+
+// Función para construir una fila de la tabla con los datos
+function construirFila(encuesta) {
+  const fila = document.createElement('tr');
+
+  fila.innerHTML = `
+    <td class="estilo_celda_body">${encuesta.id}</td>
+    <td class="estilo_celda_body">${encuesta.Titulo}</td>
+    <td class="estilo_celda_body">${encuesta.Formato}</td>
+    <td class="estilo_celda_body">${encuesta.cantidadPreguntas}</td>
+    <td class="estilo_celda_body">${encuesta.Fecha}</td>
+    <td class="estilo_celda_body"><i class="deleteItem basura bi bi-trash3"></i></td>
+  `;
+
+  return fila;
+}
+
+// Renderizar los datos en el tbody
+if (objetoEncuesta) {
+  objetoEncuesta.forEach(encuesta => {
+    const fila = construirFila(encuesta);
+    tbody.appendChild(fila);
+  });
+}
+
+//FUNCIONES PARA RENDERIZAR CARTAS DE ENCUESTAS CREADAS
+const contenedorCartas = document.querySelector('.cartas');
+
+// Función para construir una carta con los datos
+function construirCarta(encuesta, fondoEncuesta, colorEncuesta) {
+    const carta = document.createElement('div');
+    carta.className = 'card';
+  
+    // Establecer el estilo de fondo de la carta
+    carta.style.setProperty('--i', `url(${fondoEncuesta})`);
+  
+    const contenidoCarta = `
+      <h2 style="color: ${colorEncuesta};">${encuesta.Titulo}</h2>
+      <div class="content">
+        <p style="color: ${colorEncuesta};">Contrary to popular belief, Lorem Ipsum is not simply random text.</p>
+        <a style="color: ${colorEncuesta}; border:2px solid ${colorEncuesta};" href="encuesta.html?id=${encuesta.id}" type="button" class="llamar-modal">Editar</a>
+      </div>
+    `;
+  
+    carta.innerHTML = contenidoCarta;
+    return carta;
+  }
+  
+
+  const datosEncuesta = JSON.parse(localStorage.getItem("Encuesta"));
+  
+  
+  datosEncuesta.forEach(encuesta => {
+    const fondoEncuesta = encuesta.estiloEncuesta[0].fondo;
+  const colorEncuesta = encuesta.estiloEncuesta[0].color;
+
+  const nuevaCarta = construirCarta(encuesta, fondoEncuesta, colorEncuesta);
+  contenedorCartas.appendChild(nuevaCarta);
+  });
+  

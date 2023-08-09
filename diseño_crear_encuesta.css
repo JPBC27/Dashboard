@@ -1371,6 +1371,29 @@
 }
 
 /*=========================================================*/
+/*CONTENEDOR GUARDAR ENCUESTA*/
+/*=========================================================*/
+.contenedor-guardar-encuesta{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 15px 0px;
+    min-height: auto;
+}
+
+.boton-guardar-encuesta{
+    padding: 20px 40px;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.boton-guardar-encuesta:hover{
+    background-color: #000;
+    color: white;
+    font-weight: 800;
+}
+
+/*=========================================================*/
 /*MODAL EDITAR*/
 /*=========================================================*/
 

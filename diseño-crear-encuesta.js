@@ -159,7 +159,8 @@ fondo.forEach(e => {
 
   e.onclick=()=>{
     const filename=new URL(e.lastChild.lastChild.src).pathname
-    localStorage.setItem("fondo",JSON.stringify(filename))
+    // localStorage.setItem("fondo",JSON.stringify(filename))
+    localStorage.setItem("fondo", filename);
     contenedorEncuesta.style.background=`url(${filename }) no-repeat center center`;
     contenedorEncuesta.style.backgroundSize=`100% 100%`;
     // console.log(filename)
