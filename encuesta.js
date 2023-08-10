@@ -91,38 +91,58 @@ if (objetoEncuesta) {
   });
 }
 
-//FUNCIONES PARA RENDERIZAR CARTAS DE ENCUESTAS CREADAS
-const contenedorCartas = document.querySelector('.cartas');
+  //FUNCIONES PARA RENDERIZAR CARTAS DE ENCUESTAS CREADAS
+  const contenedorCartas = document.querySelector('.cartas');
 
-// Función para construir una carta con los datos
-function construirCarta(encuesta, fondoEncuesta, colorEncuesta) {
-    const carta = document.createElement('div');
-    carta.className = 'card';
-  
-    // Establecer el estilo de fondo de la carta
-    carta.style.setProperty('--i', `url(${fondoEncuesta})`);
-  
-    const contenidoCarta = `
-      <h2 style="color: ${colorEncuesta};">${encuesta.Titulo}</h2>
-      <div class="content">
-        <p style="color: ${colorEncuesta};">Contrary to popular belief, Lorem Ipsum is not simply random text.</p>
-        <a style="color: ${colorEncuesta}; border:2px solid ${colorEncuesta};" href="encuesta.html?id=${encuesta.id}" type="button" class="llamar-modal">Editar</a>
-      </div>
-    `;
-  
-    carta.innerHTML = contenidoCarta;
-    return carta;
+  // Función para construir una carta con los datos
+  function construirCarta(encuesta, fondoEncuesta, colorEncuesta) {
+      const carta = document.createElement('div');
+      carta.className = 'card';
+    
+      // Establecer el estilo de fondo de la carta
+      // carta.style.setProperty('--i', `url(${fondoEncuesta})`);
+      const fondoURLPredeterminado = '/img/24783.jpg'; // Cambia esto a la URL deseada
+
+        const fondoEstilo = fondoEncuesta ? `url(${fondoEncuesta})` : `url(${fondoURLPredeterminado})`;
+        carta.style.setProperty('--i', fondoEstilo);
+
+    
+      const contenidoCarta = `
+        <h2 style="color: ${colorEncuesta};">${encuesta.Titulo}</h2>
+        <div class="content">
+          <p style="color: ${colorEncuesta};">Contrary to popular belief, Lorem Ipsum is not simply random text.</p>
+          <a style="color: ${colorEncuesta}; border:2px solid ${colorEncuesta};"
+          type="button" class="llamar-modal" href="crear_encuesta.html" 
+          onclick="editarEncuesta('${encuesta.id}')">Editar</a>
+        </div>
+      `;
+    
+      carta.innerHTML = contenidoCarta;
+      return carta;
+    }
+    
+
+    const datosEncuesta = JSON.parse(localStorage.getItem("Encuesta"));
+    
+    
+    datosEncuesta.forEach(encuesta => {
+      const fondoEncuesta = encuesta.estiloEncuesta[0].fondo;
+    const colorEncuesta = encuesta.estiloEncuesta[0].color;
+
+    const nuevaCarta = construirCarta(encuesta, fondoEncuesta, colorEncuesta);
+    contenedorCartas.appendChild(nuevaCarta);
+    });
+    
+  //FUNCIONES PARA EDITAR ENCUESTA
+  function editarEncuesta(id) {
+    const encuesta = objetoEncuesta.find(e => e.id === id);
+    if (encuesta) {
+      localStorage.setItem("datosEncuesta", JSON.stringify({ Titulo: encuesta.Titulo }));
+      localStorage.setItem("color", (encuesta.estiloEncuesta[0].color));
+      localStorage.setItem("fondo", JSON.stringify(encuesta.estiloEncuesta[0].fondo));
+      localStorage.setItem("fuente", JSON.stringify(encuesta.estiloEncuesta[0].fuente));
+      localStorage.setItem("prueba1",JSON.stringify (encuesta.preguntasEncuesta));
+
+      // console.log(JSON.stringify(encuesta.estiloEncuesta[0].color))
+    }
   }
-  
-
-  const datosEncuesta = JSON.parse(localStorage.getItem("Encuesta"));
-  
-  
-  datosEncuesta.forEach(encuesta => {
-    const fondoEncuesta = encuesta.estiloEncuesta[0].fondo;
-  const colorEncuesta = encuesta.estiloEncuesta[0].color;
-
-  const nuevaCarta = construirCarta(encuesta, fondoEncuesta, colorEncuesta);
-  contenedorCartas.appendChild(nuevaCarta);
-  });
-  

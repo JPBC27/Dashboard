@@ -150,7 +150,7 @@ primero3.addEventListener("click",function (e){
 
 const fondo=document.querySelectorAll(".nav-link4");
 const contenedorEncuesta=document.getElementById("contenedor-encuesta")
-const dato3=window.localStorage.fondo
+const dato3=window.localStorage.fondo;
 
 
 fondo.forEach(e => {
@@ -174,7 +174,7 @@ fondo.forEach(e => {
 
 const fuente = document.querySelectorAll(".nav-link5");
 const tituloEncuesta = document.getElementById("titulo-encuesta");
-const dato4=window.localStorage.fuente
+const dato4=window.localStorage.fuente || null;
 
 // console.log(dato4)
 
@@ -198,16 +198,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const colorTituloEncuesta = document.getElementById("titulo-encuesta");
   const colorPregunta = document.querySelectorAll(".diseño-pregunta-span");
   const colorRespuestas = document.querySelectorAll(".diseño-opciones span");
-  const dato5 = window.localStorage.color;
+  const dato5 = window.localStorage.color || null;
 
   colorTituloEncuesta.style.color = dato5;
-  colorPregunta.forEach(pregunta => {
-    pregunta.style.color = dato5;
-  });
-  colorRespuestas.forEach(respuestas => {
-    respuestas.style.color = dato5;
-  });
 
+  // Verificar si colorPregunta existe antes de recorrerlo
+  if (colorPregunta) {
+    colorPregunta.forEach(pregunta => {
+      pregunta.style.color = dato5;
+    });
+  }
+
+  // Verificar si colorRespuestas existe antes de recorrerlo
+  if (colorRespuestas) {
+    colorRespuestas.forEach(respuestas => {
+      respuestas.style.color = dato5;
+    });
+  }
 
   color.forEach(f => {
     f.onclick = () => {
@@ -218,14 +225,20 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem("color", filenameColor);
         tituloEncuesta.style.color = filenameColor;
 
-        colorPregunta.forEach(pregunta => {
-          pregunta.style.color = filenameColor;
-          console.log("cambio")
-        });
+        // Verificar si colorPregunta existe antes de recorrerlo
+        if (colorPregunta) {
+          colorPregunta.forEach(pregunta => {
+            pregunta.style.color = filenameColor;
+            console.log("cambio")
+          });
+        }
 
-        colorRespuestas.forEach(respuestas => {
-          respuestas.style.color = filenameColor;
-        });
+        // Verificar si colorRespuestas existe antes de recorrerlo
+        if (colorRespuestas) {
+          colorRespuestas.forEach(respuestas => {
+            respuestas.style.color = filenameColor;
+          });
+        }
       }
     };
   });
