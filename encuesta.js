@@ -139,9 +139,10 @@ if (objetoEncuesta) {
     if (encuesta) {
       localStorage.setItem("datosEncuesta", JSON.stringify({ Titulo: encuesta.Titulo }));
       localStorage.setItem("color", (encuesta.estiloEncuesta[0].color));
-      localStorage.setItem("fondo", JSON.stringify(encuesta.estiloEncuesta[0].fondo));
-      localStorage.setItem("fuente", JSON.stringify(encuesta.estiloEncuesta[0].fuente));
+      localStorage.setItem("fondo", (encuesta.estiloEncuesta[0].fondo));
+      localStorage.setItem("fuente", (encuesta.estiloEncuesta[0].fuente));
       localStorage.setItem("prueba1",JSON.stringify (encuesta.preguntasEncuesta));
+      localStorage.setItem("idEncuestaEditar",(encuesta.id));
 
       // console.log(JSON.stringify(encuesta.estiloEncuesta[0].color))
     }

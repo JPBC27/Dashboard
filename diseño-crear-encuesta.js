@@ -193,13 +193,11 @@ fuente.forEach(f => {
 // FUNCIONES PARA REMPLAZAR COLOR
 // ========================================================
 
-document.addEventListener('DOMContentLoaded', () => {
-  const color = document.querySelectorAll(".nav-link6");
+const color = document.querySelectorAll(".nav-link6");
   const colorTituloEncuesta = document.getElementById("titulo-encuesta");
-  const colorPregunta = document.querySelectorAll(".diseño-pregunta-span");
-  const colorRespuestas = document.querySelectorAll(".diseño-opciones span");
   const dato5 = window.localStorage.color || null;
-
+  var colorPregunta = document.querySelectorAll(".diseño-pregunta-span");
+  var colorRespuestas = document.querySelectorAll(".diseño-opciones span");
   colorTituloEncuesta.style.color = dato5;
 
   // Verificar si colorPregunta existe antes de recorrerlo
@@ -218,13 +216,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   color.forEach(f => {
     f.onclick = () => {
+      var colorPregunta = document.querySelectorAll(".diseño-pregunta-span");
+      var colorRespuestas = document.querySelectorAll(".diseño-opciones span");
       const imgElement = f.querySelector("img");
       if (imgElement) {
         const filenameColor = imgElement.getAttribute('alt');
-        console.log(filenameColor);
         localStorage.setItem("color", filenameColor);
         tituloEncuesta.style.color = filenameColor;
-
+        console.log(colorPregunta)
         // Verificar si colorPregunta existe antes de recorrerlo
         if (colorPregunta) {
           colorPregunta.forEach(pregunta => {
@@ -242,4 +241,3 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
   });
-});

@@ -302,7 +302,7 @@ const renderQuestions =()=>{
   const htmlres=document.getElementById("contenedor-preguntas-realizadas")
   htmlres.innerHTML="";
   
-  console.log(objeto)
+  // console.log(objeto)
  objeto.forEach((a)=>{
     let {id,pregunta,respuestas,tipo}=a
     const htmlrespuesta=document.getElementById("diseño-opciones")
@@ -432,14 +432,14 @@ const renderQuestions =()=>{
    const colorTituloEncuesta = document.getElementById("titulo-encuesta");
    const colorPregunta = document.querySelectorAll(".diseño-pregunta-span");
    const colorRespuestas = document.querySelectorAll(".diseño-opciones span");
-   const dato5 = window.localStorage.color;
+   const datoC5 = window.localStorage.color;
 
-   colorTituloEncuesta.style.color = dato5;
+   colorTituloEncuesta.style.color = datoC5;
    colorPregunta.forEach((pregunta) => {
-     pregunta.style.color = dato5;
+     pregunta.style.color = datoC5;
    });
    colorRespuestas.forEach((respuestas) => {
-     respuestas.style.color = dato5;
+     respuestas.style.color = datoC5;
    });  
 
 }
@@ -1024,9 +1024,10 @@ const botonGuardarEncuesta = document.getElementById("guardar-encuesta");
 botonGuardarEncuesta.addEventListener('click', () => {
   var objetoEstiloEncuesta = [];
   var preguntasEncuesta = JSON.parse(localStorage.getItem("prueba1"));
-  var cantidadPreguntas = JSON.parse(localStorage.getItem("prueba1")).length;
+  var cantidadPreguntas = preguntasEncuesta.length; // Usar preguntasEncuesta directamente
   var datosEncuesta = JSON.parse(localStorage.getItem("datosEncuesta"));
-  var idEncuesta = CryptoJS.SHA3(`${datosEncuesta.Titulo + cantidadPreguntas}`, { outputLength: 32 }).toString();
+  var idEncuesta = localStorage.getItem("idEncuestaEditar"); // Obtener id de edición si existe
+
   var fecha = new Date();
   var opcionesFecha = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'America/Lima' };
   var fechaFormateada = fecha.toLocaleString('es-PE', opcionesFecha);
@@ -1042,7 +1043,7 @@ botonGuardarEncuesta.addEventListener('click', () => {
   });
 
   var objetoEncuesta = {
-    id: "e" + idEncuesta,
+    id: idEncuesta || "e" + CryptoJS.SHA3(`${datosEncuesta.Titulo + datosEncuesta.Formato}`, { outputLength: 32 }).toString(),
     Titulo: datosEncuesta.Titulo,
     Formato: datosEncuesta.Formato,
     cantidadPreguntas: cantidadPreguntas,
@@ -1052,7 +1053,16 @@ botonGuardarEncuesta.addEventListener('click', () => {
   };
 
   var encuestas = JSON.parse(localStorage.getItem("Encuesta")) || [];
-  encuestas.push(objetoEncuesta);
+
+  // Buscar si la encuesta ya existe por su ID
+  var index = encuestas.findIndex(e => e.id === objetoEncuesta.id);
+  console.log(index)
+  if (index !== -1) {
+    console.log("actualizar")
+    encuestas[index] = objetoEncuesta; // Actualizar si existe
+  } else {
+    encuestas.push(objetoEncuesta); // Agregar como nuevo si no existe
+  }
 
   // Almacenar objetoEncuesta en el localStorage y borrar otros valores
   localStorage.setItem("Encuesta", JSON.stringify(encuestas));
@@ -1061,6 +1071,7 @@ botonGuardarEncuesta.addEventListener('click', () => {
   localStorage.removeItem("color");
   localStorage.removeItem("fuente");
   localStorage.removeItem("fondo");
+  localStorage.removeItem("idEncuestaEditar");
 
   window.location.href = 'encuesta.html';
 });
