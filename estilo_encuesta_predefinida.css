@@ -1,0 +1,171 @@
+.barra_encuesta_1{
+    margin-right: 4.0em;
+    background: #F2A530;
+    padding: 5px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+    font-weight: 600;
+    width: 110px;
+    text-align: center;
+}
+
+.contenedor-encuesta-predefinidas{
+    position: relative;
+    left: 210px;
+    height: 100vh;
+    width: calc(100% - 210px);
+    background: white;
+    transition: var(--tran-05);
+}
+
+.sidebar.close ~ .contenedor-encuesta-predefinidas{
+    left:88px;
+    width: calc(100% - 88px);
+}
+
+
+.contenido-encuesta-predefinidas{
+    display: flex;
+    flex-direction: column;
+    gap: 3%;
+    padding: 8px 60px;
+    flex-wrap: wrap;
+    align-content: stretch;
+}
+
+.titulo-encuesta-predefinidas{
+    font-size: 30px;
+    font-weight: 600;
+    color: black;
+}
+
+.icon-volver-predefinido{
+    display: flex;
+    margin-top: 2.3rem;
+    align-items: center;
+}
+
+.icon-volver-predefinido a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 20px;
+    color:    #676767;
+}
+
+.icon-volver-predefinido a i{
+    color: #F2A530;
+    font-size: 28px;
+    margin-right: 5px;
+}
+
+.cartas-predefinidas{
+    display: flex;
+    gap: 5%;
+    flex-wrap: wrap;
+    margin-top: 60px;
+}
+
+.card{
+    display: flex;
+    /* position: absolute; */
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 243px;
+    height: 364px;
+    border-radius: 14px;
+    background: var(--i);
+    background-size: cover;
+    /* box-shadow: 3px 5px 5px rgba(3,32,51,.8); */
+    filter: drop-shadow(0px 5px 11px rgba(0, 0, 0, 0.43));
+    overflow: hidden;
+    text-align: center;
+}
+
+.card h2{
+    position: relative;
+    color: white;
+    top: 70%;
+    transition: .5s;
+    font-size: 20px;
+
+}
+
+.content{
+    margin-top: 30px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    color: white;
+    position: relative;
+    /* background: rgba(0, 0, 0, 0.4); */
+    bottom: 50px;
+    transition: .5s;
+    opacity: 0;
+    padding: 10px;
+}
+
+.content p{
+    
+    font-size: 13px;
+    width: 70%;
+    
+}
+
+.content a{
+    margin-top: 40px;
+    border: 2px solid white;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 134px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.content a:hover{
+    background-color: white;
+    color: black;
+}
+
+.card:hover .content{
+    bottom: 45%;
+    opacity: 1;
+}
+
+.card:hover h2{
+    top:20%;
+}
+
+.boton-vista{
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    width: 80%;
+    position: relative;
+    transition: .5s;
+    opacity: 0;
+}
+
+.vista-previa{
+    color: white;
+}
+
+.vista-previa i{
+    font-size: 20px;
+}
+
+.card:hover .boton-vista{
+    opacity: 1;
+}

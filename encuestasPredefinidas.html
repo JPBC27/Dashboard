@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta</title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="estilo_barra_lateral.css">
+    <!-- <link rel="stylesheet" href="estilo_encuesta.css"> -->
+    <link rel="stylesheet" href="estilo_encuesta_predefinida.css">
+
+    <!-- iconos de bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    
+    
+</head>
+<body>
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                    <img src="img/7.jpg"  alt="">
+                
+            </div>
+        </header>
+        <!-- <div class="menu-bar"> -->
+      
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-link" id="link1"><a href="barra_lateral.html"><i class="bi bi-person icons"></i> <span class="text nav-text" id="text1">Perfil</span></a></li>
+                    <li class="nav-link" id="link2"><a href="encuesta.html"><i class="bi bi-clipboard icons"></i> <span class="text nav-text" id="text2">Encuesta</span></a></li>
+                    <li class="nav-link" id="link3"><a href="cuenta.html"><i class="bi bi-bar-chart-fill icons"></i> <span class="text nav-text" id="text3">Cuenta</span></a></li>
+                </ul>
+
+            </div>
+
+            <div class="botton-content">
+                <li class="nav-link" id="link4"><a href=""><i class="bi bi-box-arrow-right icons"></i><span class="text nav-text" id="text4">Salir</span></a></li>
+            </div>
+
+            <div class="box-toggle">
+            <i class="bi bi-caret-right toggle"></i>
+        </div>
+    </nav>
+
+    <!-- ENCUESTAS PREDEFINIDAS -->
+    <section class="contenedor-encuesta-predefinidas">
+        <nav class="barra_usuario">
+            <ul>
+                <li><a href="" class="barra_encuesta">Mis encuestas</a></li>
+                <li><img src="img/7.jpg" alt="" style="width: 50px; height: 50px;"></li>
+            </ul>
+        </nav>
+
+        <div class="contenido-encuesta-predefinidas">
+           <div class="titulo-encuesta-predefinidas">
+                ENCUESTAS PREDEFINIDAS
+            </div>
+            <div class="icon-volver-predefinido">
+                <a href="encuesta.html"><i class="bi bi-arrow-left"></i> Volver</a>
+            </div>     
+            <div class="contenedor-encuestas-predefinidas">
+                <div class="cartas-predefinidas">
+                    <div class="card" style="--i:url(img/paisaje_oscuro.jpg)">
+                        <div class="boton-vista">
+                            <a class="vista-previa"><i class="bi bi-eye-fill"></i></a>
+                        </div>
+
+                        <h2>CLIMA Y CULTURA</h2>
+    
+                        <div class="content">
+                            <p>Contrary to popular belief, Lorem Ipsum is not simply random text.</p>
+                            <a  type="button" class="llamar-modal">Usar</a>
+                        </div>
+                    </div>  
+    
+                   
+                    <div class="card" style="--i:url(img/edificio.jpg)">
+                        <div class="boton-vista">
+                            <a class="vista-previa"><i class="bi bi-eye-fill"></i></a>
+                        </div>
+
+                        <h2>SATISFACCIÓN AL CLIENTE</h2>
+    
+                        <div class="content">
+                            <p>Contrary to popular belief, Lorem Ipsum is not simply random text.</p>
+                            <a type="button" class="segunda-carta">Usar</a>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="barra.js"></script>
+</body>
+</html>
