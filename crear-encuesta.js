@@ -1016,6 +1016,17 @@ guardarEditarBoton.addEventListener("click",()=>{
   editarContenedorBoton.style.display="none"
 })
 
+document.addEventListener("DOMContentLoaded", function() {
+  const botonListo = document.getElementById('btn-listo');
+  const valorLocalStorageBoton = localStorage.getItem('botonFinal');
+  if (valorLocalStorageBoton) {
+    botonListo.textContent = valorLocalStorageBoton;
+    inputValor.value = valorLocalStorageBoton;
+
+  }
+});
+
+
 // ====================================================================
 // FUNCIONES DE GUARDAR ENCUESTA
 // ====================================================================
@@ -1035,6 +1046,10 @@ botonGuardarEncuesta.addEventListener('click', () => {
   var colorEncuesta = localStorage.getItem("color");
   var fuenteEncuesta = localStorage.getItem("fuente");
   var fondoEncuesta = localStorage.getItem("fondo");
+  
+  var botonFinal = document.getElementById("valor-boton").value
+
+  console.log(botonFinal)
 
   objetoEstiloEncuesta.push({
     color: colorEncuesta,
@@ -1049,7 +1064,8 @@ botonGuardarEncuesta.addEventListener('click', () => {
     cantidadPreguntas: cantidadPreguntas,
     Fecha: fechaFormateada,
     preguntasEncuesta: preguntasEncuesta,
-    estiloEncuesta: objetoEstiloEncuesta
+    estiloEncuesta: objetoEstiloEncuesta,
+    botonFinal: botonFinal || "Listo"
   };
 
   var encuestas = JSON.parse(localStorage.getItem("Encuesta")) || [];

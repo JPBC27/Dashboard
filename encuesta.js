@@ -44,7 +44,8 @@ closeModal.addEventListener('click',(e)=>{
 // ALMACENAR DATOS DE LA ENCUESTA 
 const inputTituloEncuesta= document.getElementById("tituloEncuesta")
 const radioButtons = document.querySelectorAll('input[name="r"]');
-    
+const toastContainer = document.getElementById('toast-container');
+
     document.getElementById('crearEncuesta').addEventListener('click', () => {
         let seleccionado = null;
 
@@ -56,10 +57,20 @@ const radioButtons = document.querySelectorAll('input[name="r"]');
        
        if(inputTituloEncuesta.value){
             localStorage.setItem('datosEncuesta', JSON.stringify({Titulo:inputTituloEncuesta.value, Formato: seleccionado }));
-       }
-       else{
-        console.log("Falta titulo")
-       }
+            window.location.href = 'crear_encuesta.html';
+        }
+        else {
+          const toast = document.createElement('div');
+          toast.classList.add('toast');
+          toast.textContent = 'Falta el título de la encuesta. Por favor, ingresa un título.';
+          toastContainer.appendChild(toast);
+          
+          // Agregar clase para mostrar el toast
+          toast.classList.add('show');
+          setTimeout(() => {
+              toastContainer.removeChild(toast);
+          }, 3000); // Eliminar el toast después de 3 segundos (ajusta el valor según tus preferencias)
+      }
     });
 
 //FUNCIONES PARA GESTIONAR LAS ENCUESTAS    
@@ -84,12 +95,13 @@ function construirFila(encuesta) {
 }
 
 // Renderizar los datos en el tbody
-if (objetoEncuesta) {
-  objetoEncuesta.forEach(encuesta => {
-    const fila = construirFila(encuesta);
-    tbody.appendChild(fila);
-  });
-}
+// if (objetoEncuesta) {
+//   objetoEncuesta.forEach(encuesta => {
+//     const fila = construirFila(encuesta);
+//     tbody.appendChild(fila);
+//   });
+// }
+
 
   //FUNCIONES PARA RENDERIZAR CARTAS DE ENCUESTAS CREADAS
   const contenedorCartas = document.querySelector('.cartas');
@@ -122,7 +134,7 @@ if (objetoEncuesta) {
     }
     
 
-    const datosEncuesta = JSON.parse(localStorage.getItem("Encuesta"));
+  const datosEncuesta = JSON.parse(localStorage.getItem("Encuesta"));
     
     
     datosEncuesta.forEach(encuesta => {
@@ -141,9 +153,66 @@ if (objetoEncuesta) {
       localStorage.setItem("color", (encuesta.estiloEncuesta[0].color));
       localStorage.setItem("fondo", (encuesta.estiloEncuesta[0].fondo));
       localStorage.setItem("fuente", (encuesta.estiloEncuesta[0].fuente));
+      localStorage.setItem("botonFinal", (encuesta.botonFinal));
       localStorage.setItem("prueba1",JSON.stringify (encuesta.preguntasEncuesta));
       localStorage.setItem("idEncuestaEditar",(encuesta.id));
 
       // console.log(JSON.stringify(encuesta.estiloEncuesta[0].color))
     }
   }
+
+
+  //FUNCION PARA ELIMINAR ENCUESTA
+function eliminarEncuesta(id) {
+  const indiceAEliminar = objetoEncuesta.findIndex(encuesta => encuesta.id === id);
+
+  if (indiceAEliminar !== -1) {
+    objetoEncuesta.splice(indiceAEliminar, 1);
+    localStorage.setItem('Encuesta', JSON.stringify(objetoEncuesta));
+    // Remover la fila de la tabla
+    const filaEliminar = tbody.querySelector(`[data-id="${id}"]`);
+    if (filaEliminar) {
+      tbody.removeChild(filaEliminar);
+    }
+  }
+}
+
+// Función para eliminar una encuesta y renderizar las cartas nuevamente
+function eliminarEncuestaYRenderizar(id) {
+  eliminarEncuesta(id);
+  
+  // Vaciar el contenedor de cartas
+  contenedorCartas.innerHTML = '';
+  const datosEncuestaR = JSON.parse(localStorage.getItem("Encuesta"));
+
+  // Renderizar las cartas nuevamente con los datos actualizados
+  datosEncuestaR.forEach(encuesta => {
+    const fondoEncuesta = encuesta.estiloEncuesta[0].fondo;
+    const colorEncuesta = encuesta.estiloEncuesta[0].color;
+
+    const nuevaCarta = construirCarta(encuesta, fondoEncuesta, colorEncuesta);
+    contenedorCartas.appendChild(nuevaCarta);
+  });
+}
+
+
+
+if (objetoEncuesta) {
+  objetoEncuesta.forEach(encuesta => {
+    const fila = construirFila(encuesta);
+
+    // Añadir el atributo data-id con el valor del id de la encuesta
+    fila.setAttribute('data-id', encuesta.id);
+
+    // Obtener el ícono de basura dentro de la fila
+    const iconoBasura = fila.querySelector('.deleteItem');
+
+    // Agregar evento onclick al ícono de basura para eliminar la encuesta
+    iconoBasura.addEventListener('click', () => {
+      eliminarEncuestaYRenderizar(encuesta.id);
+    });
+
+    tbody.appendChild(fila);
+  });
+}
+

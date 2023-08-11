@@ -497,6 +497,30 @@
     font-weight: 700;
     cursor: pointer;
   }
+
+  /* TOAST */
+  .toast-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+.toast {
+    background-color: #f44336;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 4px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
   
 /*=========================================================*/
 /*BREAKPOINT*/
