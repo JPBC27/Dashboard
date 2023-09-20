@@ -148,16 +148,6 @@
     top:20%;
 }
 
-.boton-vista{
-    margin-top: 15px;
-    display: flex;
-    justify-content: flex-end;
-    width: 80%;
-    position: relative;
-    transition: .5s;
-    opacity: 0;
-}
-
 .vista-previa{
     color: white;
 }
@@ -166,6 +156,24 @@
     font-size: 20px;
 }
 
-.card:hover .boton-vista{
-    opacity: 1;
+.boton-vista {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    width: 80%;
+    position: relative;
+    transition: .5s;
+    opacity: 0;
+    z-index: -90;
 }
+
+.card:hover .boton-vista {
+    opacity: 1;
+    z-index: 90;
+}
+
+.vista-previa.disabled {
+    pointer-events: none;
+}
+
+
