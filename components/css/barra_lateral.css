@@ -143,7 +143,7 @@
 /*BREAKPOINT*/
 /*=========================================================*/
 /*TABLET*/
-@media screen and (min-width: 481px) and (max-width: 768px) {
+@media screen and (min-width: 551px) and (max-width: 768px) {
     /*Opciones principales del sidebar*/
     /*.menu, .botton-content{
         position: relative;
@@ -174,11 +174,11 @@
         top: 0;
     }
 
-    .botton-content{
+    .button-content{
         margin-top: 5px;
     }
 
-    .botton-content a{
+    .button-content a{
         margin-top: 9px;
     }
     
