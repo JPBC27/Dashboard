@@ -1,0 +1,541 @@
+/* Colores generales */
+:root {
+    --color-background: #fff; /* Color de fondo principal */
+    --color-primary: #454546; /*Color de fondo de la alerta*/
+    --color-secundary: #fff;
+    --color-border-input: #808080; /*El color de borde de los inputs*/
+}
+  
+/* Colores para textos */
+:root {
+    --color-text-tittle: #454545; /*Color del título principal*/
+    --color-text-primary: #454545; /* Color de texto principal */
+    --color-text-secondary: #F1FEFB; /* Color de texto secundario */
+    --color-text-link: #F2A530; /*Color de texto de los links*/
+    --color-text-recomendation: #ABABAB; /*Color de texto recomedación*/
+}
+
+/* Colores para botones */
+:root {
+    --color-button-primary-bg: #F2A530; /* Fondo de botón principal */
+    --color-button-primary-text: #2D453E; /* Texto de botón principal */
+    --color-button-secondary-bg: #fff; /* Fondo de botón secundario */
+    --color-button-secondary-text: #000000; /* Texto de botón secundario */
+    --color-button-upload-bg: #D9D9D9; /* Fondo de botón cargar imagen */
+    --color-button-upload-text: #000000; /* Texto de botón cargar imagen */
+}
+  
+/* Colores para hover */
+:root {
+    --color-hover-primary: #df9a33; /* Color de hover para elementos principales */
+    --color-hover-secondary: #d4d4d4; /* Color de hover para elementos secundarios */
+    --color-hover-upload: #a1a1a1; /* Color de hover para cargar imagen */
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Public Sans", sans-serif;
+    font-size: 1rem;
+}
+
+header{
+    background-color: var(--color-background);
+}
+
+/*Quitar el cursor pointer del icono del perfil*/
+#profile-image{
+    cursor: default;
+}
+
+/*Contenido principal*/
+main{
+    background-color: var(--color-background);
+    height: 100vh;
+}
+
+#contenido-principal > * {
+    padding: 5px;
+}
+
+/*Contenido de la alerta de confirmación*/
+.contenido-info{
+    background-color: var(--color-background);
+    grid-area: Info;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+/*Alerta de la confirmación*/
+.alerta-info{
+    background-color: var(--color-primary);
+    border-radius: 10px;
+    padding: 5px 10px;
+    position: sticky;
+    top: 0;
+}
+
+/*Título de la alerta de confirmación*/
+.alerta-info h2{
+    margin: 0 0;
+    font-size: 1.2rem;
+    color: var(--color-text-secondary);
+}
+
+/*Texto de la alerta de confirmación*/
+.alerta-info p{
+    margin: 9px 0 0 0;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+/*Link de la alerta de confirmación*/
+.alerta-info a{
+    color: var(--color-text-link);
+    font-size: 14px;
+}
+
+/*Salto de linea*/
+.alerta-info br{
+    display: none;
+}
+
+/*Contenido del título de la página*/
+.contenido-nombre{
+    background-color: var(--color-background);
+    grid-area: Nombre;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+/*Título de la página*/
+.contenido-nombre h1{
+    font-size: 1.5rem;
+    color: var(--color-text-tittle);
+    margin: 0 20px;
+}
+
+/*Contenedor del perfil usuario (fotos y datos)*/
+.contenido-datos{
+    background-color: var(--color-background);
+    grid-area: Datos;
+    margin-bottom: 80px;
+}
+
+/*Contenedor donde el usuario subirá o verá su foto de perfil*/
+.contenedor-fotoPerfil{
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/*Forma de la foto del perfil del usuario*/
+.contenedor-fotoPerfil .circuloPerfil{
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 30px auto 10px auto;
+    background-color: var(--color-background);
+    border: #494949 solid 1px;
+    position: relative;
+}
+
+/*Oscurecimiento cuando se ponga el mouse encima de la foto*/
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.circuloPerfil:hover .overlay {
+    opacity: 1;
+    cursor: pointer;
+}
+
+/*Color del texto dentro del circulo*/
+.overlay span {
+    color: white;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/*Color del svg dentro del circulo*/
+.overlay i {
+    color: white;
+    font-size: 30px;
+}
+
+/*Foto del perfil del usuario*/
+.circuloPerfil img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    object-fit: cover; 
+}
+
+/*Botón por defecto del cargar imagen del sistema*/
+#cargarImagen {
+    display: none;
+}
+
+/*Texto de recomendación del tamaño de la foto del usuario*/
+.contenedor-fotoPerfil p{
+    margin: 14px auto 20px auto;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-recomendation);
+    width: 100%;
+    cursor: context-menu;
+}
+
+/**/
+/*Contendrá todos los datos del usuario*/
+.contenedor-datosPerfil{
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    margin-top: 28px; 
+    margin-bottom: 120px;
+}
+
+/*Icono del datos básicos*/
+.bi-pencil{
+    border: 0.5px solid #9D9D9D;
+    color: #535353;
+    padding: 6px 8px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+/*Contenedor datos del usuario*/
+.datos-basicos{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 45px;
+}
+
+/*Estilo general tanto de los labels como el del los inputs*/
+.contenedor-inputDatos{
+    flex-wrap: nowrap;
+    display: flex;
+    margin-top: 5px;
+    width: 70%;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*Grupo label e input*/
+.li-grupo{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+/*Casilla de entrada de datos (inputs)*/
+.datos-input{
+    color: var(--color-text-primary);
+    background-color: #fff;
+    padding: 13px;
+    width: 190px;
+    height: 12px;
+    margin-top: 15px;
+    border-radius: 12px;
+    border: 2px solid  var(--color-border-input);
+}
+
+.datos-input:focus{
+    outline: none;
+    border: solid 2px var(--color-button-primary-bg);
+}
+
+.datos-input:disabled{ 
+    border: 2px solid  var(--color-border-input);
+    cursor: default;
+    opacity: 0.7;
+}
+
+/*Botónes del formulario*/
+.botontes-datos{
+    margin-top: 30px;
+    display: flex;
+    gap: 3%;
+    display: none;
+}
+
+.botontes-datos a {
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+}
+
+/*Botón guardar*/
+.btn_guardar{
+    background-color: var(--color-button-primary-bg);
+    color: var(--color-button-primary-text);
+    border-radius: 8px;
+    padding: 5px 30px;
+    transition: 0.3s ease-in-out;
+    align-self: center;
+    cursor: pointer;
+}
+
+.btn_guardar:hover{
+    background-color: var(--color-hover-primary);
+}
+
+/*Botón Cancelar*/
+.btn_cancelar{
+    background-color: var(--color-button-secondary-bg);
+    border: 2px solid black;
+    color: var(--color-button-secondary-text);
+    border-radius: 8px;
+    padding: 4.8px 20px;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.btn_cancelar:hover{
+    background-color: var(--color-hover-secondary);
+}
+
+/*Contenido de los datos profesionales del usuario*/
+.datos-profesionales{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 45px;
+}
+
+
+/**/
+/* Estilos para el modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-contenido {
+    background-color: #fff;
+    margin: 5vh auto;
+    padding: 12px;
+    border: 1px solid #888;
+    width: 87%;
+}
+
+/* Estilos para el botón de cerrar (x) */
+.cerrar-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.cerrar-modal:hover,
+.cerrar-modal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*Botones del modal*/
+#btns-modal{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+/*Contenedor donde se mostrará la imagen para ser recortada*/
+#contenedorImagen {
+    max-width: 550px;
+    max-height: 350px;
+    overflow: hidden;
+    margin: 5px auto auto;
+
+}
+
+/*Cropper.js poniendo el focus en forma de circulo*/
+.cropper-view-box{
+            border-radius: 50%;
+}
+
+/*Se oculta, ya que cropper js creará el suyo*/
+#imagen{
+    display: none;
+}
+
+
+#canvas {
+    min-width: 500px;
+    min-height: 500px;
+    border: 1px solid #000;
+}
+
+/*Animación loader que hará mientras se espera que el
+cropper js cargue la imagen completamente*/
+.loader{
+    border: 4px solid rgba(0, 0, 0, .1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: #09f;
+    margin: 3% auto;
+    animation: load 1s linear infinite;
+}
+
+@keyframes load {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+/*Celular*/
+@media (max-width: 550px) {
+    .datos-input{
+        max-width: 350px;
+        padding: 9px 10px;
+        height: 38px;
+    }
+}
+
+/*Tablet*/
+@media (min-width: 551px) and (max-width:1099px) {
+    #contenido-principal{
+        width: calc(100% - 95px);
+        margin-left: auto;
+    }
+
+    .datos-basicos{
+        align-items: flex-start;
+        width: 100%;
+        margin-bottom: 65px;
+    }
+
+    .contenedor-inputDatos{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 20px;
+        width: 90%;
+    }
+
+    .datos-input{
+        width: 100%;
+        max-width: 350px;
+        padding: 9px 10px;
+        height: 38px;
+    }
+
+    .datos-profesionales{
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .contenido-nombre h1{
+        margin: 0;
+    }
+
+    .contenedor-datosPerfil{
+        margin-bottom: 0;
+    }
+
+    .modal-contenido {
+        margin: 5vh auto;
+        max-width: 65%;
+    }
+}
+/*PC*/
+@media (min-width: 1100px){
+    #contenido-principal{
+        width: calc(100% - 130px);
+        display: grid;
+        margin-left: auto;
+        grid-template: 
+        "Nombre Info" 40px
+        "Datos Info"  auto/
+        700px auto;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .contenido-datos{
+        margin-bottom: 0;
+    }
+
+    .alerta-info{
+        text-align: center;
+        padding: 30px 15px;
+        max-width: 450px;
+        margin-right: 10px;
+        margin-top: 20px;
+    }
+
+    .alerta-info h2, .alerta-info p{
+        cursor: default;
+    }
+
+    .alerta-info br{
+        display: block;
+    }
+    .datos-basicos{
+        align-items: flex-start;
+        width: 100%;
+        margin-bottom: 65px;
+    }
+
+    .contenedor-inputDatos{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 48px;
+        width: 98%;
+    }
+
+    .datos-input{
+        width: 100%;
+        max-width: 350px;
+        padding: 9px 10px;
+        height: 38px;
+    }
+
+    .datos-profesionales{
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .contenido-nombre h1{
+        margin: 0;
+    }
+
+    .contenedor-datosPerfil{
+        margin-bottom: 0;
+    }
+
+    .modal-contenido {
+        max-width: 700px;
+    }
+}
