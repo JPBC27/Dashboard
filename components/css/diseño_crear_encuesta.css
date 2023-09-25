@@ -956,6 +956,7 @@
     list-style: none;
     display: flex;
     align-items: center;
+    cursor:pointer;
 }
 
 .nav-link3{
@@ -966,6 +967,7 @@
     list-style: none;
     display: flex;
     align-items: center;
+    cursor:pointer;
 }
 
 .sidebar-2 li .icons,
@@ -989,6 +991,7 @@
     border-bottom-left-radius:8px;
     transition: var(--tran-03);
     z-index: 99;
+    cursor: pointer;
 }
 
 .hidden-arrow{
