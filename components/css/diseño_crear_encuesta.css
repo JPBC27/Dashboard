@@ -6,6 +6,10 @@
     --tran-05:all 0.5s ease;
 }
 
+body{
+    font-family: sans-serif;
+}
+
 .contenido-diseño-encuesta{
     display: flex;
     flex-direction: column;
@@ -83,6 +87,126 @@
     transition: var(--tran-04);
 }
 
+.contenedor-editar-pregunta{
+    width: 249px;
+    height: calc(100vh - 70px);
+    background-color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    right: -260px; 
+    transition: right 0.3s; 
+    box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.5); 
+    overflow-y: auto;
+    padding: 10px;
+}
+/* Estilos del scrollbar */
+/*.contenedor-editar-pregunta::-webkit-scrollbar {
+    width: 10px; 
+  }
+  
+.contenedor-editar-pregunta::-webkit-scrollbar-thumb {
+    background-color: #bebebe;
+    border-radius: 5px;
+  }*/
+
+/**/
+
+.titulo-editar-pregunta{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    border-bottom: #bdbdbd solid 1px;
+    padding-bottom: 5px;
+}
+
+.titulo-editar-pregunta h2{
+    font-size: 14px;
+    color:#4C4C4C;
+    text-transform: uppercase;
+}
+
+.acordeon {
+    border-bottom: 1px solid #ccc;
+}
+  
+.acordeon-titulo {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 13px 0;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+  
+.acordeon-contenido {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 10px;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+  
+.acordeon-contenido.mostrar {
+    max-height: 500px;
+    padding: 10px;
+}
+  
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+  
+textarea {
+    width: 100%;
+    resize: none;
+}
+
+.btn-edicion-rapida{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin-top: 20px;
+}
+
+.btn-duplicar,
+.btn-eliminar {
+    width: 100%;
+    height: 35px;
+    padding: 6px;
+    margin: 5px 0px;
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+.btn-duplicar {
+    color: #0785be;
+    background-color: #fff;
+    border: #0785be solid 1px;
+}
+
+.btn-duplicar:hover {
+    color: #fff;
+    background-color: #0785be;
+}
+
+.btn-eliminar {
+    color: #d40101;
+    background-color: #fff;
+    border: #d40101 solid 1px;
+}
+
+.btn-eliminar:hover {
+    color: #fff;
+    background-color: #d40101;
+}
+/**/
 .titulo-encuesta{
     margin: 15px;
     padding: 15px;
@@ -565,6 +689,47 @@
         display: flex;
         background-color: transparent;
         flex-direction: column;
+    }
+
+    .pregunta-individual{
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        margin-top: 10px;
+    }
+
+    /*Oscurecimiento cuando se ponga el mouse encima de la foto*/
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .pregunta-individual:hover .overlay {
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    /*Color del texto dentro del circulo*/
+    .overlay span {
+        color: white;
+        font-weight: bold;
+        margin-top: 5px;
+    }
+
+    .overlay i {
+        color: white;
+        font-size: 30px;
+        border: none;
     }
 
     .diseño-pregunta{

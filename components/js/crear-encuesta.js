@@ -311,8 +311,8 @@ const renderQuestions =()=>{
     if (tipo === "Opción múltiples") {
       // Diseño para preguntas de tipo opciones múltiples
       const html = `
-      <div id="${id}"> 
-      <div class="barra-pregunta " >
+      <div id="${id}" class="pregunta-individual input-checkbox"> 
+          <div class="barra-pregunta " >
                             <div class="contenedor-barra-tuerca f${id}">
                                 <ul class="barra-tuerca ">
                                     <li><a onclick="editar(${id})"><i class="bi bi-pencil-square"></i></a></li>
@@ -341,8 +341,12 @@ const renderQuestions =()=>{
                         `
                        }).join("")}
                     </div>  
-                    </div>
-       </div>             
+          </div>
+        <div class="overlay">
+            <i class="bi bi-pencil"></i>
+            <span>Editar pregunta</span>
+        </div>
+      </div>             
       `;
       htmlres.innerHTML += html;
     }else if(tipo === "Casillas de verificación"){
@@ -1092,4 +1096,67 @@ botonGuardarEncuesta.addEventListener('click', () => {
   window.location.href = 'encuesta.html';
 });
 
+//SIDEBAR EDITAR PREGUNTA
+const divPreguntas = document.querySelectorAll('.pregunta-individual');
+const sidebarEditarPregunta = document.getElementById('sidebar-editar-pregunta');
 
+divPreguntas.forEach((divPregunta) => {
+  divPregunta.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (sidebarEditarPregunta.style.right === '-260px' || !sidebarEditarPregunta.style.right) {
+      sidebarEditarPregunta.style.right = '0';
+    }
+  });
+});
+
+document.addEventListener('click', (event) => {
+  if (!sidebarEditarPregunta.contains(event.target) && !event.target.classList.contains('pregunta-individual')) {
+    sidebarEditarPregunta.style.right = '-260px';
+  }
+});
+
+//
+const acordeonTitulos = document.querySelectorAll('.acordeon-titulo');
+
+acordeonTitulos.forEach((titulo) => {
+  titulo.addEventListener('click', () => {
+    const contenido = titulo.nextElementSibling;
+    contenido.classList.toggle('mostrar');
+  });
+});
+
+//
+const inpCheckbocs = document.querySelectorAll('.input-checkbox');
+const preguntaSeleccionada = document.getElementById('pregunta');
+var elemento = 
+
+inpCheckbocs.forEach((inpCheckboc) => {
+  inpCheckboc.addEventListener('click', (event) => {
+    elemento = inpCheckboc;
+    const radios = inpCheckboc.querySelectorAll('input[type="radio"]');
+
+    const valoresOpciones = [];
+
+    radios.forEach((radio) => {
+      valoresOpciones.push(radio.value);
+    });
+    const label = inpCheckboc.querySelector('span');
+    const labelTexto = label.textContent; 
+    preguntaSeleccionada.value = labelTexto; 
+    
+    console.log(labelTexto, preguntaSeleccionada.value)
+    console.log(`Clase: input-checkbox`);
+    console.log('label: ', labelTexto);
+    console.log('Valores de las opciones:', valoresOpciones);
+    //console.log(`Texto del párrafo: ${parrafo}`);
+
+    // Aquí puedes realizar las acciones que desees con los valores obtenidos
+  });
+});
+
+
+preguntaSeleccionada.addEventListener('input', () => {
+  const preguntaAModificar = elemento.querySelector('span');
+  const nuevoValor = preguntaSeleccionada.value;
+  preguntaAModificar.textContent = nuevoValor;
+});
