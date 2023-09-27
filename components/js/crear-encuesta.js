@@ -207,59 +207,39 @@ cancelar.forEach(botonCancelar => {
 // ============================
 // OBTENER DATOS DE PREGUNTA
 // ============================
-
 const multiples=document.querySelector(".opciones-multiples-agregar")
 const guardar=document.getElementById("guardar")
-// const contenedor_agregar_pregunta=document.getElementById("contenedor-agregar-pregunta");
-// const objeto=[];
-
 var objeto = JSON.parse(localStorage.getItem("prueba1")) || [];
-guardar.addEventListener("click",()=>{
+
+guardar.addEventListener("click", () => {
   const respuestas= document.querySelectorAll(".input-opciones1-agregar");
   const values = [];
-   
-    var question=pregunta.value;
-    // console.log(question)
+  const preguntaValue = pregunta.value; 
 
-    
-
-    respuestas.forEach(input => {
-      values.push(input.value);
-
-    });
-
-    // const questions={pregunta:pregunta.value,respuestas: values, tipo:sBtn_text.innerText}
- 
+  respuestas.forEach(input => {
+    values.push(input.value);
+  });
 
   // verifica si la pregunta ya existe en el array
-  if (objeto.some((item) => item.pregunta === question)) {
+  if (objeto.some((item) => item.pregunta === preguntaValue)) {
     return; // si existe, no la agregues de nuevo
   }
-    
-  const id=CryptoJS.SHA3(`${values+pregunta.value+sBtn_text.innerText}`,{outputLength:32}).toString();
-
-  objeto.push({id:"f"+id,pregunta:pregunta.value,respuestas: values, tipo:sBtn_text.innerText})
- 
   
-    localStorage.setItem("prueba1",JSON.stringify(objeto))
-    // console.log(objeto)
-    renderQuestions();
-    contenedor_diseño_pregunta.style.display="none"
-    contenedor_agregar_pregunta.style.display="flex"
-     // Restablece valoresIngresados a un array vacío
-     valoresIngresados = [];
-    respuestas.forEach(input => {
-      input.value = "";
-      pregunta.value = "";
-    });
-    contenedor_opciones.forEach(element1 => {
-      element1.style.display = "none";
-      sBtn_text.innerText = "Diseño de opciones";
-      opcion_checkbox.innerHTML = '';
-      opcion_multiple.innerHTML = '';
-    });
-    
+  const id = CryptoJS.SHA3(`${values+pregunta.value+sBtn_text.innerText}`, {outputLength:32}).toString();
+  objeto.push({ id: "f" + id, pregunta: pregunta.value, respuestas: values, tipo: sBtn_text.innerText })
+ 
+  localStorage.setItem("prueba1",JSON.stringify(objeto))
 
+  renderQuestions();
+  
+  contenedor_diseño_pregunta.style.display="none"
+  contenedor_agregar_pregunta.style.display="flex"
+  // Restablece valoresIngresados a un array vacío
+  respuestas.forEach(input => {
+    input.value = "";
+  });
+  
+  resetearFormulario();
 }) 
 
 // ==================================
