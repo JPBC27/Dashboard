@@ -86,7 +86,7 @@ body{
     flex-direction: column;
     transition: var(--tran-04);
 }
-
+/**/
 .contenedor-editar-pregunta{
     width: 249px;
     height: calc(100vh - 70px);
