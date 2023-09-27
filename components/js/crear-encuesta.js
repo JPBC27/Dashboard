@@ -17,7 +17,7 @@ const menu_multiple= document.getElementById("opcion-multiple-agregar"),
       contenedor_opcion_checkbox=document.getElementById("boton-opcion-checkbox-agregar");
       contenedor_opcion_textArea=document.getElementById("opcion-textArea-agregar");
 
-const contenedor_general=document.getElementById("contenedor-opciones-agregar"); //Donde se agrega o muestran los elementos a agregar
+const contenedor_general_agregar=document.getElementById("contenedor-opciones-agregar"); //Donde se agrega o muestran los elementos a agregar
 
 selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active")); // Mostrar el listado de opciones
 
@@ -36,7 +36,7 @@ options.forEach(option =>{
     if(selectedOption == "Opción múltiples"){
       menu_multiple.style.display ="block";
       casilla_verificacion.style.display ="none";
-      contenedor_general.style.display="block"
+      contenedor_general_agregar.style.display="block"
       opcion_checkbox.innerHTML=''
       contenedor_opcion_multiple.style.display="flex"
       contenedor_opcion_checkbox.style.display="none"
@@ -46,7 +46,7 @@ options.forEach(option =>{
     else if(selectedOption=="Casillas de verificación"){
       menu_multiple.style.display ="none";
       casilla_verificacion.style.display ="block";
-      contenedor_general.style.display="block"
+      contenedor_general_agregar.style.display="block"
       opcion_multiple.innerHTML=''
       contenedor_opcion_multiple.style.display="none"
       contenedor_opcion_checkbox.style.display="flex"
@@ -55,7 +55,7 @@ options.forEach(option =>{
     else if(selectedOption=="Texto simple"){
       menu_multiple.style.display ="none";
       casilla_verificacion.style.display ="none";
-      contenedor_general.style.display="block";
+      contenedor_general_agregar.style.display="block";
       opcion_checkbox.innerHTML=''
       opcion_multiple.innerHTML=''
       contenedor_opcion_multiple.style.display="none"
@@ -76,14 +76,16 @@ options.forEach(option =>{
 
 
 // ==================================
-// FUNCIONES PARA  BOTON MAS MULTIPLES
+// Funciones Checkbox y Multiple
 // ==================================
 
+//multiple
 const opcion_multiple=document.getElementById("opcion-multiple-agregar") //Contenedor de casillas de tipo "multiple"
 const mas_opcion_multiple=document.getElementById("mas-opcion-multiple-agregar") //Botón de agregar opción "multiple"
 
-const opcion_checkbox=document.getElementById("opcion-checkbox-agregar") //Contenedor de casillas de tipo "checkbox"
-const mas_opcion_checkbox=document.getElementById("mas-opcion-checkbox-agregar") //Botón de agregar opción "checkbox"
+//checkbox
+const opcion_checkbox=document.getElementById("opcion-checkbox-agregar") 
+const mas_opcion_checkbox=document.getElementById("mas-opcion-checkbox-agregar")
 
 // Declara un array para almacenar los objetos con el índice y el valor ingresado en los inputs
 let valoresIngresados = [];
@@ -140,7 +142,6 @@ function actualizarValoresIngresados(tipo) {
 
 // Función para agregar eventos de eliminación
 function agregarEventosEliminar(tipo) {
-  console.log(opcion_multiple, opcion_checkbox);
   const opcion = tipo === 'multiple' ? opcion_multiple : opcion_checkbox;
   const nuevosDivs = opcion.querySelectorAll(".pregunta-opciones");
   nuevosDivs.forEach((div) => {
@@ -162,53 +163,48 @@ mas_opcion_checkbox.addEventListener("click", () => {
 });
 
 
-// ==================================
+// ============================
 // FUNCIONES BOTON CANCELAR
 // ============================
-const cancelar=document.querySelectorAll(".opcion-cancelar-agregar")
-const contenedor_opciones=document.querySelectorAll(".contenedor-opciones-agregar")
-const contenedor_agregar_pregunta=document.getElementById("contenedor-agregar-pregunta");
-const contenedor_listo=document.querySelector(".contenedor-listo");
-const contenedor_diseño_pregunta=document.getElementById("pregunta-agregar")
-const pregunta= document.querySelector(".texto-pregunta-agregar")
+const contenedor_agregar_pregunta=document.getElementById("contenedor-agregar-pregunta"); //Contenedor para agregar +
+const contenedor_diseño_pregunta=document.getElementById("pregunta-agregar"); // Todo el contenedor (pregunta y opciones)
+const contenedor_opciones=document.querySelectorAll(".contenedor-opciones-agregar"); //Solo las opciones (radio,text,check,..)
+const pregunta= document.querySelector(".texto-pregunta-agregar"); //La pregunta a realizar
+const cancelar=document.querySelectorAll(".opcion-cancelar-agregar"); //Botón cancelar
+const contenedor_listo=document.querySelector(".contenedor-listo"); //botón Listo
 
-cancelar.forEach(element => {
-  element.addEventListener("click", () => {
+function resetearFormulario() {
+  pregunta.value = "";
+  valoresIngresados = [];
+  contenedor_opciones.forEach(opcion => {
+    opcion.style.display = "none";
+    sBtn_text.innerText = "Diseño de opciones";
+    opcion_checkbox.innerHTML = '';
+    opcion_multiple.innerHTML = '';
+  });
+}
+
+cancelar.forEach(botonCancelar => {
+  botonCancelar.addEventListener("click", () => {
     const valorLocalStorage = localStorage.getItem("prueba1");
-    console.log(valorLocalStorage)
 
     if (valorLocalStorage && JSON.parse(valorLocalStorage).length > 0) {
       // Si existe el valor en el localStorage, ocultamos los contenedores de opciones
-      contenedor_opciones.forEach(element1 => {
-        element1.style.display = "none";
-        sBtn_text.innerText = "Diseño de opciones";
-        opcion_checkbox.innerHTML = '';
-        opcion_multiple.innerHTML = '';
-      });
-    pregunta.value = "";
-     valoresIngresados = [];
+      resetearFormulario();
       contenedor_agregar_pregunta.style.display = "flex";
       contenedor_diseño_pregunta.style.display = "none";
       
     } else {
       // Si NO existe el valor en el localStorage, ocultamos el contenedor actual y mostramos el de agregar pregunta
+      resetearFormulario();
       contenedor_diseño_pregunta.style.display = "block";
       contenedor_agregar_pregunta.style.display = "none";
-      valoresIngresados = [];
-      pregunta.value = "";
-      contenedor_opciones.forEach(element1 => {
-        element1.style.display = "none";
-        sBtn_text.innerText = "Diseño de opciones";
-        opcion_checkbox.innerHTML = '';
-        opcion_multiple.innerHTML = '';
-      });
-      
-      
+
     }
   });
 });
 
-// ==================================
+// ============================
 // OBTENER DATOS DE PREGUNTA
 // ============================
 
