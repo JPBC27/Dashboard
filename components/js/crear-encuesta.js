@@ -82,113 +82,85 @@ options.forEach(option =>{
 const opcion_multiple=document.getElementById("opcion-multiple-agregar") //Contenedor de casillas de tipo "multiple"
 const mas_opcion_multiple=document.getElementById("mas-opcion-multiple-agregar") //Botón de agregar opción "multiple"
 
+const opcion_checkbox=document.getElementById("opcion-checkbox-agregar") //Contenedor de casillas de tipo "checkbox"
+const mas_opcion_checkbox=document.getElementById("mas-opcion-checkbox-agregar") //Botón de agregar opción "checkbox"
+
 // Declara un array para almacenar los objetos con el índice y el valor ingresado en los inputs
 let valoresIngresados = [];
 
-// Función para agregar una nueva opción múltiple
-function agregarNuevaOpcion() {
-  const template = `
-    <div class="pregunta-opciones">
-      <label class="radio1">
-        <input type="radio" name="r" value="clasica" disabled>
-        <span></span>
-      </label>
-      <input class="input-opciones1 input-opciones1-agregar" type="text">
-      <i class="bi bi-dash-circle multiple-quitar-agregar"></i>
-    </div>
-  `;
+// Función para agregar una nueva opción de cualquier tipo
+function agregarNuevaOpcion(tipo) {
+  let template = '';
 
-  //Agrega debajo el template
-  opcion_multiple.insertAdjacentHTML("beforeend", template);
+  if (tipo === 'multiple') {
+    template = `
+      <div class="pregunta-opciones">
+        <label class="radio1">
+          <input type="radio" name="r" value="clasica" disabled>
+          <span></span>
+        </label>
+        <input class="input-opciones1 input-opciones1-agregar" type="text">
+        <i class="bi bi-dash-circle multiple-quitar-agregar"></i>
+      </div>
+    `;
+  } else if (tipo === 'checkbox') {
+    template = `
+      <div class="pregunta-opciones">
+        <div class="checkbox">
+          <input class="checkbox-spin" type="checkbox" id="check4" disabled/>
+          <label for="check4"><span></span></label>
+        </div>
+        <input class="input-opciones1 input-opciones1-agregar" type="text">
+        <i class="bi bi-dash-circle checkbox-quitar-agregar"></i>
+      </div>
+    `;
+  }
 
-  actualizarValoresIngresados();
-  agregarEventosEliminar();
+  const opcion = tipo === 'multiple' ? opcion_multiple : opcion_checkbox;
+  opcion.insertAdjacentHTML("beforeend", template);
+
+  actualizarValoresIngresados(tipo);
+  agregarEventosEliminar(tipo);
 }
 
 // Función para actualizar los valores ingresados
-function actualizarValoresIngresados() {
-  // Obtiene todos los inputs recién agregados
-  const nuevosInputs = opcion_multiple.querySelectorAll(".input-opciones1-agregar");
+function actualizarValoresIngresados(tipo) {
+  const opcion = tipo === 'multiple' ? opcion_multiple : opcion_checkbox;
+  const nuevosInputs = opcion.querySelectorAll(".input-opciones1-agregar");
+
   nuevosInputs.forEach((input, index) => {
-    // Almacena los valores ingresados en el array de objetos
     input.addEventListener("input", (event) => {
       const valor = event.target.value;
       valoresIngresados[index] = { index, valor };
     });
 
-    // Muestra los valores almacenados en los inputs cuando se hace clic en "Agregar más input"
     input.value = valoresIngresados[index] ? valoresIngresados[index].valor : "";
   });
 }
 
 // Función para agregar eventos de eliminación
-function agregarEventosEliminar() {
-  // Obtiene todos los divs recién agregados
-  const nuevosDivs = opcion_multiple.querySelectorAll(".pregunta-opciones");
-
-  // Agrega el evento de clic para eliminar el div cuando se hace clic en el icono
+function agregarEventosEliminar(tipo) {
+  console.log(opcion_multiple, opcion_checkbox);
+  const opcion = tipo === 'multiple' ? opcion_multiple : opcion_checkbox;
+  const nuevosDivs = opcion.querySelectorAll(".pregunta-opciones");
   nuevosDivs.forEach((div) => {
-    const iconoEliminar = div.querySelector(".multiple-quitar-agregar");
+    const iconoEliminar = div.querySelector(`.${tipo}-quitar-agregar`);
     iconoEliminar.addEventListener("click", () => {
       div.remove();
     });
   });
 }
 
-// Evento de clic para agregar una nueva opción "múltiple"
-mas_opcion_multiple.addEventListener("click", agregarNuevaOpcion);
+// Evento de clic para agregar una nueva opción "multiple"
+mas_opcion_multiple.addEventListener("click", () => {
+  agregarNuevaOpcion('multiple');
+});
 
+// Evento de clic para agregar una nueva opción "checkbox"
+mas_opcion_checkbox.addEventListener("click", () => {
+  agregarNuevaOpcion('checkbox');
+});
 
-// ==================================
-// FUNCIONES PARA  BOTON MAS CHECKBOX
-// ============================
-
-const opcion_checkbox=document.getElementById("opcion-checkbox-agregar")
-const mas_opcion_checkbox=document.getElementById("mas-opcion-checkbox-agregar")
-
-mas_opcion_checkbox.addEventListener("click",()=>{
-  // console.log("hola")
-  const temp1=`
-  <div class="pregunta-opciones">
-    <div class="checkbox">
-      <input class="checkbox-spin" type="checkbox" id="check4" disabled/>
-      <label for="check4"><span></span></label>
-    </div>
-      <input class="input-opciones1 input-opciones1-agregar" type="text">
-      <i class="bi bi-dash-circle verificacion-quitar-agregar"></i>
-    </div>
-`
-  // opcion_multiple.insertAdjacentHTML("beforeend",temp) =temp
-  opcion_checkbox.innerHTML+=temp1;
-
-  // Obtiene todos los inputs recién agregados
-  const nuevosInputsC = opcion_checkbox.querySelectorAll(".input-opciones1-agregar");
-
-  // Almacena los valores ingresados en el array de objetos
-  nuevosInputsC.forEach((input, index) => {
-    input.addEventListener("input", (event) => {
-      const valor = event.target.value;
-      valoresIngresados[index] = { index, valor };
-    });
-  });
-
-  // Muestra los valores almacenados en los inputs cuando se hace clic en "Agregar más input"
-  nuevosInputsC.forEach((input, index) => {
-    input.value = valoresIngresados[index] ? valoresIngresados[index].valor : "";
-  });
-
-   // Obtiene todos los divs recién agregados
-  const nuevosDivsC = opcion_checkbox.querySelectorAll(".pregunta-opciones");
-
-  // Agrega el evento de clic para eliminar el div cuando se hace clic en el icono
-  nuevosDivsC.forEach((div) => {
-    const iconoEliminar = div.querySelector(".verificacion-quitar-agregar");
-    iconoEliminar.addEventListener("click", () => {
-      div.remove();
-    });
-  });
-  
-})
 
 // ==================================
 // FUNCIONES BOTON CANCELAR
