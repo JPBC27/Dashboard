@@ -231,144 +231,93 @@ guardar.addEventListener("click", () => {
   localStorage.setItem("prueba1",JSON.stringify(objeto))
 
   renderQuestions();
-  
+
   contenedor_diseño_pregunta.style.display="none"
   contenedor_agregar_pregunta.style.display="flex"
   // Restablece valoresIngresados a un array vacío
-  respuestas.forEach(input => {
+  /* respuestas.forEach(input => {
     input.value = "";
-  });
-  
+  });*/
   resetearFormulario();
 }) 
 
-// ==================================
+// =======================
 // RENDERIZAR PREGUNTAS
-// ============================
+// =======================
 
+const htmlres = document.getElementById("contenedor-preguntas-realizadas");
 
-
-const renderQuestions =()=>{
-  const htmlres=document.getElementById("contenedor-preguntas-realizadas")
-  htmlres.innerHTML="";
-  
-  // console.log(objeto)
- objeto.forEach((a)=>{
-    let {id,pregunta,respuestas,tipo}=a
-    const htmlrespuesta=document.getElementById("diseño-opciones")
-     
-
-    if (tipo === "Opción múltiples") {
-      // Diseño para preguntas de tipo opciones múltiples
-      const html = `
-      <div id="${id}" class="pregunta-individual input-checkbox"> 
-          <div class="barra-pregunta " >
-                            <div class="contenedor-barra-tuerca f${id}">
-                                <ul class="barra-tuerca ">
-                                    <li><a onclick="editar(${id})"><i class="bi bi-pencil-square"></i></a></li>
-                                    <li><a onclick="eliminar(${id})"><i class="bi bi-trash3"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="tuerca ${id}">
-                               <a onclick="mostrar(${id})"><i class="bi bi-gear-fill"></i></a>
-                            </div>
-                            
-                        </div> 
-                        
-                        <div class="diseño-pregunta">
-                        <span class="diseño-pregunta-span">${pregunta}</span>
-                    <div id="diseño-opciones">     
-                      ${respuestas.map(b=>{
-                        return `
-                        <div class="diseño-opciones" >
-                          <label class="radio1">
-                          <input type="radio" name="${pregunta}" value="${b}" >
-                          <span>${b.toString()}</span>
-                          </label>
-                          
-                  
-                        </div>
-                        `
-                       }).join("")}
-                    </div>  
+function generatePreguntaHTML(id, pregunta, respuestas, tipo) {
+  let opcionesHTML = ""
+  if (tipo === "Opción múltiples" || tipo === "Casillas de verificación"){
+    opcionesHTML = respuestas.map((b) => {
+      if (tipo === "Opción múltiples") {
+        return `
+          <div class="diseño-opciones">
+            <label class="radio1">
+              <input type="radio" name="${pregunta}" value="${b}">
+              <span>${b}</span>
+            </label>
           </div>
-        <div class="overlay">
-            <i class="bi bi-pencil"></i>
-            <span>Editar pregunta</span>
-        </div>
-      </div>             
-      `;
-      htmlres.innerHTML += html;
-    }else if(tipo === "Casillas de verificación"){
-        const html = `
-        <div id="${id}"> 
-        <div class="barra-pregunta " >
-                              <div class="contenedor-barra-tuerca f${id}">
-                                  <ul class="barra-tuerca ">
-                                      <li><a onclick="editar(${id})"><i class="bi bi-pencil-square"></i></a></li>
-                                      <li><a onclick="eliminar(${id})"><i class="bi bi-trash3"></i></a></li>
-                                  </ul>
-                              </div>
-                              <div class="tuerca ${id}">
-                                 <a onclick="mostrar(${id})"><i class="bi bi-gear-fill"></i></a>
-                              </div>
-                              
-                          </div> 
-                          
-                          <div class="diseño-pregunta">
-                          <span class="diseño-pregunta-span">${pregunta}</span>
-                      <div id="diseño-opciones">     
-                        ${respuestas.map(b=>{
-                          return `
-                          <div class="diseño-opciones">
-                            <div class="checkbox-container">
-                                <input class="checkbox-spin-1" type="radio" id="check-${id}-${pregunta}-${b}" name="check-${id}-${pregunta}" value="${b}">
-                                <label for="check-${id}-${pregunta}-${b}"><span>&#10004;</span></label>
-                                <span>${b.toString()}</span>
-
-                            </div>
-                            </div>
-
-
-                          `
-                         }).join("")}
-                      </div>  
-                      </div>
-         </div>             
         `;
-        htmlres.innerHTML += html;
-      }else if(tipo === "Texto simple"){
-        const html = `
-        <div id="${id}"> 
-        <div class="barra-pregunta " >
-                              <div class="contenedor-barra-tuerca f${id}">
-                                  <ul class="barra-tuerca ">
-                                      <li><a onclick="editar(${id})"><i class="bi bi-pencil-square"></i></a></li>
-                                      <li><a onclick="eliminar(${id})"><i class="bi bi-trash3"></i></a></li>
-                                  </ul>
-                              </div>
-                              <div class="tuerca ${id}">
-                                 <a onclick="mostrar(${id})"><i class="bi bi-gear-fill"></i></a>
-                              </div>
-                              
-                          </div> 
-                          
-                          <div class="diseño-pregunta">
-                          <span class="diseño-pregunta-span">${pregunta}</span>
-                      <div id="diseño-opciones">     
-                        <div class="diseño-opciones">
-                         <textarea name="${id}" id="" cols="30" rows="10" style="width: 100%;"></textarea>     
-                        </div>  
-                      </div>  
-                      </div>
-         </div>             
+      } else if (tipo === "Casillas de verificación") {
+        return `
+          <div class="diseño-opciones">
+            <div class="checkbox-container">
+              <input class="checkbox-spin-1" type="radio" id="check-${id}-${pregunta}-${b}" name="check-${id}-${pregunta}" value="${b}">
+              <label for="check-${id}-${pregunta}-${b}"><span>&#10004;</span></label>
+              <span>${b}</span>
+            </div>
+          </div>
         `;
-        htmlres.innerHTML += html;
       }
-    
-    }
+    }).join("");
+
+  } else if (tipo === "Texto simple") {
+      console.log("si");
+      opcionesHTML = `
+        <div class="diseño-opciones">
+          <textarea name="${id}" cols="30" rows="10" style="width: 100%;"></textarea>
+        </div>
+      `;
+  }
   
-  )
+  return `
+      <div id="${id}" class="pregunta-individual input-checkbox"> 
+        <div class="barra-pregunta " >
+            <div class="contenedor-barra-tuerca f${id}">
+                <ul class="barra-tuerca ">
+                    <li><a onclick="editar(${id})"><i class="bi bi-pencil-square"></i></a></li>
+                    <li><a onclick="eliminar(${id})"><i class="bi bi-trash3"></i></a></li>
+                </ul>
+              </div>
+              <div class="tuerca ${id}">
+                  <a onclick="mostrar(${id})"><i class="bi bi-gear-fill"></i></a>
+              </div>         
+            </div>    
+            <div class="diseño-pregunta">
+              <span class="diseño-pregunta-span">${pregunta}</span>
+                  <div id="diseño-opciones">     
+                    ${opcionesHTML}
+                  </div>  
+            </div>
+            <div class="overlay">
+              <i class="bi bi-pencil"></i>
+              <span>Editar pregunta</span>
+            </div>
+        </div>
+    </div> 
+  `;
+}
+
+function renderQuestions() {
+  htmlres.innerHTML = "";
+
+  objeto.forEach((item) => {
+    const { id, pregunta, respuestas, tipo } = item;
+    const htmlPregunta = generatePreguntaHTML(id, pregunta, respuestas, tipo);
+    htmlres.innerHTML += htmlPregunta;
+  });
 
   if (objeto.length == 0) {
     
@@ -382,21 +331,24 @@ const renderQuestions =()=>{
     contenedor_listo.style.display="block"
   }
 
-   // Asignar estilos a los elementos DOM
-   const colorTituloEncuesta = document.getElementById("titulo-encuesta");
-   const colorPregunta = document.querySelectorAll(".diseño-pregunta-span");
-   const colorRespuestas = document.querySelectorAll(".diseño-opciones span");
-   const datoC5 = window.localStorage.color;
+    // Asignar estilos a los elementos DOM
+    const colorTituloEncuesta = document.getElementById("titulo-encuesta");
+    const colorPregunta = document.querySelectorAll(".diseño-pregunta-span");
+    const colorRespuestas = document.querySelectorAll(".diseño-opciones span");
+    const datoC5 = window.localStorage.color;
 
-   colorTituloEncuesta.style.color = datoC5;
-   colorPregunta.forEach((pregunta) => {
-     pregunta.style.color = datoC5;
-   });
-   colorRespuestas.forEach((respuestas) => {
-     respuestas.style.color = datoC5;
-   });  
-
+    colorTituloEncuesta.style.color = datoC5;
+    colorPregunta.forEach((pregunta) => {
+      pregunta.style.color = datoC5;
+    });
+    colorRespuestas.forEach((respuestas) => {
+      respuestas.style.color = datoC5;
+    });  
 }
+
+// renderQuestions() para inicializar las vistas
+renderQuestions();
+
 
 // ==================================
     // FUNCIONES DE LA BARRA FLOTANTE DE PREGUNTA
