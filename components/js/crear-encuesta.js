@@ -672,7 +672,6 @@ mas_opcion_checkbox_editar.addEventListener("click", () => {
   agregarOpcion('checkbox');
 });
 
-
 // ====================================================================
 // FUNCIONES BOTON  EDITAR
 // ====================================================================
@@ -688,7 +687,6 @@ btnEditar.addEventListener("click", () => {
   respuestas.forEach(input => {
     values.push(input.value);
   });
-
 
   // Verifica si la pregunta ya existe en el array
   if (objeto.some((item) => item.pregunta_editar === question)) {
@@ -710,7 +708,6 @@ btnEditar.addEventListener("click", () => {
     // Guarda el objeto actualizado en el localStorage
     localStorage.setItem("prueba1", JSON.stringify(objeto));
 
-    console.log(objeto);
     renderQuestions();
     contenedor_diseño_pregunta_editar.style.display = "none";
     document.getElementById("modalEditar").style.display = "none";
@@ -742,41 +739,35 @@ const contenedor_opciones_editar=document.querySelectorAll(".contenedor-opciones
 // const contenedor_agregar_pregunta_editar=document.getElementById("contenedor-agregar-pregunta");
 const contenedor_diseño_pregunta_editar=document.getElementById("pregunta-agregar")
 
+function limpiarDiseno(){
+  valoresIngresados = [];
+  contenedor_opciones_editar.forEach(element1 => {
+    element1.style.display = "none";
+    sBtn_text_editar.innerText = "Diseño de opciones";
+    opcion_checkbox_editar.innerHTML = '';
+    opcion_multiple_editar.innerHTML = '';
+  });
+}
+
 cancelar_editar.forEach(element => {
   element.addEventListener("click", () => {
     document.getElementById("modalEditar").style.display = "none";
     const valorLocalStorage = localStorage.getItem("prueba1");
     if (valorLocalStorage) {
       // Si existe el valor en el localStorage, ocultamos los contenedores de opciones
-      contenedor_opciones_editar.forEach(element1 => {
-        element1.style.display = "none";
-        sBtn_text_editar.innerText = "Diseño de opciones";
-        opcion_checkbox_editar.innerHTML = '';
-        opcion_multiple_editar.innerHTML = '';
-      });
-    pregunta_editar.value = "";
-     valoresIngresados = [];
-    //  contenedor_agregar_pregunta_editar.style.display = "flex";
+      pregunta_editar.value = "";
+      limpiarDiseno();
+      //  contenedor_agregar_pregunta_editar.style.display = "flex";
       contenedor_diseño_pregunta_editar.style.display = "none";
       
     } else {
       // Si NO existe el valor en el localStorage, ocultamos el contenedor actual y mostramos el de agregar pregunta
-      valoresIngresados = [];
       pregunta.value = "";
-      contenedor_opciones_editar.forEach(element1 => {
-        element1.style.display = "none";
-        sBtn_text_editar.innerText = "Diseño de opciones";
-        opcion_checkbox_editar.innerHTML = '';
-        opcion_multiple_editar.innerHTML = '';
-      });
-      
-      
+      limpiarDiseno();
     }
   });
 });
 
-
-// ================================================================================================
 // ================================================================================================
 
 // ==================================
@@ -789,23 +780,19 @@ const eliminar=(id)=>{
 
   // Actualizar el 'objeto' para reflejar los datos actualizados en el 'localStorage'
   objeto = objeto.filter(item => item.id !== id.id);
-  console.log(objeto)
   // localStorage.removeItem("prueba1");
   borrarDatoPorId(idinput1.id);
   // console.log(objeto.length)
   if (objeto.length == 0) {
     contenedor_listo.style.display="none"
-  contenedor_opciones.forEach(element1 => {
-    element1.style.display = "none";
-    sBtn_text.innerText = "Diseño de opciones";
-    opcion_checkbox.innerHTML = '';
-    opcion_multiple.innerHTML = '';
-  });
+    contenedor_opciones.forEach(element1 => {
+      element1.style.display = "none";
+      sBtn_text.innerText = "Diseño de opciones";
+      opcion_checkbox.innerHTML = '';
+      opcion_multiple.innerHTML = '';
+    });
   }
 }
-
-
-
 
 function borrarDatoPorId(id) {
   // Obtener los datos del localStorage
@@ -827,7 +814,6 @@ function borrarDatoPorId(id) {
   }
 }
 
-
 // ====================================================================
 // FUNCIONES DE BOTON AGREGAR PREGUNTA
 // ==============================================================
@@ -838,8 +824,6 @@ boton_agregar_pregunta.addEventListener("click",()=>{
   contenedor_agregar_pregunta.style.display="none"
 
 })
-
-
 
 renderQuestions();
 
@@ -944,6 +928,7 @@ botonGuardarEncuesta.addEventListener('click', () => {
   window.location.href = 'encuesta.html';
 });
 
+/**/
 //SIDEBAR EDITAR PREGUNTA
 const divPreguntas = document.querySelectorAll('.pregunta-individual');
 const sidebarEditarPregunta = document.getElementById('sidebar-editar-pregunta');
@@ -1001,8 +986,6 @@ inpCheckbocs.forEach((inpCheckboc) => {
     // Aquí puedes realizar las acciones que desees con los valores obtenidos
   });
 });
-
-
 
 
 preguntaSeleccionada.addEventListener('input', () => {
