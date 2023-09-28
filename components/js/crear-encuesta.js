@@ -281,7 +281,7 @@ function generatePreguntaHTML(id, pregunta, respuestas, tipo) {
         </div>
       `;
   }
-  
+
   return `
       <div id="${id}" class="pregunta-individual input-checkbox"> 
         <div class="barra-pregunta " >
@@ -351,8 +351,8 @@ renderQuestions();
 
 
 // ==================================
-    // FUNCIONES DE LA BARRA FLOTANTE DE PREGUNTA
-    // ============================
+// FUNCIONES DE LA BARRA FLOTANTE DE PREGUNTA
+// ============================
 const mostrar=(id)=>{
   let idinput=id
   // console.log(idinput)
@@ -366,11 +366,6 @@ const mostrar=(id)=>{
     barra_c[i].classList.toggle("activar-barra-tuerca")
   }
 }
-
-
-// ================================================================================================
-// FUNCION PARA EDITAR PREGUNTA
-// ================================================================================================
 
 // ==================================
 // FUNCIONES DEL DROPDOWN EDITAR
@@ -404,10 +399,7 @@ optionsEditor.forEach(option =>{
         option.addEventListener("click", ()=>{
           let selectedOptionEditar=option.querySelector(".option-text-editar").innerText;
           sBtn_text_editar.innerText= selectedOptionEditar;
-          
           optionMenuEditar.classList.remove("active");
-          // console.log(selectedOption)
-
           // ==================================
           // FUNCIONES PARA OPCIONES DE PREGUNTA
           // =====================================
@@ -427,7 +419,6 @@ optionsEditor.forEach(option =>{
 
           else if(selectedOptionEditar=="Casillas de verificación"){
             contenedor_general_editar.style.display="block"
-
             menu_multiple_editar.style.display ="none";
             casilla_verificacion_editar.style.display ="block";
             // texto_simple.style.display="none";
@@ -468,7 +459,6 @@ optionsEditor.forEach(option =>{
 // FUNCIONES PARA EL MODAL Y LOCAL STORAGE
 // ================================================================================================
       
-
 // Cerrar el modalEditar al hacer clic en la "X" o en el fondo oscuro difuminado
 document.getElementById("closeModalEditarButton").addEventListener("click", function() {
   document.getElementById("modalEditar").style.display = "none";
@@ -504,11 +494,6 @@ const editar=(id)=>{
     // Agregar el input al contenedor
     contenedorInputs.appendChild(nuevoInput);
   }
-  
-
-     
-
-  console.log(preguntaEditada)
 
   if (preguntaEditada) {
     // Si se encontró el objeto, asigna los valores almacenados a los campos del formulario
@@ -622,31 +607,37 @@ const editar=(id)=>{
   });
 }
 
-
 // ==============================================================
-// FUNCIONES PARA  BOTON MAS MULTIPLES EDITAR
+// FUNCIONES PARA  BOTON MAS MULTIPLES y CHECKBOX - EDITAR
 // ==============================================================
-
-
-// Declara un array para almacenar los objetos con el índice y el valor ingresado en los inputs
-let valoresIngresadosEditar = [];
-
-mas_opcion_multiple_editar.addEventListener("click", () => {
+// Función para agregar opciones múltiples o casillas de verificación
+function agregarOpcion() {
+  // Declara un array para almacenar los objetos con el índice y el valor ingresado en los inputs
+  let valoresIngresadosEditar = [];
   const temp = `
     <div class="pregunta-opciones">
-      <label class="radio1">
-        <input type="radio" name="r" value="clasica" disabled>
-        <span></span>
-      </label>
+      ${tipo === 'multiple' ? `
+        <div class="checkbox">
+            <input class="checkbox-spin" type="checkbox" id="check4" disabled/>
+            <label class="check4" for="check4"><span></span></label>
+        </div>
+      `:`
+        <label class="radio1">
+            <input type="radio" name="r" value="clasica" disabled>
+            <span></span>
+        </label>
+      `}
       <input class="input-opciones1 input-opciones1-editar" type="text">
-      <i class="bi bi-dash-circle multiple-quitar-editar"></i>
+      <i class="bi bi-dash-circle ${tipo === 'multiple' ? 'multiple' : 'verificacion'}-quitar-editar"></i>
     </div>
   `;
 
-  opcion_multiple_editar.innerHTML += temp;
+  const opcionContainer = tipo === 'multiple' ? opcion_multiple_editar : opcion_checkbox_editar;
+  
+  opcionContainer.innerHTML += temp;
 
   // Obtiene todos los inputs recién agregados
-  const nuevosInputs = opcion_multiple_editar.querySelectorAll(".input-opciones1-editar");
+  const nuevosInputs = opcionContainer.querySelectorAll(".input-opciones1-editar");
 
   // Almacena los valores ingresados en el array de objetos
   nuevosInputs.forEach((input, index) => {
@@ -662,71 +653,29 @@ mas_opcion_multiple_editar.addEventListener("click", () => {
   });
 
   // Obtiene todos los divs recién agregados
-  const nuevosDivs = opcion_multiple_editar.querySelectorAll(".pregunta-opciones");
+  const nuevosDivs = opcionContainer.querySelectorAll(".pregunta-opciones");
 
   // Agrega el evento de clic para eliminar el div cuando se hace clic en el icono
   nuevosDivs.forEach((div) => {
-    const iconoEliminar = div.querySelector(".multiple-quitar-editar");
+    const iconoEliminar = div.querySelector(`.${tipo === 'multiple' ? 'multiple' : 'verificacion'}-quitar-editar`);
     iconoEliminar.addEventListener("click", () => {
       div.remove();
     });
   });
-  
+}
+
+mas_opcion_multiple_editar.addEventListener("click", () => {
+  agregarOpcion('multiple');
 });
 
+mas_opcion_checkbox_editar.addEventListener("click", () => {
+  agregarOpcion('checkbox');
+});
 
-// ========================================================
-// FUNCIONES PARA  BOTON MAS CHECKBOX EDITAR
-// ========================================================
-
-mas_opcion_checkbox_editar.addEventListener("click",()=>{
-  // console.log("hola")
-  const temp1=`
-  <div class="pregunta-opciones">
-    <div class="checkbox">
-      <input class="checkbox-spin" type="checkbox" id="check4" disabled/>
-      <label class="check4" for="check4"><span></span></label>
-    </div>
-      <input class="input-opciones1 input-opciones1-editar" type="text">
-      <i class="bi bi-dash-circle verificacion-quitar-editar"></i>
-    </div>
-`
-  // opcion_multiple.insertAdjacentHTML("beforeend",temp) =temp
-  opcion_checkbox_editar.innerHTML+=temp1;
-
-  // Obtiene todos los inputs recién agregados
-  const nuevosInputsC = opcion_checkbox_editar.querySelectorAll(".input-opciones1-editar");
-
-  // Almacena los valores ingresados en el array de objetos
-  nuevosInputsC.forEach((input, index) => {
-    input.addEventListener("input", (event) => {
-      const valor = event.target.value;
-      valoresIngresados[index] = { index, valor };
-    });
-  });
-
-  // Muestra los valores almacenados en los inputs cuando se hace clic en "Agregar más input"
-  nuevosInputsC.forEach((input, index) => {
-    input.value = valoresIngresados[index] ? valoresIngresados[index].valor : "";
-  });
-
-   // Obtiene todos los divs recién agregados
-  const nuevosDivsC = opcion_checkbox_editar.querySelectorAll(".pregunta-opciones");
-
-  // Agrega el evento de clic para eliminar el div cuando se hace clic en el icono
-  nuevosDivsC.forEach((div) => {
-    const iconoEliminar = div.querySelector(".verificacion-quitar-editar");
-    iconoEliminar.addEventListener("click", () => {
-      div.remove();
-    });
-  });
-  
-})
 
 // ====================================================================
 // FUNCIONES BOTON  EDITAR
 // ====================================================================
-
 btnEditar.addEventListener("click", () => {
   const respuestas = document.querySelectorAll(".input-opciones1");
   const values = [];
@@ -782,11 +731,8 @@ btnEditar.addEventListener("click", () => {
   }
 });
 
-
-
 // ================================================================================================================================
 // ================================================================================================================================
-
 
 // ====================================================================
 // FUNCIONES BOTON CANCELAR EDITAR
