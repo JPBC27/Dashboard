@@ -51,7 +51,9 @@ h1{
     flex-direction: column;
     transition: var(--tran-04);
 }
-
+/*==================================*/
+/*Logo empresa y guardado automatico*/
+/*==================================*/
 .logoEmpresa{
     display: flex;
     flex-direction: row;
@@ -88,7 +90,9 @@ h1{
     font-size: 11px;
     font-weight: 700;
 }
-
+/*======================*/
+/*Título e instrcciones*/
+/*======================*/
 .contenedor-introduccion-instruccion{
     display: flex;
     align-items: center;
@@ -126,7 +130,6 @@ h1{
 .contenedor-preguntas{
     margin-top: 35px;
 }
-
 /*========*/
 /*Pregunta*/
 /*========*/
@@ -154,7 +157,7 @@ h1{
     padding: 0px 35px;
     flex-direction: row;
 }
-/*Radio*/
+/*-- Radio --*/
 .radio1 {
     margin: 7px 0;
     display: block;
