@@ -1004,6 +1004,7 @@ textarea {
         display: block;
         position: relative;
       }
+      
       .radio1 input + span:not(:empty) {
         padding-left: 35px;
         font-size: 25px;

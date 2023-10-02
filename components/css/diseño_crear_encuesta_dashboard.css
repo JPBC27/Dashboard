@@ -1,0 +1,264 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+main{
+    margin: 0px 5px;
+}
+
+h1{
+    color: #454545;
+    font-size: 25px;
+}
+
+.volver-pagina-anterior a{
+    color: #676767;
+    text-decoration: none;
+    align-self: center;
+}
+
+.bi-arrow-left{
+    color: #F2A530;
+    margin-right: 3px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.subtitulo-diseño-preguntas{
+    margin-top: 40px;
+}
+
+.subtitulo-diseño-preguntas hr{
+    color: #676767;
+    margin-top: 2px;
+}
+
+.subtitulo-diseño-preguntas a{
+    color: #454545;
+    font-weight: 800;
+    border-bottom: 3.5px solid #F2A530;
+}
+
+#contenedor-encuesta{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    min-height: 100vh;
+    width: 100%;
+    background: #EEE;
+    display: flex;
+    flex-direction: column;
+    transition: var(--tran-04);
+}
+
+.logoEmpresa{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin: 10px 20px;
+}
+
+.logoEmpresa img{
+    width: 30px;
+    height: auto;
+}
+
+.guardado-automatico{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    position: sticky;
+    top: 0;
+    margin-top: -39px;
+    margin-right: 10px;
+}
+
+.guardado-automatico i{
+    color: #00B3AA;
+    margin-right: 8px;
+    font-size: 23px;
+}
+
+.guardado-automatico p{
+    color: #504F4F;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.contenedor-introduccion-instruccion{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+#titulo-encuesta, #instruccion-encuesta{
+    background-color: #EEE;
+    padding: 10px 25px;
+    border-radius: 10px;
+    border: 2px dashed #099EBD;
+    cursor: pointer;
+}
+
+#titulo-encuesta:hover, #instruccion-encuesta:hover{
+    background-color: #F2A530;
+}
+
+#titulo-encuesta:hover h2, #instruccion-encuesta:hover p{
+    color: #fff;
+}
+
+#titulo-encuesta h2, #instruccion-encuesta p{
+    margin: 0;
+    font-size: 11px;
+    font-weight: 800;
+    color: #595959;
+    text-align: center;
+}
+
+.contenedor-preguntas{
+    margin-top: 35px;
+}
+
+/*========*/
+/*Pregunta*/
+/*========*/
+.diseño-pregunta {
+    margin: 20px 0;
+    display: flex;
+    padding: 0px 15px;
+    flex-direction: column;
+}
+
+.diseño-pregunta span {
+    font-size: 17px;
+    font-weight: 700;
+    color: #676767;
+}
+
+#contenedor-respuestas-pregunta{
+    margin-top: 7px;
+}
+
+.diseño-opciones {
+    display: flex;
+    align-items: center;
+    height: auto;
+    padding: 0px 35px;
+    flex-direction: row;
+}
+/*Radio*/
+.radio1 {
+    margin: 7px 0;
+    display: block;
+    cursor: pointer;
+}
+
+.radio1 input {
+    display: none;
+}
+/*Estilo Text Radio*/
+.radio1 input + span:not(:empty) {
+    padding-left: 35px;
+    font-size: 16px;
+    font-weight: 600;
+
+}
+
+.radio1 input + span {
+    line-height: 22px;
+    height: 22px;
+    display: block;
+    position: relative;
+}
+
+/*Estilo Botón - Radio*/
+.radio1 input + span:before {
+    background: #005FA6;
+    transition: background 0.2s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 2);
+}
+
+.radio1 input + span:after {
+    background: #fff;
+    transform: scale(0.9);
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.4);
+}
+
+.radio1 input + span:before, .radio1 input + span:after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    display: block;
+    border-radius: 50%;
+    left: 0;
+    top: 0;
+    position: absolute;
+}
+
+/*radio - Seleccionado*/
+.radio1 input:checked + span:before {
+    transform: scale(1.04);
+    background: #1894F2;
+}
+
+.radio1 input:checked + span:after {
+    transform: scale(0.4);
+    transition: transform 0.3s ease;
+}
+
+/*Radio - Hover*/
+.radio1:hover input + span:before {
+    transform: scale(0.92);
+}
+.radio1:hover input + span:after {
+    transform: scale(0.74);
+}
+.radio1:hover input:checked + span:after {
+    transform: scale(0.4);
+}
+/*Overlay - Encima de las preguntas para su modificacion*/
+.pregunta-individual{
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/*Oscurecimiento cuando se ponga el mouse encima*/
+.pregunta-individual:hover .overlay {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.overlay span {
+    color: white;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.overlay i {
+    color: white;
+    font-size: 30px;
+    border: none;
+}
