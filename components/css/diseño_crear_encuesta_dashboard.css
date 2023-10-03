@@ -8,6 +8,11 @@ main{
     margin: 0px 5px;
 }
 
+/* ==ICONOS*/
+.bi::before, [class^="bi-"]::before, [class*=" bi-"]::before {
+    font-weight: 600 !important;
+}
+
 h1{
     color: #454545;
     font-size: 25px;
@@ -51,9 +56,8 @@ h1{
     flex-direction: column;
     transition: var(--tran-04);
 }
-/*==================================*/
-/*Logo empresa y guardado automatico*/
-/*==================================*/
+
+/* ==Logo empresa y guardado automatico*/
 .logoEmpresa{
     display: flex;
     flex-direction: row;
@@ -75,8 +79,8 @@ h1{
     flex-wrap: nowrap;
     position: sticky;
     top: 0;
-    margin-top: -39px;
-    margin-right: 10px;
+    margin: -39px 10px 0 0;
+    z-index: 2;
 }
 
 .guardado-automatico i{
@@ -90,9 +94,8 @@ h1{
     font-size: 11px;
     font-weight: 700;
 }
-/*======================*/
-/*Título e instrcciones*/
-/*======================*/
+
+/* ==Título e instrcciones*/
 .contenedor-introduccion-instruccion{
     display: flex;
     align-items: center;
@@ -128,16 +131,17 @@ h1{
 }
 
 .contenedor-preguntas{
-    margin-top: 35px;
+    margin: 35px 0 30px;
+    padding: 0px 5px;
 }
-/*========*/
+
 /*Pregunta*/
-/*========*/
 .diseño-pregunta {
-    margin: 20px 0;
     display: flex;
-    padding: 0px 15px;
+    padding: 20px 10px;
     flex-direction: column;
+    background-color: #fff;
+    border-right: 4px solid #099EBD;
 }
 
 .diseño-pregunta span {
@@ -154,10 +158,266 @@ h1{
     display: flex;
     align-items: center;
     height: auto;
-    padding: 0px 35px;
+    padding: 0px 25px;
     flex-direction: row;
 }
-/*-- Radio --*/
+
+/* ==Overlay - Encima de las preguntas para su modificacion*/
+.pregunta-individual{
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/*Oscurecimiento cuando se ponga el mouse encima*/
+.pregunta-individual:hover .overlay {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.overlay span {
+    color: white;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.overlay i {
+    color: white;
+    font-size: 30px;
+    border: none;
+}
+
+/* ==CONTENEDOR AGREGAR PREGUNTA*/
+.contenedor-agregar-pregunta{
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-agregar{
+    display: flex;
+    background-color: #EEE;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    border: solid 2px #F2A530;
+    border-radius: 10px;
+    padding: 3px 23px;
+    cursor: pointer;
+    color: #F2A530;
+}
+
+.contenedor-agregar:hover{
+    background-color: #F2A530;
+    color: #EEE;
+}
+
+.contenedor-agregar a{
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.contenedor-agregar i{
+    font-size: 27px;
+    margin-bottom: -4px;
+}
+
+/*AGREGAR PREGUNTA CUADRO*/
+.pregunta{
+    background-color: #099EBD;
+    border-radius: 10px;
+    padding: 7px 2px;
+}
+
+.input-pregunta {
+    display: flex;
+    width: 100%;
+
+    margin-top: 20px;
+}
+.texto-pregunta {
+    border: 2px solid #fff;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: #515151;
+    font-weight: 700;
+    height: 10px;
+    font-size: 14px;
+    padding: 15px 10px;
+    width: 66%;
+}
+
+/* ==Botón para elegir el tipo de pregunta*/
+.dropdown{
+    width: 35%;
+}
+
+.dropdown .select-btn{
+    display: flex;
+    height: 10px;
+    background: white;
+    padding: 15px 1px;
+    font-size: 13px;
+    border: 2px solid #fff;
+    border-left-color: #e0e0e0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.sBtn-text{
+    max-width: 85px;
+    font-size: 13px;
+    color: #515151;
+    font-weight: 700;
+}
+.select-btn i {
+    margin-top: 5px;
+    font-size: 17px;
+    color: #005FA6;
+}
+
+.dropdown .options{
+    position: relative;
+    padding: 9px 7px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.options .option{
+    display: flex;
+    height: 50px;
+    cursor: pointer;
+    background: #fff;
+    align-items: center;
+}
+
+.options .option:hover{
+    background: #F2F2F2;
+}
+
+.option i{
+    font-size: 20px;
+    margin-top: 5px;
+    margin-right: 12px;
+}
+
+.option .option-text{
+    font-size: 15px ;
+    color: #333;
+}
+
+.dropdown.active .options{
+    display: block;
+    position: absolute;
+    right: 10px;
+    width: 40%;
+}
+
+.dropdown.active .select-btn i{
+    transform: rotate(-180deg);
+    margin-top: 0;
+    margin-bottom: 3px;
+}
+
+/* ==Contenedor donde estrán todas las posibles respuestas*/
+.contenedor-opciones-agregar{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 15px;
+}
+
+/* ==Botón para agregar posible respuesta*/
+.mas-pregunta{
+    display: flex;
+    justify-content: center;
+}
+
+.mas-pregunta i{
+    font-size: 20px;
+    color: #003359;
+    background-color: #fff;
+    border: solid 2px #003359;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    transition: all 0.2s ease;
+    align-items: center;
+    justify-content: center;
+}
+
+.mas-pregunta a:hover i{
+    color: #fff;
+    background-color: #003359;
+}
+
+/* ==BOTÓNES AGREGAR O CANCELAR PREGUNTA*/
+.botones{
+    display: flex;
+    gap: 2%;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.opcion-cancelar, .opcion-guardar{
+    background-color: #fff;
+    text-align: center;
+    display: flex;
+    width: 63px;
+    height: 30px;
+    border: 2px solid #F2A530;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    color: #F2A530;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.opcion-guardar{
+    border: 2px solid #09B3A2;
+    color: #09B3A2;
+}
+
+.opcion-cancelar:hover{
+    background-color: #F2A530;
+    color: #fff;
+}
+
+.opcion-guardar:hover{
+    background-color: #09B3A2;
+    color: #fff;
+}
+
+/* ==Respuesta Radio o unica*/
 .radio1 {
     margin: 7px 0;
     display: block;
@@ -226,42 +486,120 @@ h1{
 .radio1:hover input:checked + span:after {
     transform: scale(0.4);
 }
-/*Overlay - Encima de las preguntas para su modificacion*/
-.pregunta-individual{
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    margin-top: 10px;
-}
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
 
-/*Oscurecimiento cuando se ponga el mouse encima*/
-.pregunta-individual:hover .overlay {
-    opacity: 1;
+/* ==RESPUESTA CHECKBOX */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 8px 0px;
+}
+  
+/* Estilo para el checkbox oculto */
+.checkbox-container input[type="checkbox"] {
+    display: none;
+}
+  
+/* Estilo para el diseño del checkbox personalizado */
+.checkbox-container label {
+    position: relative;
+    border-radius: 3px;
+    display: flex;
     cursor: pointer;
 }
 
-.overlay span {
-    color: white;
-    font-weight: bold;
-    margin-top: 5px;
+.check-container-icon{
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.overlay i {
-    color: white;
-    font-size: 30px;
-    border: none;
+.checkbox-container label i{
+    transform: scale(1);
+    transition: all 0.3s ease-in-out
+}
+
+.checkbox-container:hover label i{
+    transform: scaleY(0.8) scaleX(0.9);
+    border-width: 2px;
+}
+
+/* Estilo para el ícono de verificación (checkmark) */
+.checkbox-container label i {
+    font-size: 14px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #005FA6;
+    background-color: #fff;
+    border-radius: 3px;
+    color: #fff;
+}
+  
+/* Estilo para mostrar el ícono cuando el checkbox está seleccionado */
+.checkbox-container input[type="checkbox"]:checked + label i {
+    background-color: #1894F2; 
+    border-color: #1894F2; 
+}
+
+/* ==RESPUESTA LARGA */
+.diseño-opciones textarea{
+    margin-top: 10px;
+    border: 1px solid #005FA6;
+    width: 100%;
+}
+
+/* ==RESPUESTA BARRA DE CALOR */
+.rating {
+    border: 1px solid #005FA6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    background: linear-gradient(to right, #f00 0%, #f00 60%, #ff0 60%, #ff0 80%, #0f0 80%, #0f0 100%);
+    width: 210px;/**/
+    margin: 15px 0;
+}
+
+.rating input {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+    display: none;
+}
+
+.rating label {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    justify-content: center;
+    font-weight: bold;
+    align-items: center;
+    background: white;
+    color: #515151;
+    cursor: pointer;
+
+}
+
+.rating label:not(:last-child) {
+    border-left: 1px solid #005FA6;
+    transition: .3s;
+
+}
+
+.rating input[type='radio']:hover~label,
+input[type='radio']:checked~label {
+    background: none;
+}
+
+.rating input[type="radio"]:hover~label,
+.rating input[type="radio"]:checked~label {
+    background: transparent;
+    color: #000000;
 }

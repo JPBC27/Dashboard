@@ -281,23 +281,12 @@ function generatePreguntaHTML(id, pregunta, respuestas, tipo) {
         </div>
       `;
   }
-
+//BORRAR ID= DISEÑO-OPCIONES
   return `
-      <div id="${id}" class="pregunta-individual input-checkbox"> 
-        <div class="barra-pregunta " >
-            <div class="contenedor-barra-tuerca f${id}">
-                <ul class="barra-tuerca ">
-                    <li><a onclick="editar(${id})"><i class="bi bi-pencil-square"></i></a></li>
-                    <li><a onclick="eliminar(${id})"><i class="bi bi-trash3"></i></a></li>
-                </ul>
-              </div>
-              <div class="tuerca ${id}">
-                  <a onclick="mostrar(${id})"><i class="bi bi-gear-fill"></i></a>
-              </div>         
-            </div>    
+      <div id="${id}" class="pregunta-individual input-checkbox">    
             <div class="diseño-pregunta">
               <span class="diseño-pregunta-span">${pregunta}</span>
-                  <div id="diseño-opciones">     
+                  <div id="contenedor-respuestas-pregunta diseño-opciones">     
                     ${opcionesHTML}
                   </div>  
             </div>
