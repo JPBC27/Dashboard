@@ -326,7 +326,7 @@ h1{
 }
 
 .option .option-text{
-    font-size: 15px ;
+    font-size: 14px ;
     color: #333;
 }
 
@@ -335,6 +335,7 @@ h1{
     position: absolute;
     right: 10px;
     width: 40%;
+    max-width: 177px;
 }
 
 .dropdown.active .select-btn i{
@@ -363,12 +364,13 @@ h1{
     background-color: #fff;
     border: solid 2px #003359;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     display: flex;
     transition: all 0.2s ease;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .mas-pregunta a:hover i{
@@ -562,7 +564,7 @@ h1{
     align-items: center;
     flex-direction: row-reverse;
     background: linear-gradient(to right, #f00 0%, #f00 60%, #ff0 60%, #ff0 80%, #0f0 80%, #0f0 100%);
-    width: 210px;/**/
+    width: 100%;/**/
     margin: 15px 0;
 }
 
@@ -575,7 +577,7 @@ h1{
 
 .rating label {
     display: flex;
-    width: 25px;
+    width: 25%;
     height: 25px;
     font-size: 15px;
     justify-content: center;
@@ -602,4 +604,46 @@ input[type='radio']:checked~label {
 .rating input[type="radio"]:checked~label {
     background: transparent;
     color: #000000;
+}
+
+/*==Dieseño de las respuestas input*/
+.pregunta-opciones{
+    display: flex;
+    padding: 0 10px;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+}
+
+.pregunta-opciones .input-opciones1-agregar{
+    margin: 0 10px 0 30px;
+    width: 60%;
+    border-radius: 10px;
+    border: solid #fff 1px;
+    padding: 3px 7px;
+    outline: none;
+    color: #515151;
+    font-weight: 600;
+}
+
+.pregunta-opciones label {
+    margin: 0px;
+}
+
+.pregunta-opciones span, .pregunta-opciones .radio1:hover input + span::after{
+    cursor: default;
+    transform: scale(0.9);
+}
+
+.pregunta-opciones .radio1:hover input + span:before {
+    transform: scale(1);
+}
+
+.referencia-checkbox-agregar{
+    margin-right: -20px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #005FA6;
+    background-color: #fff;
+    border-radius: 3px;
 }

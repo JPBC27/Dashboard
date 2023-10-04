@@ -12,11 +12,6 @@
     <link rel="stylesheet" href="components/css/navbar_usuario.css">
     <link rel="stylesheet" href="components/css/diseño_crear_encuesta_dashboard.css">
 
-    <style>
-
-
-
-    </style>
 </head>
 <body>
     <!-- Cabecera -->
@@ -72,11 +67,11 @@
             <div class="contenedor-preguntas">
                 <div id="contenedor-preguntas-realizadas" class="contenedor-preguntas-realizadas">
 
-                    <div id="f01176e5a" class="pregunta-individual input-checkbox"> 
+                    <div id="${id}" class="pregunta-individual input-checkbox"> 
                         
                         <!-- Posibles respuestas -->
                         <div class="diseño-pregunta">
-                            <span class="diseño-pregunta-span">PREGUNTA 1 *Radio*</span>
+                            <span class="diseño-pregunta-span">${pregunta}</span>
                             <div id="contenedor-respuestas-pregunta diseño-opciones">     
                   
                                 <div class="diseño-opciones">
@@ -110,11 +105,11 @@
                         </div>
                     </div>
                     
-                    <div id="f01176e5a" class="pregunta-individual input-checkbox"> 
+                    <div id="${id}" class="pregunta-individual input-checkbox"> 
                         
                         <!-- Posibles respuestas -->
                         <div class="diseño-pregunta">
-                            <span class="diseño-pregunta-span">PREGUNTA 2 *Check*</span>
+                            <span class="diseño-pregunta-span">${pregunta}</span>
                             <div id="contenedor-respuestas-pregunta">     
 
                                 <div class="diseño-opciones">
@@ -157,11 +152,11 @@
                         </div>
                     </div>
                     
-                    <div id="f01176e5a" class="pregunta-individual input-checkbox"> 
+                    <div id="${id}" class="pregunta-individual input-checkbox"> 
                         
                         <!-- Posibles respuestas -->
                         <div class="diseño-pregunta">
-                            <span class="diseño-pregunta-span">PREGUNTA 3 *Respuesta Larga*</span>
+                            <span class="diseño-pregunta-span">${pregunta}</span>
                             <div id="contenedor-respuestas-pregunta">     
                   
                                 <div class="diseño-opciones">
@@ -178,11 +173,11 @@
                         </div>
                     </div>
                     
-                    <div id="f01176e5a" class="pregunta-individual input-checkbox"> 
+                    <div id="${id}" class="pregunta-individual input-checkbox"> 
                         
                         <!-- Posibles respuestas -->
                         <div class="diseño-pregunta">
-                            <span class="diseño-pregunta-span">PREGUNTA 4 *respuesta ratio*</span>
+                            <span class="diseño-pregunta-span">${pregunta}</span>
                             <div id="contenedor-respuestas-pregunta">     
                   
                                 <div class="diseño-opciones">
@@ -211,7 +206,6 @@
                     </div>
                     
                 </div>
-
 
             </div>
 
@@ -252,12 +246,34 @@
                         <div class="opciones-preguntas">
 
 
-                            <div id="opcion-multiple-agregar" class="add opciones-multiples opciones-multiples-agregar" style="display: none;">
-                                
+                            <div id="opcion-multiple-agregar" class="add opciones-multiples opciones-multiples-agregar" >
+
+                                <div class="pregunta-opciones">
+                                    <label class="radio1">
+                                        <input type="radio" name="r" value="clasica" disabled>
+                                        <span></span>
+                                    </label>
+                                    <input class="input-opciones1 input-opciones1-agregar" type="text">
+                                    <div class="quitar-pregunta mas-pregunta">
+                                        <a type="button"><i class="bi bi-dash multiple-quitar-agregar"></i></a>
+                                    </div>
+                                </div>
+
                             </div>
 
-                            <div class="add opciones-checkbox-agregar" id="opcion-checkbox-agregar" style="display: none;">
-                                    
+                            <div class="add opciones-checkbox-agregar" id="opcion-checkbox-agregar">
+
+                                <div class="pregunta-opciones">
+                                    <div class="checkbox referencia-checkbox-agregar">
+                                      <input class="checkbox-spin" type="checkbox" id="check4" disabled style="display: none;"/>
+                                      <label for="check4"><span></span></label>
+                                    </div>
+                                    <input class="input-opciones1 input-opciones1-agregar" type="text">
+                                    <div class="quitar-pregunta mas-pregunta">
+                                        <a type="button"><i class="bi bi-dash checkbox-quitar-agregar"></i></a>
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div class="add opciones-textArea-agregar" id="opcion-textArea-agregar" style="display: none;">
