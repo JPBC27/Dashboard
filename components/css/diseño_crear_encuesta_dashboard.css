@@ -647,3 +647,57 @@ input[type='radio']:checked~label {
     background-color: #fff;
     border-radius: 3px;
 }
+
+/*==Toggle*/
+.wrap-toggle{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 10px;
+}
+.wrap-toggle p{
+    margin: 0 10px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.wrap-toggle span{
+    color: #F2A530;
+}
+
+.wrap-toggle .switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  background-color: #666666;
+  border-radius: 40px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.wrap-toggle .switch:after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 30px;
+  background-color: white;
+  top: 2.5px;
+  left: 2.5px;
+  transition: all 0.3s;
+}
+
+.wrap-toggle input[type='checkbox']:checked + .switch:after {
+  transform: translateX(19px);
+  background-color: white;
+}
+
+.wrap-toggle input[type='checkbox']:checked + .switch {
+  background-color: #F2A530;
+}
+
+.wrap-toggle .offscreen {
+  position: absolute;
+  left: -9999px;
+}
