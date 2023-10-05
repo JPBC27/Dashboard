@@ -168,8 +168,9 @@ h1{
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-    max-width: 1070px;
+    max-width: 1064px;
     margin: 20px auto 0 auto;
+    box-shadow: 4px 5px 14px 0px rgba(0, 0, 0, 0.25);
 }
 .overlay {
     position: absolute;
@@ -254,8 +255,7 @@ h1{
 .input-pregunta {
     display: flex;
     width: 100%;
-
-    margin-top: 20px;
+    margin: 20px 0;
 }
 .texto-pregunta {
     border: 2px solid #fff;
