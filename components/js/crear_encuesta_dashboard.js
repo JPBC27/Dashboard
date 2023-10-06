@@ -21,7 +21,8 @@ const menu_multiple= document.getElementById("opcion-multiple-agregar"),
       casilla_verificacion=document.getElementById("opcion-checkbox-agregar"),
       contenedor_opcion_multiple=document.getElementById("boton-opcion-multiple-agregar"),
       contenedor_opcion_checkbox=document.getElementById("boton-opcion-checkbox-agregar");
-      contenedor_opcion_textArea=document.getElementById("opcion-textArea-agregar");
+      contenedor_opcion_textArea=document.getElementById("opcion-textArea-agregar"),
+      contenedor_opcion_npm=document.getElementById("opcion-npm-agregar");
 
 // Declara un array para almacenar los objetos con el índice y el valor ingresado en los inputs
 let valoresIngresados = [];
@@ -55,7 +56,7 @@ options.forEach(option =>{
                   contenedor_opcion_textArea.style.display="flex"
             }
             else if(selectedOption==OPCION_BARRA_CALOR){
-                  contenedor_opcion_textArea.style.display="block"
+                  contenedor_opcion_npm.style.display="flex"
             }
             else{
                   contenedor_general_agregar.style.display = "none";
