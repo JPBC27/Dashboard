@@ -557,8 +557,10 @@ h1{
     border-color: #1894F2; 
 }
 
-/* ==RESPUESTA LARGA */
-.diseño-opciones textarea{
+/* ==RESPUESTA LARGA
+.diseño-opciones textarea
+ */
+textarea{
     margin-top: 10px;
     border: 1px solid #005FA6;
     width: 100%;
@@ -615,6 +617,9 @@ input[type='radio']:checked~label {
 }
 
 /*==Dieseño de las respuestas input*/
+.opciones-preguntas{
+    margin-bottom: 25px;
+}
 .pregunta-opciones{
     display: flex;
     padding: 0 10px;
@@ -662,8 +667,9 @@ input[type='radio']:checked~label {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-left: 10px;
+    margin: 0 0 20px 10px;
 }
+
 .wrap-toggle p{
     margin: 0 10px;
     font-weight: 600;
