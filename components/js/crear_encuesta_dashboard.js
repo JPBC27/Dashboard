@@ -42,6 +42,7 @@ options.forEach(option =>{
             contenedor_opcion_multiple.style.display = "none";
             contenedor_opcion_checkbox.style.display = "none";
             contenedor_opcion_textArea.style.display = "none";
+            contenedor_opcion_npm.style.display="none";
 
             // Mostrar según el tipo de pregunta
             if(selectedOption == OPCION_RADIO){
@@ -53,10 +54,10 @@ options.forEach(option =>{
                   contenedor_opcion_checkbox.style.display="flex";
             }
             else if(selectedOption==OPCION_TEXTAREA){
-                  contenedor_opcion_textArea.style.display="flex"
+                  contenedor_opcion_textArea.style.display="flex";
             }
             else if(selectedOption==OPCION_BARRA_CALOR){
-                  contenedor_opcion_npm.style.display="flex"
+                  contenedor_opcion_npm.style.display="flex";
             }
             else{
                   contenedor_general_agregar.style.display = "none";
