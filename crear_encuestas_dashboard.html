@@ -41,6 +41,7 @@
                 <hr>
             </div>
         </div>
+
         <!-- Encuesta -->
         <div id="contenedor-encuesta">
             <!-- Logo de la empresa y notificación de guardado -->
@@ -66,7 +67,8 @@
             <!-- Preguntas -->
             <div class="contenedor-preguntas">
                 <div id="contenedor-preguntas-realizadas" class="contenedor-preguntas-realizadas">
-
+                    <!-- Borrar -->
+                    
                     <div id="${id}" class="pregunta-individual input-checkbox"> 
                         
                         <!-- Posibles respuestas -->
@@ -204,7 +206,7 @@
                             <span>Editar pregunta</span>
                         </div>
                     </div>
-                    
+                    <!-- Borrar -->
                 </div>
 
             </div>
@@ -241,71 +243,72 @@
 
                     </div>
                 </div>
-                <div class="contendor-opciones-multiple contenedor-opciones contenedor-opciones-agregar" id="contenedor-opciones-agregar" >
+
+                <div class="contendor-opciones-multiple contenedor-opciones contenedor-opciones-agregar" id="contenedor-opciones-agregar"  style="display: none;">
+                    <!-- Botón toggle obligatorio -->
                     <div class="wrap-toggle">
                         <input type="checkbox" id="toggle" class="offscreen" />
                         <label for="toggle" class="switch"></label>
                         <p>Obligatorio <span>*</span></p>
                     </div>
 
-                        <div class="opciones-preguntas">
+                    <div class="opciones-preguntas">
 
-
-                            <div id="opcion-multiple-agregar" class="add opciones-multiples opciones-multiples-agregar" >
-
-                                <div class="pregunta-opciones">
-                                    <label class="radio1">
-                                        <input type="radio" name="r" value="clasica" disabled>
-                                        <span></span>
-                                    </label>
-                                    <input class="input-opciones1 input-opciones1-agregar" type="text">
-                                    <div class="quitar-pregunta mas-pregunta">
-                                        <a type="button"><i class="bi bi-dash multiple-quitar-agregar"></i></a>
-                                    </div>
+                        <div class="add opciones-multiples opciones-multiples-agregar" id="opcion-multiple-agregar" style="display: none;">
+                            <!-- 
+                            <div class="pregunta-opciones">
+                                <label class="radio1">
+                                    <input type="radio" name="r" value="clasica" disabled>
+                                    <span></span>
+                                </label>
+                                <input class="input-opciones1 input-opciones1-agregar" type="text">
+                                <div class="quitar-pregunta mas-pregunta">
+                                    <a type="button"><i class="bi bi-dash multiple-quitar-agregar"></i></a>
                                 </div>
-
                             </div>
+                            -->
+                        </div>
 
-                            <div class="add opciones-checkbox-agregar" id="opcion-checkbox-agregar">
-
-                                <div class="pregunta-opciones">
-                                    <div class="checkbox referencia-checkbox-agregar">
-                                      <input class="checkbox-spin" type="checkbox" id="check4" disabled style="display: none;"/>
-                                      <label for="check4"><span></span></label>
-                                    </div>
-                                    <input class="input-opciones1 input-opciones1-agregar" type="text">
-                                    <div class="quitar-pregunta mas-pregunta">
-                                        <a type="button"><i class="bi bi-dash checkbox-quitar-agregar"></i></a>
-                                    </div>
+                        <div class="add opciones-checkbox-agregar" id="opcion-checkbox-agregar"  style="display: none;">
+                            <!-- 
+                            <div class="pregunta-opciones">
+                                <div class="checkbox referencia-checkbox-agregar">
+                                    <input class="checkbox-spin" type="checkbox" id="check4" disabled style="display: none;"/>
+                                    <label for="check4"><span></span></label>
                                 </div>
-
+                                <input class="input-opciones1 input-opciones1-agregar" type="text">
+                                <div class="quitar-pregunta mas-pregunta">
+                                    <a type="button"><i class="bi bi-dash checkbox-quitar-agregar"></i></a>
+                                </div>
                             </div>
+                            -->
+                        </div>
 
-                            <div class="add opciones-textArea-agregar" id="opcion-textArea-agregar" style="display: none;">
-                               <textarea name="" id="" cols="30" rows="10" style="width: 100%;"></textarea>     
-                            </div>
+                        <div class="add opciones-textArea-agregar" id="opcion-textArea-agregar" style="display: none;">
+                            <textarea name="" id="" cols="30" rows="10"></textarea>     
+                        </div>
 
+                        <!-- botones agregar -->
+                        <div class="mas-pregunta" id="boton-opcion-multiple-agregar"  style="display: none;">
+                            <a type="button" id="mas-opcion-multiple-agregar"><i class="bi bi-plus-lg"></i></a>
+                        </div>
 
-                            <div class="mas-pregunta" id="boton-opcion-multiple-agregar" >
-                                <a type="button" id="mas-opcion-multiple-agregar"><i class="bi bi-plus-lg"></i></a>
-                            </div>
-
-                            <div class="mas-pregunta" id="boton-opcion-checkbox-agregar" style="display: none;">
-                                <a type="button" id="mas-opcion-checkbox-agregar"><i class="bi bi-plus-lg"></i></a>
-                            </div>
+                        <div class="mas-pregunta" id="boton-opcion-checkbox-agregar" style="display: none;">
+                            <a type="button" id="mas-opcion-checkbox-agregar"><i class="bi bi-plus-lg"></i></a>
                         </div>
                         
-
-                        <div class="botones-opciones">
-                            <div class="botones">
-                                <a class="opcion-cancelar opcion-cancelar-agregar" type="button"><i class="bi bi-x"></i></a>
-                                <a class="opcion-guardar" id="guardar" type="button"><i class="bi bi-check-lg"></i></a>
-                            </div>
+                    </div>
+                        
+                    <div class="botones-opciones">
+                        <div class="botones">
+                            <a class="opcion-cancelar opcion-cancelar-agregar" type="button"><i class="bi bi-x"></i></a>
+                            <a class="opcion-guardar" id="guardar" type="button"><i class="bi bi-check-lg"></i></a>
                         </div>
                     </div>
 
- 
+                </div>
             </div>
+            
             <!-- Botón Agregar Preguntas -->
             <div class="contenedor-agregar-pregunta" id="contenedor-agregar-pregunta">
                 <div class="contenedor-agregar">
@@ -317,7 +320,6 @@
             </div>
 
         </div>
-
     </main>
 
     <!-- EDITAR-->
