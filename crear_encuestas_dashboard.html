@@ -68,10 +68,10 @@
             <div class="contenedor-preguntas">
                 <div id="contenedor-preguntas-realizadas" class="contenedor-preguntas-realizadas">
                     <!-- Borrar -->
-                    
+                    <!-- 
                     <div id="${id}" class="pregunta-individual input-checkbox"> 
                         
-                        <!-- Posibles respuestas -->
+                      
                         <div class="diseño-pregunta">
                             <span class="diseño-pregunta-span">${pregunta}</span>
                             <div id="contenedor-respuestas-pregunta diseño-opciones">     
@@ -79,7 +79,7 @@
                             </div>  
                         </div>
                         
-                        <!-- Edicion -->
+                   
                         <div class="overlay">
                             <i class="bi bi-pencil"></i>
                             <span>Editar pregunta</span>
@@ -88,7 +88,7 @@
                     
                     <div id="${id}" class="pregunta-individual input-checkbox"> 
                         
-                        <!-- Posibles respuestas -->
+
                         <div class="diseño-pregunta">
                             <span class="diseño-pregunta-span">${pregunta}</span>
                             <div id="contenedor-respuestas-pregunta">     
@@ -126,7 +126,7 @@
                             </div>  
                         </div>
                         
-                        <!-- Edicion -->
+
                         <div class="overlay">
                             <i class="bi bi-pencil"></i>
                             <span>Editar pregunta</span>
@@ -135,7 +135,7 @@
                     
                     <div id="${id}" class="pregunta-individual input-checkbox"> 
                         
-                        <!-- Posibles respuestas -->
+
                         <div class="diseño-pregunta">
                             <span class="diseño-pregunta-span">${pregunta}</span>
                             <div id="contenedor-respuestas-pregunta">     
@@ -147,7 +147,7 @@
                             </div>  
                         </div>
                         
-                        <!-- Edicion -->
+
                         <div class="overlay">
                             <i class="bi bi-pencil"></i>
                             <span>Editar pregunta</span>
@@ -156,7 +156,7 @@
                     
                     <div id="${id}" class="pregunta-individual input-checkbox"> 
                         
-                        <!-- Posibles respuestas -->
+
                         <div class="diseño-pregunta">
                             <span class="diseño-pregunta-span">${pregunta}</span>
                             <div id="contenedor-respuestas-pregunta">     
@@ -179,13 +179,13 @@
                             </div>  
                         </div>
                         
-                        <!-- Edicion --> 
+                    
                         <div class="overlay">
                             <i class="bi bi-pencil"></i>
                             <span>Editar pregunta</span>
                         </div>
                     </div>
-
+                    -->
                     <!-- Borrar -->
                 </div>
 
@@ -194,8 +194,7 @@
             <div class="pregunta" id="pregunta-agregar">
 
                 <div class="input-pregunta">
-                    <input class="texto-pregunta texto-pregunta-agregar" type="text" placeholder="Escriba su pregunta">
-                    
+                    <input class="texto-pregunta texto-pregunta-agregar" type="text" placeholder="Escriba su pregunta">                   
                     <div class="dropdown dropdown-agregar">
                         <div class="select-btn select-btn-agregar">
                             <span class="sBtn-text sBtn-text-agregar">Diseño de opciones</span>
@@ -266,6 +265,21 @@
 
                         <div class="add opciones-textArea-agregar" id="opcion-textArea-agregar" style="display: none;">
                             <textarea name="" id="" cols="30" rows="7" disabled></textarea>     
+                        </div>
+
+                        <div class="add opciones-npm-agregar" id="opcion-npm-agregar" style="display: none">
+                            <div class="rating rating-sin-estilo">
+                                <input type="radio" name="${pregunta}" value="10" id="rata10" disabled><label for="rata10">10</label>
+                                <input type="radio" name="${pregunta}" value="9" id="rata9" disabled><label for="rata9">9</label>
+                                <input type="radio" name="${pregunta}" value="8" id="rata8" disabled><label for="rata8">8</label>
+                                <input type="radio" name="${pregunta}" value="7" id="rata7" disabled><label for="rata7">7</label>
+                                <input type="radio" name="${pregunta}" value="6" id="rata6" disabled><label for="rata6">6</label>
+                                <input type="radio" name="${pregunta}" value="5" id="rata5" disabled><label for="rata5">5</label>
+                                <input type="radio" name="${pregunta}" value="4" id="rata4" disabled><label for="rata4">4</label>
+                                <input type="radio" name="${pregunta}" value="3" id="rata3" disabled><label for="rata3">3</label>
+                                <input type="radio" name="${pregunta}" value="2" id="rata2" disabled><label for="rata2">2</label>
+                                <input type="radio" name="${pregunta}" value="1" id="rata1" disabled><label for="rata1">1</label>
+                            </div>     
                         </div>
 
                         <!-- botones agregar -->

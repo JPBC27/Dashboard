@@ -582,6 +582,9 @@ textarea:disabled {
     width: 100%;/**/
     margin: 15px 0;
 }
+.rating-sin-estilo{
+    background: white;
+}
 
 .rating input {
     opacity: 0;
@@ -601,7 +604,6 @@ textarea:disabled {
     background: white;
     color: #515151;
     cursor: pointer;
-
 }
 
 .rating label:not(:last-child) {
@@ -621,6 +623,11 @@ input[type='radio']:checked~label {
     color: #000000;
 }
 
+.rating-sin-estilo input[type="radio"]:hover~label{
+    background: white;
+    color: #515151;;
+    cursor: default;
+}
 /*==Dieseño de las respuestas input*/
 .opciones-preguntas{
     margin-bottom: 25px;
