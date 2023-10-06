@@ -558,14 +558,19 @@ h1{
 }
 
 /* ==RESPUESTA LARGA
-.diseño-opciones textarea
- */
+.diseño-opciones textarea */
 textarea{
     margin-top: 10px;
     border: 1px solid #005FA6;
     width: 100%;
 }
-
+/* Estilos para el textarea deshabilitado */
+textarea:disabled {
+    margin-top: 10px;
+    border: 1px solid #005FA6;
+    width: 100%;
+    background-color: #fff;
+}
 /* ==RESPUESTA BARRA DE CALOR */
 .rating {
     border: 1px solid #005FA6;
