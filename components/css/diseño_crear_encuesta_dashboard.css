@@ -150,6 +150,9 @@ h1{
     font-weight: 700;
     color: #676767;
 }
+.diseño-pregunta .color-obligatorio{
+    color: #F2A530;
+}
 
 #contenedor-respuestas-pregunta{
     margin-top: 7px;
@@ -731,6 +734,10 @@ input[type='radio']:checked~label {
 }
 
 /*Editar*/
+#btn-cerrar-editar{
+    cursor: pointer;
+}
+
 .contenedor-editar-pregunta{
     width: 249px;
     height: calc(100vh - 70px);

@@ -160,6 +160,7 @@ const cancelar=document.querySelectorAll(".opcion-cancelar-agregar"); //Botón c
 
 function resetearFormulario() {
   pregunta.value = "";
+  pregunta_obligatoria.checked = false;
   valoresIngresados = [];
   contenedor_opciones.forEach(opcion => {
     opcion.style.display = "none";
@@ -192,13 +193,14 @@ cancelar.forEach(botonCancelar => {
 // ==GUARDAR PREGUNTA (en el local)
 const multiples=document.querySelector(".opciones-multiples-agregar")
 const guardar=document.getElementById("guardar")
+const pregunta_obligatoria = document.getElementById("pregunta_obligatoria");
 var objeto = JSON.parse(localStorage.getItem("prueba1")) || [];
 
 guardar.addEventListener("click", () => {
   const respuestas= document.querySelectorAll(".input-opciones1-agregar");
   const values = [];
   const preguntaValue = pregunta.value; 
-
+console.log(pregunta_obligatoria.checked);
   respuestas.forEach(input => {
     values.push(input.value);
   });
@@ -209,7 +211,7 @@ guardar.addEventListener("click", () => {
   }
   
   const id = CryptoJS.SHA3(`${values+pregunta.value+sBtn_text.innerText}`, {outputLength:32}).toString();
-  objeto.push({ id: "f" + id, pregunta: pregunta.value, respuestas: values, tipo: sBtn_text.innerText })
+  objeto.push({ id: "f" + id, pregunta: pregunta.value, respuestas: values, obligatorio: pregunta_obligatoria.checked, tipo: sBtn_text.innerText })
  
   localStorage.setItem("prueba1",JSON.stringify(objeto))
   renderQuestions();
@@ -221,7 +223,7 @@ guardar.addEventListener("click", () => {
 
 // ==RENDERIZAR PREGUNTAS
 
-function generatePreguntaHTML(id, pregunta, respuestas, tipo) {
+function generatePreguntaHTML(id, pregunta, respuestas, obligatorio, tipo) {
       let opcionesHTML = ""
       if (tipo === OPCION_RADIO || tipo === OPCION_CHECKBOX){
             opcionesHTML = respuestas.map((b) => {
@@ -275,12 +277,12 @@ function generatePreguntaHTML(id, pregunta, respuestas, tipo) {
       return `
             <div id="${id}" class="pregunta-individual input-checkbox">     
                   <div class="diseño-pregunta">
-                  <span class="diseño-pregunta-span">${pregunta}</span>
+                  <span class="diseño-pregunta-span">${pregunta} <span class="color-obligatorio">${obligatorio ? "*":""}</span></span>
                         <div id="contenedor-respuestas-pregunta diseño-opciones">     
                               ${opcionesHTML}
                         </div>  
                   </div>
-                  <div class="overlay">
+                  <div class="overlay" id="editar-eliminar-${id}" nombre-elemento="${tipo}">
                         <i class="bi bi-pencil"></i>
                         <span>Editar pregunta</span>
                   </div>
@@ -295,8 +297,8 @@ function renderQuestions() {
   htmlres.innerHTML = "";
 
   objeto.forEach((item) => {
-    const { id, pregunta, respuestas, tipo } = item;
-    const htmlPregunta = generatePreguntaHTML(id, pregunta, respuestas, tipo);
+    const { id, pregunta, respuestas, obligatorio, tipo } = item;
+    const htmlPregunta = generatePreguntaHTML(id, pregunta, respuestas, obligatorio, tipo);
     htmlres.innerHTML += htmlPregunta;
   });
 
@@ -341,3 +343,99 @@ boton_agregar_pregunta.addEventListener("click",()=>{
 renderQuestions();
 
 const texto_simple=document.querySelector(".contendor-texto-simple");//No USO
+
+//==EDITAR PREGUNTA
+const divPreguntas = document.querySelectorAll('.pregunta-individual');
+const sidebarEditarPregunta = document.getElementById('sidebar-editar-pregunta');
+const btn_cerrar_editar = document.getElementById('btn-cerrar-editar');
+
+divPreguntas.forEach((divPregunta) => {
+      divPregunta.addEventListener('click', (e) => {
+      e.stopPropagation();
+            if (sidebarEditarPregunta.style.right === '-330px' || !sidebarEditarPregunta.style.right) {
+                  sidebarEditarPregunta.style.right = '0';
+            }
+      });
+});
+
+document.addEventListener('click', (event) => {
+      if (!sidebarEditarPregunta.contains(event.target) && !event.target.classList.contains('pregunta-individual')) {
+            sidebarEditarPregunta.style.right = '-330px';   
+      }
+});
+
+btn_cerrar_editar.addEventListener('click', (event) => {
+      sidebarEditarPregunta.style.right = '-330px';
+});
+
+//Acordeon
+const acordeonTitulos = document.querySelectorAll('.acordeon-titulo');
+acordeonTitulos.forEach((titulo) => {
+  titulo.addEventListener('click', () => {
+    const contenido = titulo.nextElementSibling;
+    contenido.classList.toggle('mostrar');
+  });
+});
+
+
+//CRUD
+var overlays = document.querySelectorAll(".overlay");
+overlays.forEach(function(overlay) {
+      overlay.addEventListener("click", function() {
+    // Obtener el ID del elemento cuando se hace clic en él
+    var id = overlay.id;
+    console.log("ID del elemento: " + id);
+  });
+});
+
+
+const inpCheckbocs = document.querySelectorAll('.input-checkbox');
+const preguntaSeleccionada = document.getElementById('pregunta');
+var elemento;
+//ELIMINAR
+
+// ==================================
+// FUNCION PARA ELIMINAR PREGUNTA
+// ==================================
+const eliminar=(id)=>{
+      let idinput1=id
+      // console.log(idinput1)
+      idinput1.remove();
+    
+      // Actualizar el 'objeto' para reflejar los datos actualizados en el 'localStorage'
+      objeto = objeto.filter(item => item.id !== id.id);
+      // localStorage.removeItem("prueba1");
+      borrarDatoPorId(idinput1.id);
+      // console.log(objeto.length)
+      if (objeto.length == 0) {
+        contenedor_listo.style.display="none"
+        contenedor_opciones.forEach(element1 => {
+          element1.style.display = "none";
+          sBtn_text.innerText = "Diseño de opciones";
+          opcion_checkbox.innerHTML = '';
+          opcion_multiple.innerHTML = '';
+        });
+      }
+    }
+    
+    function borrarDatoPorId(id) {
+      // Obtener los datos del localStorage
+      let datos = JSON.parse(localStorage.getItem("prueba1"));
+    
+      // Buscar y eliminar el objeto con el ID específico
+      datos = datos.filter(function (dato) {
+        return dato.id !== id;
+      });
+    
+      // Guardar los datos actualizados en el localStorage
+      localStorage.setItem("prueba1", JSON.stringify(datos));
+    
+      const newItemCount = datos.length;
+      if (newItemCount < 1) {
+        contenedor_diseño_pregunta.style.display="block"
+        contenedor_agregar_pregunta.style.display="none"
+    
+      }
+    }
+
+// Agrega un evento de clic al botón de eliminar en el sidebar
