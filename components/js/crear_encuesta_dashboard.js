@@ -282,7 +282,7 @@ function generatePreguntaHTML(id, pregunta, respuestas, obligatorio, tipo) {
                               ${opcionesHTML}
                         </div>  
                   </div>
-                  <div class="overlay" id="editar-eliminar-${id}" nombre-elemento="${tipo}">
+                  <div class="overlay" onclick="obtenerElemento(${id})">
                         <i class="bi bi-pencil"></i>
                         <span>Editar pregunta</span>
                   </div>
@@ -290,7 +290,7 @@ function generatePreguntaHTML(id, pregunta, respuestas, obligatorio, tipo) {
       `;
 }
 
-//const contenedor_listo=document.querySelector(".contenedor-listo"); //botón Listo //FALTA REALIZAR EL BOTON LISTO
+const contenedor_listo=document.querySelector(".contenedor-listo"); //FALTA REALIZAR EL BOTON LISTO
 const htmlres = document.getElementById("contenedor-preguntas-realizadas");
 
 function renderQuestions() {
@@ -345,26 +345,16 @@ renderQuestions();
 const texto_simple=document.querySelector(".contendor-texto-simple");//No USO
 
 //==EDITAR PREGUNTA
-const divPreguntas = document.querySelectorAll('.pregunta-individual');
 const sidebarEditarPregunta = document.getElementById('sidebar-editar-pregunta');
 const btn_cerrar_editar = document.getElementById('btn-cerrar-editar');
 
-divPreguntas.forEach((divPregunta) => {
-      divPregunta.addEventListener('click', (e) => {
-      e.stopPropagation();
-            if (sidebarEditarPregunta.style.right === '-330px' || !sidebarEditarPregunta.style.right) {
-                  sidebarEditarPregunta.style.right = '0';
-            }
-      });
-});
-
 document.addEventListener('click', (event) => {
-      if (!sidebarEditarPregunta.contains(event.target) && !event.target.classList.contains('pregunta-individual')) {
+      if (!event.target.closest('.overlay') && !event.target.closest('.contenedor-editar-pregunta')) {
             sidebarEditarPregunta.style.right = '-330px';   
       }
 });
 
-btn_cerrar_editar.addEventListener('click', (event) => {
+btn_cerrar_editar.addEventListener('click', () => {
       sidebarEditarPregunta.style.right = '-330px';
 });
 
@@ -378,35 +368,29 @@ acordeonTitulos.forEach((titulo) => {
 });
 
 
-//CRUD
-var overlays = document.querySelectorAll(".overlay");
-overlays.forEach(function(overlay) {
-      overlay.addEventListener("click", function() {
-    // Obtener el ID del elemento cuando se hace clic en él
-    var id = overlay.id;
-    console.log("ID del elemento: " + id);
-  });
+//==CRUD
+var elementoAModificar;
+//Obtener el id del elemento seleccionado y abrir el menu editar
+const obtenerElemento=(elemento)=>{
+      elementoAModificar = elemento;
+      mostrarSidebarEditar(elementoAModificar);
+      sidebarEditarPregunta.style.right = '0';
+}
+
+//=ELIMINAR
+const btn_eliminar_pregunta = document.getElementById('btn-eliminar-pregunta');
+btn_eliminar_pregunta.addEventListener('click', () => {
+      eliminar(elementoAModificar);
 });
 
-
-const inpCheckbocs = document.querySelectorAll('.input-checkbox');
-const preguntaSeleccionada = document.getElementById('pregunta');
-var elemento;
-//ELIMINAR
-
-// ==================================
-// FUNCION PARA ELIMINAR PREGUNTA
-// ==================================
-const eliminar=(id)=>{
-      let idinput1=id
-      // console.log(idinput1)
-      idinput1.remove();
-    
+const eliminar=(elemento)=>{
+      let htmlElemento=elemento
+      htmlElemento.remove();
       // Actualizar el 'objeto' para reflejar los datos actualizados en el 'localStorage'
-      objeto = objeto.filter(item => item.id !== id.id);
-      // localStorage.removeItem("prueba1");
-      borrarDatoPorId(idinput1.id);
-      // console.log(objeto.length)
+      objeto = objeto.filter(item => item.id !== elemento.id);
+
+      borrarDatoPorId(htmlElemento.id);
+
       if (objeto.length == 0) {
         contenedor_listo.style.display="none"
         contenedor_opciones.forEach(element1 => {
@@ -416,26 +400,49 @@ const eliminar=(id)=>{
           opcion_multiple.innerHTML = '';
         });
       }
-    }
+}
     
-    function borrarDatoPorId(id) {
+function borrarDatoPorId(id) {
       // Obtener los datos del localStorage
       let datos = JSON.parse(localStorage.getItem("prueba1"));
-    
+
       // Buscar y eliminar el objeto con el ID específico
       datos = datos.filter(function (dato) {
-        return dato.id !== id;
+            return dato.id !== id;
       });
-    
+
       // Guardar los datos actualizados en el localStorage
       localStorage.setItem("prueba1", JSON.stringify(datos));
-    
+
       const newItemCount = datos.length;
       if (newItemCount < 1) {
-        contenedor_diseño_pregunta.style.display="block"
-        contenedor_agregar_pregunta.style.display="none"
-    
+            contenedor_diseño_pregunta.style.display="block"
+            contenedor_agregar_pregunta.style.display="none"
       }
-    }
+}
 
-// Agrega un evento de clic al botón de eliminar en el sidebar
+//==MOSTRAR
+const titulo_sidebar = document.querySelector('.titulo-editar-pregunta h2');
+const texto_pregunta = document.getElementById('pregunta');
+const contenedor_respuestas = document.getElementById('respuestas');
+
+function mostrarSidebarEditar(elemento) {
+      //Limpiar el contenedor respuestas
+      contenedor_respuestas.innerHTML = ''; 
+      
+      const preguntaIndex = objeto.findIndex(item => item.id === elemento.id);
+      elemento_local = objeto[preguntaIndex];
+      console.log(objeto[preguntaIndex]);
+
+      //Editar el encabezado de el sidebar
+      titulo_sidebar.textContent = elemento_local.tipo;
+      //Mostrar la pregunta
+      texto_pregunta.textContent = elemento_local.pregunta;
+      //Mostrar respuestas
+      elemento_local.respuestas.forEach((respuesta) => {
+            console.log(respuesta);
+            const inputElement = document.createElement('textarea');
+            inputElement.textContent = respuesta;
+            contenedor_respuestas.appendChild(inputElement);
+      });
+}
