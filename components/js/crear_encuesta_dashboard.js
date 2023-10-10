@@ -479,7 +479,7 @@ function mostrarSidebarEditar(elemento) {
       titulo_sidebar.textContent = elemento_local.tipo;
       //Mostrar la pregunta
       texto_pregunta.textContent = elemento_local.pregunta;
-      if(elemento_local.respuestas.length < 1){
+      if(elemento_local.respuestas.length < 1){ //cambiar POR TIPO NO POR CANTIDAD
             acordeon_respuestas.style.display="none"
       }else{
             acordeon_respuestas.style.display="block"
@@ -508,6 +508,11 @@ function mostrarSidebarEditar(elemento) {
                   //Agregarlos
                   contenedor_respuestas.appendChild(divElement);
             });
+
+            const buttonElement = document.createElement('button');
+            buttonElement.classList.add('btn-agregar-respuesta');
+            buttonElement.innerHTML = '<i class="bi bi-plus-lg icono-agregar-respuesta"></i>Agregar Respuesta';
+            contenedor_respuestas.appendChild(buttonElement);
               
       }
 }

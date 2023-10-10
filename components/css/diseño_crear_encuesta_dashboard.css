@@ -905,6 +905,24 @@ input[type="color"] {
     font-size: 20px;
     cursor: pointer;
 }
+
+button.btn-agregar-respuesta {
+    width: 100%;
+    height: 42px;
+    padding: 6px;
+    margin: 5px 0px;
+    background-color: #ffffff;
+    border: solid 1px #9D9D9D;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    color: #515151;
+    border-radius: 10px;
+}
 /*Adaptable*/
 /*Tablet*/
 @media (min-width: 501px) and (max-width:1104px) {
