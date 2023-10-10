@@ -348,14 +348,18 @@ const texto_simple=document.querySelector(".contendor-texto-simple");//No USO
 const sidebarEditarPregunta = document.getElementById('sidebar-editar-pregunta');
 const btn_cerrar_editar = document.getElementById('btn-cerrar-editar');
 
+function cerrarSideBarEditar(cerrar) {
+      cerrar ? sidebarEditarPregunta.style.right = '-330px' : sidebarEditarPregunta.style.right = '0';
+}
+
 document.addEventListener('click', (event) => {
       if (!event.target.closest('.overlay') && !event.target.closest('.contenedor-editar-pregunta')) {
-            sidebarEditarPregunta.style.right = '-330px';   
+            cerrarSideBarEditar(true);   
       }
 });
 
 btn_cerrar_editar.addEventListener('click', () => {
-      sidebarEditarPregunta.style.right = '-330px';
+      cerrarSideBarEditar(true);
 });
 
 //Acordeon
@@ -368,19 +372,23 @@ acordeonTitulos.forEach((titulo) => {
 });
 
 
-//==CRUD
+//==Controlador
 var elementoAModificar;
 //Obtener el id del elemento seleccionado y abrir el menu editar
 const obtenerElemento=(elemento)=>{
       elementoAModificar = elemento;
       mostrarSidebarEditar(elementoAModificar);
-      sidebarEditarPregunta.style.right = '0';
+      cerrarSideBarEditar(false);
+      editarRespuestas();
+      opcionPreguntaObligatoria();
+      eliminarRespuesta(); //inicializar
 }
 
-//=ELIMINAR
+//==ELIMINAR
 const btn_eliminar_pregunta = document.getElementById('btn-eliminar-pregunta');
 btn_eliminar_pregunta.addEventListener('click', () => {
       eliminar(elementoAModificar);
+      cerrarSideBarEditar(true);
 });
 
 const eliminar=(elemento)=>{
@@ -421,15 +429,48 @@ function borrarDatoPorId(id) {
       }
 }
 
+function eliminarRespuesta(respuesta){
+      const btns_eliminar_respuesta = document.querySelectorAll('.elimar-opcion-respuesta');
+      const preguntaIndex = objeto.findIndex(item => item.id === elementoAModificar.id);
+      var indice;
+
+      btns_eliminar_respuesta.forEach((btn_eliminar_respuesta) => {
+            btn_eliminar_respuesta.addEventListener('click', () => {
+                  const padreDelBoton = btn_eliminar_respuesta.parentElement;
+                  padreDelBoton.style.display = 'none';
+            });
+      });
+
+      if (preguntaIndex !== -1) {
+            objeto[preguntaIndex].respuestas = objeto[preguntaIndex].respuestas.filter((str, index) => {
+                  if (str === respuesta) {
+                    indice = index; 
+                    return false; 
+                  }
+                  return true; 
+            });
+            localStorage.setItem("prueba1", JSON.stringify(objeto));
+      }
+
+      if(respuesta){
+            const elementosDiseñoOpciones = elementoAModificar.querySelectorAll('.diseño-opciones');
+            const opcion_respuesta = elementosDiseñoOpciones[indice].querySelectorAll('span');
+            const ultimoSpan = opcion_respuesta[opcion_respuesta.length - 1];
+            const abuelo = ultimoSpan.parentElement.parentElement
+            abuelo.parentNode.removeChild(abuelo);
+      }
+
+}
+
 //==MOSTRAR
 const titulo_sidebar = document.querySelector('.titulo-editar-pregunta h2');
 const texto_pregunta = document.getElementById('pregunta');
 const contenedor_respuestas = document.getElementById('respuestas');
-
+const acordeon_respuestas = document.getElementById('acordeon-respuestas');
 function mostrarSidebarEditar(elemento) {
       //Limpiar el contenedor respuestas
       contenedor_respuestas.innerHTML = ''; 
-      
+
       const preguntaIndex = objeto.findIndex(item => item.id === elemento.id);
       elemento_local = objeto[preguntaIndex];
       console.log(objeto[preguntaIndex]);
@@ -438,11 +479,99 @@ function mostrarSidebarEditar(elemento) {
       titulo_sidebar.textContent = elemento_local.tipo;
       //Mostrar la pregunta
       texto_pregunta.textContent = elemento_local.pregunta;
-      //Mostrar respuestas
-      elemento_local.respuestas.forEach((respuesta) => {
-            console.log(respuesta);
-            const inputElement = document.createElement('textarea');
-            inputElement.textContent = respuesta;
-            contenedor_respuestas.appendChild(inputElement);
+      if(elemento_local.respuestas.length < 1){
+            acordeon_respuestas.style.display="none"
+      }else{
+            acordeon_respuestas.style.display="block"
+            //Mostrar respuestas
+            elemento_local.respuestas.forEach((respuesta, index) => {
+                  //Contenedror
+                  const divElement = document.createElement('div');
+                  divElement.classList.add('opciones-respuestas');
+                  //"Input"
+                  const inputElement = document.createElement('textarea');
+                  inputElement.textContent = respuesta;
+                  inputElement.classList.add('respuesta-de-pregunta');
+                  inputElement.classList.add(`numero-${index + 1}`);
+                  //Icono eliminar
+                  const iconElement = document.createElement('i');
+                  iconElement.classList.add('bi');
+                  iconElement.classList.add('bi-trash');
+                  iconElement.classList.add('elimar-opcion-respuesta');
+                  iconElement.addEventListener('click', () => {
+                        eliminarRespuesta(respuesta);
+                  });
+                  iconElement.classList.add(`numero-${index + 1}`);
+                  //Juntarlos
+                  divElement.appendChild(inputElement);
+                  divElement.appendChild(iconElement);
+                  //Agregarlos
+                  contenedor_respuestas.appendChild(divElement);
+            });
+              
+      }
+}
+
+//==EDITAR
+//pregunta
+const preguntaSeleccionada = document.getElementById('pregunta');
+
+preguntaSeleccionada.addEventListener('input', () => {
+      const preguntaAModificar = elementoAModificar.querySelector('span');
+      const nuevoValor = preguntaSeleccionada.value;
+      
+      // Actualiza el valor en el objeto del Local Storage
+      const preguntaIndex = objeto.findIndex(item => item.id === elementoAModificar.id);
+      
+      if (preguntaIndex !== -1) {
+            objeto[preguntaIndex].pregunta = nuevoValor;
+            localStorage.setItem("prueba1", JSON.stringify(objeto));
+      }
+
+      // Actualiza el valor en el HTML
+      preguntaAModificar.textContent = nuevoValor;
+});
+
+function editarRespuestas(){
+      const respuestas_de_pregunta = document.querySelectorAll('.respuesta-de-pregunta');
+      
+      respuestas_de_pregunta.forEach((respuesta, index) => {
+            respuesta.addEventListener('input', () => {
+                  console.log(elementoAModificar);
+                  const nuevoValor = respuesta.value;
+
+                  const preguntaIndex = objeto.findIndex(item => item.id === elementoAModificar.id);
+
+                  if (preguntaIndex !== -1) {
+                        objeto[preguntaIndex].respuestas[index] = nuevoValor;
+                        localStorage.setItem("prueba1", JSON.stringify(objeto));
+                  }
+
+                  const elementosDiseñoOpciones = elementoAModificar.querySelectorAll('.diseño-opciones');
+
+                  const opcion_respuesta = elementosDiseñoOpciones[index].querySelectorAll('span');
+                  const ultimoSpan = opcion_respuesta[opcion_respuesta.length - 1];
+                  ultimoSpan.textContent = nuevoValor;
+            });
+      });
+}
+
+//Pregunta obligatoria Toggle
+const opcion_pregunta_obligatoria = document.getElementById('opcion_rapida_pregunta_obligatoria');
+
+function opcionPreguntaObligatoria(){
+      const preguntaIndex = objeto.findIndex(item => item.id === elementoAModificar.id);
+      opcion_pregunta_obligatoria.checked = objeto[preguntaIndex].obligatorio;
+
+      opcion_pregunta_obligatoria.addEventListener("change", function() {
+            const icono_obligatorio = elementoAModificar.querySelector(".color-obligatorio");
+            icono_obligatorio.textContent = opcion_pregunta_obligatoria.checked ? "*" : "";
+
+            const preguntaIndex = objeto.findIndex(item => item.id === elementoAModificar.id);
+
+            if (preguntaIndex !== -1) {
+                  objeto[preguntaIndex].obligatorio = opcion_pregunta_obligatoria.checked;
+                  localStorage.setItem("prueba1", JSON.stringify(objeto));
+            }
       });
 }

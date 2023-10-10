@@ -225,10 +225,10 @@
 
                 <div class="contendor-opciones-multiple contenedor-opciones contenedor-opciones-agregar" id="contenedor-opciones-agregar"  style="display: none;">
                     <!-- Botón toggle obligatorio -->
-                    <div class="wrap-toggle">
+                    <div class="wrap-toggle wrap-toggle-pregunta">
                         <input type="checkbox" id="pregunta_obligatoria" class="offscreen" />
                         <label for="pregunta_obligatoria" class="switch"></label>
-                        <p>Obligatorio <span>*</span></p>
+                        <p>Obligatorio <span class="simbolo-obligatorio">*</span></p>
                     </div>
 
                     <div class="opciones-preguntas">
@@ -334,7 +334,7 @@
                     <textarea id="pregunta" rows="3" maxlength="120"></textarea>
                 </div>
             </div>
-            <div class="acordeon">
+            <div class="acordeon" id="acordeon-respuestas">
                 <button class="acordeon-titulo">Respuestas</button>
                 <div class="acordeon-contenido" id="respuestas">
 
@@ -343,6 +343,27 @@
             <div class="acordeon">
                 <button class="acordeon-titulo">Opciones</button>
                 <div class="acordeon-contenido">
+                    <div class="opcion-rapida-edicion">
+                        <div class="texto-icono-premium">
+                            <span>Obligatorio <span class="color-obligatorio">*</span></span>
+                        </div>
+                        <div class="wrap-toggle">
+                            <input type="checkbox" id="opcion_rapida_pregunta_obligatoria" class="offscreen" />
+                            <label for="opcion_rapida_pregunta_obligatoria" class="switch"></label>
+                        </div>
+                    </div>
+                    <div class="opcion-rapida-edicion">
+                        <div class="texto-icono-premium">
+                            <span>Color de pregunta</span>
+                            <i class="bi bi-rocket-takeoff-fill icono-premium"></i>
+                        </div>
+                        <input type="color" value="#000000" />
+                    </div>
+                    <div class="opcion-rapida-edicion">
+                        <div class="texto-icono-premium">
+                            <span>Tipo de pregunta</span>
+                        </div>
+                    </div>
 
                 </div>
             </div>
