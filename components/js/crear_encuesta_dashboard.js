@@ -295,8 +295,10 @@ const htmlres = document.getElementById("contenedor-preguntas-realizadas");
 
 function renderQuestions() {
   htmlres.innerHTML = "";
-
+console.log("objeto ", objeto);
   objeto.forEach((item) => {
+      console.log("item ", item);
+      console.log("itemOf ",typeof item);
     const { id, pregunta, respuestas, obligatorio, tipo } = item;
     const htmlPregunta = generatePreguntaHTML(id, pregunta, respuestas, obligatorio, tipo);
     htmlres.innerHTML += htmlPregunta;
@@ -461,6 +463,15 @@ function eliminarRespuesta(respuesta){
       }
 
 }
+//==AGREGAR
+function agregarRespuesta(){
+      const preguntaIndex = objeto.findIndex(item => item.id === elementoAModificar.id);
+
+      if (preguntaIndex !== -1) {
+            objeto[preguntaIndex].respuestas.push(`Opción ${elemento_local.respuestas.length + 1}`);
+            localStorage.setItem("prueba1", JSON.stringify(objeto));
+      }
+}
 
 //==MOSTRAR
 const titulo_sidebar = document.querySelector('.titulo-editar-pregunta h2');
@@ -508,12 +519,14 @@ function mostrarSidebarEditar(elemento) {
                   //Agregarlos
                   contenedor_respuestas.appendChild(divElement);
             });
-
+            //Boton agregar
             const buttonElement = document.createElement('button');
             buttonElement.classList.add('btn-agregar-respuesta');
+            buttonElement.addEventListener('click', () => {
+                  agregarRespuesta();
+            });
             buttonElement.innerHTML = '<i class="bi bi-plus-lg icono-agregar-respuesta"></i>Agregar Respuesta';
             contenedor_respuestas.appendChild(buttonElement);
-              
       }
 }
 
