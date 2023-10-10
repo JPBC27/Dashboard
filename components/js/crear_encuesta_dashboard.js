@@ -355,7 +355,7 @@ function cerrarSideBarEditar(cerrar) {
 }
 
 document.addEventListener('click', (event) => {
-      if (!event.target.closest('.overlay') && !event.target.closest('.contenedor-editar-pregunta')) {
+      if (!event.target.closest('.overlay') && !event.target.closest('.contenedor-editar-pregunta') && !event.target.closest('.btn-agregar-respuesta')) {
             cerrarSideBarEditar(true);   
       }
 });
@@ -471,6 +471,9 @@ function agregarRespuesta(){
             objeto[preguntaIndex].respuestas.push(`Opción ${elemento_local.respuestas.length + 1}`);
             localStorage.setItem("prueba1", JSON.stringify(objeto));
       }
+
+      mostrarSidebarEditar(elementoAModificar);
+      cerrarSideBarEditar(false);
 }
 
 //==MOSTRAR
