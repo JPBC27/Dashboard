@@ -168,6 +168,12 @@ h1{
     padding: 0px 25px;
     flex-direction: row;
 }
+.contenedor-pregunta-realizar {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 5px;
+}
 
 /* ==Overlay - Encima de las preguntas para su modificacion*/
 .pregunta-individual{
