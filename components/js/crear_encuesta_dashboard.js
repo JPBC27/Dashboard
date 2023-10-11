@@ -385,7 +385,6 @@ const obtenerElemento=(elemento)=>{
       cerrarSideBarEditar(false);
       editarRespuestas();
       opcionPreguntaObligatoria();
-      crearPregunta();
 }
 
 //=*ELIMINAR
@@ -530,7 +529,7 @@ function agregarRespuesta(){
 
 //=*MOSTRAR
 const titulo_sidebar = document.querySelector('.titulo-editar-pregunta h2'); // Título del sidebar
-const texto_pregunta = document.getElementById('pregunta'); // Texto Pregunta
+const texto_pregunta = document.getElementById('pregunta-txt'); // Texto Pregunta
 const contenedor_respuestas = document.getElementById('respuestas'); // Contenedor de respuestas
 const acordeon_respuestas = document.getElementById('acordeon-respuestas');
 const acordeon_pregunta = document.getElementById('acordeon-contenido mostrar');
@@ -539,7 +538,6 @@ const contenido_pregunta = document.getElementById('contenedor-pregunta');
 function mostrarSidebarEditar(elemento) {
       // Limpiar el contenedor de respuestas
       contenedor_respuestas.innerHTML = '';
-      contenido_pregunta.innerHTML = '';
  
       //const preguntaIndex = objeto.findIndex(item => item.id === elemento.id);
       const elemento_local = objeto[preguntaIndex];
@@ -548,10 +546,7 @@ function mostrarSidebarEditar(elemento) {
       titulo_sidebar.textContent = elemento_local.tipo;
 
       // Mostrar la pregunta
-      const pregunta_realizar = document.createElement('textarea');
-      pregunta_realizar.textContent = elemento_local.pregunta;
-      pregunta_realizar.id = "pregunta"
-      contenido_pregunta.appendChild(pregunta_realizar);
+      texto_pregunta.value = elemento_local.pregunta;
 
       // Mostrar las respuestas si es una pregunta de opción simple o múltiple
       if (elemento_local.tipo === "Opción simple" || elemento_local.tipo === "Opción múltiple") {
@@ -600,7 +595,6 @@ function mostrarSidebarEditar(elemento) {
       // Actualizar el ID de las respuestas
       actualizarIdRespuestas();
       editarRespuestas();
-      crearPregunta();
 }
 
 // Función para actualizar los IDs de las respuestas en la vista preguntas
@@ -625,22 +619,16 @@ function actualizarIdRespuestas() {
 }
   
 //=*EDITAR
-//pregunta
-function crearPregunta(){
-const preguntaSeleccionada = document.getElementById('pregunta'); // Textarea de la pregunta Sidebar
-
 // Cambios en la pregunta
-preguntaSeleccionada.addEventListener('input', () => {
+texto_pregunta.addEventListener('input', () => {
       // Obtener el elemento HTML que se va a modificar
       const modificarHTML = document.getElementById(`${elementoAModificar.id}`);
     
       // Obtener el elemento de la pregunta en el HTML
       const preguntaAModificar = modificarHTML.querySelector('#pregunta-realizar');
-      // Encontrar la pregunta correspondiente en el objeto
-      //const preguntaIndex = objeto.findIndex(item => item.id === elementoAModificar.id);
 
       // Obtener el nuevo valor de la pregunta desde el textarea
-      const nuevoValor = preguntaSeleccionada.value;
+      const nuevoValor = texto_pregunta.value;
 
       if (preguntaIndex !== -1) {
             // Actualizar la pregunta en el objeto de datos
@@ -656,7 +644,7 @@ preguntaSeleccionada.addEventListener('input', () => {
       // Llamar a la función para actualizar el ID de las respuestas (si es necesario)
       // actualizarIdRespuestas();
 });
-}
+
 
 // Función para los cambios en las respuestas
 function editarRespuestas(){
