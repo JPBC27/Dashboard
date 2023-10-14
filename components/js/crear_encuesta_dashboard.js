@@ -718,3 +718,78 @@ function opcionPreguntaObligatoria(){
             //actualizarIdRespuestas();
       });
 }
+/*titulo.style.border = "solid 1px #099EBD";*/
+const tituloEncuesta = document.getElementById("titulo-encuesta");
+const titulo = document.querySelector(".texto-titulo-encuesta");
+const textarea = document.getElementById("textarea-titulo-encuesta");
+const modificarTitulos = document.querySelector(".modificar-titulos");
+
+tituloEncuesta.addEventListener("click", () => {
+    titulo.style.display = "none";
+    textarea.style.display = "block";
+    modificarTitulos.style.display = "none";
+    titulo.style.border = "solid 1px #099EBD";
+    textarea.focus();
+});
+
+textarea.addEventListener("blur", () => {
+    titulo.style.display = "block";
+    textarea.style.display = "none";
+    if(textarea.value.length === 0){
+      modificarTitulos.style.display = "none";
+      titulo.textContent = "AÑADIR INTRODUCCIÓN";
+      titulo.style.border = "dashed 2px #099EBD";
+    }else{
+      modificarTitulos.style.display = "flex";
+    }
+});
+
+modificarTitulos.addEventListener("click", () => {
+    titulo.style.display = "none";
+    textarea.style.display = "block";
+    modificarTitulos.style.display = "none";
+    textarea.focus();
+});
+
+textarea.addEventListener("input", () => {
+    titulo.textContent = textarea.value;
+});
+/*** */
+const instruccionEncuesta = document.getElementById("instruccion-encuesta");
+const instruccion = document.querySelector(".texto-instruccion-encuesta");
+const textareaInstruccion = document.getElementById("textarea-instruccion-encuesta");
+const modificarInstruccion = document.getElementById("overlay-instruccion");
+
+instruccionEncuesta.addEventListener("click", () => {
+    instruccion.style.display = "none";
+    textareaInstruccion.style.display = "block";
+    modificarInstruccion.style.display = "none";
+    instruccion.style.border = "solid 1px #099EBD";
+    textareaInstruccion.focus();
+});
+
+textareaInstruccion.addEventListener("blur", () => {
+    instruccion.style.display = "block";
+    textareaInstruccion.style.display = "none";
+    if(textareaInstruccion.value.length === 0){
+      modificarInstruccion.style.display = "none";
+      instruccion.textContent = "AÑADIR INSTRUCCION";
+      instruccion.style.border = "dashed 2px #099EBD";
+      instruccion.style.textAlign = "center";
+
+    }else{
+      modificarInstruccion.style.display = "flex";
+      instruccion.style.textAlign = "start";
+    }
+});
+
+modificarInstruccion.addEventListener("click", () => {
+    instruccion.style.display = "none";
+    textareaInstruccion.style.display = "block";
+    modificarInstruccion.style.display = "none";
+    textareaInstruccion.focus();
+});
+
+textareaInstruccion.addEventListener("input", () => {
+    instruccion.textContent = textareaInstruccion.value;
+});
