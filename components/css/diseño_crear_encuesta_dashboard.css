@@ -1004,6 +1004,27 @@ button.btn-agregar-respuesta {
     color: #515151;
     border-radius: 10px;
 }
+
+.boton-guardar-encuesta{
+    display: flex;
+    gap: 5px;
+    background-color: #EEE;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    border: solid 2px #09B3A2;
+    border-radius: 10px;
+    background-color: #09B3A2;
+    padding: 3px 23px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    height: 58px;
+    font-weight: 600;
+    width: 126px;
+    margin: 30px 20px 20px auto;
+}
 /*Adaptable*/
 /*Tablet*/
 @media (min-width: 501px) and (max-width:1104px) {

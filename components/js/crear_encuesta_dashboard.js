@@ -718,7 +718,22 @@ function opcionPreguntaObligatoria(){
             //actualizarIdRespuestas();
       });
 }
-/*titulo.style.border = "solid 1px #099EBD";*/
+/* */
+var objeto_encuesta = JSON.parse(localStorage.getItem("encuesta1")) || [];
+
+function inicializarEncuesta() {
+    if (objeto_encuesta.length === 0) {
+        objeto_encuesta.push({ id: "1", titulo: "", instruccion: "" });
+        localStorage.setItem("encuesta1", JSON.stringify(objeto_encuesta));
+    } else {
+        if (objeto_encuesta[0].id === "1") {
+            return;
+        }
+    }
+}
+
+inicializarEncuesta();
+
 const tituloEncuesta = document.getElementById("titulo-encuesta");
 const titulo = document.querySelector(".texto-titulo-encuesta");
 const textarea = document.getElementById("textarea-titulo-encuesta");
@@ -753,6 +768,9 @@ modificarTitulos.addEventListener("click", () => {
 
 textarea.addEventListener("input", () => {
     titulo.textContent = textarea.value;
+
+    objeto_encuesta[0].titulo = textarea.value;
+    localStorage.setItem("encuesta1", JSON.stringify(objeto_encuesta));
 });
 /*** */
 const instruccionEncuesta = document.getElementById("instruccion-encuesta");
@@ -792,4 +810,75 @@ modificarInstruccion.addEventListener("click", () => {
 
 textareaInstruccion.addEventListener("input", () => {
     instruccion.textContent = textareaInstruccion.value;
+
+    objeto_encuesta[0].instruccion = textareaInstruccion.value;
+    localStorage.setItem("encuesta1", JSON.stringify(objeto_encuesta));
+});
+
+
+/* GUARDAR ENCUESTA */
+
+const botonGuardarEncuesta = document.getElementById("guardar-encuesta");
+
+botonGuardarEncuesta.addEventListener('click', () => {
+  var objetoEstiloEncuesta = [];
+  var preguntasEncuesta = JSON.parse(localStorage.getItem("prueba1"));
+  var cantidadPreguntas = preguntasEncuesta.length; // Usar preguntasEncuesta directamente
+  //var datosEncuesta = JSON.parse(localStorage.getItem("datosEncuesta"));
+  var datosEncuesta = JSON.parse(localStorage.getItem("encuesta1"));
+  var idEncuesta = localStorage.getItem("idEncuestaEditar"); // Obtener id de edición si existe
+
+  var fecha = new Date();
+  var opcionesFecha = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'America/Lima' };
+  var fechaFormateada = fecha.toLocaleString('es-PE', opcionesFecha);
+
+  var colorEncuesta = localStorage.getItem("color");
+  var fuenteEncuesta = localStorage.getItem("fuente");
+  var fondoEncuesta = localStorage.getItem("fondo");
+  
+  //var botonFinal = document.getElementById("valor-boton").value
+
+  //console.log(botonFinal)
+
+  objetoEstiloEncuesta.push({
+    color: colorEncuesta,
+    fuente: fuenteEncuesta,
+    fondo: fondoEncuesta
+  });
+
+  var objetoEncuesta = {
+    //id: idEncuesta || "e" + CryptoJS.SHA3(`${datosEncuesta.Titulo + datosEncuesta.Formato}`, { outputLength: 32 }).toString(),
+    id: idEncuesta || "e" + CryptoJS.SHA3(`${datosEncuesta[0].titulo + datosEncuesta[0].instruccion}`, { outputLength: 32 }).toString(),
+    Titulo: datosEncuesta[0].titulo,
+    Instruccion: datosEncuesta[0].instruccion,
+    cantidadPreguntas: cantidadPreguntas,
+    Fecha: fechaFormateada,
+    preguntasEncuesta: preguntasEncuesta,
+    estiloEncuesta: objetoEstiloEncuesta,
+   // botonFinal: botonFinal || "Listo"
+  };
+
+  var encuestas = JSON.parse(localStorage.getItem("Encuesta")) || [];
+
+  // Buscar si la encuesta ya existe por su ID
+  var index = encuestas.findIndex(e => e.id === objetoEncuesta.id);
+  console.log(index)
+  if (index !== -1) {
+    console.log("actualizar")
+    encuestas[index] = objetoEncuesta; // Actualizar si existe
+  } else {
+    encuestas.push(objetoEncuesta); // Agregar como nuevo si no existe
+  }
+
+  // Almacenar objetoEncuesta en el localStorage y borrar otros valores
+  localStorage.setItem("Encuesta", JSON.stringify(encuestas));
+  localStorage.removeItem("prueba1");
+  localStorage.removeItem("encuesta1");
+  localStorage.removeItem("datosEncuesta");
+  localStorage.removeItem("color");
+  localStorage.removeItem("fuente");
+  localStorage.removeItem("fondo");
+  localStorage.removeItem("idEncuestaEditar");
+
+  window.location.href = 'encuesta.html';
 });
