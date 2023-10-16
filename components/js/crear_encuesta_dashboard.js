@@ -292,7 +292,8 @@ function generatePreguntaHTML(id, pregunta, respuestas, obligatorio, tipo) {
       `;
 }
 
-const contenedor_listo=document.querySelector(".contenedor-listo"); //FALTA REALIZAR EL BOTON LISTO
+//const contenedor_listo=document.querySelector(".contenedor-listo"); //FALTA REALIZAR EL BOTON LISTO
+const guardar_ecuesta = document.getElementById("guardar-encuesta");
 const htmlres = document.getElementById("contenedor-preguntas-realizadas");
 
 function renderQuestions() {
@@ -305,13 +306,15 @@ function renderQuestions() {
 
   if (objeto.length == 0) {
     
-    contenedor_diseño_pregunta.style.display="block"
-    contenedor_agregar_pregunta.style.display="none"
+    contenedor_diseño_pregunta.style.display="block";
+    contenedor_agregar_pregunta.style.display="none";
+    guardar_ecuesta.style.display="none";
  //   contenedor_listo.style.display="none"
     
   }else{
-    contenedor_diseño_pregunta.style.display="none"
-    contenedor_agregar_pregunta.style.display="flex"
+    contenedor_diseño_pregunta.style.display="none";
+    contenedor_agregar_pregunta.style.display="flex";
+    guardar_ecuesta.style.display="flex";
 //    contenedor_listo.style.display="block"
   }
 
@@ -409,7 +412,8 @@ const eliminar = () => {
       // Comprobar si no hay más elementos en el objeto
       if (objeto.length === 0) {
             // Ocultar elementos relacionados con la pregunta
-            contenedor_listo.style.display = "none";
+            guardar_ecuesta.style.display="none";
+           // contenedor_listo.style.display = "none";
             contenedor_opciones.forEach(element1 => {
             element1.style.display = "none";
             sBtn_text.innerText = "Diseño de opciones";
@@ -721,7 +725,7 @@ function opcionPreguntaObligatoria(){
 /* */
 var objeto_encuesta = JSON.parse(localStorage.getItem("encuesta1")) || [];
 
-function inicializarEncuesta() {
+function inicializarVariablesEncuesta() {
     if (objeto_encuesta.length === 0) {
         objeto_encuesta.push({ id: "1", titulo: "", instruccion: "" });
         localStorage.setItem("encuesta1", JSON.stringify(objeto_encuesta));
@@ -732,12 +736,21 @@ function inicializarEncuesta() {
     }
 }
 
-inicializarEncuesta();
+inicializarVariablesEncuesta();
 
 const tituloEncuesta = document.getElementById("titulo-encuesta");
 const titulo = document.querySelector(".texto-titulo-encuesta");
 const textarea = document.getElementById("textarea-titulo-encuesta");
 const modificarTitulos = document.querySelector(".modificar-titulos");
+
+if(objeto_encuesta[0].titulo !== ""){
+      titulo.textContent = objeto_encuesta[0].titulo;
+      textarea.value = objeto_encuesta[0].titulo;
+      titulo.style.display = "block";
+      textarea.style.display = "none";
+      modificarTitulos.style.display = "flex";
+      titulo.style.border = "solid 1px #099EBD";
+}
 
 tituloEncuesta.addEventListener("click", () => {
     titulo.style.display = "none";
@@ -777,6 +790,15 @@ const instruccionEncuesta = document.getElementById("instruccion-encuesta");
 const instruccion = document.querySelector(".texto-instruccion-encuesta");
 const textareaInstruccion = document.getElementById("textarea-instruccion-encuesta");
 const modificarInstruccion = document.getElementById("overlay-instruccion");
+
+if(objeto_encuesta[0].instruccion !== ""){
+      instruccion.textContent = objeto_encuesta[0].instruccion;
+      textareaInstruccion.value = objeto_encuesta[0].instruccion;
+      instruccion.style.display = "block";
+      textareaInstruccion.style.display = "none";
+      modificarInstruccion.style.display = "flex";
+      instruccion.style.border = "solid 1px #099EBD";
+}
 
 instruccionEncuesta.addEventListener("click", () => {
     instruccion.style.display = "none";
