@@ -9,6 +9,11 @@ const optionMenu=document.querySelector(".dropdown-agregar"), //div en donde se 
       selectBtn= optionMenu.querySelector(".select-btn-agregar"); //Botón en donde se abrirá el menú de opciones para agregar
 
 selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active")); // Mostrar el listado de opciones
+document.addEventListener('click', (event) => {
+      if (!event.target.closest('.dropdown-agregar')) {
+            optionMenu.classList.remove("active");
+      }
+});
 
 // ==AGREGAR PREGUNTA, AGREGAR TIPO DE RESPUESTA
 //Mostrar
