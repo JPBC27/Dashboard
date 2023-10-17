@@ -438,6 +438,37 @@ h1{
     margin-top: 0;
     margin-bottom: 3px;
 }
+#edicion-rapida-opcion .dropdown-tipo-pregunta {
+    position: relative;
+    display: flex !important;
+    max-width: 47%;
+    cursor: pointer;
+}
+
+.dropdown-content-tipo-pregunta{
+    display: block;
+    background-color: #f9f9f9;
+    box-shadow: 0px 3px 17px 4px rgba(0,0,0,0.2);
+    border-radius: 6px;
+    padding: 12px 9px;
+    margin-right: 4px;
+    list-style-type: none;
+}
+
+.dropdown-content-tipo-pregunta .option {
+    height: 33px;
+    padding: 0 5px;
+}
+
+.dropdown-tipo-pregunta.active .select-btn i{
+    margin-top: 0;
+    transform: rotate(180deg);
+    display: inline-block;
+}
+
+.dropdown-tipo-pregunta .sBtn-text{
+    margin-right: 1px;
+}
 
 /* ==Contenedor donde estrán todas las posibles respuestas*/
 .contenedor-opciones-agregar{
@@ -1058,6 +1089,9 @@ button.btn-agregar-respuesta {
         max-width: 330px;
         width: 31%;
     }
+    .dropdown-tipo-pregunta.active .select-btn{
+        margin-right: 1px;
+    }
 }
 /*PC*/
 @media (min-width: 1105px){
@@ -1111,5 +1145,9 @@ button.btn-agregar-respuesta {
 
     .options .option {
         padding: 0 15px;
+    }
+
+    .dropdown-tipo-pregunta .sBtn-text{
+        margin-right: 1px;
     }
 }

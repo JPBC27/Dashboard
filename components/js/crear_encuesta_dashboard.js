@@ -384,6 +384,7 @@ acordeonTitulos.forEach((titulo) => {
 var elementoAModificar;
 var preguntaIndex;
 
+
 // Función para obtener el elemento seleccionado y abrir el menú de edición
 const obtenerElemento=(elemento)=>{
       elementoAModificar = elemento;
@@ -393,6 +394,7 @@ const obtenerElemento=(elemento)=>{
       cerrarSideBarEditar(false);
       editarRespuestas();
       opcionPreguntaObligatoria();
+      txt_tipo_pregunta.innerHTML = objeto[preguntaIndex].tipo;
 }
 
 //=*ELIMINAR
@@ -543,6 +545,8 @@ const contenedor_respuestas = document.getElementById('respuestas'); // Contened
 const acordeon_respuestas = document.getElementById('acordeon-respuestas');
 const acordeon_pregunta = document.getElementById('acordeon-contenido mostrar');
 const contenido_pregunta = document.getElementById('contenedor-pregunta');
+const txt_tipo_pregunta = document.getElementById("txt-tipo-pregunta");
+
 // Función para actualizar la vista sideBar de las respuestas y preguntas
 function mostrarSidebarEditar(elemento) {
       // Limpiar el contenedor de respuestas
@@ -556,6 +560,9 @@ function mostrarSidebarEditar(elemento) {
 
       // Mostrar la pregunta
       texto_pregunta.value = elemento_local.pregunta;
+
+      // Mostrar el tipo actual en Opciones
+      txt_tipo_pregunta.innerHTML = objeto[preguntaIndex].tipo;
 
       // Mostrar las respuestas si es una pregunta de opción simple o múltiple
       if (elemento_local.tipo === "Opción simple" || elemento_local.tipo === "Opción múltiple") {
@@ -842,9 +849,64 @@ textareaInstruccion.addEventListener("input", () => {
     localStorage.setItem("encuesta1", JSON.stringify(objeto_encuesta));
 });
 
+/*Dropdown tipo pregunta */
+const dropdownContent = document.getElementById("content-dropdown-tipo-preguntas");
+const dropdownTipoPregunta =document.querySelector(".dropdown-tipo-pregunta"), 
+      selectBtnTipoPregunta = dropdownTipoPregunta.querySelector(".select-btn-agregar"); 
 
-/* GUARDAR ENCUESTA */
+selectBtnTipoPregunta.addEventListener("click", () => dropdownTipoPregunta.classList.toggle("active"));
+dropdownContent.style.display="none";
+function mostrarDropDownTipoPregunta() {
+      if (dropdownContent.style.display === "none") {
+          dropdownContent.style.display = "block";
+      } else {
+          dropdownContent.style.display = "none";
+      }
+}
 
+/* Cambiar el tipo en DROP DOWN de EDICION*/
+const tpos_pregunta = dropdownContent.querySelectorAll(".opc-tipo-pregunta");
+tpos_pregunta.forEach((tipo_pregunta, index) => {
+    tipo_pregunta.addEventListener("click", () => {
+      if(index === 0){
+            if(objeto[preguntaIndex].tipo === "Texto simple" || objeto[preguntaIndex].tipo === "NPS"){
+                  objeto[preguntaIndex].respuestas = ["Opción 1"]; 
+            }
+            // Actualizar la respuesta en el objeto de datos
+            objeto[preguntaIndex].tipo = "Opción simple";
+            console.log("CLICK1");
+      }else if(index === 1){
+            if(objeto[preguntaIndex].tipo === "Texto simple" || objeto[preguntaIndex].tipo === "NPS"){
+                  objeto[preguntaIndex].respuestas = ["Opción 1"]; 
+            }
+            // Actualizar la respuesta en el objeto de datos
+            objeto[preguntaIndex].tipo = "Opción múltiple";
+            console.log("CLICK2");
+      }else if(index === 2){
+            console.log("CLICK3");
+            // Actualizar la respuesta en el objeto de datos
+            objeto[preguntaIndex].tipo = "Texto simple";
+            objeto[preguntaIndex].respuestas = [];
+      }else if(index === 3){
+            console.log("CLICK4");
+            // Actualizar la respuesta en el objeto de datos
+            objeto[preguntaIndex].tipo = "NPS";
+            objeto[preguntaIndex].respuestas = [];
+      }
+      // Actualizar el objeto en el almacenamiento local
+      localStorage.setItem("prueba1", JSON.stringify(objeto));
+      actualizarIdRespuestas();
+      mostrarSidebarEditar();
+    });
+});
+/**/
+const btnDuplicarPregunta = document.getElementById("btn-duplicar-pregunta");
+btnDuplicarPregunta.addEventListener('click', () => {
+      objeto.splice(preguntaIndex + 1, 0, objeto[preguntaIndex]);
+      console.log(objeto);
+});
+/* */
+/* =*GUARDAR ENCUESTA */
 const botonGuardarEncuesta = document.getElementById("guardar-encuesta");
 
 botonGuardarEncuesta.addEventListener('click', () => {

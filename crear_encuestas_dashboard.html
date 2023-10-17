@@ -357,7 +357,7 @@
         </div>
         <div class="opciones-editar-pregunta">
             <div class="btn-edicion-rapida">
-                <button class="btn-duplicar">Duplicar</button>
+                <button class="btn-duplicar" id="btn-duplicar-pregunta">Duplicar</button>
                 <button class="btn-eliminar" id="btn-eliminar-pregunta">Eliminar</button>
             </div>
             <div class="acordeon">
@@ -395,17 +395,47 @@
                         </div>
                         <input type="color" value="#000000" />
                     </div>
-                    <div class="opcion-rapida-edicion">
+
+                    <div class="opcion-rapida-edicion" id="edicion-rapida-opcion">
                         <div class="texto-icono-premium">
                             <span>Tipo de pregunta</span>
                         </div>
+                        <div class="dropdown-tipo-pregunta">
+                            <div class="select-btn select-btn-agregar" onclick="mostrarDropDownTipoPregunta()">
+                                <span class="sBtn-text sBtn-text-agregar" id="txt-tipo-pregunta">Diseño de opciones</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </div>
+                        </div>
                     </div>
 
+                    <div class="opcion-rapida-edicion">
+                        <div class="texto-icono-premium">
+                            <span> </span>
+                        </div>
+                        <ul class="dropdown-content-tipo-pregunta options" id="content-dropdown-tipo-preguntas">
+                            <li class="option option-agregar opc-tipo-pregunta">
+                                <i class="bi bi-list-ul"></i>
+                                <span class="option-text option-text-agregar">Opción simple</span>
+                            </li>
+                            <li class="option option-agregar opc-tipo-pregunta">
+                                <i class="bi bi-card-checklist"></i>
+                                <span class="option-text option-text-agregar">Opción múltiple</span>
+                            </li>
+                            <li class="option option-agregar opc-tipo-pregunta">
+                                <i class="bi bi-card-text"></i>
+                                <span class="option-text option-text-agregar">Texto simple</span>
+                            </li>
+                            <li class="option option-agregar opc-tipo-pregunta">
+                                <i class="bi bi-speedometer2"></i>
+                                <span class="option-text option-text-agregar">NPS</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
+    
     <script src="components/js/crear_encuesta_dashboard.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
     integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
