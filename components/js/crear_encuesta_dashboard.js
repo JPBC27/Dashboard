@@ -971,3 +971,14 @@ botonGuardarEncuesta.addEventListener('click', () => {
 
   window.location.href = 'encuesta.html';
 });
+
+/* 
+//Creacion del UUID
+// Genera un nuevo UUID
+      var newUUID = uuidv4();
+  
+      // Obtén el elemento donde deseas mostrar el UUID
+      var uuidElement = document.getElementById("uuid");
+      // Establece el valor del elemento
+      uuidElement.textContent = newUUID;
+       */
