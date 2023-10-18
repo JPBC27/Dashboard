@@ -232,19 +232,19 @@
                         </div>
 
                         <ul class="options">
-                            <li class="option option-agregar">
+                            <li class="option option-agregar" data-opciones="Opción simple">
                                 <i class="bi bi-list-ul"></i>
                                 <span class="option-text option-text-agregar">Opción simple</span>
                             </li>
-                            <li class="option option-agregar">
+                            <li class="option option-agregar" data-opciones="Opción múltiple">
                                 <i class="bi bi-card-checklist"></i>
                                 <span class="option-text option-text-agregar">Opción múltiple</span>
                             </li>
-                            <li class="option option-agregar">
+                            <li class="option option-agregar" data-opciones="Texto simple">
                                 <i class="bi bi-card-text"></i>
                                 <span class="option-text option-text-agregar">Texto simple</span>
                             </li>
-                            <li class="option option-agregar">
+                            <li class="option option-agregar" data-opciones="NPS">
                                 <i class="bi bi-speedometer2"></i>
                                 <span class="option-text option-text-agregar">NPS</span>
                             </li>
@@ -263,7 +263,7 @@
 
                     <div class="opciones-preguntas">
 
-                        <div class="add opciones-multiples opciones-multiples-agregar" id="opcion-multiple-agregar" style="display: none;">
+                        <div class="add opciones-multiples opciones-multiples-agregar" id="cntdor-rptas-opcion-simple" style="display: none;">
                             <!-- 
                             <div class="pregunta-opciones">
                                 <label class="radio1">
@@ -278,7 +278,7 @@
                             -->
                         </div>
 
-                        <div class="add opciones-checkbox-agregar" id="opcion-checkbox-agregar"  style="display: none;">
+                        <div class="add opciones-checkbox-agregar" id="cntdor-rptas-opcion-multiple"  style="display: none;">
                             <!-- 
                             <div class="pregunta-opciones">
                                 <div class="checkbox referencia-checkbox-agregar">
@@ -293,11 +293,11 @@
                             -->
                         </div>
 
-                        <div class="add opciones-textArea-agregar" id="opcion-textArea-agregar" style="display: none;">
+                        <div class="add opciones-textArea-agregar" id="cntdor-rpta-opcion-textArea" style="display: none;">
                             <textarea name="" id="" cols="30" rows="7" disabled></textarea>     
                         </div>
 
-                        <div class="add opciones-npm-agregar" id="opcion-npm-agregar" style="display: none">
+                        <div class="add opciones-npm-agregar" id="cntdor-rpta-opcion-npm" style="display: none">
                             <div class="rating rating-sin-estilo">
                                 <input type="radio" name="${pregunta}" value="10" id="rata10" disabled><label for="rata10">10</label>
                                 <input type="radio" name="${pregunta}" value="9" id="rata9" disabled><label for="rata9">9</label>
@@ -313,12 +313,12 @@
                         </div>
 
                         <!-- botones agregar -->
-                        <div class="mas-pregunta" id="boton-opcion-multiple-agregar"  style="display: none;">
-                            <a type="button" id="mas-opcion-multiple-agregar"><i class="bi bi-plus-lg"></i></a>
+                        <div class="mas-pregunta" id="ctndor-agregar-rpta-opcion-simple"  style="display: none;">
+                            <a type="button" id="btn-agregar-rpta-opcion-simple"><i class="bi bi-plus-lg"></i></a>
                         </div>
 
-                        <div class="mas-pregunta" id="boton-opcion-checkbox-agregar" style="display: none;">
-                            <a type="button" id="mas-opcion-checkbox-agregar"><i class="bi bi-plus-lg"></i></a>
+                        <div class="mas-pregunta" id="ctndor-agregar-rpta-opcion-multiple" style="display: none;">
+                            <a type="button" id="btn-agregar-rpta-opcion-multiple"><i class="bi bi-plus-lg"></i></a>
                         </div>
                         
                     </div>
