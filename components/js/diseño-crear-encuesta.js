@@ -1,6 +1,6 @@
 //OBTENER EL TITULO DE ENCUESTA
 
-const tituloEncuestaElement = document.getElementById('titulo-encuesta');
+/*const tituloEncuestaElement = document.getElementById('titulo-encuesta');
 
     // Intenta recuperar el título almacenado en el localStorage
     const storedTituloEncuesta = localStorage.getItem('datosEncuesta');
@@ -13,7 +13,7 @@ const tituloEncuestaElement = document.getElementById('titulo-encuesta');
         }
     }
 
-
+*/
 // VARIABLES GLOBALES DEL PRIMER SUB MENU
 const primero1=document.getElementById("primero_1");
 const primero2=document.getElementById("primero_2")
@@ -147,7 +147,7 @@ primero3.addEventListener("click",function (e){
 // ==================================
 // FUNCIONES PARA REMPLAZAR EL FONDO 
 // ============================
-
+/*
 const fondo=document.querySelectorAll(".nav-link4");
 const contenedorEncuesta=document.getElementById("contenedor-encuesta")
 const dato3=window.localStorage.fondo;
@@ -167,32 +167,32 @@ fondo.forEach(e => {
   }
 
 });
-
+*/
 // ========================================================
 // FUNCIONES PARA REMPLAZAR FUENTE
 // ========================================================
-
+/*
 const fuente = document.querySelectorAll(".nav-link5");
-const tituloEncuesta = document.getElementById("titulo-encuesta");
+//const tituloEncuesta = document.getElementById("titulo-encuesta");
 const dato4=window.localStorage.fuente || null;
 
 // console.log(dato4)
 
 fuente.forEach(f => {
-  tituloEncuesta.style.fontFamily = dato4;
+  //tituloEncuesta.style.fontFamily = dato4;
   f.onclick = () => {
     const fuenteSeleccionada = f.querySelector(".descripcion-fuente").textContent;
     localStorage.setItem("fuente", fuenteSeleccionada);
-    tituloEncuesta.style.fontFamily = fuenteSeleccionada;
+    //tituloEncuesta.style.fontFamily = fuenteSeleccionada;
     // console.log(localStorage.getItem("fuente")); // Muestra el valor actualizado del Local Storage
   };
 });
-
+*/
 
 // ========================================================
 // FUNCIONES PARA REMPLAZAR COLOR
 // ========================================================
-
+/*
 const color = document.querySelectorAll(".nav-link6");
   const colorTituloEncuesta = document.getElementById("titulo-encuesta");
   const dato5 = window.localStorage.color || null;
@@ -222,7 +222,7 @@ const color = document.querySelectorAll(".nav-link6");
       if (imgElement) {
         const filenameColor = imgElement.getAttribute('alt');
         localStorage.setItem("color", filenameColor);
-        tituloEncuesta.style.color = filenameColor;
+        //tituloEncuesta.style.color = filenameColor;
         console.log(colorPregunta)
         // Verificar si colorPregunta existe antes de recorrerlo
         if (colorPregunta) {
@@ -241,3 +241,4 @@ const color = document.querySelectorAll(".nav-link6");
       }
     };
   });
+*/

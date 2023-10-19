@@ -9,11 +9,73 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
     <!-- Estilos css -->
-    <link rel="stylesheet" href="components/css/navbar_usuario.css">
-    <link rel="stylesheet" href="components/css/diseño_crear_encuesta_dashboard.css">
+    <link rel="stylesheet" href="components/css/navbar_usuario.css"> <!-- Barra de navegación Perfil -->
+    <link rel="stylesheet" href="components/css/barra_lateral_dashboard.css"> <!-- Barra lateral estilos -->
+    <link rel="stylesheet" href="components/css/diseño_crear_encuesta_dashboard.css"> <!-- CSS Actual -->
+
+    <!-- Tipo de fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Arimo&family=Roboto:ital@1&display=swap" rel="stylesheet">
+
 
 </head>
 <body>
+    <nav class="sidebar-2 cerrar">
+        <!-- <i class="bi bi-caret-right"></i>  -->
+        <i class="bi bi-chevron-right"></i>
+
+        <div class="barra-menu">
+            <div class="menu2">
+                <ul class="menu-links2">
+                    <li class="nav-link2 primer" id="primero">
+                        <a ><i class="bi bi-pencil-square icons" id="pencil"></i></a>
+                    </li>
+                    <li class="nav-link2" id="segundo"><a href="#"><i class="bi bi-clipboard icons" id="clipboard"></i></a></li>
+                    <li class="nav-link2" id="tercero"><a href="#"><i class="bi bi-trash3 icons" id="trash"></i></a></li>
+                </ul>
+
+                <div class="sub-menu">
+                    <p class="titulo-sub-menu">FORMATO</p>
+                    <ul>
+                        <li class="nav-link3" id="primero_1"><a >Fondo</a></li>
+                        <li class="nav-link3" id="primero_2"><a >Fuente</a></li>
+                        <li class="nav-link3" id="primero_3"><a >Color</a></li>
+                    </ul>
+
+                    <div class="sub-menu-1">
+                        <ul id="fondo">
+                            <li class="nav-link4"><div class="tema"><img src="components/img/edificio.jpg" alt=""></div></li>
+                            <li class="nav-link4"><div class="tema"><img src="components/img/edificio.jpg" alt=""></div></li>
+                            <li class="nav-link4"><div class="tema"><img src="components/img/paisaje_oscuro.jpg" alt=""></div></li>
+                            <li class="nav-link4"><div class="tema"><img src="components/img/24783.jpg" alt=""></div></li>
+                            <li class="nav-link4"><div class="tema"><img src="components/img/fondo-abstracto-textura.jpg" alt=""></div></li>
+                            <li class="nav-link4"><div class="tema"><img src="components/img/fondo-abstracto-textura.jpg" alt=""></div></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="sub-menu-2">
+                        <ul id="fuente">
+                            <li class="nav-link5"><div class="fuente"><img src="Fuentes/Roboto.jpg" alt="" ><p class="descripcion-fuente">Roboto</p></div></li>
+                            <li class="nav-link5"><div class="fuente"><img src="Fuentes/Arimo.jpg" alt=""><p class="descripcion-fuente">Arimo</p></div></li>
+                            <li class="nav-link5"><div class="fuente"><img src="Fuentes/Amatic.jpg" alt=""><p class="descripcion-fuente">Amatic SC</p></div></li>
+                        </ul>
+                    </div>
+
+                    <div class="sub-menu-3">
+                        <ul id="color">
+                            <li class="nav-link6"><div class="color"><img src="Color/000000.jpg" alt="#000000" ></div></li>
+                            <li class="nav-link6"><div class="color"><img src="Color/2A64E8.png" alt="#2A64E8"></div></li>
+                            <li class="nav-link6"><div class="color"><img src="Color/FFFFFF.png" alt="#FFFFFF"></div></li>
+                        </ul>
+                    </div>
+                </div>    
+            </div>
+        </div>
+
+    </nav>
+    
     <!-- Cabecera -->
     <header>
         <nav class="navbar">
@@ -435,9 +497,10 @@
             </div>
         </div>
     </div>
+    <script src="components/js/diseño-crear-encuesta.js"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/uuid@8.3.2/dist/umd/uuidv4.min.js"></script>
     <script src="components/js/crear_encuesta_dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uuid@8.3.2/dist/umd/uuidv4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
     integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
