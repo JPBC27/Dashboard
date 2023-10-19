@@ -13,11 +13,11 @@ const selectBtn = optionMenu.querySelector(".select-btn-agregar"); // Botón que
 const sBtnText = optionMenu.querySelector(".sBtn-text-agregar");// Texto del botón que activa el dropdown
 
 const contenedorGeneralAgregar = document.getElementById("contenedor-opciones-agregar");// Donde se agrega o muestran la(s) respeusta(s)
-const cntdorOpcionSimple = document.getElementById("cntdor-rptas-opcion-simple");//opcion-multiple-agregar // Contenedor en donde se agregarán las opcioen simple
-const cntdorAgregarRespuestaSimple = document.getElementById("ctndor-agregar-rpta-opcion-simple");//boton-opcion-multiple-agregar// Contenedor que agrega una respuesta opcioen simple
+const cntdorOpcionSimple = document.getElementById("cntdor-rptas-opcion-simple");// Contenedor en donde se agregarán las opcioen simple
+const cntdorAgregarRespuestaSimple = document.getElementById("ctndor-agregar-rpta-opcion-simple");// Contenedor que agrega una respuesta opcioen simple
 
-const cntdorOpcionMultiple = document.getElementById("cntdor-rptas-opcion-multiple");//opcion-checkbox-agregar // Contenedor en donde se agregarán las opcioen multiple
-const cntdorAgregarRespuestaMultiple = document.getElementById("ctndor-agregar-rpta-opcion-multiple");//boton-opcion-checkbox-agregar  // Botón que agrega una respuesta opcioen multiple
+const cntdorOpcionMultiple = document.getElementById("cntdor-rptas-opcion-multiple");// Contenedor en donde se agregarán las opcioen multiple
+const cntdorAgregarRespuestaMultiple = document.getElementById("ctndor-agregar-rpta-opcion-multiple");// Botón que agrega una respuesta opcioen multiple
 
 const cntdorOpcionTextArea = document.getElementById("cntdor-rpta-opcion-textArea");
 const cntdorOpcionNpm = document.getElementById("cntdor-rpta-opcion-npm");
@@ -79,8 +79,8 @@ selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"))
 
 
 // * Multiple
-const contenedorOpcionesSimple = document.getElementById("cntdor-rptas-opcion-simple");//opcion_multiple //Contenedor de casillas de tipo "multiple"
-const botonAgregarOpcionSimple = document.getElementById("btn-agregar-rpta-opcion-simple");//mas-opcion-multiple-agregar //Botón de agregar opción "multiple"
+const contenedorOpcionesSimple = document.getElementById("cntdor-rptas-opcion-simple");//Contenedor de casillas de tipo "simple"
+const botonAgregarOpcionSimple = document.getElementById("btn-agregar-rpta-opcion-simple");//Botón de agregar opción "simple"
 
 // * Checkbox
 const contenedorOpcionesMultiple = document.getElementById("cntdor-rptas-opcion-multiple") ;
@@ -137,14 +137,17 @@ function actualizarValoresIngresados(tipo) {
 
 // Función para agregar eventos de eliminación de la respuesta
 function agregarEventosEliminar(tipo) {
-  const contenedor  = tipo === 'multiple' ? contenedorOpcionesMultiple : contenedorOpcionesSimple;
-  const nuevosDivs = contenedor.querySelectorAll(".pregunta-opciones");
-  nuevosDivs.forEach((div) => {
-    const iconoEliminar = div.querySelector(`.${tipo}-quitar-agregar`);
-    iconoEliminar.addEventListener("click", () => {
-      div.remove();
-    });
-  });
+      const contenedor  = tipo === 'multiple' ? contenedorOpcionesMultiple : contenedorOpcionesSimple;
+      contenedor.addEventListener("click", function(event) {
+            if (event.target.classList.contains(`${tipo}-quitar-agregar`)) {
+                  const div = event.target.closest(".pregunta-opciones");
+                  const index = Array.from(contenedor.querySelectorAll(".pregunta-opciones")).indexOf(div);
+                  if (index > -1) {
+                        div.remove();
+                        valoresIngresados.splice(index, 1);
+                  }
+            }
+      });
 }
 
 // Evento de clic para agregar una nueva opción "Simple"
@@ -189,205 +192,6 @@ cancelar.forEach(botonCancelar => {
       });
 });
 
-/*
-//Opciones
-      const OPCION_RADIO = "Opción simple";
-      const OPCION_CHECKBOX = "Opción múltiple";
-      const OPCION_TEXTAREA = "Texto simple";
-      const OPCION_BARRA_CALOR = "NPS";
-
-//Abrir lista de tipos de preguntas
-const optionMenu=document.querySelector(".dropdown-agregar"), //div en donde se encuentran las opciones (checkbox, texto corto,...)
-      selectBtn= optionMenu.querySelector(".select-btn-agregar"); //Botón en donde se abrirá el menú de opciones para agregar
-
-selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active")); // Mostrar el listado de opciones
-document.addEventListener('click', (event) => {
-      if (!event.target.closest('.dropdown-agregar')) {
-            optionMenu.classList.remove("active");
-      }
-});
-
-// ==AGREGAR PREGUNTA, AGREGAR TIPO DE RESPUESTA
-//Mostrar
-const sBtn_text= optionMenu.querySelector(".sBtn-text-agregar"), //texto del menu opciones
-      options= optionMenu.querySelectorAll(".option-agregar"); //opciones (checkbox, texto corto,...)
-      
-const contenedor_general_agregar=document.getElementById("contenedor-opciones-agregar"); //Donde se agrega o muestran los elementos a agregar
-
-const menu_multiple= document.getElementById("opcion-multiple-agregar"),
-      casilla_verificacion=document.getElementById("opcion-checkbox-agregar"),
-      contenedor_opcion_multiple=document.getElementById("boton-opcion-multiple-agregar"),
-      contenedor_opcion_checkbox=document.getElementById("boton-opcion-checkbox-agregar");
-      contenedor_opcion_textArea=document.getElementById("opcion-textArea-agregar"),
-      contenedor_opcion_npm=document.getElementById("opcion-npm-agregar");
-
-// Declara un array para almacenar los objetos con el índice y el valor ingresado en los inputs
-let valoresIngresados = [];
-// Renderizar
-options.forEach(option =>{
-      option.addEventListener("click", ()=>{
-            let selectedOption = option.querySelector(".option-text-agregar").innerText;
-            sBtn_text.innerText= selectedOption; // Cambiar nombre al botón de opciones
-            optionMenu.classList.remove("active"); //Desactivar listado
-
-            //Limpiar
-            contenedor_general_agregar.style.display = "block";
-            menu_multiple.style.display = "none";
-            casilla_verificacion.style.display = "none";
-            opcion_checkbox.innerHTML = '';
-            opcion_multiple.innerHTML = '';
-            contenedor_opcion_multiple.style.display = "none";
-            contenedor_opcion_checkbox.style.display = "none";
-            contenedor_opcion_textArea.style.display = "none";
-            contenedor_opcion_npm.style.display="none";
-
-            // Mostrar según el tipo de pregunta
-            if(selectedOption == OPCION_RADIO){
-                  menu_multiple.style.display ="block";
-                  contenedor_opcion_multiple.style.display="flex";
-            }
-            else if(selectedOption==OPCION_CHECKBOX){
-                  casilla_verificacion.style.display ="block";
-                  contenedor_opcion_checkbox.style.display="flex";
-            }
-            else if(selectedOption==OPCION_TEXTAREA){
-                  contenedor_opcion_textArea.style.display="flex";
-            }
-            else if(selectedOption==OPCION_BARRA_CALOR){
-                  contenedor_opcion_npm.style.display="flex";
-            }
-            else{
-                  contenedor_general_agregar.style.display = "none";
-            }
-      })
-})
-
-//multiple
-const opcion_multiple=document.getElementById("opcion-multiple-agregar") //Contenedor de casillas de tipo "multiple"
-const mas_opcion_multiple=document.getElementById("mas-opcion-multiple-agregar") //Botón de agregar opción "multiple"
-
-//checkbox
-const opcion_checkbox=document.getElementById("opcion-checkbox-agregar") 
-const mas_opcion_checkbox=document.getElementById("mas-opcion-checkbox-agregar")
-
-
-// Función para agregar una nueva opción de cualquier tipo
-function agregarNuevaOpcion(tipo) {
-      let template = '';
-
-      if (tipo === 'multiple') {
-            template = `
-                  <div class="pregunta-opciones">
-                        <label class="radio1">
-                              <input type="radio" name="r" value="clasica" disabled>
-                              <span></span>
-                        </label>
-                        <input class="input-opciones1 input-opciones1-agregar" type="text">
-                        <div class="quitar-pregunta mas-pregunta">
-                              <a type="button"><i class="bi bi-dash multiple-quitar-agregar"></i></a>
-                        </div>
-                  </div>
-            `;
-      } else if (tipo === 'checkbox') {
-            template = `
-                  <div class="pregunta-opciones">
-                        <div class="checkbox referencia-checkbox-agregar">
-                              <input class="checkbox-spin" type="checkbox" id="check4" disabled style="display: none;"/>
-                              <label for="check4"><span></span></label>
-                        </div>
-                        <input class="input-opciones1 input-opciones1-agregar" type="text">
-                        <div class="quitar-pregunta mas-pregunta">
-                              <a type="button"><i class="bi bi-dash checkbox-quitar-agregar"></i></a>
-                        </div>
-                  </div>
-            `;
-      }
-
-      const opcion = tipo === 'multiple' ? opcion_multiple : opcion_checkbox;
-      opcion.insertAdjacentHTML("beforeend", template);
-
-      actualizarValoresIngresados(tipo);
-      agregarEventosEliminar(tipo);
-}
-
-
-// Función para actualizar los valores ingresados de la respuesta
-function actualizarValoresIngresados(tipo) {
-  const opcion = tipo === 'multiple' ? opcion_multiple : opcion_checkbox;
-  const nuevosInputs = opcion.querySelectorAll(".input-opciones1-agregar");
-
-  nuevosInputs.forEach((input, index) => {
-    input.addEventListener("input", (event) => {
-      const valor = event.target.value;
-      valoresIngresados[index] = { index, valor };
-    });
-
-    input.value = valoresIngresados[index] ? valoresIngresados[index].valor : "";
-  });
-}
-
-// Función para agregar eventos de eliminación de la respuesta
-function agregarEventosEliminar(tipo) {
-  const opcion = tipo === 'multiple' ? opcion_multiple : opcion_checkbox;
-  const nuevosDivs = opcion.querySelectorAll(".pregunta-opciones");
-  nuevosDivs.forEach((div) => {
-    const iconoEliminar = div.querySelector(`.${tipo}-quitar-agregar`);
-    iconoEliminar.addEventListener("click", () => {
-      div.remove();
-    });
-  });
-}
-
-// Evento de clic para agregar una nueva opción "multiple"
-mas_opcion_multiple.addEventListener("click", () => {
-  agregarNuevaOpcion('multiple');
-});
-
-// Evento de clic para agregar una nueva opción "checkbox"
-mas_opcion_checkbox.addEventListener("click", () => {
-  agregarNuevaOpcion('checkbox');
-  
-});
-
-// ==CANCELAR PREGUNTA
-const contenedor_agregar_pregunta=document.getElementById("contenedor-agregar-pregunta"); //Contenedor para agregar +
-const contenedor_diseño_pregunta=document.getElementById("pregunta-agregar"); // Todo el contenedor (pregunta y opciones)
-const contenedor_opciones=document.querySelectorAll(".contenedor-opciones-agregar"); //Solo las opciones (radio,text,check,..)
-const pregunta= document.querySelector(".texto-pregunta-agregar"); //La pregunta a realizar
-const cancelar=document.querySelectorAll(".opcion-cancelar-agregar"); //Botón cancelar
-
-function resetearFormulario() {
-  pregunta.value = "";
-  pregunta_obligatoria.checked = false;
-  valoresIngresados = [];
-  contenedor_opciones.forEach(opcion => {
-    opcion.style.display = "none";
-    sBtn_text.innerText = "Diseño de opciones";
-    opcion_checkbox.innerHTML = '';
-    opcion_multiple.innerHTML = '';
-  });
-}
-
-cancelar.forEach(botonCancelar => {
-  botonCancelar.addEventListener("click", () => {
-    const valorLocalStorage = localStorage.getItem("prueba1");
-
-    if (valorLocalStorage && JSON.parse(valorLocalStorage).length > 0) {
-      // Si existe el valor en el localStorage, ocultamos los contenedores de opciones
-      resetearFormulario();
-      contenedor_agregar_pregunta.style.display = "flex";
-      contenedor_diseño_pregunta.style.display = "none";
-      
-    } else {
-      // Si NO existe el valor en el localStorage, ocultamos el contenedor actual y mostramos el de agregar pregunta
-      resetearFormulario();
-      contenedor_diseño_pregunta.style.display = "block";
-      contenedor_agregar_pregunta.style.display = "none";
-
-    }
-  });
-});
-*/
 // *GUARDAR PREGUNTA (en el local)
 const botonGuardar=document.getElementById("guardar");
 var preguntasGuardadas = JSON.parse(localStorage.getItem("prueba1")) || [];
@@ -406,10 +210,10 @@ function guardarPreguntaLocalmente() {
         return; // Si la pregunta ya existe, no la agregues de nuevo
       }
 
-      const id = CryptoJS.SHA3(`${values + pregunta.value + sBtnText.innerText}`, {outputLength:32}).toString();
-      
+      const id = uuidv4();
+
       preguntasGuardadas.push({
-            id: "f" + id,
+            id: id,
             pregunta: pregunta.value,
             respuestas: values,
             obligatorio: preguntaObligatoria.checked,
@@ -422,6 +226,11 @@ function guardarPreguntaLocalmente() {
       contenedorDiseñoPregunta.style.display="none";
       contenedorAgregarPregunta.style.display="flex";
       resetearFormulario();
+}
+function crearNuevoID() {
+      // Genera un nuevo UUID
+      var newUUID = uuidv4();
+      return newUUID;
 }
 
 botonGuardar.addEventListener("click", guardarPreguntaLocalmente);
@@ -489,7 +298,7 @@ function generatePreguntaHTML(id, pregunta, respuestas, obligatorio, tipo) {
                               ${opcionesHTML}
                         </div>  
                   </div>
-                  <div class="overlay" onclick="obtenerElemento(${id})">
+                  <div class="overlay" onclick="obtenerElementoSeleccionado('${id}')">
                         <i class="bi bi-pencil"></i>
                         <span>Editar pregunta</span>
                   </div>
@@ -585,34 +394,30 @@ acordeonTitulos.forEach((titulo) => {
       });
 });
 
+function resetearAcordeon(){
+      acordeonTitulos.forEach((titulo) => {
+            const contenido = titulo.nextElementSibling;
+            contenido.classList.remove('mostrar');
+      });
+}
 
 // *CONTROLADOR
-//var elementoSeleccionado;
-//var preguntaIndex;
 var elementoSeleccionado;
 var indicePreguntaSeleccionada;
 
-// Función para obtener el elemento seleccionado y abrir el menú de edición
-const obtenerElementoSeleccionado = (elemento) => {
-      elementoSeleccionado = elemento;
-      const indicePregunta = preguntasGuardadas.findIndex(item => item.id === elementoSeleccionado.id);
+// Función para obtener el idElementoSeleccionado seleccionado y abrir el menú de edición
+const obtenerElementoSeleccionado = (idElementoSeleccionado) => {
+      const obtenerElementoSeleccionado = document.getElementById(idElementoSeleccionado);
+      elementoSeleccionado = obtenerElementoSeleccionado;
+      const indicePregunta = preguntasGuardadas.findIndex(item => item.id === idElementoSeleccionado);
       indicePreguntaSeleccionada = indicePregunta;
-      mostrarSidebarEditar(elementoSeleccionado);
+      mostrarSidebarEditar();
+      resetearAcordeon();
       cerrarSidebarEditar(false);
       editarRespuestas();
       opcionPreguntaObligatoria();
-      txtTipoPregunta.innerHTML = preguntasGuardadas[indicePreguntaSeleccionada].tipo;
+      txtTipoPregunta_SB.innerHTML = preguntasGuardadas[indicePreguntaSeleccionada].tipo;
 }
-/*const obtenerElemento=(elemento)=>{
-      elementoSeleccionado = elemento;
-      const indexPregunta= preguntasGuardadas.findIndex(item => item.id === elementoSeleccionado.id);
-      preguntaIndex = indexPregunta;
-      mostrarSidebarEditar(elementoSeleccionado);
-      cerrarSidebarEditar(false);
-      editarRespuestas();
-      opcionPreguntaObligatoria();
-      txt_tipo_pregunta.innerHTML = preguntasGuardadas[preguntaIndex].tipo;
-}*/
 
 // *ELIMINAR
 const btnEliminarPregunta = document.getElementById('btn-eliminar-pregunta');
@@ -665,20 +470,20 @@ function eliminarRespuesta(indice){
       const eliminarHTML = document.getElementById(elementoSeleccionado.id);
       eliminarHTML.querySelector(`#${elementoSeleccionado.id}-respuesta-${indice + 1}`).remove();
 
-      if (preguntaIndex !== -1) {
-            preguntasGuardadas[preguntaIndex].respuestas.splice(indice, 1);
+      if (indicePreguntaSeleccionada !== -1) {
+            preguntasGuardadas[indicePreguntaSeleccionada].respuestas.splice(indice, 1);
             localStorage.setItem("prueba1", JSON.stringify(preguntasGuardadas));
       }
 
       // Mostrar el sidebar actualizado
-      mostrarSidebarEditar(elementoSeleccionado);
+      mostrarSidebarEditar();
 }
 
 // *AGREGAR
 // Función para agregar respuestas tanto en la vista preguntas como en las vista sideBar
 function agregarRespuesta(){
-      if (preguntaIndex !== -1) {
-            const preguntaActual  = preguntasGuardadas[preguntaIndex];
+      if (indicePreguntaSeleccionada !== -1) {
+            const preguntaActual  = preguntasGuardadas[indicePreguntaSeleccionada];
             const nuevaRespuesta = `Opción ${preguntaActual.respuestas.length + 1}`;
             let respuestaHTML = '';
 
@@ -710,7 +515,7 @@ function agregarRespuesta(){
             contenedorRespuestas .insertAdjacentHTML('beforeend', respuestaHTML);
 
             // Actualizar los datos del preguntasGuardadas y del almacenamiento local
-            preguntasGuardadas[preguntaIndex].respuestas.push(nuevaRespuesta);
+            preguntasGuardadas[indicePreguntaSeleccionada].respuestas.push(nuevaRespuesta);
             localStorage.setItem("prueba1", JSON.stringify(preguntasGuardadas));
 
             // Mostrar el sidebar actualizado
@@ -729,7 +534,7 @@ const txtTipoPregunta_SB = document.getElementById("txt-tipo-pregunta");
 
 // Función para actualizar la vista sideBar de las respuestas y preguntas
 function mostrarSidebarEditar() {
-      const preguntaActual = preguntasGuardadas[preguntaIndex];
+      const preguntaActual = preguntasGuardadas[indicePreguntaSeleccionada];
 
       contenedorRespuestas_SB.innerHTML = '';
       tituloSidebar_SB.textContent = preguntaActual.tipo;
@@ -738,7 +543,7 @@ function mostrarSidebarEditar() {
       textoPregunta_SB.value = preguntaActual.pregunta;
 
       // Mostrar el tipo actual en Opciones
-      txtTipoPregunta_SB.innerHTML = preguntasGuardadas[preguntaIndex].tipo;
+      txtTipoPregunta_SB.innerHTML = preguntasGuardadas[indicePreguntaSeleccionada].tipo;
 
       // Mostrar las respuestas si es una pregunta de opción simple o múltiple
       if (preguntaActual.tipo === opciones.OPCION_RADIO || preguntaActual.tipo === opciones.OPCION_CHECKBOX) {
@@ -792,7 +597,7 @@ function mostrarSidebarEditar() {
 // Función para actualizar los IDs de las respuestas en la vista preguntas
 function actualizarIdRespuestas() {
       const divARemplazar = document.getElementById(elementoSeleccionado.id);
-      const preguntaActual = preguntasGuardadas[preguntaIndex];
+      const preguntaActual = preguntasGuardadas[indicePreguntaSeleccionada]; //local
   
       // Generar el HTML actualizado para la pregunta
       const divActualizado = generatePreguntaHTML(
@@ -803,7 +608,7 @@ function actualizarIdRespuestas() {
             preguntaActual.tipo
       );
   
-      divARemplazar.insertAdjacentHTML('afterend', divActualizado);
+      divARemplazar.insertAdjacentHTML('afterend', divActualizado); //el nuevo HTML se insertará justo después del elemento
       divARemplazar.remove();
 }
   
@@ -814,20 +619,14 @@ textoPregunta_SB.addEventListener('input', () => {
       const preguntaAModificar = modificarHTML.querySelector('#pregunta-realizar');
       const nuevoValor = textoPregunta_SB.value;
 
-      if (preguntaIndex !== -1) {
-            preguntasGuardadas[preguntaIndex].pregunta = nuevoValor;
+      if (indicePreguntaSeleccionada !== -1) {
+            preguntasGuardadas[indicePreguntaSeleccionada].pregunta = nuevoValor;
             localStorage.setItem("prueba1", JSON.stringify(preguntasGuardadas));
       }
       
       // Actualizar el valor en el HTML con el nuevo contenido
-      actualizarContenidoHTML(preguntaAModificar, nuevoValor);
-  });
-  
-function actualizarContenidoHTML(elemento, nuevoContenido) {
-      if (elemento) {
-            elemento.innerText = nuevoContenido;
-      }
-}
+      preguntaAModificar.innerText = nuevoValor
+});
 
 // Función para los cambios en las respuestas
 function editarRespuestas(){
@@ -837,14 +636,15 @@ function editarRespuestas(){
             opcionRespuesta.addEventListener('input', () => {
                   const nuevoValor = opcionRespuesta.value;
 
-                  if (preguntaIndex !== -1) {
-                        preguntasGuardadas[preguntaIndex].respuestas[index] = nuevoValor;
+                  if (indicePreguntaSeleccionada !== -1) {
+                        preguntasGuardadas[indicePreguntaSeleccionada].respuestas[index] = nuevoValor;
                         localStorage.setItem("prueba1", JSON.stringify(preguntasGuardadas));
                   }
-                  
+                  console.log('todo OK');
                   const modificarHTML = document.getElementById(`${elementoSeleccionado.id}`);
-                  const contenedorRespuesta = modificarHTML.querySelector(`#${elementoSeleccionado.id}-respuesta-${index + 1}`);
-
+                  console.log(modificarHTML);
+                  const contenedorRespuesta = document.getElementById(`${elementoSeleccionado.id}-respuesta-${index + 1}`);
+                  console.log(contenedorRespuesta);
                   // Obtener los elementos <span> del contenedor
                   const respuesta = contenedorRespuesta.querySelectorAll('span');
                   const ultimoSpan = respuesta[respuesta.length - 1];
@@ -857,7 +657,7 @@ function editarRespuestas(){
 const preguntaObligatoria_SB = document.getElementById('opcion_rapida_pregunta_obligatoria');
 
 function opcionPreguntaObligatoria() {
-      preguntaObligatoria_SB.checked = preguntasGuardadas[preguntaIndex].obligatorio;
+      preguntaObligatoria_SB.checked = preguntasGuardadas[indicePreguntaSeleccionada].obligatorio;
 
       preguntaObligatoria_SB.addEventListener("change", () => {
             const modificarHTML = document.getElementById(`${elementoSeleccionado.id}`);
@@ -866,8 +666,8 @@ function opcionPreguntaObligatoria() {
             // Actualizar el icono de obligatorio en el HTML
             iconoObligatorio.textContent = preguntaObligatoria_SB.checked ? "*" : " ";
 
-            if (preguntaIndex !== -1) {
-                  preguntasGuardadas[preguntaIndex].obligatorio = preguntaObligatoria_SB.checked;
+            if (indicePreguntaSeleccionada !== -1) {
+                  preguntasGuardadas[indicePreguntaSeleccionada].obligatorio = preguntaObligatoria_SB.checked;
                   localStorage.setItem("prueba1", JSON.stringify(preguntasGuardadas));
             }
       });
@@ -875,7 +675,7 @@ function opcionPreguntaObligatoria() {
 
 var encabezadoEncuesta = JSON.parse(localStorage.getItem("encuesta1")) || [];
 //objeto_encuesta
-function inicializarVariablesEncuesta() {
+function inicializarEncabezadoEncuesta() {
       if (encabezadoEncuesta.length === 0) {
             encabezadoEncuesta.push({ id: "1", titulo: "", instruccion: "" });
             localStorage.setItem("encuesta1", JSON.stringify(encabezadoEncuesta));
@@ -886,7 +686,7 @@ function inicializarVariablesEncuesta() {
       }
 }
 
-inicializarVariablesEncuesta();
+inicializarEncabezadoEncuesta();
 
 // * Editar Título de la encuesta
 const tituloEncuesta = document.getElementById("titulo-encuesta");
@@ -1003,31 +803,31 @@ function mostrarDropDownTipoPregunta() {
       }
 }
 
-/* Cambiar el tipo en DROP DOWN de EDICION*/
+// * Cambiar el tipo en DROP DOWN de EDICION
 const tiposPregunta  = dropdownContent.querySelectorAll(".opc-tipo-pregunta");
 
 tiposPregunta.forEach((tipoPregunta, index) => {
       tipoPregunta.addEventListener("click", () => {
             switch (index){
                   case 0:
-                        if(preguntasGuardadas[preguntaIndex].tipo === opciones.OPCION_TEXTAREA || preguntasGuardadas[preguntaIndex].tipo === opciones.OPCION_BARRA_CALOR){
-                              preguntasGuardadas[preguntaIndex].respuestas = ["Opción 1"]; 
+                        if(preguntasGuardadas[indicePreguntaSeleccionada].tipo === opciones.OPCION_TEXTAREA || preguntasGuardadas[indicePreguntaSeleccionada].tipo === opciones.OPCION_BARRA_CALOR){
+                              preguntasGuardadas[indicePreguntaSeleccionada].respuestas = ["Opción 1"]; 
                         }
-                        preguntasGuardadas[preguntaIndex].tipo = opciones.OPCION_RADIO;
+                        preguntasGuardadas[indicePreguntaSeleccionada].tipo = opciones.OPCION_RADIO;
                         break;
                   case 1:
-                        if(preguntasGuardadas[preguntaIndex].tipo === opciones.OPCION_TEXTAREA || preguntasGuardadas[preguntaIndex].tipo === opciones.OPCION_BARRA_CALOR){
-                              preguntasGuardadas[preguntaIndex].respuestas = ["Opción 1"]; 
+                        if(preguntasGuardadas[indicePreguntaSeleccionada].tipo === opciones.OPCION_TEXTAREA || preguntasGuardadas[indicePreguntaSeleccionada].tipo === opciones.OPCION_BARRA_CALOR){
+                              preguntasGuardadas[indicePreguntaSeleccionada].respuestas = ["Opción 1"]; 
                         }
-                        preguntasGuardadas[preguntaIndex].tipo = opciones.OPCION_CHECKBOX;
+                        preguntasGuardadas[indicePreguntaSeleccionada].tipo = opciones.OPCION_CHECKBOX;
                         break;
                   case 2:
-                        preguntasGuardadas[preguntaIndex].tipo = opciones.OPCION_TEXTAREA;
-                        preguntasGuardadas[preguntaIndex].respuestas = [];
+                        preguntasGuardadas[indicePreguntaSeleccionada].tipo = opciones.OPCION_TEXTAREA;
+                        preguntasGuardadas[indicePreguntaSeleccionada].respuestas = [];
                         break;
                   case 3:
-                        preguntasGuardadas[preguntaIndex].tipo = opciones.OPCION_BARRA_CALOR;
-                        preguntasGuardadas[preguntaIndex].respuestas = [];
+                        preguntasGuardadas[indicePreguntaSeleccionada].tipo = opciones.OPCION_BARRA_CALOR;
+                        preguntasGuardadas[indicePreguntaSeleccionada].respuestas = [];
                         break;
             }
             localStorage.setItem("prueba1", JSON.stringify(preguntasGuardadas));
@@ -1040,8 +840,30 @@ tiposPregunta.forEach((tipoPregunta, index) => {
 const btnDuplicarPregunta = document.getElementById("btn-duplicar-pregunta");
 
 btnDuplicarPregunta.addEventListener('click', () => {
-      preguntasGuardadas.splice(preguntaIndex + 1, 0, preguntasGuardadas[preguntaIndex]); //! Falta Implementar, primero es agregar el ID unico a todas las preguntas
+      let newID = uuidv4();
+      let nuevaPregunta = {...preguntasGuardadas[indicePreguntaSeleccionada]};
+      nuevaPregunta.id = newID;
+      preguntasGuardadas.splice(indicePreguntaSeleccionada + 1, 0, nuevaPregunta);
+      localStorage.setItem("prueba1", JSON.stringify(preguntasGuardadas));
+      agregarPreguntaDuplicada();
 });
+
+// !Función para agregar pregunta a la vista preguntas
+function agregarPreguntaDuplicada() {
+      const divActual = document.getElementById(elementoSeleccionado.id);
+      const preguntaDuplicada = preguntasGuardadas[indicePreguntaSeleccionada + 1]; //local
+  
+      // Generar el HTML nuevo para la pregunta
+      const divNuevo = generatePreguntaHTML(
+            preguntaDuplicada.id, 
+            preguntaDuplicada.pregunta, 
+            preguntaDuplicada.respuestas, 
+            preguntaDuplicada.obligatorio, 
+            preguntaDuplicada.tipo
+      );
+  
+      divActual.insertAdjacentHTML('afterend', divNuevo); //el nuevo HTML se insertará justo después del elemento
+}
 
 // * GUARDAR ENCUESTA 
 const botonGuardarEncuesta = document.getElementById("guardar-encuesta");
@@ -1104,14 +926,3 @@ botonGuardarEncuesta.addEventListener('click', () => {
 
       window.location.href = 'encuesta.html';
 });
-
-/* 
-      * Creacion del UUID
-      * Genera un nuevo UUID
-      var newUUID = uuidv4();
-  
-      * Obtén el elemento donde deseas mostrar el UUID
-      var uuidElement = document.getElementById("uuid");
-      * Establece el valor del elemento
-      uuidElement.textContent = newUUID;
-*/
