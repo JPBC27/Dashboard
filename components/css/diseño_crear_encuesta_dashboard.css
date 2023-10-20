@@ -70,6 +70,8 @@ h1{
 .logoEmpresa img{
     width: 30px;
     height: auto;
+    min-width: 30px;
+    min-height: 20px;
 }
 
 .guardado-automatico{
@@ -129,7 +131,12 @@ h1{
     display: flex;
 }
 
+.texto-titulo-encuesta{
+    max-width: 450px;
+}
+
 .texto-instruccion-encuesta{
+    max-width: 570px;
     font-size: 13px;
     text-transform: none;
     font-weight: 700;
@@ -183,10 +190,10 @@ h1{
 }
 
 #textarea-titulo-encuesta, #textarea-instruccion-encuesta {
+    max-width: 86%;
     display: none;
     resize: none; 
     display: none; 
-    max-width: 90%;
     background-color: #EEE;
     border: 1px solid #099EBD;
     border-radius: 10px;
@@ -196,6 +203,11 @@ h1{
     font-weight: 800;
     color: #595959;
     text-transform: uppercase;
+}
+#textarea-titulo-encuesta{
+    max-width: 450px;
+    max-height: 34px;
+    padding: 10px 25px;
 }
 #textarea-instruccion-encuesta{
     font-size: 13px;
@@ -250,6 +262,7 @@ h1{
     align-items: center;
     flex-wrap: nowrap;
     gap: 5px;
+    padding-left: 10px;
 }
 
 /* ==Overlay - Encima de las preguntas para su modificacion*/
@@ -297,7 +310,7 @@ h1{
 /* ==CONTENEDOR AGREGAR PREGUNTA*/
 .contenedor-agregar-pregunta{
     margin: 30px 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -682,6 +695,9 @@ h1{
 textarea{
     border: 1px solid #005FA6;
     width: 100%;
+    resize: vertical;
+    border-radius: 5px;
+    min-height: 30px;
 }
 /* Estilos para el textarea deshabilitado */
 textarea:disabled {
@@ -1039,7 +1055,7 @@ button.btn-agregar-respuesta {
 }
 
 .boton-guardar-encuesta{
-    display: flex;
+    display: none;
     gap: 5px;
     background-color: #EEE;
     flex-direction: column;
@@ -1091,6 +1107,18 @@ button.btn-agregar-respuesta {
     }
     .dropdown-tipo-pregunta.active .select-btn{
         margin-right: 1px;
+    }
+
+    #textarea-titulo-encuesta{
+        max-width: 450px;
+        max-height: 34px;
+        padding: 10px 25px;
+    }
+
+    #textarea-instruccion-encuesta{
+        max-width: 570px;
+        max-height: 45px;
+        padding: 10px 25px;
     }
 }
 /*PC*/
@@ -1149,5 +1177,18 @@ button.btn-agregar-respuesta {
 
     .dropdown-tipo-pregunta .sBtn-text{
         margin-right: 1px;
+    }
+
+    #textarea-titulo-encuesta{
+        max-width: 450px;
+        max-height: 34px;
+        padding: 10px 25px;
+    }
+
+    
+    #textarea-instruccion-encuesta{
+        max-width: 570px;
+        max-height: 45px;
+        padding: 10px 25px;
     }
 }

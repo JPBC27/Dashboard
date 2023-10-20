@@ -749,6 +749,7 @@ if(encabezadoEncuesta[0].instruccion !== ""){
       textareaInstruccion.style.display = "none";
       modificarInstruccion.style.display = "flex";
       instruccion.style.border = "solid 1px #099EBD";
+      instruccion.style.textAlign = "start";
 }
 
 instruccionEncuesta.addEventListener("click", () => {
@@ -836,7 +837,7 @@ tiposPregunta.forEach((tipoPregunta, index) => {
     });
 });
 
-// * Duplicar Pregunta
+// *Duplicar Pregunta
 const btnDuplicarPregunta = document.getElementById("btn-duplicar-pregunta");
 
 btnDuplicarPregunta.addEventListener('click', () => {
@@ -846,9 +847,10 @@ btnDuplicarPregunta.addEventListener('click', () => {
       preguntasGuardadas.splice(indicePreguntaSeleccionada + 1, 0, nuevaPregunta);
       localStorage.setItem("prueba1", JSON.stringify(preguntasGuardadas));
       agregarPreguntaDuplicada();
+      cerrarSidebarEditar(true);
 });
 
-// !Función para agregar pregunta a la vista preguntas
+// Función para agregar pregunta a la vista preguntas
 function agregarPreguntaDuplicada() {
       const divActual = document.getElementById(elementoSeleccionado.id);
       const preguntaDuplicada = preguntasGuardadas[indicePreguntaSeleccionada + 1]; //local
