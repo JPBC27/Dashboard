@@ -24,6 +24,7 @@
     background-color:#666666 ;
     transition: var(--tran-05);
     z-index: 1;
+    cursor: auto;
 }
 
 .menu2{
@@ -220,12 +221,17 @@
    
 }
 
+.sidebar-2.cerrar .barra-menu{
+    display: none;
+}
+
 .sidebar-2.cerrar{
     top: 56%;
     width: 25px;
     height: 50px;
     border-top-right-radius:8px;
     border-bottom-right-radius:8px;
+    cursor: pointer;
 }
 
 .sidebar-2.cerrar .bi-chevron-right{

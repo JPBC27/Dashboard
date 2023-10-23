@@ -1,3 +1,24 @@
+const sidebar = document.querySelector(".sidebar-2"); // Todo el submenu (nav)
+const barra_menu = document.querySelector(".barra-menu"); // Contenedor de las opciones
+
+// * ABRIR SIDEBAR SUBMENU
+sidebar.addEventListener("click", () => {
+  sidebar.classList.toggle("cerrar");
+});
+
+// * CERRAR SIDEBAR SUBMENU
+document.addEventListener('click', (event) => {
+    if (!(sidebar.contains(event.target))) {
+      sidebar.classList.add("cerrar");
+    }
+});
+
+
+
+
+
+
+
 //OBTENER EL TITULO DE ENCUESTA
 
 /*const tituloEncuestaElement = document.getElementById('titulo-encuesta');
@@ -21,19 +42,25 @@ const primero3=document.getElementById("primero_3")
 
 
 const body= document.querySelector("body"),
-      sidebar=body.querySelector(".sidebar-2"),
-      toggle=body.querySelector(".bi-chevron-right"),
+     // sidebar=document.querySelector(".sidebar-2"),
+    //  barra_menu = document.querySelector(".barra-menu"),
+      toggle=body.querySelector(".bi-chevron-right"), // Icono de abir o cerrar submenu
       submenu=document.querySelector(".sub-menu"),
       submenu1=document.querySelector(".sub-menu-1"),
       submenu2=document.querySelector(".sub-menu-2"),
       submenu3=document.querySelector(".sub-menu-3");
 
+ /*     
       toggle.addEventListener("click",()=>{
         sidebar.classList.toggle("cerrar"); 
       });
-
+      document.addEventListener('click', (event) => {
+        if ((sidebar.contains(event.target))) {
+          barra_menu.style.display = "flex";
+        }
+      });*/
 const links=document.querySelectorAll('.nav-link2');
-
+//barra_menu.style.display = "none";
 
 
 // ===============================================
