@@ -23,7 +23,7 @@
     width: 50px;
     background-color:#666666 ;
     transition: var(--tran-05);
-    z-index: 1;
+    z-index: 3;
     cursor: auto;
 }
 
@@ -52,6 +52,18 @@
     display: flex;
     align-items: center;
     cursor:pointer;
+}
+
+.nav-link3:hover{
+    background-color: #666666;
+}
+
+.nav-link3:last-child:hover{
+    border-bottom-right-radius: 8px;
+}
+
+.nav-link3.activate-li-sub-menu:last-child:hover{
+    border-bottom-right-radius: 0;
 }
 
 .sidebar-2 li .icons,
@@ -102,8 +114,8 @@
     width: 100%;
 }
 
-.icon-active{
-    color: #00B3AA !important;
+.nav-link2-activate i{
+    color: #00B3AA !important
 }
 
 .sidebar-2.cerrar li{
@@ -128,6 +140,7 @@
     border-top-right-radius:8px;
     border-bottom-right-radius:8px;
     z-index: -1;
+
 
 }
 
@@ -241,6 +254,8 @@
     border-bottom-left-radius:0;
     border-top-right-radius:8px;
     border-bottom-right-radius:8px;
+    height: 49px;
+    width: 30px;
     z-index: 2;
 }
 

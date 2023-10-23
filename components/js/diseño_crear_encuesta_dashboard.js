@@ -1,139 +1,93 @@
-const sidebar = document.querySelector(".sidebar-2"); // Todo el submenu (nav)
-const barra_menu = document.querySelector(".barra-menu"); // Contenedor de las opciones
+// MENU
+const sidebar = document.querySelector(".sidebar-2"); // Todo el manu (nav)
+const iconoAbrirCerrarMenu = document.querySelector(".bi-chevron-right"); //toggle // Icono de abir o cerrar submenu
 
-// * ABRIR SIDEBAR SUBMENU
-sidebar.addEventListener("click", () => {
+// * ABRIR SIDEBAR MENU
+iconoAbrirCerrarMenu.addEventListener("click", () => {
   sidebar.classList.toggle("cerrar");
 });
 
-// * CERRAR SIDEBAR SUBMENU
+// * CERRAR SIDEBAR MENU
 document.addEventListener('click', (event) => {
-    if (!(sidebar.contains(event.target))) {
-      sidebar.classList.add("cerrar");
+    if (!(sidebar.contains(event.target)) && !sidebar.classList.contains("cerrar")) {
+        sidebar.classList.add("cerrar");
+        limpiarMenu();
+        subMenu_1.classList.remove("activate-sub-menu");
     }
 });
 
+// * ABRIR Y CERRAR SUBMENUS
 
+const opciones_menu = document.querySelectorAll('.nav-link2'); //links //Opciones del menú
 
+const subMenu_1 = document.querySelector(".sub-menu"); //submenu //Contenedor sub menú de la primera opción
+const opcionesSubMenu_1 = { // Opciones del sub menú 1
+  Opcion1 : document.getElementById("primero_1"), //primero1 // Fondo
+  Opcion2 : document.getElementById("primero_2"), //primero2 // Fuente
+  Opcion3 : document.getElementById("primero_3"), //primero3 // Color
+}
 
+const subSubMenus = {
+  subSubMenu_1 : document.querySelector(".sub-menu-1"), //submenu1 // menu Fondo
+  subSubMenu_2 : document.querySelector(".sub-menu-2"), //submenu2 // menu Fuente
+  subSubMenu_3 : document.querySelector(".sub-menu-3") //submenu3 // menu Color
+}
 
+// Función para limpiar los submenus y opciones menú
+function limpiarMenu(){
+  sidebar.querySelector("#primero").classList.remove("nav-link2-activate");
+  sidebar.querySelector("#segundo").classList.remove("nav-link2-activate");
+  sidebar.querySelector("#tercero").classList.remove("nav-link2-activate");
 
+  opcionesSubMenu_1.Opcion1.classList.remove("activate-li-sub-menu");
+  opcionesSubMenu_1.Opcion2.classList.remove("activate-li-sub-menu");
+  opcionesSubMenu_1.Opcion3.classList.remove("activate-li-sub-menu");
 
-//OBTENER EL TITULO DE ENCUESTA
+  subSubMenus.subSubMenu_1.classList.remove("activate-sub-menu-1");
+  subSubMenus.subSubMenu_2.classList.remove("activate-sub-menu-2");
+  subSubMenus.subSubMenu_3.classList.remove("activate-sub-menu-3");
+}
 
-/*const tituloEncuestaElement = document.getElementById('titulo-encuesta');
+// Función para manejar la lógica de clics en los elementos de la barra lateral
+function handleNavClick(element) {
+  if(!element.className.includes("nav-link2-activate")){
+    limpiarMenu();
+  }
+  // alternar estilos
+  element.classList.toggle("nav-link2-activate");
+}
 
-    // Intenta recuperar el título almacenado en el localStorage
-    const storedTituloEncuesta = localStorage.getItem('datosEncuesta');
+// Click en opciones del menú
+opciones_menu.forEach(element => {
+  element.addEventListener("click", function (e) {
+      if (element.id === "primero") {
+          handleNavClick(element);
+          subMenu_1.classList.toggle("activate-sub-menu");
 
-    // Si existe un título almacenado en el localStorage, reemplaza el contenido del <p> con él
-    if (storedTituloEncuesta) {
-        const tituloEncuestaObj = JSON.parse(storedTituloEncuesta);
-        if (tituloEncuestaObj.Titulo) {
-            tituloEncuestaElement.textContent = tituloEncuestaObj.Titulo;
-        }
-    }
+      } else if (element.id === "segundo") {
+          handleNavClick(element);
+          subMenu_1.classList.remove("activate-sub-menu");
 
-*/
-// VARIABLES GLOBALES DEL PRIMER SUB MENU
-const primero1=document.getElementById("primero_1");
-const primero2=document.getElementById("primero_2")
-const primero3=document.getElementById("primero_3")
-
-
-const body= document.querySelector("body"),
-     // sidebar=document.querySelector(".sidebar-2"),
-    //  barra_menu = document.querySelector(".barra-menu"),
-      toggle=body.querySelector(".bi-chevron-right"), // Icono de abir o cerrar submenu
-      submenu=document.querySelector(".sub-menu"),
-      submenu1=document.querySelector(".sub-menu-1"),
-      submenu2=document.querySelector(".sub-menu-2"),
-      submenu3=document.querySelector(".sub-menu-3");
-
- /*     
-      toggle.addEventListener("click",()=>{
-        sidebar.classList.toggle("cerrar"); 
-      });
-      document.addEventListener('click', (event) => {
-        if ((sidebar.contains(event.target))) {
-          barra_menu.style.display = "flex";
-        }
-      });*/
-const links=document.querySelectorAll('.nav-link2');
-//barra_menu.style.display = "none";
-
-
-// ===============================================
-// funciones para la barra lateral
-// ===============================================
-links.forEach(element => {
-  // console.log(element)
-  // toggle.classList.add("hidden-arrow");
-
-  element.addEventListener("click",function (e) {
-    // toggle.classList.add("hidden-arrow");
-    
-
-    if(element.id=="primero"){
-      document.getElementById("primero").classList.toggle("nav-link2-activate")
-      document.getElementById("segundo").classList.remove("nav-link2-activate")
-      document.getElementById("tercero").classList.remove("nav-link2-activate")
-      document.getElementById("pencil").classList.toggle("icon-active")
-      document.getElementById("clipboard").classList.remove("icon-active")
-      document.getElementById("trash").classList.remove("icon-active")
-      submenu.classList.toggle("activate-sub-menu")
-      primero1.classList.remove("activate-li-sub-menu")
-      submenu1.classList.remove("activate-sub-menu-1")
-      primero2.classList.remove("activate-li-sub-menu")
-      submenu2.classList.remove("activate-sub-menu-2")
-      primero3.classList.remove("activate-li-sub-menu")
-      submenu3.classList.remove("activate-sub-menu-3")
-
-      // console.log(document.getElementById("pencil"))
-      // console.log(document.getElementById("primero"))
-
-    }
-    else if(element.id=="segundo"){
-      document.getElementById("primero").classList.remove("nav-link2-activate")
-      document.getElementById("segundo").classList.toggle("nav-link2-activate")
-      document.getElementById("tercero").classList.remove("nav-link2-activate")
-      document.getElementById("pencil").classList.remove("icon-active")
-      document.getElementById("clipboard").classList.toggle("icon-active")
-      document.getElementById("trash").classList.remove("icon-active")
-      submenu.classList.remove("activate-sub-menu")
-      primero1.classList.remove("activate-li-sub-menu")
-      submenu1.classList.remove("activate-sub-menu-1")
-      primero2.classList.remove("activate-li-sub-menu")
-      submenu2.classList.remove("activate-sub-menu-2")
-
-    }
-    else{
-      document.getElementById("primero").classList.remove("nav-link2-activate")
-      document.getElementById("segundo").classList.remove("nav-link2-activate")
-      document.getElementById("tercero").classList.toggle("nav-link2-activate")
-      document.getElementById("pencil").classList.remove("icon-active")
-      document.getElementById("clipboard").classList.remove("icon-active")
-      document.getElementById("trash").classList.toggle("icon-active")
-      submenu.classList.remove("activate-sub-menu")
-      primero1.classList.remove("activate-li-sub-menu")
-      submenu1.classList.remove("activate-sub-menu-1")
-      primero2.classList.remove("activate-li-sub-menu")
-      submenu2.classList.remove("activate-sub-menu-2")
-    }
-
-    if(element.className.includes("nav-link2-activate")){
-      toggle.classList.add("hidden-arrow")
-    }
-    else{
-      toggle.classList.remove("hidden-arrow");
-    }
-
-    // console.log(element.className)    
-  })
-
- 
+      } else if (element.id === "tercero") {
+          handleNavClick(element);
+          subMenu_1.classList.remove("activate-sub-menu");
+      }
+  });
 });
 
+//!
+
+const primero1 = document.getElementById("primero_1");
+const primero2 = document.getElementById("primero_2");
+const primero3 = document.getElementById("primero_3");
+const toggle = document.querySelector(".bi-chevron-right");
+const links = document.querySelectorAll('.nav-link2');
+
+const submenu = document.querySelector(".sub-menu");
+const submenu1 = document.querySelector(".sub-menu-1");
+const submenu2 = document.querySelector(".sub-menu-2");
+const submenu3 = document.querySelector(".sub-menu-3");
+// !
 // ==================================
 // FUNCIONES DEL PRIMER SUBMENU
 // ============================
