@@ -55,6 +55,9 @@ h1{
     transition: var(--tran-04);
     max-width: 1600px;
     margin: 25px auto;
+    background-size: cover;
+    background-position: bottom;
+    border-radius: 8px;
 }
 
 /* ==Logo empresa y guardado automatico*/

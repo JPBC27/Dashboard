@@ -75,80 +75,61 @@ opciones_menu.forEach(element => {
   });
 });
 
-//!
 
-const primero1 = document.getElementById("primero_1");
-const primero2 = document.getElementById("primero_2");
-const primero3 = document.getElementById("primero_3");
-const toggle = document.querySelector(".bi-chevron-right");
-const links = document.querySelectorAll('.nav-link2');
-
-const submenu = document.querySelector(".sub-menu");
-const submenu1 = document.querySelector(".sub-menu-1");
-const submenu2 = document.querySelector(".sub-menu-2");
-const submenu3 = document.querySelector(".sub-menu-3");
-// !
-// ==================================
-// FUNCIONES DEL PRIMER SUBMENU
-// ============================
-
+//* FUNCIÓN DEL PRIMER SUBMENU
+function toggleSubMenu(opcion, subSubMenu, index) {
+  for (let i = 1; i <= 3; i++) {
+    if (i !== index) {
+      opcionesSubMenu_1['Opcion' + i].classList.remove("activate-li-sub-menu");
+      subSubMenus['subSubMenu_' + i].classList.remove("activate-sub-menu-" + i);
+    }
+  }
+  opcion.classList.toggle("activate-li-sub-menu");
+  subSubMenu.classList.toggle("activate-sub-menu-" + index);
+}
 
 // FONDO
-primero1.addEventListener("click",function (e){
-  primero1.classList.toggle("activate-li-sub-menu")
-  submenu1.classList.toggle("activate-sub-menu-1")
-  primero2.classList.remove("activate-li-sub-menu")
-  submenu2.classList.remove("activate-sub-menu-2")
-  primero3.classList.remove("activate-li-sub-menu")
-  submenu3.classList.remove("activate-sub-menu-3")
+opcionesSubMenu_1.Opcion1.addEventListener("click", () => {
+  toggleSubMenu(opcionesSubMenu_1.Opcion1, subSubMenus.subSubMenu_1, 1);
+});
 
-})
 
 // FUENTE
-primero2.addEventListener("click",function (e){
-  primero2.classList.toggle("activate-li-sub-menu")
-  submenu2.classList.toggle("activate-sub-menu-2")
-  primero1.classList.remove("activate-li-sub-menu")
-  submenu1.classList.remove("activate-sub-menu-1")
-  primero3.classList.remove("activate-li-sub-menu")
-  submenu3.classList.remove("activate-sub-menu-3")
-})
+opcionesSubMenu_1.Opcion2.addEventListener("click", () => {
+  toggleSubMenu(opcionesSubMenu_1.Opcion2, subSubMenus.subSubMenu_2, 2);
+});
 
 // COLOR 
-primero3.addEventListener("click",function (e){
-  primero3.classList.toggle("activate-li-sub-menu")
-  submenu3.classList.toggle("activate-sub-menu-3")
-  primero1.classList.remove("activate-li-sub-menu")
-  submenu1.classList.remove("activate-sub-menu-1")
-  primero2.classList.remove("activate-li-sub-menu")
-  submenu2.classList.remove("activate-sub-menu-2")
-})
-
-
-// ==================================
-// FUNCIONES PARA REMPLAZAR EL FONDO 
-// ============================
-/*
-const fondo=document.querySelectorAll(".nav-link4");
-const contenedorEncuesta=document.getElementById("contenedor-encuesta")
-const dato3=window.localStorage.fondo;
-
-
-fondo.forEach(e => {
-  contenedorEncuesta.style.background=`url(${dato3}) no-repeat center center`;
-  contenedorEncuesta.style.backgroundSize=`100% 100%`;
-
-  e.onclick=()=>{
-    const filename=new URL(e.lastChild.lastChild.src).pathname
-    // localStorage.setItem("fondo",JSON.stringify(filename))
-    localStorage.setItem("fondo", filename);
-    contenedorEncuesta.style.background=`url(${filename }) no-repeat center center`;
-    contenedorEncuesta.style.backgroundSize=`100% 100%`;
-    // console.log(filename)
-  }
-
+opcionesSubMenu_1.Opcion3.addEventListener("click", () => {
+  toggleSubMenu(opcionesSubMenu_1.Opcion3, subSubMenus.subSubMenu_3, 3);
 });
-*/
+
+//* REEMPLAZAR FONDO
+var estilosGuardados = JSON.parse(localStorage.getItem("estilos")) || {};
+
+const fondos = document.querySelectorAll(".nav-link4"); // Fondos pre-definidos
+const contenedorEncuesta = document.getElementById("contenedor-encuesta")
+const dato3 = window.localStorage.fondo;
+
+
+fondos.forEach(e => {
+  e.onclick=()=>{
+    const url = new URL(e.lastChild.lastChild.src).pathname
+    let urlModificado = url.replace(/_mini/, "");
+
+    contenedorEncuesta.style.backgroundImage = `url(${urlModificado })`;
+
+//! FALTA
+    if('fondo' in estilosGuardados){
+      estilosGuardados.fondo = urlModificado
+      //estilosGuardados.push({fondo: urlModificado});
+      //localStorage.setItem("estilos", JSON.stringify(estilosGuardados));
+    }
+
+
+  }
+});
+
 // ========================================================
 // FUNCIONES PARA REMPLAZAR FUENTE
 // ========================================================

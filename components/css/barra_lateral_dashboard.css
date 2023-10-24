@@ -23,7 +23,7 @@
     width: 50px;
     background-color:#666666 ;
     transition: var(--tran-05);
-    z-index: 3;
+    z-index: 4;
     cursor: auto;
 }
 
@@ -140,11 +140,7 @@
     border-top-right-radius:8px;
     border-bottom-right-radius:8px;
     z-index: -1;
-
-
 }
-
-
 
 .sub-menu-1{
     position: absolute;
@@ -168,17 +164,18 @@
     flex-wrap: wrap;
     gap: 10%;
     justify-content: center;
-
-
 }
 
 .sub-menu-1 li{
     display: flex;
     height: 40px;
     margin-top: 5px;
+    cursor: pointer;
     margin-bottom: 5px;
+}
 
-
+.sub-menu-1 li:hover{
+    opacity: 0.5;
 }
 
 .tema{
