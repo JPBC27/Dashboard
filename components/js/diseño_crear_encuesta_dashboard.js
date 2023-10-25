@@ -108,54 +108,50 @@ opcionesSubMenu_1.Opcion3.addEventListener("click", () => {
 var estilosGuardados = JSON.parse(localStorage.getItem("estilos")) || {};
 
 const fondos = document.querySelectorAll(".nav-link4"); // Fondos pre-definidos
-const contenedorEncuesta = document.getElementById("contenedor-encuesta")
-const dato3 = window.localStorage.fondo;
+const contenedorEncuesta = document.getElementById("contenedor-encuesta");
 
+if('fondo' in estilosGuardados){ //Si hay un fondo, lo pone en el background
+  contenedorEncuesta.style.backgroundImage = `url(${estilosGuardados.fondo})`;
+}
 
-fondos.forEach(e => {
-  e.onclick=()=>{
-    const url = new URL(e.lastChild.lastChild.src).pathname
+fondos.forEach(fondo => {
+  fondo.onclick=()=>{
+    const url = new URL(fondo.lastChild.lastChild.src).pathname;
     let urlModificado = url.replace(/_mini/, "");
 
     contenedorEncuesta.style.backgroundImage = `url(${urlModificado })`;
-
-//! FALTA
-    if('fondo' in estilosGuardados){
-      estilosGuardados.fondo = urlModificado
-      //estilosGuardados.push({fondo: urlModificado});
-      //localStorage.setItem("estilos", JSON.stringify(estilosGuardados));
+    if(estilosGuardados.fondo === urlModificado){
+      return;
     }
-
-
+    estilosGuardados.fondo = urlModificado;
+    localStorage.setItem("estilos", JSON.stringify(estilosGuardados));
   }
 });
 
-// ========================================================
-// FUNCIONES PARA REMPLAZAR FUENTE
-// ========================================================
-/*
-const fuente = document.querySelectorAll(".nav-link5");
+//* REMPLAZAR FUENTE
+const fuentes = document.querySelectorAll(".nav-link5"); // Fondos pre-definidos
 //const tituloEncuesta = document.getElementById("titulo-encuesta");
-const dato4=window.localStorage.fuente || null;
 
-// console.log(dato4)
+if('fuente' in estilosGuardados){ //Si hay un fondo, lo pone en el background
+  tituloEncuesta.style.fontFamily = estilosGuardados.fuente;
+}
 
-fuente.forEach(f => {
-  //tituloEncuesta.style.fontFamily = dato4;
-  f.onclick = () => {
-    const fuenteSeleccionada = f.querySelector(".descripcion-fuente").textContent;
-    localStorage.setItem("fuente", fuenteSeleccionada);
-    //tituloEncuesta.style.fontFamily = fuenteSeleccionada;
-    // console.log(localStorage.getItem("fuente")); // Muestra el valor actualizado del Local Storage
+fuentes.forEach(fuente => {
+  fuente.onclick = () => {
+    const fuenteSeleccionada = fuente.querySelector(".descripcion-fuente").textContent;
+    
+    if(estilosGuardados.fuente === fuenteSeleccionada){
+      return;
+    }
+    estilosGuardados.fuente = fuenteSeleccionada;
+    localStorage.setItem("estilos", JSON.stringify(estilosGuardados));
+    tituloEncuesta.style.fontFamily = fuenteSeleccionada;
   };
 });
-*/
 
-// ========================================================
-// FUNCIONES PARA REMPLAZAR COLOR
-// ========================================================
+//* REMPLAZAR COLOR
 /*
-const color = document.querySelectorAll(".nav-link6");
+  const color = document.querySelectorAll(".nav-link6");
   const colorTituloEncuesta = document.getElementById("titulo-encuesta");
   const dato5 = window.localStorage.color || null;
   var colorPregunta = document.querySelectorAll(".diseño-pregunta-span");
