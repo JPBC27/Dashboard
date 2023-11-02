@@ -99,7 +99,11 @@
                 <a href=""><i class="bi bi-arrow-left"></i>volver</a>
             </div>
             <div class="subtitulo-diseño-preguntas">
-                <a type="button" class="activate-b" id="crear">Diseño de preguntas</a>
+                <div>
+                    <!-- Activate-s:activado, Activate-n, mostrar bloqueado -->
+                    <a type="button" class="opcion activate-s" id="crear">Diseño de preguntas</a>
+                    <a type="button" class="opcion activate-n" id="crear">Opciones de encuesta</a>
+                </div>
                 <hr>
             </div>
         </div>
@@ -107,17 +111,18 @@
         <!-- Encuesta -->
         <div id="contenedor-encuesta">
             <!-- Logo de la empresa y notificación de guardado -->
-            <div class="logoEmpresa">
-                <img src="components/img/LogoEmpresa.svg" alt="Logo de la Empresa Consulting">
-
-            </div>
-            <div class="guardado-automatico">
+            <div class="guardado-automatico" id="guardadoTemporal" >
                 <i class="bi bi-cloud-arrow-up"></i>
                 <p>Datos guardados en borrador.</p>
             </div>
             
             <!-- Introduccion e Instrucciones de la encuesta -->
             <div class="contenedor-introduccion-instruccion">
+
+                <div class="imagen_empresa">
+                    <input type="file" id="imagenEmpresaCliente" style="display:none">
+                    <button onclick="handleImage()" id="imagenEmpresaClienteButton" class="button">CARGAR LOGO</button>
+                </div>
 
                 <div id="titulo-encuesta">
 
@@ -405,9 +410,17 @@
                 </div>
             </div>
 
+            <div class="contenedor-enviar-encuesta" id="contenedor-encuesta-lista">
+                <div class="contenedor-enviar" id="btnEnviar-encuesta">
+                    <a class="texto-btnEnviar">ENVIAR ENCUESTA</a>
+                </div>
+                <textarea id="textarea-btnEnviar-encuesta" rows="1" maxlength="20"></textarea>
+            </div>
+
             <div class="contenedor-guardar-encuesta">
                 <button type="submit" class="boton-guardar-encuesta" id="guardar-encuesta"><i class="bi bi-clipboard2-check-fill"></i>Guardar</button>
             </div>
+
         </div>
     </main>
 

@@ -37,7 +37,19 @@ const mostrarElementos = (opcionSeleccionada) => {
       cntdorAgregarRespuestaMultiple.style.display = "none";
       cntdorOpcionTextArea.style.display = "none";
       cntdorOpcionNpm.style.display = "none";
-      
+
+      if (valoresIngresados.length > 0) {
+            if(opcionSeleccionada === opciones.OPCION_RADIO){
+                  for (let i = 0; i < valoresIngresados.length; i++) {
+                        agregarNuevaOpcion('simple');
+                  }
+            }else if(opcionSeleccionada === opciones.OPCION_CHECKBOX){
+                  for (let i = 0; i < valoresIngresados.length; i++) {
+                        agregarNuevaOpcion('multiple');
+                  }
+            }
+      }
+
       // Mostrar elementos específicos según la opción seleccionada
       switch (opcionSeleccionada) {
             case opciones.OPCION_RADIO:
@@ -226,6 +238,7 @@ function guardarPreguntaLocalmente() {
       contenedorDiseñoPregunta.style.display="none";
       contenedorAgregarPregunta.style.display="flex";
       resetearFormulario();
+      guardadoBorrador (1);
 }
 function crearNuevoID() {
       // Genera un nuevo UUID
@@ -355,8 +368,8 @@ function asignarEstilos() {
 renderizarPreguntas();
 
 // *FUNCIONES PARA PODER AGREGAR OTRA PREGUNTA
-//const contenedorAgregarPregunta = document.getElementById("contenedor-agregar-pregunta"); //Contenedor para agregar +
-contenedorAgregarPregunta.addEventListener("click", () => {
+const btnAgregarPregunta = document.querySelector(".contenedor-agregar"); //Contenedor para agregar +
+btnAgregarPregunta.addEventListener("click", () => {
       contenedorDiseñoPregunta.style.display="block"
       contenedorAgregarPregunta.style.display="none"
 });
@@ -425,6 +438,7 @@ const btnEliminarPregunta = document.getElementById('btn-eliminar-pregunta');
 btnEliminarPregunta.addEventListener('click', () => {
       eliminarPregunta();
       cerrarSidebarEditar(true);
+      guardadoBorrador (2);
 });
 
 // Función para eliminar la pregunta
@@ -628,6 +642,10 @@ textoPregunta_SB.addEventListener('input', () => {
       preguntaAModificar.innerText = nuevoValor
 });
 
+textoPregunta_SB.addEventListener("blur", () => {
+      guardadoBorrador();
+});
+
 // Función para los cambios en las respuestas
 function editarRespuestas(){
       const respuestasDePregunta = document.querySelectorAll('.respuesta-de-pregunta');
@@ -640,15 +658,19 @@ function editarRespuestas(){
                         preguntasGuardadas[indicePreguntaSeleccionada].respuestas[index] = nuevoValor;
                         localStorage.setItem("prueba1", JSON.stringify(preguntasGuardadas));
                   }
-                  console.log('todo OK');
                   const modificarHTML = document.getElementById(`${elementoSeleccionado.id}`);
-                  console.log(modificarHTML);
                   const contenedorRespuesta = document.getElementById(`${elementoSeleccionado.id}-respuesta-${index + 1}`);
-                  console.log(contenedorRespuesta);
+
                   // Obtener los elementos <span> del contenedor
                   const respuesta = contenedorRespuesta.querySelectorAll('span');
                   const ultimoSpan = respuesta[respuesta.length - 1];
                   ultimoSpan.textContent = nuevoValor;
+            });
+            let respuestaAnterior = preguntasGuardadas[indicePreguntaSeleccionada].respuestas[index];
+            opcionRespuesta.addEventListener("blur", () => {
+                  if(preguntasGuardadas[indicePreguntaSeleccionada].respuestas[index] !== respuestaAnterior){
+                        guardadoBorrador();   
+                  }
             });
       });
 }
@@ -721,6 +743,7 @@ textAreaTitulo.addEventListener("blur", () => {
       }else{
             modificarTitulos.style.display = "flex";
       }
+      guardadoBorrador();
 });
 
 modificarTitulos.addEventListener("click", () => {
@@ -773,6 +796,7 @@ textareaInstruccion.addEventListener("blur", () => {
             modificarInstruccion.style.display = "flex";
             instruccion.style.textAlign = "start";
       }
+      guardadoBorrador();
 });
 
 modificarInstruccion.addEventListener("click", () => {
@@ -785,6 +809,40 @@ modificarInstruccion.addEventListener("click", () => {
 textareaInstruccion.addEventListener("input", () => {
       instruccion.textContent = textareaInstruccion.value;
       encabezadoEncuesta[0].instruccion = textareaInstruccion.value;
+      localStorage.setItem("encuesta1", JSON.stringify(encabezadoEncuesta));
+});
+
+// * Editar Botón envíar encuesta
+const btnEnviarEncuesta = document.getElementById("btnEnviar-encuesta");//instruccionEncuesta
+const btnEnviar = document.querySelector(".texto-btnEnviar"); //instruccion
+const textareabtnEnviarEncuesta = document.getElementById("textarea-btnEnviar-encuesta");//textareaInstruccion
+
+if(encabezadoEncuesta[0].txtBtnEnviar !== ""){
+      btnEnviar.textContent = encabezadoEncuesta[0].txtBtnEnviar;
+      textareabtnEnviarEncuesta.value = encabezadoEncuesta[0].txtBtnEnviar;
+      btnEnviarEncuesta.style.display = "block";
+      textareabtnEnviarEncuesta.style.display = "none";
+}
+
+btnEnviarEncuesta.addEventListener("click", () => {
+      btnEnviarEncuesta.style.display = "none";
+      textareabtnEnviarEncuesta.style.display = "block";
+      textareabtnEnviarEncuesta.focus();
+});
+
+textareabtnEnviarEncuesta.addEventListener("blur", () => {
+      btnEnviarEncuesta.style.display = "flex";
+      textareabtnEnviarEncuesta.style.display = "none";
+      if(textareabtnEnviarEncuesta.value.length === 0){
+            btnEnviar.textContent = "ENVIAR ENCUESTA";
+            btnEnviar.style.textAlign = "center";
+      }
+      guardadoBorrador();
+});
+
+textareabtnEnviarEncuesta.addEventListener("input", () => {
+      btnEnviar.textContent = textareabtnEnviarEncuesta.value;
+      encabezadoEncuesta[0].txtBtnEnviar = textareabtnEnviarEncuesta.value;
       localStorage.setItem("encuesta1", JSON.stringify(encabezadoEncuesta));
 });
 
@@ -848,6 +906,7 @@ btnDuplicarPregunta.addEventListener('click', () => {
       localStorage.setItem("prueba1", JSON.stringify(preguntasGuardadas));
       agregarPreguntaDuplicada();
       cerrarSidebarEditar(true);
+      guardadoBorrador();
 });
 
 // Función para agregar pregunta a la vista preguntas
@@ -867,6 +926,28 @@ function agregarPreguntaDuplicada() {
       divActual.insertAdjacentHTML('afterend', divNuevo); //el nuevo HTML se insertará justo después del elemento
 }
 
+function handleImage() {
+      var fileInput = document.getElementById('imagenEmpresaCliente');
+      fileInput.click();
+      fileInput.onchange = function() {
+        var file = fileInput.files[0];
+        if (file) {
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = function() {
+            var imageButton = document.getElementById('imagenEmpresaClienteButton');
+            imageButton.style.backgroundImage = "url('" + reader.result + "')";
+            console.log("url('" + reader.result + "')");
+            imageButton.innerHTML = ''; // Eliminar texto del botón si lo hay
+            imageButton.style.border = "none"; // Eliminar borde
+            imageButton.style.width = "120px";
+            imageButton.style.height = "120px";
+            imageButton.style.backgroundColor = "unset";
+          };
+        }
+      };
+}
+
 // * GUARDAR ENCUESTA 
 const botonGuardarEncuesta = document.getElementById("guardar-encuesta");
 
@@ -874,7 +955,6 @@ botonGuardarEncuesta.addEventListener('click', () => {
       var objetoEstiloEncuesta = [];
       var preguntasEncuesta = JSON.parse(localStorage.getItem("prueba1"));
       var cantidadPreguntas = preguntasEncuesta.length; // Usar preguntasEncuesta directamente
-      //var datosEncuesta = JSON.parse(localStorage.getItem("datosEncuesta"));
       var datosEncuesta = JSON.parse(localStorage.getItem("encuesta1"));
       var idEncuesta = localStorage.getItem("idEncuestaEditar"); // Obtener id de edición si existe
 
@@ -882,11 +962,10 @@ botonGuardarEncuesta.addEventListener('click', () => {
       var opcionesFecha = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'America/Lima' };
       var fechaFormateada = fecha.toLocaleString('es-PE', opcionesFecha);
 
-      var colorEncuesta = localStorage.getItem("color");
-      var fuenteEncuesta = localStorage.getItem("fuente");
-      var fondoEncuesta = localStorage.getItem("fondo");
-      
-      //var botonFinal = document.getElementById("valor-boton").value
+      let estilosGuardados = JSON.parse(localStorage.getItem("estilos")) || {};
+      let colorEncuesta = estilosGuardados.color;
+      let fuenteEncuesta = estilosGuardados.fuente;
+      let fondoEncuesta = estilosGuardados.fondo;
 
       objetoEstiloEncuesta.push({
             color: colorEncuesta,
@@ -918,13 +997,23 @@ botonGuardarEncuesta.addEventListener('click', () => {
 
       // Almacenar objetoEncuesta en el localStorage y borrar otros valores
       localStorage.setItem("Encuesta", JSON.stringify(encuestas));
-      localStorage.removeItem("prueba1");
+      /*localStorage.removeItem("prueba1");
       localStorage.removeItem("encuesta1");
-      localStorage.removeItem("datosEncuesta");
-      localStorage.removeItem("color");
-      localStorage.removeItem("fuente");
-      localStorage.removeItem("fondo");
-      localStorage.removeItem("idEncuestaEditar");
-
-      window.location.href = 'encuesta.html';
+      localStorage.removeItem("estilos");*/
+      window.location.href = 'crear_encuesta_dashboard2.html';
 });
+
+let timeoutId; // Variable para almacenar el ID del temporizador
+
+function guardadoBorrador() {
+      console.log("mostrar guardado");
+      guardadoTemporal.style.display = "flex";
+      if (timeoutId) {
+            clearTimeout(timeoutId); // Reinicia el temporizador si ya estaba corriendo
+      }
+      timeoutId = setTimeout(function() {
+            console.log("ocultar guardado");
+            guardadoTemporal.style.display = "none";
+            timeoutId = null; // Resetea la variable del ID del temporizador una vez que finaliza el temporizador
+      }, 3000);
+}

@@ -40,10 +40,30 @@ h1{
     margin-top: 2px;
 }
 
-.subtitulo-diseño-preguntas a{
+.subtitulo-diseño-preguntas .opcion{
     color: #454545;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.subtitulo-diseño-preguntas .opcion:not(:first-child){
+    margin-left: 15px;
+}
+
+.subtitulo-diseño-preguntas .opcion.activate-s{
     font-weight: 800;
+    font-size: 16px;
     border-bottom: 3.5px solid #F2A530;
+}
+
+.subtitulo-diseño-preguntas .opcion.activate-n{
+    cursor: default;
+}
+
+.subtitulo-diseño-preguntas .opcion:hover:not(.activate-n){
+    color: #F2A530;
 }
 
 #contenedor-encuesta{
@@ -61,31 +81,15 @@ h1{
 }
 
 /* ==Logo empresa y guardado automatico*/
-.logoEmpresa{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-    margin: 10px 20px;
-}
-
-.logoEmpresa img{
-    width: 30px;
-    height: auto;
-    min-width: 30px;
-    min-height: 20px;
-}
-
 .guardado-automatico{
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     flex-wrap: nowrap;
     position: sticky;
     top: 0;
-    margin: -39px 10px 0 0;
-    z-index: 2;
+    margin: 5px 0px 0 12px;
+    z-index: 10;
 }
 
 .guardado-automatico i{
@@ -95,9 +99,10 @@ h1{
 }
 
 .guardado-automatico p{
-    color: #504F4F;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
+    color: white;
+    text-shadow: -1px -1px 0 #504F4F, 1px -1px 0 #504F4F, -1px 1px 0 #504F4F, 1px 1px 0 #504F4F;
 }
 
 /* ==Título e instrcciones*/
@@ -145,7 +150,7 @@ h1{
     font-weight: 700;
 }
 
-.efectohover-titulo-instruccion:hover{
+.efectohover-titulo-instruccion:hover, #imagenEmpresaClienteButton:hover{
     background-color: #F2A530;
     color: #fff;
 }
@@ -192,11 +197,10 @@ h1{
     color: #A40D0D;
 }
 
-#textarea-titulo-encuesta, #textarea-instruccion-encuesta {
+#textarea-titulo-encuesta, #textarea-instruccion-encuesta, #textarea-btnEnviar-encuesta {
     max-width: 86%;
     display: none;
     resize: none; 
-    display: none; 
     background-color: #EEE;
     border: 1px solid #099EBD;
     border-radius: 10px;
@@ -217,7 +221,14 @@ h1{
     font-weight: 700;
     text-transform: none;
 }
-#textarea-titulo-encuesta:focus, #textarea-instruccion-encuesta:focus  {
+#textarea-btnEnviar-encuesta{
+    max-width: 190px;
+    max-height: 4px;
+    padding: 10px 20px 0px;
+    text-transform: none;
+}
+
+#textarea-titulo-encuesta:focus, #textarea-instruccion-encuesta:focus, #textarea-btnEnviar-encuesta:focus{
     outline: none;
 }
 
@@ -1077,6 +1088,51 @@ button.btn-agregar-respuesta {
     width: 126px;
     margin: 30px 20px 20px auto;
 }
+
+div#contenedor-encuesta-lista {
+    display: flex;
+    margin: 35px 0 10px;
+    /* display: none; */
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-enviar {
+    display: flex;
+    background-color:#0785be;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 10px 30px;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.contenedor-enviar:hover {
+    background-color: #099EBD;
+}
+
+#imagenEmpresaClienteButton {
+    background-color: white;
+    border: 2px dashed #099EBD;
+    font-family: sans-serif;
+    border-radius: 8px;
+    color: black;
+    padding: 10px 57px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+    color: #595959;
+    display: inline-block;
+    cursor: pointer;
+    background-position: center;
+    background-size: cover; /*100% 100%*/
+}
+
 /*Adaptable*/
 /*Tablet*/
 @media (min-width: 501px) and (max-width:1104px) {

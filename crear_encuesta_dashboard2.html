@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <!-- Estilos css -->
+    <link rel="stylesheet" href="components/css/navbar_usuario.css"> <!-- Barra de navegación Perfil -->
+    <link rel="stylesheet" href="components/css/barra_lateral_dashboard.css"> <!-- Barra lateral estilos -->
+    <link rel="stylesheet" href="components/css/diseño_crear_encuesta_dashboard.css"> <!-- CSS Actual -->
+
+    <!-- Tipo de fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Arimo&family=Roboto:ital@1&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+    <nav class="sidebar-2 cerrar">
+        <!-- <i class="bi bi-caret-right"></i>  -->
+        <i class="bi bi-chevron-right"></i>
+
+        <div class="barra-menu">
+            <div class="menu2">
+                <ul class="menu-links2">
+                    <li class="nav-link2 primer" id="primero">
+                        <a ><i class="bi bi-pencil-square icons" id="pencil"></i></a>
+                    </li>
+                    <li class="nav-link2" id="segundo"><a href="#"><i class="bi bi-clipboard icons" id="clipboard"></i></a></li>
+                    <li class="nav-link2" id="tercero"><a href="#"><i class="bi bi-trash3 icons" id="trash"></i></a></li>
+                </ul>
+
+                <div class="sub-menu">
+                    <p class="titulo-sub-menu">FORMATO</p>
+                    <ul>
+                        <li class="nav-link3" id="primero_1"><a >Fondo</a></li>
+                        <li class="nav-link3" id="primero_2"><a >Fuente</a></li>
+                        <li class="nav-link3" id="primero_3"><a >Color</a></li>
+                    </ul>
+
+                    <div class="sub-menu-1">
+                        <ul id="fondo">
+                            <li class="nav-link4"><div class="tema"><img src="components/img/edificio_mini.jpg" alt=""></div></li>
+                            <li class="nav-link4"><div class="tema"><img src="components/img/edificio_mini.jpg" alt=""></div></li>
+                            <li class="nav-link4"><div class="tema"><img src="components/img/paisajeOscuro_mini.jpg" alt=""></div></li>
+                            <li class="nav-link4"><div class="tema"><img src="components/img/paisajeOscuro_mini.jpg" alt=""></div></li>
+                            <li class="nav-link4"><div class="tema"><img src="components/img/fondo1_mini.jpg" alt=""></div></li>
+                            <li class="nav-link4"><div class="tema"><img src="components/img/fondo1_mini.jpg" alt=""></div></li>
+                        </ul>
+                    </div>
+
+                    <div class="sub-menu-2">
+                        <ul id="fuente">
+                            <li class="nav-link5"><div class="fuente"><img src="Fuentes/Roboto.jpg" alt="" ><p class="descripcion-fuente">Roboto</p></div></li>
+                            <li class="nav-link5"><div class="fuente"><img src="Fuentes/Roboto.jpg" alt="" ><p class="descripcion-fuente">Sans-Serif</p></div></li>
+                            <li class="nav-link5"><div class="fuente"><img src="Fuentes/Arimo.jpg" alt=""><p class="descripcion-fuente">Arimo</p></div></li>
+                            <li class="nav-link5"><div class="fuente"><img src="Fuentes/Amatic.jpg" alt=""><p class="descripcion-fuente">Amatic SC</p></div></li>
+                        </ul>
+                    </div>
+
+                    <div class="sub-menu-3">
+                        <ul id="color">
+                            <li class="nav-link6"><div class="color"><img src="Color/000000.jpg" alt="#000000" ></div></li>
+                            <li class="nav-link6"><div class="color"><img src="Color/2A64E8.png" alt="#2A64E8"></div></li>
+                            <li class="nav-link6"><div class="color"><img src="Color/FFFFFF.png" alt="#FFFFFF"></div></li>
+                        </ul>
+                    </div>
+                </div>    
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- Cabecera -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="https://www.pngall.com/wp-content/uploads/9/Kingdom-Hearts-III-Logo-PNG.png" alt="Logo">
+            </div>
+            <div class="navbar-right">
+                <a href="#" class="yellow-button">Mis encuestas</a>
+                <div class="profile-image" id="profile-image">
+                    <img id="icon-profile" src="https://www.pngitem.com/pimgs/m/497-4970762_sora-kh3-render-hd-png-download.png" alt="Imagen Circular">
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Detalle en la sección en la que se encuentra -->
+        <div class="sub-encabezado">
+            <h1>PULSO DE CLIMA<br>LABORAL</h1>
+            <div class="volver-pagina-anterior">
+                <a href=""><i class="bi bi-arrow-left"></i>volver</a>
+            </div>
+            <div class="subtitulo-diseño-preguntas">
+                <div>
+                    <a href="crear_encuestas_dashboard.html" type="button" class="opcion" id="crear">Diseño de preguntas</a>
+                    <a type="button" class="opcion activate-s" id="crear">Opciones de encuesta</a>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+
+    </main>
+
+    <!-- JS -->
+    <script src="components/js/diseño_crear_encuesta_dashboard.js"></script> <!-- Contiene la actividad de la Barra Lateral -->
+    <script src="https://cdn.jsdelivr.net/npm/uuid@8.3.2/dist/umd/uuidv4.min.js"></script> <!-- Creación de Keys -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+    integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> <!-- ! Eliminar cuando se soluciones problema de la ID encuesta -->
+</body>
+</html>
