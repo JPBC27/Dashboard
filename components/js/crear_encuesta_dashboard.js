@@ -816,8 +816,10 @@ textareaInstruccion.addEventListener("input", () => {
 const btnEnviarEncuesta = document.getElementById("btnEnviar-encuesta");//instruccionEncuesta
 const btnEnviar = document.querySelector(".texto-btnEnviar"); //instruccion
 const textareabtnEnviarEncuesta = document.getElementById("textarea-btnEnviar-encuesta");//textareaInstruccion
-
-if(encabezadoEncuesta[0].txtBtnEnviar !== ""){
+console.log();
+if(!encabezadoEncuesta[0].txtBtnEnviar){
+      btnEnviar.textContent = "ENVIAR ENCUESTA";
+}else{
       btnEnviar.textContent = encabezadoEncuesta[0].txtBtnEnviar;
       textareabtnEnviarEncuesta.value = encabezadoEncuesta[0].txtBtnEnviar;
       btnEnviarEncuesta.style.display = "block";

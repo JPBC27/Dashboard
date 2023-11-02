@@ -17,11 +17,22 @@ h1{
     color: #454545;
     font-size: 25px;
 }
+.volver-pagina-anterior{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 .volver-pagina-anterior a{
     color: #676767;
     text-decoration: none;
     align-self: center;
+}
+
+.volver-pagina-anterior .vista-previa{
+    color: #099EBD;
+    cursor: pointer;
+    margin: 0 10px;
 }
 
 .bi-arrow-left{
@@ -50,6 +61,7 @@ h1{
 
 .subtitulo-diseño-preguntas .opcion:not(:first-child){
     margin-left: 15px;
+    align-self: center;
 }
 
 .subtitulo-diseño-preguntas .opcion.activate-s{
@@ -64,6 +76,13 @@ h1{
 
 .subtitulo-diseño-preguntas .opcion:hover:not(.activate-n){
     color: #F2A530;
+}
+
+.sub-encabezado {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 2;
 }
 
 #contenedor-encuesta{
