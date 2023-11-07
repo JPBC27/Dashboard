@@ -82,7 +82,7 @@ h1{
     position: sticky;
     top: 0;
     background-color: white;
-    z-index: 2;
+    z-index: 4;
 }
 
 #contenedor-encuesta{

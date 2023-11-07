@@ -287,16 +287,16 @@ function generatePreguntaHTML(id, pregunta, respuestas, obligatorio, tipo) {
             opcionesHTML = `
                   <div class="diseño-opciones">
                         <div class="rating">
-                              <input type="radio" name="${pregunta}" value="10" id="rata10"><label for="rata10">10</label>
-                              <input type="radio" name="${pregunta}" value="9" id="rata9" ><label for="rata9">9</label>
-                              <input type="radio" name="${pregunta}" value="8" id="rata8" ><label for="rata8">8</label>
-                              <input type="radio" name="${pregunta}" value="7" id="rata7" ><label for="rata7">7</label>
-                              <input type="radio" name="${pregunta}" value="6" id="rata6" ><label for="rata6">6</label>
-                              <input type="radio" name="${pregunta}" value="5" id="rata5" ><label for="rata5">5</label>
-                              <input type="radio" name="${pregunta}" value="4" id="rata4" ><label for="rata4">4</label>
-                              <input type="radio" name="${pregunta}" value="3" id="rata3" ><label for="rata3">3</label>
-                              <input type="radio" name="${pregunta}" value="2" id="rata2" ><label for="rata2">2</label>
-                              <input type="radio" name="${pregunta}" value="1" id="rata1" ><label for="rata1">1</label>
+                              <input type="radio" name="${pregunta}" value="10" id="${id}_option10" disabled><label for="${id}_option10">10</label>
+                              <input type="radio" name="${pregunta}" value="9" id="${id}_option9" disabled><label for="${id}_option9">9</label>
+                              <input type="radio" name="${pregunta}" value="8" id="${id}_option8" disabled><label for="${id}_option8">8</label>
+                              <input type="radio" name="${pregunta}" value="7" id="${id}_option7" disabled ><label for="${id}_option7">7</label>
+                              <input type="radio" name="${pregunta}" value="6" id="${id}_option6" disabled><label for="${id}_option6">6</label>
+                              <input type="radio" name="${pregunta}" value="5" id="${id}_option5" disabled><label for="${id}_option5">5</label>
+                              <input type="radio" name="${pregunta}" value="4" id="${id}_option4" disabled><label for="${id}_option4">4</label>
+                              <input type="radio" name="${pregunta}" value="3" id="${id}_option3" disabled><label for="${id}_option3">3</label>
+                              <input type="radio" name="${pregunta}" value="2" id="${id}_option2" disabled><label for="${id}_option2">2</label>
+                              <input type="radio" name="${pregunta}" value="1" id="${id}_option1" disabled><label for="${id}_option1">1</label>
                         </div>
                   </div>
             `;
@@ -816,7 +816,7 @@ textareaInstruccion.addEventListener("input", () => {
 const btnEnviarEncuesta = document.getElementById("btnEnviar-encuesta");//instruccionEncuesta
 const btnEnviar = document.querySelector(".texto-btnEnviar"); //instruccion
 const textareabtnEnviarEncuesta = document.getElementById("textarea-btnEnviar-encuesta");//textareaInstruccion
-console.log();
+
 if(!encabezadoEncuesta[0].txtBtnEnviar){
       btnEnviar.textContent = "ENVIAR ENCUESTA";
 }else{
@@ -928,6 +928,19 @@ function agregarPreguntaDuplicada() {
       divActual.insertAdjacentHTML('afterend', divNuevo); //el nuevo HTML se insertará justo después del elemento
 }
 
+if(!encabezadoEncuesta[0].imagenEncuesta){
+      
+}else{
+      let imageLogoBoton = document.getElementById('imagenEmpresaClienteButton');
+      imageLogoBoton.style.backgroundImage = "url('" + encabezadoEncuesta[0].imagenEncuesta + "')";
+      imageLogoBoton.style.border = "none"; // Eliminar borde
+      imageLogoBoton.style.width = "120px";
+      imageLogoBoton.style.height = "120px";
+      imageLogoBoton.style.backgroundColor = "unset";
+      imageLogoBoton.style.display = "flex";
+      imageLogoBoton.style.alignItems= "center";
+      imageLogoBoton.style.justifyContent= "center";
+}
 function handleImage() {
       var fileInput = document.getElementById('imagenEmpresaCliente');
       fileInput.click();
@@ -939,12 +952,17 @@ function handleImage() {
           reader.onload = function() {
             var imageButton = document.getElementById('imagenEmpresaClienteButton');
             imageButton.style.backgroundImage = "url('" + reader.result + "')";
+            encabezadoEncuesta[0].imagenEncuesta = reader.result; // ! ELIMINAR
+            localStorage.setItem("encuesta1", JSON.stringify(encabezadoEncuesta)); //! ELIMINAR
             console.log("url('" + reader.result + "')");
-            imageButton.innerHTML = ''; // Eliminar texto del botón si lo hay
             imageButton.style.border = "none"; // Eliminar borde
             imageButton.style.width = "120px";
             imageButton.style.height = "120px";
             imageButton.style.backgroundColor = "unset";
+            imageLogoBoton.style.backgroundColor = "unset";
+            imageLogoBoton.style.display = "flex";
+            imageLogoBoton.style.alignItems= "center";
+            imageLogoBoton.style.justifyContent= "center";
           };
         }
       };

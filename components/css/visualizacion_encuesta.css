@@ -1,9 +1,19 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+main{
+    margin: 0px 5px;
+}
+
 .visualizacion-encuesta{
     min-width: 100%;
     display: flex;
     justify-content: center;
 }
-
+/*
 .contenedor-visualizador{
     margin-top: 25px;
     margin-bottom: 25px;
@@ -12,16 +22,671 @@
     background: #00B3AA;
     display: flex;
     flex-direction: column;
+    border-radius: 10px;
     transition: var(--tran-04);
+}*/
+
+/**/
+h1{
+    color: #454545;
+    font-size: 25px;
 }
 
-.titulo-predefinido{
-    margin: 15px;
-    padding: 15px;
+#contenedor-encuesta{
+    min-height: 100vh;
     width: 100%;
+    background: #EEE;
+    display: flex;
+    flex-direction: column;
+    transition: var(--tran-04);
+    max-width: 1600px;
+/*    margin: 25px auto;*/
+    background-size: cover;
+    background-position: bottom;
+    border-radius: 8px;
+}
+
+/* ==Título e instrcciones*/
+.contenedor-introduccion-instruccion{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+#titulo-encuesta, #instruccion-encuesta{
+    max-width: 90%;
+}
+
+.texto-titulo-encuesta, .texto-instruccion-encuesta{
+    background-color: #EEE;
+    border-radius: 10px;
+    border: 2px solid #099EBD;
+    
+    padding: 10px 25px;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 800;
+    color: #595959;
     text-align: center;
+    text-transform: uppercase;
+    min-width: 7px;
+    min-height: 14px;
+
+    cursor: default;
+    display: flex;
+}
+
+.texto-titulo-encuesta{
+    max-width: 450px;
+}
+
+.texto-instruccion-encuesta{
+    max-width: 570px;
+    font-size: 13px;
+    text-transform: none;
+    font-weight: 700;
+}
+
+/**/
+.contenedor-preguntas{
+    margin: 35px 0 30px;
+    padding: 0px 5px;
+}
+
+/*Pregunta*/
+.diseño-pregunta {
+    display: flex;
+    /*!padding: 25px 7px;*/
+    padding: 10px 7px;
+    flex-direction: column;
+    background-color: #fff;
+    border-right: 4px solid #099EBD;
+    max-width: 1046px;
+}
+
+.diseño-pregunta span {
+    /*!font-size: 17px;*/
+    font-size: 15px;
+    font-weight: 700;
+    color: #676767;
+}
+
+/*COLOR OBLIGATORIO*/
+.diseño-pregunta .color-obligatorio{
+    color: #F2A530;
+}
+.color-obligatorio{
+    color: #F2A530;
+}
+#contenedor-respuestas-pregunta{
+    margin-top: 7px;
+}
+
+.diseño-opciones {
+    display: flex;
+    align-items: center;
+    height: auto;
+    padding: 0px 25px;
+    flex-direction: row;
+}
+.contenedor-pregunta-realizar {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 5px;
+    padding-left: 10px;
+}
+
+/* ==Overlay - Encima de las preguntas para su modificacion*/
+.pregunta-individual{
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 1064px;
+    margin: 20px auto 0 auto;
+    box-shadow: 4px 5px 14px 0px rgba(0, 0, 0, 0.25);
+}
+
+/*AGREGAR PREGUNTA CUADRO*/
+.pregunta{
+    background-color: #099EBD;
+    border-radius: 10px;
+    padding: 7px 2px;
+    max-width: 1050px;
+    position: relative;
+}
+
+.input-pregunta {
+    display: flex;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.texto-pregunta {
+    border: 2px solid #fff;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: #515151;
+    font-weight: 700;
+    height: 10px;
+    font-size: 14px;
+    padding: 11px 10px;
+    width: 66%;
+    max-width: 646px;
+}
+.sBtn-text{
+    max-width: 85px;
+    font-size: 13px;
+    color: #515151;
+    font-weight: 700;
+}
+.select-btn i {
+    margin-top: 5px;
+    font-size: 17px;
+    color: #005FA6;
+}
+
+.dropdown .options{
+    position: relative;
+    padding: 9px 7px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.options .option{
+    display: flex;
+    height: 50px;
+    cursor: pointer;
+    background: #fff;
+    align-items: center;
+}
+
+/* ==Contenedor donde estrán todas las posibles respuestas*/
+.contenedor-opciones-agregar{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 15px;
+}
+
+/* ==Respuesta Radio o unica*/
+.radio1 {
+    margin: 7px 0;
+    display: block;
+    cursor: pointer;
+}
+
+.radio1 input {
+    display: none;
+}
+
+/*Estilo Text Radio*/
+.radio1 input + span:not(:empty) {
+    padding-left: 35px;
+    /*!font-size: 16px;*/
+    font-size: 14px;
+    font-weight: 600;
+
+}
+
+.radio1 input + span {
+    line-height: 22px;
+    height: 22px;
+    display: block;
+    position: relative;
+}
+
+/*Estilo Botón - Radio*/
+.radio1 input + span:before {
+    background: #005FA6;
+    transition: background 0.2s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 2);
+}
+
+.radio1 input + span:after {
+    background: #fff;
+    transform: scale(0.9);
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.4);
+}
+
+.radio1 input + span:before, .radio1 input + span:after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    display: block;
+    border-radius: 50%;
+    left: 0;
+    top: 0;
+    position: absolute;
+}
+
+/*radio - Seleccionado*/
+.radio1 input:checked + span:before {
+    transform: scale(1.04);
+    background: #1894F2;
+}
+
+.radio1 input:checked + span:after {
+    transform: scale(0.4);
+    transition: transform 0.3s ease;
+}
+
+/*Radio - Hover*/
+.radio1:hover input + span:before {
+    transform: scale(0.92);
+}
+.radio1:hover input + span:after {
+    transform: scale(0.74);
+}
+.radio1:hover input:checked + span:after {
+    transform: scale(0.4);
+}
+
+/* ==RESPUESTA CHECKBOX */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 8px 0px;
+}
+  
+/* Estilo para el checkbox oculto */
+.checkbox-container input[type="checkbox"] {
+    display: none;
+}
+  
+/* Estilo para el diseño del checkbox personalizado */
+.checkbox-container label {
+    position: relative;
+    border-radius: 3px;
+    display: flex;
+    cursor: pointer;
+}
+
+.check-container-icon{
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-container span {
+    font-size: 14px;
+}
+
+.checkbox-container label i{
+    transform: scale(1);
+    transition: all 0.3s ease-in-out
+}
+
+.checkbox-container:hover label i{
+    transform: scaleY(0.8) scaleX(0.9);
+    border-width: 2px;
+}
+
+/* Estilo para el ícono de verificación (checkmark) */
+.checkbox-container label i {
+    font-size: 14px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #005FA6;
+    background-color: #fff;
+    border-radius: 3px;
+    color: #fff;
+}
+  
+/* Estilo para mostrar el ícono cuando el checkbox está seleccionado */
+.checkbox-container input[type="checkbox"]:checked + label i {
+    background-color: #1894F2; 
+    border-color: #1894F2; 
+}
+
+/* ==RESPUESTA LARGA
+.diseño-opciones textarea */
+textarea{
+    border: 1px solid #005FA6;
+    width: 100%;
+    resize: vertical;
+    border-radius: 5px;
+    min-height: 30px;
+}
+
+textarea:focus {
+    border-color: #004479; /* Cambia el color del borde a rojo cuando el textarea está enfocado */
+    outline: none; /* Para eliminar el contorno predeterminado del elemento enfocado */
+}
+
+/* Estilos para el textarea deshabilitado */
+textarea:disabled {
+    margin-top: 10px;
+    border: 1px solid #005FA6;
+    width: 100%;
+    background-color: #fff;
+}
+
+/* ==RESPUESTA BARRA DE CALOR */
+.rating {
+    border: 1px solid #005FA6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    background: linear-gradient(to right, #f00 0%, #f00 60%, #ff0 60%, #ff0 80%, #0f0 80%, #0f0 100%);
+    width: 100%;/**/
+    margin: 15px 0;
+}
+
+.rating-sin-estilo{
+    background: white;
+}
+
+.rating input {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+    display: none;
+}
+
+.rating label {
+    display: flex;
+    width: 25%;
+    height: 25px;
+    font-size: 15px;
+    justify-content: center;
+    font-weight: bold;
+    align-items: center;
+    background: white;
+    color: #515151;
+    cursor: pointer;
+}
+
+.rating label:not(:last-child) {
+    border-left: 1px solid #005FA6;
+    transition: .3s;
+
+}
+
+.rating input[type='radio']:hover~label,
+input[type='radio']:checked~label {
+    background: none;
+}
+
+.rating input[type="radio"]:hover~label,
+.rating input[type="radio"]:checked~label {
+    background: transparent;
+    color: #000000;
+}
+
+.rating-sin-estilo input[type="radio"]:hover~label{
+    background: white;
+    color: #515151;;
+    cursor: default;
+}
+
+/*==Dieseño de las respuestas input*/
+.opciones-preguntas{
+    margin-bottom: 25px;
+}
+.pregunta-opciones{
+    display: flex;
+    padding: 0 10px;
+    align-items: center;
+    justify-content: flex-start;
     margin-bottom: 15px;
+}
+
+.pregunta-opciones .input-opciones1-agregar{
+    margin: 0 10px 0 30px;
+    width: 60%;
+    border-radius: 10px;
+    border: solid #fff 1px;
+    padding: 3px 7px;
+    outline: none;
+    color: #515151;
+    font-weight: 600;
+    max-width: 615px;
+}
+
+.pregunta-opciones label {
+    margin: 0px;
+}
+
+.pregunta-opciones span, .pregunta-opciones .radio1:hover input + span::after{
+    cursor: default;
+    transform: scale(0.9);
+}
+
+.pregunta-opciones .radio1:hover input + span:before {
+    transform: scale(1);
+}
+
+.referencia-checkbox-agregar{
+    margin-right: -20px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #005FA6;
+    background-color: #fff;
+    border-radius: 3px;
+}
+
+/*==Toggle*/
+.wrap-toggle{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.wrap-toggle-pregunta{
+    margin: 0 0 20px 10px;
+}
+
+.wrap-toggle p{
+    margin: 0 10px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.wrap-toggle span{
+    color: #F2A530;
+}
+
+.wrap-toggle .switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  margin: 0 0 0 30px;
+  background-color: #666666;
+  border-radius: 40px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.wrap-toggle .switch:after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 30px;
+  background-color: white;
+  top: 2.5px;
+  left: 2.5px;
+  transition: all 0.3s;
+}
+
+.wrap-toggle input[type='checkbox']:checked + .switch:after {
+  transform: translateX(19px);
+  background-color: white;
+}
+
+.wrap-toggle input[type='checkbox']:checked + .switch {
+  background-color: #F2A530;
+}
+
+.wrap-toggle .offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+
+.boton-guardar-encuesta{
+    display: none;
+    gap: 5px;
+    background-color: #EEE;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    border: solid 2px #09B3A2;
+    border-radius: 10px;
+    background-color: #09B3A2;
+    padding: 3px 23px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    height: 58px;
+    font-weight: 600;
+    width: 126px;
+    margin: 30px 20px 20px auto;
+}
+
+div#contenedor-encuesta-lista {
+    display: flex;
+    margin: 10px 0 45px;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-enviar {
+    display: flex;
+    background-color:#0785be;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 10px 30px;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.contenedor-enviar:hover {
+    background-color: #004981;
+}
+
+#imagenEmpresaClienteButton {
+    background-color: white;
+    border: 2px dashed #099EBD;
+    font-family: sans-serif;
+    border-radius: 8px;
+    color: black;
+    padding: 10px 57px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+    color: #595959;
+    display: inline-block;
+    cursor: pointer;
+    background-position: center;
+    background-size: cover; /*100% 100%*/
+}
+
+/*Adaptable*/
+/*Tablet*/
+@media (min-width: 501px) and (max-width:1104px) {
+    .rating{
+        max-width: 750px;
+        margin: 15px auto;
+    }
+    .sBtn-text {
+        max-width: none;
+        margin-right: 5px;
+    }
+    .pregunta{
+        padding: 7px 10px;
+    }
+    .botones{
+        justify-content: flex-end;
+    }
+    .input-pregunta{
+        gap:8px;
+    }
+    .texto-pregunta{
+        border-radius: 10px;
+    }
+    .radio1 input + span:not(:empty), .checkbox-container span {
+        font-size: 16px;
+    }
+
+    .diseño-pregunta {
+        padding: 25px 7px;
+    }
+
+    .diseño-pregunta span {
+        font-size: 17px;
+    }
+}
+/*PC*/
+@media (min-width: 1105px){
+    main{
+        margin: 0 10px;
+    }
+    .diseño-pregunta {
+        min-width: 1045px;
+        margin: 0 auto;
+        border-radius: 10px;
+    }
+    /*Crear Pregunta*/
+    .pregunta{
+        padding: 7px 20px;
+        min-width: 1030px;
+        margin: 0 auto;
+    }
+    .rating{
+        max-width: 750px;
+        margin: 15px auto;
+    }
+    .sBtn-text {
+        max-width: none;
+        margin-right: 15px;
+    }
+    .botones{
+        justify-content: flex-end;
+    }
+    .input-pregunta{
+        gap:16px;
+    }
+    .texto-pregunta{
+        border-radius: 10px;
+    }
+    .dropdown .select-btn{
+        border-radius: 10px;
+    }
+    .pregunta-opciones .input-opciones1-agregar{
+        margin-right: 16px;
+    }
+
+    .radio1 input + span:not(:empty), .checkbox-container span {
+        font-size: 16px;
+    }
+
+    .diseño-pregunta {
+        padding: 25px 7px;
+    }
+
+    .diseño-pregunta span {
+        font-size: 17px;
+    }
 }
