@@ -72,16 +72,28 @@
                     <div class="li-grupo first">
                         <label for="">Correo</label>
                         <input type="text" class="datos-input" value="usuario@gmail.com" disabled>
+                        <span class="mensaje-error">
+                            La correo no es válido. Incluir un "@".
+                        </span>
                     </div>
 
                     <div class="li-grupo second">
                         <label for="">Contraseña actual</label>
                         <input type="password" class="datos-input" value="contraseña de prueba" disabled>
+                        <span class="mensaje-error">
+                            La contraseña debe tener al menos:<br>
+                            - 8 caracteres.<br>
+                            - 1 carácter especial.<br>
+                            - 1 número.
+                        </span>
                     </div>
 
                     <div class="li-grupo third">
                         <label for="">Contraseña nueva</label>
                         <input type="password" class="datos-input" value="contraseña de prueba" disabled>
+                        <span class="mensaje-error">
+                            Las contraseñas no son iguales.
+                        </span>
                     </div>
                 </div>
 
