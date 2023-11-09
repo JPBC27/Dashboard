@@ -106,7 +106,7 @@ h1{
     justify-content: flex-start;
     flex-wrap: nowrap;
     position: sticky;
-    top: 0;
+    top: 160px;
     margin: 5px 0px 0 12px;
     z-index: 10;
 }
@@ -390,7 +390,7 @@ h1{
 .input-pregunta {
     display: flex;
     width: 100%;
-    margin: 20px 0;
+    margin: 10px 0 20px;
 }
 .texto-pregunta {
     border: 2px solid #fff;
@@ -400,7 +400,7 @@ h1{
     font-weight: 700;
     height: 10px;
     font-size: 14px;
-    padding: 11px 10px;
+    padding: 16px 10px;
     width: 66%;
     max-width: 646px;
 }
@@ -414,7 +414,7 @@ h1{
     display: flex;
     height: 10px;
     background: white;
-    padding: 11px 1px;
+    padding: 16px 1px;
     font-size: 13px;
     border: 2px solid #fff;
     border-left-color: #e0e0e0;

@@ -142,6 +142,11 @@
 /*=========================================================*/
 /*BREAKPOINT*/
 /*=========================================================*/
+@media screen and (min-width: 769px) {
+    .sidebar{
+        top:0;
+    }    
+}
 /*TABLET*/
 @media screen and (min-width: 551px) and (max-width: 768px) {
     /*Opciones principales del sidebar*/
@@ -150,6 +155,10 @@
         right: 12px;
         margin-top: 0px;
     }*/
+    
+    .sidebar {
+        top: 0;
+    }
 
     /*Tamaño del sidebar cuando está cerrado*/
     .sidebar.close{
