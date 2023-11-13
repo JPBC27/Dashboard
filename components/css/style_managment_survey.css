@@ -56,7 +56,7 @@ body{
 #managment-survey h1{
     font-size: 1.5rem;
     color: var(--color-text-tittle);
-    margin: 0 20px;
+    margin: 0;
 }
 
 #managment-survey h1{
@@ -64,7 +64,7 @@ body{
 }
 
 #managment-survey .encabezado-managment-survey{
-    margin: 15px 10px 0px 20px;
+    margin: 25px 20px 0px 0px;
 }
 
 #managment-survey .encabezado-managment-survey hr{
@@ -77,6 +77,7 @@ body{
     justify-content: flex-start;
     align-items: center;
     gap: 25px;
+    margin-bottom: 3px;
 }
 
 #managment-survey .opcion-encabezado{
@@ -100,9 +101,127 @@ body{
     content: "";
     position: absolute;
     left: 0;
-    bottom: -2px;
+    bottom: -5px;
     width: 79px;
     height: 2px;
     background-color: #F2A530;
 }
 
+#managment-survey .survey-container{
+    margin: 40px 20px 90px 0;
+    height: 100%;
+    display: flex;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    justify-content: center;
+    gap: 30px;
+}
+
+#managment-survey .diseno-encuesta-realizada{
+    background-color: #fff;
+    box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.2);
+    width: 203px;
+    height: 280px;
+    border-radius: 10px;
+}
+
+#managment-survey .diseno-encuesta-realizada{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 23px;
+}
+
+#managment-survey .diseno-encuesta-realizada .visualizar-encuesta{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+#managment-survey .diseno-encuesta-realizada h4{
+    color: #515151;
+}
+
+#managment-survey .diseno-encuesta-realizada .estado{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    color: #7D7575;
+}
+
+#managment-survey .diseno-encuesta-realizada .estado i{
+    font-size: 9px;
+    margin-right: 5px;
+}
+#managment-survey .diseno-encuesta-realizada .estado.activo i{
+    color: #4EC24B;
+}
+#managment-survey .diseno-encuesta-realizada .estado.desactivo i{
+    color: #c24b4b;
+}
+
+#managment-survey .diseno-encuesta-realizada .fecha{
+    color: #999;
+    font-size: 14px;
+}
+
+#managment-survey .btn-revisar{
+    color: #515151;
+    border-radius: 8px;
+    padding: 5px 30px;
+    transition: 0.2s ease-in-out;
+    align-self: center;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    border: 2px solid #515151;
+}
+
+#managment-survey .btn-revisar:hover{
+    background-color: var(--color-button-primary-bg);
+}
+
+/*Celular*/
+@media (max-width: 550px){
+    #managment-survey .encabezado-managment-survey{
+        margin-left: 20px;
+    }
+
+    #managment-survey h1{
+        margin: 20px;
+    }
+
+    #managment-survey .survey-container{
+        margin: 40px 20px 0px 20px;
+        align-items: center;
+        padding-bottom: 110px;
+        flex-wrap: wrap;
+    }
+
+}
+
+/*Tablet*/
+@media (min-width: 551px) and (max-width:1099px) {
+    #managment-survey{
+        width: calc(100% - 95px);
+        margin-left: auto;
+    }
+
+
+
+
+}
+
+/*PC*/
+@media (min-width: 1100px){
+
+}
