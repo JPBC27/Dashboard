@@ -66,13 +66,13 @@
         <div class="encabezado-managment-survey">
             <div class="opcion-crear-gestionar-surveys">   
                 <a type="button" class="opcion-encabezado actual" id="option-managment-suvey">Gestionar</a>
-                <a type="button" class="opcion-encabezado" id="option-create-survey">Crear Nuevo</a>
+                <a type="button" class="opcion-encabezado disponible" id="option-create-survey">Crear Nuevo</a>
             </div>
             <hr>
         </div>
 
         <div class="survey-container">
-            <div class="diseno-encuesta-realizada">
+            <div class="diseno-carta-encuesta">
                 <a href="" class="visualizar-encuesta"><i class="bi bi-eye"></i></a>
                 <h4>Titulo Encuesta</h4>
                 <div class="estado activo">
@@ -83,7 +83,7 @@
                 <a type="button" class="btn-revisar">Revisar</a>
             </div>
 
-            <div class="diseno-encuesta-realizada">
+            <div class="diseno-carta-encuesta">
                 <a href="" class="visualizar-encuesta"><i class="bi bi-eye"></i></a>
                 <h4>Titulo Encuesta</h4>
                 <div class="estado desactivo">
@@ -94,7 +94,7 @@
                 <a type="button" class="btn-revisar">Revisar</a>
             </div>
 
-            <div class="diseno-encuesta-realizada">
+            <div class="diseno-carta-encuesta">
                 <a href="" class="visualizar-encuesta"><i class="bi bi-eye"></i></a>
                 <h4>Titulo Encuesta</h4>
                 <div class="estado activo">
@@ -104,8 +104,15 @@
                 <span class="fecha">13/11/23, 15:30pm</span>
                 <a type="button" class="btn-revisar">Revisar</a>
             </div>
+
+            <div class="diseno-carta-encuesta" id="carta-nueva-encuesta" onclick="redirigirACrearEncuesta()">
+                <a href="" class="agregar-encuesta"><i class="bi bi-plus-circle-fill"></i></a>
+                <span>Nuevo</span>
+            </div>
         </div>
     </main>
-    
+
+    <script src="components/js/barra.js"></script>
+    <script src="components/js/funct_managment_survey.js"></script>
 </body>
 </html>

@@ -57,9 +57,6 @@ body{
     font-size: 1.5rem;
     color: var(--color-text-tittle);
     margin: 0;
-}
-
-#managment-survey h1{
     cursor: default;
 }
 
@@ -89,12 +86,18 @@ body{
 #managment-survey .opcion-encabezado.actual {
     color: var(--color-text-tittle);
     font-weight: 600;
-    /* border-bottom: solid yellow; */
-    /* border-bottom-width: 2px; */
-    /* border-bottom: 2px solid red; */
     line-height: 1;
     position: relative;
     cursor: default;
+    font-size: 16px;
+}
+
+#managment-survey .opcion-encabezado.disponible {
+    font-weight: 600;
+}
+
+#managment-survey .opcion-encabezado.disponible:hover {
+    color: var(--color-hover-primary);
 }
 
 #managment-survey .opcion-encabezado.actual::after {
@@ -108,34 +111,34 @@ body{
 }
 
 #managment-survey .survey-container{
-    margin: 40px 20px 90px 0;
+    margin: 40px 5px 90px 0;
     height: 100%;
     display: flex;
-    /* flex-direction: column; */
-    /* align-items: center; */
-    justify-content: center;
+    justify-content: flex-start;
     gap: 30px;
+    flex-wrap: wrap;
+    padding-bottom: 50px;
 }
 
-#managment-survey .diseno-encuesta-realizada{
+#managment-survey .diseno-carta-encuesta{
     background-color: #fff;
-    box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 6px 3px rgba(0, 0, 0, 0.2);
     width: 203px;
     height: 280px;
     border-radius: 10px;
 }
 
-#managment-survey .diseno-encuesta-realizada{
+#managment-survey .diseno-carta-encuesta{
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
     position: relative;
-    gap: 23px;
+    gap: 21px;
 }
 
-#managment-survey .diseno-encuesta-realizada .visualizar-encuesta{
+#managment-survey .diseno-carta-encuesta .visualizar-encuesta{
     position: absolute;
     top: 10px;
     right: 10px;
@@ -144,11 +147,11 @@ body{
     color: black;
 }
 
-#managment-survey .diseno-encuesta-realizada h4{
+#managment-survey .diseno-carta-encuesta h4{
     color: #515151;
 }
 
-#managment-survey .diseno-encuesta-realizada .estado{
+#managment-survey .diseno-carta-encuesta .estado{
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -156,18 +159,18 @@ body{
     color: #7D7575;
 }
 
-#managment-survey .diseno-encuesta-realizada .estado i{
+#managment-survey .diseno-carta-encuesta .estado i{
     font-size: 9px;
     margin-right: 5px;
 }
-#managment-survey .diseno-encuesta-realizada .estado.activo i{
+#managment-survey .diseno-carta-encuesta .estado.activo i{
     color: #4EC24B;
 }
-#managment-survey .diseno-encuesta-realizada .estado.desactivo i{
+#managment-survey .diseno-carta-encuesta .estado.desactivo i{
     color: #c24b4b;
 }
 
-#managment-survey .diseno-encuesta-realizada .fecha{
+#managment-survey .diseno-carta-encuesta .fecha{
     color: #999;
     font-size: 14px;
 }
@@ -190,7 +193,32 @@ body{
     background-color: var(--color-button-primary-bg);
 }
 
+#managment-survey .diseno-carta-encuesta .agregar-encuesta{
+    color: #A4A1A1;
+    font-size: 65px;
+}
+
+#managment-survey .diseno-carta-encuesta .agregar-encuesta + span{
+    color: #7D7D7D;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+#managment-survey #carta-nueva-encuesta{
+    cursor: pointer;
+    transition: filter 0.3s;
+}
+
+#managment-survey #carta-nueva-encuesta:hover {
+    filter: brightness(0.8);
+}
+
 /*Celular*/
+@media (max-width: 490px){
+    #managment-survey .survey-container {
+        justify-content: center;
+    }
+}
 @media (max-width: 550px){
     #managment-survey .encabezado-managment-survey{
         margin-left: 20px;
@@ -204,24 +232,22 @@ body{
         margin: 40px 20px 0px 20px;
         align-items: center;
         padding-bottom: 110px;
-        flex-wrap: wrap;
     }
 
 }
 
 /*Tablet*/
-@media (min-width: 551px) and (max-width:1099px) {
+@media (min-width: 551px) and (max-width:769px) {
     #managment-survey{
         width: calc(100% - 95px);
         margin-left: auto;
     }
-
-
-
-
 }
 
 /*PC*/
-@media (min-width: 1100px){
-
+@media (min-width: 770px){
+    #managment-survey{
+        width: calc(100% - 130px);
+        margin-left: auto;
+    }
 }

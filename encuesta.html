@@ -58,143 +58,70 @@
         </div>
     </nav>
 
-    <!-- SECCION ENCUESTA -->
-    <section class="encuesta">
-        
-        <div class="contenido-encuesta">
-            <div class="text">
-                ENCUESTA
-            </div>
-
-            <div class="cg-encuesta">
-                <div class=crear-gestionar>   
-                    <a type="button" class="activate-a" id="crear">Crear Nuevo</a>
-                    <a type="button"  id="gestionar">Gestionar</a>
-                </div>
-                <hr>
-            </div>
-
-            <div id="crear-encuesta" class="crear-encuesta">
-                <div class="botones-crear-encuesta">
-                    <a href="" class="btn_basico llamar-modal">Básico</a>
-                    <a href="encuestasPredefinidas.html" class="btn_usar">Usar un diseño</a>
-                </div>
-
-                <div class="linea-separacion">
-                    <hr>
-                </div>
-    
-                <div class="texto">
-                    <p>Encuesta creadas por usted. </p>
-                </div>
-                <div class="cartas">
-                    <!-- <div class="card" style="--i:url(img/paisaje_oscuro.jpg)">
-                        <h2>CLIMA Y CULTURA</h2>
-    
-                        <div class="content">
-                            <p>Contrary to popular belief, Lorem Ipsum is not simply random text.</p>
-                            <a  type="button" class="llamar-modal">Usar</a>
-                        </div>
-                    </div>  
-    
-                   
-                    <div class="card" style="--i:url(img/edificio.jpg)">
-                        <h2>SATISFACCIÓN AL CLIENTE</h2>
-    
-                        <div class="content">
-                            <p>Contrary to popular belief, Lorem Ipsum is not simply random text.</p>
-                            <a type="button" class="segunda-carta">Usar</a>
-                        </div>
-                    </div>   -->
-                </div>
-            </div>
-
-            <div id="gestionar-encuesta" class="gestionar-encuesta" style="display: none;">
-                <div class="Lista">
-                    <table id="tabla_encuestas" class="table table-striped jss562">
-                        <thead>
-                          <tr class="table_row">
-                            <th class="estilo_celda">Id</th>
-                            <th class="estilo_celda">Titulo</th>
-                            <th class="estilo_celda">Formato</th>
-                            <th class="estilo_celda">Preguntas</th>
-                            <th class="estilo_celda">Fecha</th>
-                            <th class="estilo_celda">Eliminar</th>
-                          </tr>
-                        </thead>
-                        <tbody id="tabla-encuestas" class="table-body">
-                            <tr id="tab_p">
-                                <!-- <td scope="row" class="estilo_celda_body">123456</td>
-                                <td class="estilo_celda_body">Prueba</td>
-                                <td class="estilo_celda_body">Activo</td>
-                                <td class="estilo_celda_body">1</td>
-                                <td class="estilo_celda_body">09/08/2023</td>
-                                <td class="estilo_celda_body"><i class="editItem editar bi bi-pencil-square"></i></td>
-                                <td class="estilo_celda_body"><i class="deleteItem basura bi bi-trash3"></i></td> -->
-                            </tr>
-                
-                        </tbody>
-                    </table>
-                </div>
-                
-            
-            </div>
-            
-
+    <main id="encuesta-crear-nueva">
+        <div>
+            <h1>ENCUESTA</h1>
         </div>
 
-        
-
-        
-    </section>
-
-    <!-- MODAL -->
-    <section class="modal">
-        <div class="modal-container">
-            <div class="cerrar-modal">
-                <a type="button" class="modal_close"><i class="bi bi-x"></i></a>
+        <div class="encabezado-managment-survey">
+            <div class="opcion-crear-gestionar-surveys">   
+                <a type="button" class="opcion-encabezado disponible" id="option-managment-suvey">Gestionar</a>
+                <a type="button" class="opcion-encabezado actual" id="option-create-survey">Crear Nuevo</a>
             </div>
-            <div class="header-modal">
-                <p class="modal-title">Vamos a configurar tu encuesta</p>
-                <hr>
-            </div>
+            <hr>
+        </div>
 
-            <div class="contenido-modal">
-                <div class="nombre-encuesta">
-                    <p class="modal-paragraph">Cómo se llamará tu encuesta?</p>
-                    <input type="text" id="tituloEncuesta" placeholder="Ingrese titulo de encuesta">
+        <div class="subtitulo-tipo-encuesta">
+            <h3 class="subtitulo">Básico</h3>
+            <hr>
+        </div>
+        <!--CONTENEDOR DE CARTAS-->
+        <div class="contenedor-cartas-diseno">
+            <div class="diseno-carta-encuesta">
+                <img src="components/img/Fondo personalizado.png" alt="">
+                
+                <div class="titulo-carta">
+                    <h4>PERSONALIZADO</h4>
                 </div>
-                <hr>
-                <div class="formato-encuesta">
-                    <p>Formato de encuesta</p>
-                    <form class="input-radio">
-                        
-                        <div>
-                            <label class="radio">
-                                <input type="radio" name="r" value="clasica" checked>
-                                <span>CLÁSICA(todas las preguntas visibles)</span>
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="r" value="progresivo">
-                                <span>PROGRESIVO(una pregunta a la vez)</span>
-                            </label>
-                        </div>
-
-                        <div class="boton-crear">
-                            <!-- <a href="crear_encuesta.html" id="crearEncuesta" type="button">Crear</a> -->
-                            <a id="crearEncuesta" type="button">Crear</a>
-                        </div>
-
-                    </form>
-                    
+                <div class="descripcion-carta">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, qui repellendus voluptas ipsum animi</p>
+                    <a href="">USAR</a>
                 </div>
-
             </div>
         </div>
 
-        <div id="toast-container" class="toast-container"></div>
-    </section>
+        <div class="subtitulo-tipo-encuesta">
+            <h3>Escoge un diseño</h3>
+            <hr>
+        </div>
+        <!--CONTENEDOR DE CARTAS-->
+        <div class="contenedor-cartas-diseno">
+            <div class="diseno-carta-encuesta">
+                <img src="components/img/personalizado1.png" alt=""> <!-- ! CAMBIAR IMAGEN, MUY GRANDE Y DEMORA EN CARGAR -->
+                
+                <div class="titulo-carta">
+                    <h4>CLIMA Y CULTURA</h4>
+                </div>
+                <div class="descripcion-carta">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, qui repellendus voluptas ipsum animi</p>
+                    <a href="">USAR</a>
+                </div>
+            </div>
 
+            <div class="diseno-carta-encuesta">
+                <img src="components/img/personalizado2.png" alt="">
+                
+                <div class="titulo-carta">
+                    <h4>SATISFACCIÓN AL CLIENTE</h4>
+                </div>
+                <div class="descripcion-carta">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, qui repellendus voluptas ipsum animi</p>
+                    <a href="">USAR</a>
+                </div>
+            </div>
+        </div>
+    </main>
+   
     <script src="components/js/barra.js"></script>
     <script src="components/js/encuesta.js"></script>
 </body>
