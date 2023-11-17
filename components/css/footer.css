@@ -1,0 +1,42 @@
+#footer {
+    font-family: sans-serif;
+}
+
+#footer #redes{
+    background-color: #5A5A5A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 20px;
+    list-style: none;
+    padding: 11px;
+    font-size: 21px;
+    color: white;
+}
+
+#footer #redes a{
+    color: white;
+}
+
+#footer #derechos{
+    background-color: #454546;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    font-size: 10px;
+    padding: 6px;
+    color: white;
+    font-weight: 600;
+}
+
+/*Celular*/
+@media (max-width: 550px){
+    #footer {
+        margin-bottom: 50px;
+    }
+
+    #footer #derechos{
+        padding-bottom: 30px;  
+    }
+}
